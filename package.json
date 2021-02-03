@@ -1,0 +1,30 @@
+{
+  "name": "cwt-dblogon",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.12.5",
+    "core-js": "^3.8.3",
+    "nuxt": "^2.14.12",
+    "nuxt-buefy": "^0.4.4",
+    "bulma-floating-button": "^1.0.2",
+    "lodash.debounce": "^4.0.8",
+    "vee-validate": "^3.3.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/moment": "^1.6.1",
+    "moment-timezone": "^0.5.32",
+    "less-loader": "^6.1.1",
+    "node-sass": "^4.14.0",
+    "pug": "^2.0.4",
+    "pug-plain-loader": "^1.0.0",
+    "sass-loader": "^8.0.2"
+  }
+}
