@@ -4,5 +4,6 @@ module.exports = {
   // https://stylelint.io/user-guide/configuration
   rules: {
     'no-empty-source': null,
+    'block-no-empty': null,
   },
 }

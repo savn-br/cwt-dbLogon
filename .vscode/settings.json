@@ -6,6 +6,9 @@
     "source.fixAll.eslint": true,
     "source.fixAll.stylelint": true
   },
+  "[handlebars]": {
+    "editor.formatOnSave": false
+  },
   "prettier.useEditorConfig": true,
   "[vue]": {
     "editor.defaultFormatter": "octref.vetur"

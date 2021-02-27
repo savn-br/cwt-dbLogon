@@ -1,20 +1,23 @@
 <template lang="pug">
-  .{{name}}-wrapper
+  .{{dashCase name}}-wrapper
 </template>
 
 <script>
-  export default {
-    name: '{{name}}',
-    components: {},
-    data() {
-      return {}
-    },
-    // computed: {},
-    // watch: {},
-    // mounted: {},
-    // created: {},
-    // methods: {},
-  }
+export default {
+  name: '{{properCase name}}',
+  components: {},
+  data() {
+    return {}
+  },
+  computed: {},
+  watch: {},
+  mounted() {},
+  created() {},
+  methods: {},
+}
 </script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+.{{dashCase name}}-wrapper {
+}
+</style>
