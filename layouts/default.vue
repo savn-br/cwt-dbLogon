@@ -8,9 +8,8 @@
     template(#end)
       b-navbar-item(tag='div')
         .buttons
-          b-button(type='is-primary', @click='logout')
-            strong {{ $t("logout") }}
-  side-menu
+          b-button(tag='router-link', to='/login', type='is-primary is-link') logout
+  side-menu.tw-pl-4
   nuxt
   //- .section
     .tile.is-ancestor

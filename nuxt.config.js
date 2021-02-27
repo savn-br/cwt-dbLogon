@@ -33,6 +33,7 @@ export default {
     '@nuxtjs/stylelint-module',
     '@nuxtjs/dotenv',
     '@nuxtjs/moment',
+    '@nuxtjs/tailwindcss',
   ],
   moment: {
     timezone: true,

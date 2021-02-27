@@ -6,5 +6,6 @@ module.exports = {
     'no-empty-source': null,
     'block-no-empty': null,
     'no-descending-specificity': null,
+    'at-rule-no-unknown': null,
   },
 }
