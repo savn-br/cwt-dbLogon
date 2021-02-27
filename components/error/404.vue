@@ -1,50 +1,34 @@
 <template lang="pug">
+.notfound
   .notfound
-    .notfound
-      .notfound-404
-        h1 404
-        h2 Page not found
-			  
-    a(href="#") Homepage
-		
+    .notfound-404
+      h1 404
+      h2 Page not found
+
+  a(href='#') Homepage
 </template>
 
 <script>
 export default {
-  name: 'error-404',
+  name: 'Error404',
   props: {
     error: {
       type: Object,
       default: () => {},
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
-  * {
+* {
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
   padding: 0;
   margin: 0;
-}
-
-#notfound {
-  position: relative;
-  height: 100vh;
-  background: #030005;
-}
-
-#notfound .notfound {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
 }
 
 .notfound {
@@ -66,20 +50,19 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  -webkit-transform: translate(-50% , -50%);
-      -ms-transform: translate(-50% , -50%);
-          transform: translate(-50% , -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   font-size: 224px;
   font-weight: 900;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  margin-top: 0;
+  margin-bottom: 0;
   margin-left: -12px;
   color: #030005;
   text-transform: uppercase;
-  text-shadow: -1px -1px 0px #8400ff, 1px 1px 0px #ff005a;
+  text-shadow: -1px -1px 0 #8400ff, 1px 1px 0 #ff005a;
   letter-spacing: -20px;
 }
-
 
 .notfound .notfound-404 h2 {
   font-family: 'Montserrat', sans-serif;
@@ -91,7 +74,7 @@ body {
   font-weight: 700;
   color: #fff;
   text-transform: uppercase;
-  text-shadow: 0px 2px 0px #8400ff;
+  text-shadow: 0 2px 0 #8400ff;
   letter-spacing: 13px;
   margin: 0;
 }
@@ -116,15 +99,29 @@ body {
 }
 
 @media only screen and (max-width: 767px) {
-    .notfound .notfound-404 h2 {
-        font-size: 24px;
-    }
+  .notfound .notfound-404 h2 {
+    font-size: 24px;
+  }
 }
 
 @media only screen and (max-width: 480px) {
   .notfound .notfound-404 h1 {
-      font-size: 182px;
+    font-size: 182px;
   }
 }
 
+#notfound {
+  position: relative;
+  height: 100vh;
+  background: #030005;
+}
+
+#notfound .notfound {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
 </style>

@@ -1,17 +1,15 @@
 <template lang="pug">
-    .section
-        nuxt
-    
+.section
+  nuxt
 </template>
 
 <script>
 export default {
-    name: "public-layout",
-    data() {
-        return {};
-    }
-};
+  name: 'PublicLayout',
+  data() {
+    return {}
+  },
+}
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

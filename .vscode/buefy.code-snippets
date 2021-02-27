@@ -1,0 +1,380 @@
+{
+  // Place your buefy workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+  // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+  // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+  // used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+  // Placeholders with the same ids are connected.
+  // Example:
+  "buefy button": {
+    "scope": "",
+    "prefix": "b-button",
+    "body": ["b-button $2"],
+    "description": "buefy button"
+  },
+  "buefy button primary": {
+    "scope": "",
+    "prefix": "b-button:primary",
+    "body": ["b-button(type='is-primary') $1"],
+    "description": "buefy button primary"
+  },
+  "buefy button success": {
+    "scope": "",
+    "prefix": "b-button:success",
+    "body": ["b-button(type='is-success') $1"],
+    "description": "buefy button success"
+  },
+  "buefy button danger": {
+    "scope": "",
+    "prefix": "b-button:danger",
+    "body": ["b-button(type='is-danger') $1"],
+    "description": "buefy button danger"
+  },
+  "buefy button warning": {
+    "scope": "",
+    "prefix": "b-button:warning",
+    "body": ["b-button(type='is-warning') $1"],
+    "description": "buefy button warning"
+  },
+  "buefy button info": {
+    "scope": "",
+    "prefix": "b-button:info",
+    "body": ["b-button(type='is-info') $1"],
+    "description": "buefy button info"
+  },
+  "buefy button link": {
+    "scope": "",
+    "prefix": "b-button:link",
+    "body": ["b-button(type='is-link') $1"],
+    "description": "buefy button link"
+  },
+  "buefy button disabled": {
+    "scope": "",
+    "prefix": "b-button:disabled",
+    "body": ["b-button(disabled) $1"],
+    "description": "buefy button disabled"
+  },
+  "buefy button rounded": {
+    "scope": "",
+    "prefix": "b-button:rounded",
+    "body": ["b-button(rounded) $1"],
+    "description": "buefy button rounded"
+  },
+  "buefy button hovered": {
+    "scope": "",
+    "prefix": "b-button:hovered",
+    "body": ["b-button(hovered) $1"],
+    "description": "buefy button hovered"
+  },
+  "buefy button outlined": {
+    "scope": "",
+    "prefix": "b-button:outlined",
+    "body": ["b-button(type='$1', outlined) $2"],
+    "description": "buefy button outlined"
+  },
+  "buefy button expanded": {
+    "scope": "",
+    "prefix": "b-button:expanded",
+    "body": ["b-button(type='$1', expanded) $2"],
+    "description": "buefy button expanded"
+  },
+  "buefy button small": {
+    "scope": "",
+    "prefix": "b-button:small",
+    "body": ["b-button(size='is-small') $1"],
+    "description": "buefy button small"
+  },
+  "buefy button medium": {
+    "scope": "",
+    "prefix": "b-button:medium",
+    "body": ["b-button(size='is-medium') $1"],
+    "description": "buefy button medium"
+  },
+  "buefy button large": {
+    "scope": "",
+    "prefix": "b-button:large",
+    "body": ["b-button(size='is-large') $1"],
+    "description": "buefy button large"
+  },
+  "buefy button icon-left": {
+    "scope": "",
+    "prefix": "b-button:icon-left",
+    "body": ["b-button(type='$1', icon-left='$2') $3"],
+    "description": "buefy button icon-left"
+  },
+  "buefy button icon-right": {
+    "scope": "",
+    "prefix": "b-button:icon-right",
+    "body": ["b-button(type='$1', icon-right='$2') $3"],
+    "description": "buefy button icon-right"
+  },
+  "buefy button router": {
+    "scope": "",
+    "prefix": "b-button:router",
+    "body": ["b-button(tag='router-link', to='$1', type='is-link') $2"],
+    "description": "buefy button router"
+  },
+
+  "buefy textarea": {
+    "scope": "",
+    "prefix": "b-textarea",
+    "body": [
+      "b-field(label='$1')",
+      "  b-input(maxlength='$2', type='textarea')"
+    ],
+    "description": "buefy textarea"
+  },
+  "buefy type primary": {
+    "scope": "",
+    "prefix": "b-type:primary",
+    "body": ["type='is-primary'"],
+    "description": "buefy type primary"
+  },
+  "buefy type success": {
+    "scope": "",
+    "prefix": "b-type:success",
+    "body": ["type='is-success'"],
+    "description": "buefy type success"
+  },
+  "buefy type danger": {
+    "scope": "",
+    "prefix": "b-type:danger",
+    "body": ["type='is-danger'"],
+    "description": "buefy type danger"
+  },
+  "buefy type warning": {
+    "scope": "",
+    "prefix": "b-type:warning",
+    "body": ["type='is-warning'"],
+    "description": "buefy type warning"
+  },
+  "buefy type info": {
+    "scope": "",
+    "prefix": "b-type:info",
+    "body": ["type='is-info'"],
+    "description": "buefy type info"
+  },
+  "buefy type link": {
+    "scope": "",
+    "prefix": "b-type:link",
+    "body": ["type='is-link'"],
+    "description": "buefy type link"
+  },
+  "buefy size small": {
+    "scope": "",
+    "prefix": "b-size:small",
+    "body": ["size='is-small'"],
+    "description": "buefy size small"
+  },
+  "buefy size medium": {
+    "scope": "",
+    "prefix": "b-size:medium",
+    "body": ["size='is-medium'"],
+    "description": "buefy size medium"
+  },
+  "buefy size large": {
+    "scope": "",
+    "prefix": "b-size:large",
+    "body": ["size='is-large'"],
+    "description": "buefy size large"
+  },
+  "buefy icon": {
+    "scope": "",
+    "prefix": "b-icon",
+    "body": ["b-icon(icon='$1', size='$2')"],
+    "description": "buefy icon"
+  },
+  "buefy icon value": {
+    "scope": "",
+    "prefix": "b-icon:value",
+    "body": ["icon='$1'"],
+    "description": "buefy icon value"
+  },
+  "buefy disabled": {
+    "scope": "",
+    "prefix": "b-disabled",
+    "body": ["disabled"],
+    "description": "buefy disabled"
+  },
+  "buefy input default": {
+    "scope": "",
+    "prefix": "b-input:default",
+    "body": ["b-field(label='$1')", "  b-input(v-model='$2')"],
+    "description": "buefy input default"
+  },
+  "buefy input typed": {
+    "scope": "",
+    "prefix": "b-input:typed",
+    "body": [
+      "b-field(label='$1', type='$2', message='$3')",
+      "  b-input(type='$4', v-mode='$5')"
+    ],
+    "description": "buefy input typed"
+  },
+  "buefy input rounded": {
+    "scope": "",
+    "prefix": "b-input:rounded",
+    "body": ["b-field(label='$1')", "  b-input(placeholder='$2', rounded)"],
+    "description": "buefy input rounded"
+  },
+  "buefy input success": {
+    "scope": "",
+    "prefix": "b-input:success",
+    "body": [
+      "b-field(label='$1', type='is-success')",
+      "  b-input(placeholder='$2')"
+    ],
+    "description": "buefy input success"
+  },
+  "buefy input danger": {
+    "scope": "",
+    "prefix": "b-input:danger",
+    "body": [
+      "b-field(label='$1', type='is-danger', message='$2')",
+      "  b-input(placeholder='$3')"
+    ],
+
+    "description": "buefy input danger"
+  },
+  "buefy input info": {
+    "scope": "",
+    "prefix": "b-input:info",
+    "body": [
+      "b-field(label='$1', type='is-info')",
+      "  b-input(placeholder='$2')"
+    ],
+
+    "description": "buefy input info"
+  },
+  "buefy input warning": {
+    "scope": "",
+    "prefix": "b-input:warning",
+    "body": [
+      "b-field(label='$1', type='is-warning')",
+      "  b-input(placeholder='$2')"
+    ],
+
+    "description": "buefy input warning"
+  },
+  "buefy checkbox": {
+    "scope": "",
+    "prefix": "b-checkbox",
+    "body": ["b-checkbox(v-model='$1') $2"],
+    "description": "buefy checkbox"
+  },
+  "buefy radio": {
+    "scope": "",
+    "prefix": "b-radio",
+    "body": ["b-radio(v-model='$1', name='$2', native-value='$3') $3"],
+    "description": "buefy radio"
+  },
+  "buefy select": {
+    "scope": "",
+    "prefix": "b-select",
+    "body": [
+      "b-field(label='$1')",
+      "  b-select(placeholder='$2')",
+      "    option(v-for='$3', :value='$4', :key='$5') {{ $6 }}"
+    ],
+    "description": "buefy select"
+  },
+  "buefy slider": {
+    "scope": "",
+    "prefix": "b-slider",
+    "body": ["b-field(label='$1')", "  b-slider(v-model='$2')"],
+    "description": "buefy slider"
+  },
+  "buefy switch": {
+    "scope": "",
+    "prefix": "b-switch",
+    "body": ["b-field", "  b-switch(v-model='$1') $2"],
+    "description": "buefy switch"
+  },
+  "buefy upload": {
+    "scope": "",
+    "prefix": "b-upload",
+    "body": [
+      "b-field.file.is-primary(:class=\"{'has-name': !!file}\")",
+      "  b-upload.file-label(v-model='$1')",
+      "    span.file-cta",
+      "      b-icon.file-icon(icon='upload')",
+      "        span.file-label $2",
+      "    span.file-name(v-if='$1'){{ $1.name }} "
+    ],
+    "description": "buefy upload"
+  },
+  "buefy drop": {
+    "scope": "",
+    "prefix": "b-drop",
+    "body": [
+      "b-field",
+      "  b-upload(v-model='$1', multiple, drag-drop)",
+      "    section.section",
+      "      .content.has-text-centered",
+      "        p",
+      "          b-icon(icon='upload', size='is-large') ",
+      "        p $2"
+    ],
+    "description": "buefy drop"
+  },
+  "buefy image": {
+    "scope": "",
+    "prefix": "b-image",
+    "body": ["b-image(src='$1', alt='$2', ratio='$3')"],
+    "description": "buefy image"
+  },
+  "buefy message": {
+    "scope": "",
+    "prefix": "b-message",
+    "body": ["b-message(title='$1', aria-close-label='Close message') $2"],
+    "description": "buefy message"
+  },
+  "buefy notification": {
+    "scope": "",
+    "prefix": "b-notification",
+    "body": ["b-notification(aria-close-label='Close notification')$1 "],
+    "description": "buefy notification"
+  },
+  "buefy progress": {
+    "scope": "",
+    "prefix": "b-progress",
+    "body": ["b-progress(value='$1', show-value, format='percent')"],
+    "description": "buefy progress"
+  },
+  "buefy table": {
+    "scope": "",
+    "prefix": "b-table",
+    "body": ["b-table(:data='$1', :columns='$2')"],
+    "description": "buefy table"
+  },
+  "buefy tabs": {
+    "scope": "",
+    "prefix": "b-tabs",
+    "body": ["b-tabs(v-model='$1')", "  b-tab-item(label='$2') $3"],
+    "description": "buefy tabs"
+  },
+  "buefy tab": {
+    "scope": "",
+    "prefix": "b-tab",
+    "body": ["b-tab-item(label='$1') $2"],
+    "description": "buefy tab"
+  },
+  "buefy tag": {
+    "scope": "",
+    "prefix": "b-tag",
+    "body": ["b-field", "  b-tag $1"],
+    "description": "buefy tag"
+  },
+  "buefy taglist": {
+    "scope": "",
+    "prefix": "b-taglist",
+    "body": ["b-taglist", "  b-tag(type='$1') $2"],
+    "description": "buefy taglist"
+  },
+  "buefy tooltip": {
+    "scope": "",
+    "prefix": "b-tooltip",
+    "body": ["b-tooltip(label='$1', position='$2') $3"],
+    "description": "buefy tooltip"
+  }
+}
