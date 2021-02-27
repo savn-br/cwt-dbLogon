@@ -8,9 +8,11 @@
     template(#end)
       b-navbar-item(tag='div')
         .buttons
-          b-button(type='is-primary', size='is-small', @click='logout')
-            strong Logout
-  .section
+          b-button(type='is-primary', @click='logout')
+            strong {{ $t("logout") }}
+  side-menu
+  nuxt
+  //- .section
     .tile.is-ancestor
       .tile.is-vertical.is-3
         .tile
@@ -24,12 +26,14 @@
 
 <script>
 // import { mapState } from 'vuex'
+import SideMenu from '@/components/partials/SideMenu'
 import SideBar from '~/components/partials/SideBar'
 
 export default {
   name: 'MainPageLayout',
   components: {
     SideBar,
+    SideMenu,
   },
 
   methods: {

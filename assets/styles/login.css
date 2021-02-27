@@ -145,9 +145,9 @@ body.after-error .login-wrapper .login-form {
 
 .login-wrapper .login-form .form-group {
   text-align: center;
+  margin: 0 auto;
   margin-bottom: 0;
   position: relative;
-  margin: 0 auto;
 }
 
 .btn-wrapper {
@@ -223,7 +223,6 @@ body.after-error .forgot-password {
   padding-left: 15px;
   background-repeat: no-repeat;
   background-size: contain;
-  display: inline-block;
   background-position-x: right;
   transition: border 0.2s, box-shadow 0.2s;
   font-family: 'Source Sans Pro';
@@ -532,7 +531,6 @@ body.after-error .forgot-password {
     padding-right: unset;
     background-repeat: no-repeat;
     background-size: contain;
-    display: inline-block;
     background-position-x: right;
     border-radius: 0;
     font-family: 'Source Sans Pro';

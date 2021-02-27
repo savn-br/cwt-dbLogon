@@ -6,7 +6,7 @@ export default {
   head: {
     title: 'CWT Logon',
     htmlAttrs: {
-      lang: 'en',
+      lang: 'pt-BR',
     },
     meta: [
       { charset: 'utf-8' },
@@ -17,7 +17,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ['@/assets/styles/main.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ['@plugins/axios', '@/plugins/vee-validate.js'],
@@ -46,7 +46,18 @@ export default {
     'nuxt-buefy',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    'nuxt-i18n',
   ],
+  i18n: {
+    locales: [
+      { code: 'en', iso: 'en-US', file: 'en.json', dir: 'i18n' },
+      { code: 'br', iso: 'pt-BR', file: 'br.json', dir: 'i18n' },
+    ],
+    defaultLocale: 'br',
+    vueI18n: {
+      fallbackLocale: 'br',
+    },
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},

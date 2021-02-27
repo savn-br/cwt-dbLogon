@@ -20,6 +20,7 @@
     "lodash.debounce": "^4.0.8",
     "nuxt": "^2.15.2",
     "nuxt-buefy": "^0.4.4",
+    "nuxt-i18n": "^6.20.3",
     "vee-validate": "^3.3.0"
   },
   "devDependencies": {

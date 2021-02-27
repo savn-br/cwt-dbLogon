@@ -90,7 +90,7 @@ export default {
 }
 </script>
 <style scoped>
-@import '../assets/styles/cwt.css';
+@import '../assets/styles/login.css';
 .label-red-small {
   color: red;
   font-size: 10px;
