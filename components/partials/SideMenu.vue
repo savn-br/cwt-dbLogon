@@ -1,7 +1,8 @@
 <template lang="pug">
 .side-menu-wrapper.tw-pt-4
   b-menu.tw-fixed.tw-flex(class='md:tw-block')
-    menu-gestor
+    component(:is='menuType')
+
     //-   b-menu-item(icon='settings', :active='isActive', expanded)
     //-     template(#label='props')
     //-       | Administrator
@@ -40,6 +41,12 @@ export default {
   name: 'SideMenu',
   components: {
     MenuGestor: () => import('@/components/partials/MenuGestor'),
+    MenuAdministrador: () => import('@/components/partials/MenuAdministrador'),
+    MenuColaborador: () => import('@/components/partials/MenuColaborador'),
+    MenuAnalista: () => import('@/components/partials/MenuAnalista'),
+  },
+  props: {
+    menuType: { type: String, default: () => '' },
   },
   data() {
     return {

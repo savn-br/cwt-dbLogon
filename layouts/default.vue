@@ -1,8 +1,8 @@
 <template lang="pug">
 .main_page_layout-wrapper
-  navbar
+  navbar(:menuType='menuType')
   .tw-block.main_content(class='md:tw-grid')
-    side-menu.tw-shadow.tw-px-4.tw-hidden(class='md:tw-block')
+    side-menu.tw-shadow.tw-px-4.tw-hidden(class='md:tw-block', :menuType='menuType')
     nuxt
   //- .section
     .tile.is-ancestor
@@ -19,14 +19,14 @@
 <script>
 // import { mapState } from 'vuex'
 
-import SideBar from '~/components/partials/SideBar'
-
 export default {
   name: 'MainPageLayout',
   components: {
-    SideBar,
     Navbar: () => import('@/components/partials/Navbar'),
     SideMenu: () => import('@/components/partials/SideMenu'),
+  },
+  data() {
+    return { menuType: 'MenuAdministrador' }
   },
 
   methods: {
@@ -41,17 +41,7 @@ export default {
 
 <style lang="scss" scoped>
 .main_content {
-  height: 100%;
+  min-height: 100vh;
   grid-template-columns: 310px 1fr;
 }
-
-/* .main_page_layout-wrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
-.section {
-  padding: 1rem 2rem;
-} */
 </style>

@@ -1,6 +1,6 @@
 <template lang="pug">
 .home-page-wrapper
-  solicitacao-de-acesso
+  component(is='MeuPerfil')
 </template>
 
 <script>
@@ -9,6 +9,7 @@ export default {
   components: {
     SolicitacaoDeAcesso: () =>
       import('@/components/partials/SolicitacaoDeAcesso'),
+    MeuPerfil: () => import('@/components/partials/MeuPerfil'),
   },
   data() {
     return {}

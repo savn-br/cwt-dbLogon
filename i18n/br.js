@@ -24,4 +24,8 @@ module.exports = {
   requestAccess: 'Solicitar Acesso',
   date: 'Data',
   action: 'Ação',
+  maintainProfiles: 'Manter Perfis',
+  alternativeApprover: 'Cadastro Aprovador Alternativo',
+  accessRequest: 'Solicitação de Acesso',
+  maintainSystems: 'Manter Sistemas',
 }

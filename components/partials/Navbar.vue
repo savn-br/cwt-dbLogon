@@ -8,7 +8,7 @@
     template(#end)
       .side-menu-content.tw-block(class='md:tw-hidden')
         b-navbar-item
-          menu-gestor
+          component(:is='menuType')
       b-navbar-item(tag='div')
         .buttonns.tw-flex.tw-items-center
           nuxt-link.tw-mx-2(:to='switchLocalePath("en")') 🇺🇸
@@ -26,6 +26,12 @@ export default {
   name: 'Navbar',
   components: {
     MenuGestor: () => import('@/components/partials/MenuGestor'),
+    MenuAdministrador: () => import('@/components/partials/MenuAdministrador'),
+    MenuColaborador: () => import('@/components/partials/MenuColaborador'),
+    MenuAnalista: () => import('@/components/partials/MenuAnalista'),
+  },
+  props: {
+    menuType: { type: String, default: () => '' },
   },
   data() {
     return {}
