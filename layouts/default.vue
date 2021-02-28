@@ -2,7 +2,10 @@
 .main_page_layout-wrapper
   navbar(:menuType='menuType')
   .tw-block.main_content(class='md:tw-grid')
-    side-menu.tw-shadow.tw-px-4.tw-hidden(class='md:tw-block', :menuType='menuType')
+    side-menu.tw-shadow.tw-px-4.tw-hidden.tw-h-screen(
+      class='md:tw-block',
+      :menuType='menuType'
+    )
     nuxt
   //- .section
     .tile.is-ancestor
@@ -46,7 +49,7 @@ export default {
 
 <style lang="scss" scoped>
 .main_content {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   grid-template-columns: 310px 1fr;
 }
 </style>
