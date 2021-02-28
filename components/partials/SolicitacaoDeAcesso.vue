@@ -24,10 +24,10 @@
       b-input(v-model='matricula', size='is-small')
     b-checkbox.tw-m-5(v-model='emergencial') Emergencial
     b-checkbox.tw-m-5(v-model='desk') VIP Desk
-  .buttonns.tw-flex.tw-justify-center.tw-my-3(class='sm:tw-justify-end')
+  .update-buttons.tw-flex.tw-justify-center.tw-my-3(class='sm:tw-justify-end')
     b-button.tw-m-4(type='is-success') Atualizar
     b-button.tw-m-4(type='is-primary') Solicitar Acesso
-  .logs.tw-my-8
+  .logs
     h1 Status
     b-table(:data='data', :columns='columns')
 </template>
@@ -45,7 +45,7 @@ export default {
       nome: 'Ronnasayd',
       sobrenome: 'Machado',
       telefone: '1199999999',
-      area: 'Contabilidade',
+      area: 'Engenharia',
       cargo: 'Engenheiro',
       matricula: '1234567890',
       emergencial: '',
