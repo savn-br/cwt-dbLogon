@@ -1,6 +1,6 @@
 <template lang="pug">
 .navbar-wrapper
-  b-navbar(:fixed-top='true')
+  b-navbar.tw-shadow(:fixed-top='true')
     template(#brand)
       b-navbar-item(tag='router-link', :to='{ path: "/" }')
         img(src='~/assets/CWT_logo_-_Color_-_RGB_small_1.jpg', alt='CWT')
@@ -10,8 +10,10 @@
         b-navbar-item
           menu-gestor
       b-navbar-item(tag='div')
-        .buttons
-          b-button(tag='router-link', to='/login', type='is-primary is-link') logout
+        .buttonns.tw-flex.tw-items-center
+          nuxt-link.tw-mx-2(:to='switchLocalePath("en")') 🇺🇸
+          nuxt-link.tw-mx-2(:to='switchLocalePath("br")') 🇧🇷
+          b-button(tag='router-link', to='/login', type='is-primary is-link') {{ $t("logout") }}
 </template>
 
 <script>

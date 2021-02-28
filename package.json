@@ -22,7 +22,8 @@
     "nuxt": "^2.15.2",
     "nuxt-buefy": "^0.4.4",
     "nuxt-i18n": "^6.20.3",
-    "vee-validate": "^3.3.0"
+    "vee-validate": "^3.3.0",
+    "vue-the-mask": "^0.11.1"
   },
   "devDependencies": {
     "@nuxtjs/dotenv": "^1.4.1",

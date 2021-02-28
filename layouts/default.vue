@@ -1,8 +1,8 @@
 <template lang="pug">
-.main_page_layout
+.main_page_layout-wrapper
   navbar
   .tw-block.main_content(class='md:tw-grid')
-    side-menu.tw-pl-4.tw-hidden(class='md:tw-block')
+    side-menu.tw-shadow.tw-px-4.tw-hidden(class='md:tw-block')
     nuxt
   //- .section
     .tile.is-ancestor
@@ -42,10 +42,10 @@ export default {
 <style lang="scss" scoped>
 .main_content {
   height: 100%;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 310px 1fr;
 }
-.main_page_layout {
-  height: 100vh;
+
+/* .main_page_layout-wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -53,5 +53,5 @@ export default {
 }
 .section {
   padding: 1rem 2rem;
-}
+} */
 </style>

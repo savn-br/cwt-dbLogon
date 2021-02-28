@@ -2,34 +2,38 @@
 .solicitacao-de-acesso-wrapper.tw-px-4
   steps
   .fields.tw-grid
-    b-field.tw-mx-2(label='Usuário')
+    b-field.tw-mx-2(:label='$t("user")')
       b-input(v-model='usuario', size='is-small', disabled)
-    b-field.tw-mx-2(label='Gestor')
+    b-field.tw-mx-2(:label='$t("manager")')
       b-input(v-model='gestor', size='is-small', disabled)
     b-field.tw-mx-2(label='E-mail')
       b-input(v-model='email', size='is-small', disabled)
-    b-field.tw-mx-2(label='Empresa')
+    b-field.tw-mx-2(:label='$t("company")')
       b-input(v-model='empresa', size='is-small', disabled)
-    b-field.tw-mx-2(label='Nome')
+    b-field.tw-mx-2(:label='$t("name")')
       b-input(v-model='nome', size='is-small', disabled)
-    b-field.tw-mx-2(label='Sobrenome')
+    b-field.tw-mx-2(:label='$t("surname")')
       b-input(v-model='sobrenome', size='is-small', disabled)
-    b-field.tw-mx-2(label='Tel. Comercial')
-      b-input(v-model='telefone', size='is-small')
-    b-field.tw-mx-2(label='Área')
+    b-field.tw-mx-2(:label='$t("phone")')
+      b-input(
+        v-model='telefone',
+        size='is-small',
+        v-mask='["(##) ####-####", "(##) #####-####"]'
+      )
+    b-field.tw-mx-2(:label='$t("field")')
       b-input(v-model='area', size='is-small')
-    b-field.tw-mx-2(label='Cargo')
+    b-field.tw-mx-2(:label='$t("role")')
       b-input(v-model='cargo', size='is-small')
-    b-field.tw-mx-2(label='Mátricula')
+    b-field.tw-mx-2(:label='$t("registration")')
       b-input(v-model='matricula', size='is-small')
-    b-checkbox.tw-m-5(v-model='emergencial') Emergencial
+    b-checkbox.tw-m-5(v-model='emergencial') {{ $t("emergency") }}
     b-checkbox.tw-m-5(v-model='desk') VIP Desk
-  .update-buttons.tw-flex.tw-justify-center.tw-my-3(class='sm:tw-justify-end')
-    b-button.tw-m-4(type='is-success') Atualizar
-    b-button.tw-m-4(type='is-primary') Solicitar Acesso
-  .logs
+  .update-buttons.tw-flex.tw-justify-center(class='sm:tw-justify-end')
+    b-button.tw-mx-2(type='is-success') {{ $t("update") }}
+    b-button.tw-mx-2(type='is-primary') {{ $t("requestAccess") }}
+  .logs.tw-mt-2.tw-mb-4
     h1 Status
-    b-table(:data='data', :columns='columns')
+    b-table(:data='data', :columns='columns', :bordered='true')
 </template>
 
 <script>
@@ -53,25 +57,23 @@ export default {
       columns: [
         {
           field: 'date',
-          width: '10',
-          label: 'Data',
+          label: this.$i18n.t('date'),
         },
         {
-          field: 'description',
-          width: '90',
-          label: 'Ação',
+          field: 'action',
+          label: this.$i18n.t('action'),
         },
       ],
       data: [
         {
           id: 1,
           date: '2016-10-15 13:43:27',
-          description: 'Lorem ipsum',
+          action: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit.',
         },
         {
           id: 2,
           date: '2016-10-15 13:43:27',
-          description: 'Lorem ipsum',
+          action: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit.',
         },
       ],
     }

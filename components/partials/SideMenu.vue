@@ -1,5 +1,5 @@
 <template lang="pug">
-.side-menu-wrapper
+.side-menu-wrapper.tw-pt-4
   b-menu.tw-fixed.tw-flex(class='md:tw-block')
     menu-gestor
     //-   b-menu-item(icon='settings', :active='isActive', expanded)
@@ -56,6 +56,6 @@ export default {
 
 <style lang="scss" scoped>
 .side-menu-wrapper {
-  max-width: 300px;
+  width: 100%;
 }
 </style>

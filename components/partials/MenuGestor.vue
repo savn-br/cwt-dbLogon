@@ -1,8 +1,8 @@
 <template lang="pug">
 .menu-gestor-wrapper
   b-menu-list(label='Menu Gestor')
-    b-menu-item.tw-py-1(icon='account', :label='$t("myProfile")')
-    b-menu-item.tw-py-1(icon='home', :label='$t("managerPanel")')
+    b-menu-item.tw-py-1.tw-w-100(icon='account', :label='$t("myProfile")')
+    b-menu-item.tw-py-1(icon='account-details', :label='$t("managerPanel")')
     b-menu-item.tw-py-1(
       icon='account-arrow-right',
       :label='$t("profileAssignment")'

@@ -1,9 +1,9 @@
 <template lang="pug">
 .steps-wrapper.tw-mt-6
   b-steps(:has-navigation='false', v-model='steps')
-    b-step-item(label='Não Autorizado', icon='account-cancel')
-    b-step-item(label='Em Andamento', icon='account')
-    b-step-item(label='Aprovado', icon='account-plus')
+    b-step-item(:label='$t("unauthorized")', icon='account-cancel')
+    b-step-item(:label='$t("inProgress")', icon='account')
+    b-step-item(:label='$t("approved")', icon='account-plus')
 </template>
 
 <script>
