@@ -26,7 +26,12 @@ export default {
     SideMenu: () => import('@/components/partials/SideMenu'),
   },
   data() {
-    return { menuType: 'MenuAdministrador' }
+    return { menuType: 'MenuGestor' }
+  },
+  created() {
+    this.$nuxt.$on('menuType', (dataMenu) => {
+      this.menuType = dataMenu
+    })
   },
 
   methods: {

@@ -18,7 +18,7 @@ export default {
   watch: {},
   mounted() {},
   created() {
-    this.$nuxt.$emit('menuType', 'MenuGestor')
+    this.$nuxt.$emit('menuType', 'MenuAnalista')
   },
   methods: {},
 }
