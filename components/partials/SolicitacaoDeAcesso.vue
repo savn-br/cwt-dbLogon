@@ -41,19 +41,10 @@ export default {
   name: 'SolicitacaoDeAcesso',
   components: {},
   data() {
+    const perfil = Object.assign(require('@/jsons/perfil.json'))
+    const table = Object.assign(require('@/jsons/table.json'))
     return {
-      usuario: 'ronnas123',
-      gestor: 'Ronnasayd Machado',
-      email: 'ronnas@gmail.com',
-      empresa: 'CWT',
-      nome: 'Ronnasayd',
-      sobrenome: 'Machado',
-      telefone: '1199999999',
-      area: 'Engenharia',
-      cargo: 'Engenheiro',
-      matricula: '1234567890',
-      emergencial: '',
-      desk: '',
+      ...perfil,
       columns: [
         {
           field: 'date',
@@ -64,18 +55,7 @@ export default {
           label: this.$i18n.t('action'),
         },
       ],
-      data: [
-        {
-          id: 1,
-          date: '2016-10-15 13:43:27',
-          action: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit.',
-        },
-        {
-          id: 2,
-          date: '2016-10-15 13:43:27',
-          action: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit.',
-        },
-      ],
+      ...table,
     }
   },
   computed: {

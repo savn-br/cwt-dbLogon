@@ -41,20 +41,8 @@ export default {
   },
   props: {},
   data() {
-    return {
-      usuario: 'ronnas123',
-      gestor: 'Ronnasayd Machado',
-      email: 'ronnas@gmail.com',
-      empresa: 'CWT',
-      nome: 'Ronnasayd',
-      sobrenome: 'Machado',
-      telefone: '1199999999',
-      area: 'Engenharia',
-      cargo: 'Engenheiro',
-      matricula: '1234567890',
-      emergencial: '',
-      desk: '',
-    }
+    const perfil = Object.assign(require('@/jsons/perfil.json'))
+    return { ...perfil }
   },
   computed: {},
   watch: {},

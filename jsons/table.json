@@ -1,0 +1,14 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "date": "2016-10-15 13:43:27",
+      "action": "Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+    },
+    {
+      "id": 2,
+      "date": "2016-10-15 13:43:27",
+      "action": "Lorem ipsum, dolor sit amet consectetur adipisicing elit."
+    }
+  ]
+}
