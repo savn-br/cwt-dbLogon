@@ -57,6 +57,10 @@ export default {
     defaultLocale: 'br',
     vueI18n: {
       fallbackLocale: 'br',
+      messages: {
+        br: require('./i18n/br.js'),
+        en: require('./i18n/en.js'),
+      },
     },
   },
 

@@ -1,16 +1,9 @@
 <template lang="pug">
 .main_page_layout
-  b-navbar
-    template(#brand)
-      b-navbar-item(tag='router-link', :to='{ path: "/" }')
-        img(src='~/assets/CWT_logo_-_Color_-_RGB_small_1.jpg', alt='CWT')
-    template(#start)
-    template(#end)
-      b-navbar-item(tag='div')
-        .buttons
-          b-button(tag='router-link', to='/login', type='is-primary is-link') logout
-  side-menu.tw-pl-4
-  nuxt
+  navbar
+  .tw-block.main_content(class='md:tw-grid')
+    side-menu.tw-pl-4.tw-hidden(class='md:tw-block')
+    nuxt
   //- .section
     .tile.is-ancestor
       .tile.is-vertical.is-3
@@ -25,14 +18,15 @@
 
 <script>
 // import { mapState } from 'vuex'
-import SideMenu from '@/components/partials/SideMenu'
+
 import SideBar from '~/components/partials/SideBar'
 
 export default {
   name: 'MainPageLayout',
   components: {
     SideBar,
-    SideMenu,
+    Navbar: () => import('@/components/partials/Navbar'),
+    SideMenu: () => import('@/components/partials/SideMenu'),
   },
 
   methods: {
@@ -46,7 +40,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.main_content {
+  height: 100%;
+  grid-template-columns: 300px 1fr;
+}
 .main_page_layout {
+  height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;

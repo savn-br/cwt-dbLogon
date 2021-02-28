@@ -23,10 +23,11 @@ module.exports = {
   presets: [],
   theme: {
     screens: {
-      sm: '640px',
-      md: '768px',
-      lg: '1024px',
-      xl: '1280px',
+      xs: '768px',
+      sm: '769px',
+      md: '1024px',
+      lg: '1216px',
+      xl: '1408px',
     },
     colors: {
       transparent: 'transparent',
