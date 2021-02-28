@@ -5,7 +5,7 @@
 
 <script>
 export default {
-  name: 'HomePage',
+  name: 'Colaborator',
   components: {
     SolicitacaoDeAcesso: () =>
       import('@/components/partials/SolicitacaoDeAcesso'),
