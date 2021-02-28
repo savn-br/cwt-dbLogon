@@ -1,6 +1,6 @@
 <template lang="pug">
 .home-page-wrapper
-  component(is='MeuPerfil')
+  component(is='SolicitacaoDeAcesso')
 </template>
 
 <script>

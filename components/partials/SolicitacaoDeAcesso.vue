@@ -42,7 +42,7 @@ export default {
   components: {},
   data() {
     const perfil = Object.assign(require('@/jsons/perfil.json'))
-    const table = Object.assign(require('@/jsons/table.json'))
+    const table = Object.assign(require('@/jsons/statusTable.json'))
     return {
       ...perfil,
       columns: [
