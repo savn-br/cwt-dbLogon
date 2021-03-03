@@ -1,7 +1,7 @@
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
-  target: 'spa',
+  target: 'static',
   router: {
     base: '/cwt-dbLogon/',
   },

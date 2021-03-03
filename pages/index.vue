@@ -1,6 +1,6 @@
 <template lang="pug">
 .home-page-wrapper
-  component(is='MeuPerfil')
+  component(is='PainelGestor')
 </template>
 
 <script>
@@ -10,6 +10,7 @@ export default {
     SolicitacaoDeAcesso: () =>
       import('@/components/partials/SolicitacaoDeAcesso'),
     MeuPerfil: () => import('@/components/partials/MeuPerfil'),
+    PainelGestor: () => import('@/components/partials/PainelGestor'),
   },
   data() {
     return {}
