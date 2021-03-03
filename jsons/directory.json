@@ -1,0 +1,38 @@
+[
+  {
+    "sistema": "sistema/modulo/transação",
+    "nota": "notas",
+    "children": [
+      {
+        "sistema": "Smart Accounting",
+        "nota": "Sistema Account Bla bla bla",
+        "children": [
+          {
+            "sistema": "Smart modulo I",
+            "nota": "Modulo 1 bla bla bla",
+            "children": [
+              {
+                "sistema": "Transação I",
+                "nota": "Transação I bla bla bla"
+              },
+              {
+                "sistema": "Transação II",
+                "nota": "Transação II bla bla bla"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "sistema": "Impressão",
+        "nota": "Sistema de impressão",
+        "children": [
+          {
+            "sistema": "Balancete 120 colunas",
+            "nota": "Balancete 120 colunas bla bla bla"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -30,6 +30,7 @@
   .update-buttons.tw-flex.tw-justify-center
     b-button.tw-mx-2.tw-my-4(type='is-success') {{ $t("update") }}
   collapse(title='Perfil de Acesso')
+    detail-table(:data='tree')
   collapse(title='Visão de clientes')
 </template>
 
@@ -38,11 +39,13 @@ export default {
   name: 'MeuPerfil',
   components: {
     Collapse: () => import('@/components/Collapse'),
+    DetailTable: () => import('@/components/DetailTable'),
   },
   props: {},
   data() {
     const perfil = Object.assign(require('@/jsons/perfil.json'))
-    return { ...perfil }
+    const tree = require('@/jsons/directory.json')
+    return { ...perfil, tree }
   },
   computed: {},
   watch: {},

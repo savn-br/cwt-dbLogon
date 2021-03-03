@@ -2,11 +2,8 @@
 .main_page_layout-wrapper
   navbar(:menuType='menuType')
   .tw-block.main_content(class='md:tw-grid')
-    side-menu.tw-shadow.tw-px-4.tw-hidden.tw-h-screen(
-      class='md:tw-block',
-      :menuType='menuType'
-    )
-    nuxt
+    side-menu.tw-px-4.tw-hidden.tw-h-screen(class='md:tw-block', :menuType='menuType')
+    nuxt.wrapper-content
   //- .section
     .tile.is-ancestor
       .tile.is-vertical.is-3
@@ -51,5 +48,8 @@ export default {
 .main_content {
   /* min-height: 100vh; */
   grid-template-columns: 310px 1fr;
+  .wrapper-content {
+    border-left: 1px solid rgb(214, 214, 214);
+  }
 }
 </style>
