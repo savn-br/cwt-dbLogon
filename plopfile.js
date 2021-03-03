@@ -29,7 +29,7 @@ module.exports = function (plop) {
     actions: [
       {
         type: 'add',
-        path: 'pages/{{ properCase name }}.vue',
+        path: 'pages/{{ properCase name }}/index.vue',
         templateFile: 'plop-templates/components.hbs',
       },
     ],

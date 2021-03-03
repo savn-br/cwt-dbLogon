@@ -1,6 +1,6 @@
 <template lang="pug">
 .home-page-wrapper
-  component(is='PainelGestor')
+  component(is='DelegacaoAprovacao')
 </template>
 
 <script>
@@ -11,6 +11,9 @@ export default {
       import('@/components/partials/SolicitacaoDeAcesso'),
     MeuPerfil: () => import('@/components/partials/MeuPerfil'),
     PainelGestor: () => import('@/components/partials/PainelGestor'),
+    BloquearUsuario: () => import('@/components/partials/BloquearUsuario'),
+    DelegacaoAprovacao: () =>
+      import('@/components/partials/DelegacaoAprovacao'),
   },
   data() {
     return {}
