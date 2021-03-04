@@ -1,6 +1,6 @@
 <template lang="pug">
 .home-page-wrapper
-  component(is='SolicitacaoDeAcesso')
+  component(is='PainelGestor')
 </template>
 
 <script>

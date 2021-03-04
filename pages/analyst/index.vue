@@ -10,6 +10,10 @@ export default {
     SolicitacaoDeAcesso: () =>
       import('@/components/partials/SolicitacaoDeAcesso'),
     MeuPerfil: () => import('@/components/partials/MeuPerfil'),
+    PainelGestor: () => import('@/components/partials/PainelGestor'),
+    BloquearUsuario: () => import('@/components/partials/BloquearUsuario'),
+    DelegacaoAprovacao: () =>
+      import('@/components/partials/DelegacaoAprovacao'),
   },
   data() {
     return {}

@@ -1,15 +1,19 @@
 <template lang="pug">
 .home-page-wrapper
-  component(is='MeuPerfil')
+  component(is='BloquearUsuario')
 </template>
 
 <script>
 export default {
-  name: 'Administrator',
+  name: 'Collaborator',
   components: {
     SolicitacaoDeAcesso: () =>
       import('@/components/partials/SolicitacaoDeAcesso'),
     MeuPerfil: () => import('@/components/partials/MeuPerfil'),
+    PainelGestor: () => import('@/components/partials/PainelGestor'),
+    BloquearUsuario: () => import('@/components/partials/BloquearUsuario'),
+    DelegacaoAprovacao: () =>
+      import('@/components/partials/DelegacaoAprovacao'),
   },
   data() {
     return {}
@@ -18,7 +22,7 @@ export default {
   watch: {},
   mounted() {},
   created() {
-    this.$nuxt.$emit('menuType', 'MenuAdministrador')
+    this.$nuxt.$emit('menuType', 'MenuColaborador')
   },
   methods: {},
 }

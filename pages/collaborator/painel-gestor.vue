@@ -1,11 +1,11 @@
 <template lang="pug">
 .home-page-wrapper
-  component(is='SolicitacaoDeAcesso')
+  component(is='PainelGestor')
 </template>
 
 <script>
 export default {
-  name: 'Manager',
+  name: 'Collaborator',
   components: {
     SolicitacaoDeAcesso: () =>
       import('@/components/partials/SolicitacaoDeAcesso'),
@@ -22,7 +22,7 @@ export default {
   watch: {},
   mounted() {},
   created() {
-    this.$nuxt.$emit('menuType', 'MenuGestor')
+    this.$nuxt.$emit('menuType', 'MenuColaborador')
   },
   methods: {},
 }
