@@ -10,9 +10,11 @@
         b-navbar-item
           component(:is='menuType')
       b-navbar-item(tag='div')
-        .buttonns.tw-flex.tw-items-center
-          nuxt-link.tw-mr-4(:to='switchLocalePath("en")') 🇺🇸
-          nuxt-link.tw-mr-4(:to='switchLocalePath("br")') 🇧🇷
+        .buttonns.tw-flex.tw-items-center.tw-justify-end
+          nuxt-link.tw-mr-4(:to='switchLocalePath("en")')
+            img.tw-w-5.tw-h-5(src='@/assets/flags/en.svg', alt='EUA flag')
+          nuxt-link.tw-mr-4(:to='switchLocalePath("br")')
+            img.tw-w-5.tw-h-5(src='@/assets/flags/br.svg', alt='Brazil flag')
           b-button.tw-w-24(
             icon-left='logout',
             tag='router-link',
