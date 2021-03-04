@@ -11,9 +11,9 @@
           component(:is='menuType')
       b-navbar-item(tag='div')
         .buttonns.tw-flex.tw-items-center
-          nuxt-link.tw-mx-2(:to='switchLocalePath("en")') 🇺🇸
-          nuxt-link.tw-mx-2(:to='switchLocalePath("br")') 🇧🇷
-          b-button(
+          nuxt-link.tw-mr-4(:to='switchLocalePath("en")') 🇺🇸
+          nuxt-link.tw-mr-4(:to='switchLocalePath("br")') 🇧🇷
+          b-button.tw-w-24(
             icon-left='logout',
             tag='router-link',
             to='/login',

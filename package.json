@@ -12,7 +12,7 @@
     "lint": "yarn lint:js && yarn lint:style",
     "test": "jest",
     "plop": "plop",
-    "deploy": "gh-pages -d dist"
+    "deploy": "cd dist && cp index.html 404.html && cd .. && gh-pages -d dist"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.5",

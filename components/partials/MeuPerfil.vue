@@ -29,9 +29,9 @@
     b-checkbox.tw-m-5(v-model='desk') VIP Desk
   .update-buttons.tw-flex.tw-justify-center
     b-button.tw-mx-2.tw-my-4(type='is-success') {{ $t("update") }}
-  collapse(title='Perfil de Acesso')
+  collapse.tw-text-sm(:title='$t("accessProfile")')
     detail-table(:data='tree')
-  collapse(title='Visão de clientes')
+  collapse.tw-text-sm(:title='$t("customerView")')
 </template>
 
 <script>
@@ -59,6 +59,14 @@ export default {
 .meu-perfil-wrapper {
   .fields {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+</style>
+
+<style lang="scss">
+.meu-perfil-wrapper {
+  label {
+    font-size: 0.75rem;
   }
 }
 </style>

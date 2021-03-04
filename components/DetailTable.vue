@@ -5,6 +5,7 @@
       :data='data',
       :show-header='false',
       :bordered='false',
+      :narrowed='true',
       :paginated='false',
       :detailed='!!data[0].children && !!data[0].children.length',
       detail-key='id'
@@ -12,14 +13,14 @@
       b-table-column(
         field='sistema',
         v-slot='props',
-        :centered='true',
+        :centered='false',
         width='50%'
       )
         | {{ props.row.sistema }}
       b-table-column(
         field='nota',
         v-slot='props',
-        :centered='true',
+        :centered='false',
         width='50%'
       )
         | {{ props.row.nota }}

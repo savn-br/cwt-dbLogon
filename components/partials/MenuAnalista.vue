@@ -1,10 +1,19 @@
 <template lang="pug">
 .menu-analista-wrapper
-  b-menu-list(label='Menu Analista')
-    b-menu-item.tw-py-1.tw-w-100(icon='account', :label='$t("myProfile")')
-    b-menu-item.tw-py-1(icon='account-search', :label='$t("profileSearch")')
-    b-menu-item.tw-py-1(icon='account-lock', :label='$t("maintainProfiles")')
-    b-menu-item.tw-py-1(
+  b-menu-list(:label='$t("analystMenu")')
+    b-menu-item.tw-text-xs.tw-py-1.tw-w-100(
+      icon='account',
+      :label='$t("myProfile")'
+    )
+    b-menu-item.tw-text-xs.tw-py-1(
+      icon='account-search',
+      :label='$t("profileSearch")'
+    )
+    b-menu-item.tw-text-xs.tw-py-1(
+      icon='account-lock',
+      :label='$t("maintainProfiles")'
+    )
+    b-menu-item.tw-text-xs.tw-py-1(
       icon='access-point-network',
       :label='$t("maintainSystems")'
     )

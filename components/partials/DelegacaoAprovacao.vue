@@ -1,27 +1,42 @@
 <template lang="pug">
 .delegacao-aprovacao-wrapper.tw-mt-8.tw-px-5
   .button-primary.tw-flex.tw-justify-end
-    b-button(type='is-primary') Adicionar
-  b-table.tw-mt-5(:data='data', :bordered='true')
+    b-button(type='is-primary') {{ $t("add") }}
+  table-default.tw-mt-5(
+    :data='data',
+    :bordered='true',
+    :narrowed='true',
+    :hoverable='true'
+  )
     b-table-column(
       field='matricula',
-      label='Matricula Delegado',
+      :label='$t("delegateRegistration")',
       v-slot='props'
     )
-      | {{ props.row.matricula }}
+      span.tw-text-xs {{ props.row.matricula }}
     b-table-column(
       field='name',
-      label='Nome aprovador Delegado',
+      :label='$t("delegateApproverName")',
       v-slot='props'
     )
-      | {{ props.row.name }}
-    b-table-column(field='initial_date', label='Data inicial', v-slot='props')
-      | {{ props.row.initial_date }}
-    b-table-column(field='end_date', label='Data final', v-slot='props')
-      | {{ props.row.end_date }}
-    b-table-column(, label='Operação', v-slot='props')
+      span.tw-text-xs {{ props.row.name }}
+    b-table-column(
+      field='initial_date',
+      :label='$t("initialDate")',
+      v-slot='props'
+    )
+      span.tw-text-xs {{ props.row.initial_date }}
+    b-table-column(field='end_date', :label='$t("finalDate")', v-slot='props')
+      span.tw-text-xs {{ props.row.end_date }}
+    b-table-column(
+      ,
+      :label='$t("operation")',
+      v-slot='props',
+      :centered='true'
+    )
       b-field
         b-switch(
+          size='is-small',
           true-value='on',
           false-value='off',
           v-model='props.row.operation'
@@ -31,7 +46,9 @@
 <script>
 export default {
   name: 'DelegacaoAprovacao',
-  components: {},
+  components: {
+    TableDefault: () => import('@/components/TableDefault'),
+  },
   props: {},
   data() {
     return {

@@ -1,8 +1,11 @@
 <template lang="pug">
 .menu-colaborador-wrapper
-  b-menu-list(label='Menu Colaborador')
-    b-menu-item.tw-py-1.tw-w-100(icon='account', :label='$t("myProfile")')
-    b-menu-item.tw-py-1.tw-w-100(
+  b-menu-list(:label='$t("collaboratorMenu")')
+    b-menu-item.tw-text-xs.tw-py-1.tw-w-100(
+      icon='account',
+      :label='$t("myProfile")'
+    )
+    b-menu-item.tw-text-xs.tw-py-1.tw-w-100(
       icon='account-key',
       :label='$t("accessRequest")'
     )

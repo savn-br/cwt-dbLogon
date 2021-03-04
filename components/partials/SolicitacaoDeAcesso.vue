@@ -33,28 +33,24 @@
     b-button.tw-mx-2(type='is-primary') {{ $t("requestAccess") }}
   .logs.tw-mt-2.tw-mb-4
     h1 Status
-    b-table(:data='data', :columns='columns', :bordered='true')
+    table-default(:data='data', , :bordered='true')
+      b-table-column(field='date', :label='$t("date")', v-slot='props')
+        span.tw-text-xs {{ props.row.date }}
+      b-table-column(field='action', :label='$t("action")', v-slot='props')
+        span.tw-text-xs {{ props.row.action }}
 </template>
 
 <script>
 export default {
   name: 'SolicitacaoDeAcesso',
-  components: {},
+  components: {
+    TableDefault: () => import('@/components/TableDefault'),
+  },
   data() {
     const perfil = Object.assign(require('@/jsons/perfil.json'))
     const table = Object.assign(require('@/jsons/statusTable.json'))
     return {
       ...perfil,
-      columns: [
-        {
-          field: 'date',
-          label: this.$i18n.t('date'),
-        },
-        {
-          field: 'action',
-          label: this.$i18n.t('action'),
-        },
-      ],
       ...table,
     }
   },
@@ -72,6 +68,14 @@ export default {
 .solicitacao-de-acesso-wrapper {
   .fields {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+</style>
+
+<style lang="scss">
+.solicitacao-de-acesso-wrapper {
+  label {
+    font-size: 0.75rem;
   }
 }
 </style>

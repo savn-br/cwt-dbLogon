@@ -1,6 +1,6 @@
 <template lang="pug">
 .steps-wrapper.tw-mt-6
-  b-steps(:has-navigation='false', v-model='steps')
+  b-steps(:has-navigation='false', v-model='steps', size='is-small')
     b-step-item(
       :label='$t("unauthorized")',
       icon='account-cancel',

@@ -1,24 +1,35 @@
 <template lang="pug">
 .painel-gestor-wrapper.tw-mt-10.tw-px-4
-  b-table(:data='data', :bordered='true', :narrowed='true', :striped='true')
-    b-table-column(field='id', label='ID', v-slot='props')
-      | {{ props.row.id }}
-    b-table-column(field='date', label='Date', v-slot='props')
-      | {{ props.row.date }}
-    b-table-column(field='action', label='Ação', v-slot='props')
-      | {{ props.row.action }}
-    b-table-column(field='user', label='Usuário', v-slot='props')
-      | {{ props.row.user }}
-    b-table-column(field='colaborator', label='Colaborador', v-slot='props')
-      | {{ props.row.colaborator }}
-    b-table-column(label='Verificar', v-slot='props', :centered='true')
-      b-button(type='is-primary', @click='verificar(props.row.id)') verificar perfil
+  table-default(
+    :data='data',
+    :bordered='true',
+    :narrowed='true',
+    :striped='true'
+  )
+    b-table-column(field='date', :label='$t("date")', v-slot='props')
+      span.tw-text-xs {{ props.row.date }}
+    b-table-column(field='action', :label='$t("action")', v-slot='props')
+      span.tw-text-xs {{ props.row.action }}
+    b-table-column(field='user', :label='$t("user")', v-slot='props')
+      span.tw-text-xs {{ props.row.user }}
+    b-table-column(
+      field='colaborator',
+      :label='$t("collaborator")',
+      v-slot='props'
+    )
+      span.tw-text-xs {{ props.row.colaborator }}
+    b-table-column(:label='$t("verify")', v-slot='props', :centered='true')
+      b-button(
+        type='is-primary',
+        size='is-small',
+        @click='verificar(props.row.id)'
+      ) {{ $t("verifyProfile") }}
 </template>
 
 <script>
 export default {
   name: 'PainelGestor',
-  components: {},
+  components: { TableDefault: () => import('@/components/TableDefault') },
   props: {},
   data() {
     const data = Object.assign(require('@/jsons/attPerfil.json'))
