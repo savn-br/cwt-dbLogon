@@ -1,5 +1,5 @@
 <template lang="pug">
-.painel-gestor-wrapper.tw-mt-10.tw-px-4
+.manager-panel-wrapper.tw-mt-10.tw-px-4
   table-default(
     :data='data',
     :bordered='true',
@@ -28,11 +28,11 @@
 
 <script>
 export default {
-  name: 'PainelGestor',
-  components: { TableDefault: () => import('@/components/TableDefault') },
+  name: 'ManagerPanel',
+  components: { StandardTable: () => import('@/components/StandardTable') },
   props: {},
   data() {
-    const data = Object.assign(require('@/jsons/attPerfil.json'))
+    const data = Object.assign(require('@/jsons/assignment-profile-data.json'))
     return {
       data,
     }
@@ -48,6 +48,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.painel-gestor-wrapper {
+.manager-panel-wrapper {
 }
 </style>

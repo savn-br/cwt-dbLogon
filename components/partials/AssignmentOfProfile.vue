@@ -1,8 +1,8 @@
 <template lang="pug">
-.atribuicao-perfil-wrapper.tw-mt-6.tw-px-4
+.assignment-of-profile-wrapper.tw-mt-6.tw-px-4
   perfil-form-default(:data='perfil')
     template(v-slot:content)
-      b-checkbox.tw-m-5(v-model='perfil.ativo') Ativo
+      b-checkbox.tw-m-5(v-model='perfil.active') Ativo
   .update-buttons.tw-flex.tw-justify-center
     b-button.tw-mx-2.tw-my-4.tw-w-32(type='is-success') {{ $t("update") }}
   .view-perfil
@@ -79,17 +79,17 @@
 
 <script>
 export default {
-  name: 'AtribuicaoPerfil',
+  name: 'AssignmentOfProfile',
   components: {
-    PerfilFormDefault: () => import('@/components/partials/PerfilFormDefault'),
-    TableDefault: () => import('@/components/TableDefault'),
+    ProfileForm: () => import('@/components/partials/ProfileForm'),
+    StandardTable: () => import('@/components/StandardTable'),
   },
   props: {},
   data() {
     return {
-      perfil: require('@/jsons/perfil.json'),
-      atribuicao: require('@/jsons/atribuicao.json'),
-      vendas: require('@/jsons/vendas.json'),
+      perfil: require('@/jsons/profile-data.json'),
+      atribuicao: require('@/jsons/assignment-table-data.json'),
+      vendas: require('@/jsons/sales-data.json'),
     }
   },
   computed: {},
@@ -101,6 +101,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.atribuicao-perfil-wrapper {
+.assignment-of-profile-wrapper {
 }
 </style>

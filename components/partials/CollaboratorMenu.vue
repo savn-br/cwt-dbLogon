@@ -1,5 +1,5 @@
 <template lang="pug">
-.menu-colaborador-wrapper
+.collaborator-menu-wrapper
   b-menu-list(:label='$t("collaboratorMenu")')
     b-menu-item.tw-text-xs.tw-py-1.tw-w-100(
       icon='account',
@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'MenuColaborador',
+  name: 'CollaboratorMenu',
   components: {},
   props: {},
   data() {
@@ -28,6 +28,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.menu-colaborador-wrapper {
+.collaborator-menu-wrapper {
 }
 </style>

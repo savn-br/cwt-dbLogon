@@ -1,20 +1,20 @@
 <template lang="pug">
 .home-page-wrapper
-  component(is='AtribuicaoPerfil')
+  component(is='AssignmentOfProfile')
 </template>
 
 <script>
 export default {
   name: 'HomePage',
   components: {
-    SolicitacaoDeAcesso: () =>
-      import('@/components/partials/SolicitacaoDeAcesso'),
-    MeuPerfil: () => import('@/components/partials/MeuPerfil'),
-    PainelGestor: () => import('@/components/partials/PainelGestor'),
-    BloquearUsuario: () => import('@/components/partials/BloquearUsuario'),
-    DelegacaoAprovacao: () =>
-      import('@/components/partials/DelegacaoAprovacao'),
-    AtribuicaoPerfil: () => import('@/components/partials/AtribuicaoPerfil'),
+    LoginRequest: () => import('@/components/partials/LoginRequest'),
+    MyProfile: () => import('@/components/partials/MyProfile'),
+    ManagerPanel: () => import('@/components/partials/ManagerPanel'),
+    BlockUser: () => import('@/components/partials/BlockUser'),
+    ApprovalDelegation: () =>
+      import('@/components/partials/ApprovalDelegation'),
+    AssignmentOfProfile: () =>
+      import('@/components/partials/AssignmentOfProfile'),
   },
   data() {
     return {}
@@ -23,7 +23,7 @@ export default {
   watch: {},
   mounted() {},
   created() {
-    this.$nuxt.$emit('menuType', 'MenuGestor')
+    this.$nuxt.$emit('menuType', 'ManagerMenu')
   },
   methods: {},
 }

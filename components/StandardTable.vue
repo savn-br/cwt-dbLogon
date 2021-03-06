@@ -1,5 +1,5 @@
 <template lang="pug">
-.table-default-wrapper
+.standard-table-wrapper
   b-table(
     :data='data',
     :columns='columns',
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'DefaultTable',
+  name: 'StandardTable',
   components: {},
   props: {
     data: {
@@ -36,12 +36,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.table-default-wrapper {
+.standard-table-wrapper {
 }
 </style>
 
 <style lang="scss">
-.table-default-wrapper {
+.standard-table-wrapper {
   .table th {
     font-size: 0.75rem;
     background: $principal;

@@ -1,5 +1,5 @@
 <template lang="pug">
-.menu-analista-wrapper
+.analyst-menu-wrapper
   b-menu-list(:label='$t("analystMenu")')
     b-menu-item.tw-text-xs.tw-py-1.tw-w-100(
       icon='account',
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: 'MenuAnalista',
+  name: 'AnalystMenu',
   components: {},
   props: {},
   data() {
@@ -36,6 +36,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.menu-analista-wrapper {
+.analyst-menu-wrapper {
 }
 </style>

@@ -1,6 +1,6 @@
 <template lang="pug">
-.menu-gestor-wrapper
-  b-menu-list(:label='$t("managerMenu")')
+.administrator-menu-wrapper
+  b-menu-list(:label='$t("AdministratorMenu")')
     b-menu-item.tw-text-xs.tw-py-1.tw-w-100(
       icon='account',
       :label='$t("myProfile")'
@@ -17,7 +17,7 @@
       icon='account-cancel',
       :label='$t("blockUsers")'
     )
-    b-menu-item.tw-text-xs.tw-text-xs.tw-py-1(
+    b-menu-item.tw-text-xs.tw-py-1(
       icon='account-check',
       :label='$t("approvalDelegation")'
     )
@@ -25,11 +25,19 @@
       icon='account-search',
       :label='$t("profileSearch")'
     )
+    b-menu-item.tw-text-xs.tw-py-1(
+      icon='account-lock',
+      :label='$t("maintainProfiles")'
+    )
+    b-menu-item.tw-text-xs.tw-py-1(
+      icon='account-supervisor',
+      :label='$t("alternativeApprover")'
+    )
 </template>
 
 <script>
 export default {
-  name: 'MenuGestor',
+  name: 'AdministratorMenu',
   components: {},
   data() {
     return {}
@@ -43,6 +51,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.menu-gestor-wrapper {
+.administrator-menu-wrapper {
 }
 </style>

@@ -1,5 +1,5 @@
 <template lang="pug">
-.delegacao-aprovacao-wrapper.tw-mt-8.tw-px-5
+.approval-delegation-wrapper.tw-mt-8.tw-px-5
   .button-primary.tw-flex.tw-justify-end
     b-button(type='is-primary') {{ $t("add") }}
   table-default.tw-mt-5(
@@ -9,11 +9,11 @@
     :hoverable='true'
   )
     b-table-column(
-      field='matricula',
+      field='register',
       :label='$t("delegateRegistration")',
       v-slot='props'
     )
-      span.tw-text-xs {{ props.row.matricula }}
+      span.tw-text-xs {{ props.row.register }}
     b-table-column(
       field='name',
       :label='$t("delegateApproverName")',
@@ -45,14 +45,14 @@
 
 <script>
 export default {
-  name: 'DelegacaoAprovacao',
+  name: 'ApprovalDelegation',
   components: {
-    TableDefault: () => import('@/components/TableDefault'),
+    StandardTable: () => import('@/components/StandardTable'),
   },
   props: {},
   data() {
     return {
-      data: require('@/jsons/approval.json'),
+      data: require('@/jsons/approval-table-data.json'),
     }
   },
   computed: {},
@@ -64,6 +64,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.delegacao-aprovacao-wrapper {
+.approval-delegation-wrapper {
 }
 </style>

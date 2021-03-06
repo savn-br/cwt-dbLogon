@@ -1,5 +1,5 @@
 <template lang="pug">
-.solicitacao-de-acesso-wrapper.tw-px-4
+.login-request-wrapper.tw-px-4
   steps
   perfil-form-default(:data='perfil')
   .update-buttons.tw-flex.tw-justify-center(class='sm:tw-justify-end')
@@ -16,15 +16,15 @@
 
 <script>
 export default {
-  name: 'SolicitacaoDeAcesso',
+  name: 'LoginRequest',
   components: {
-    TableDefault: () => import('@/components/TableDefault'),
-    PerfilFormDefault: () => import('@/components/partials/PerfilFormDefault'),
+    StandardTable: () => import('@/components/StandardTable'),
+    ProfileForm: () => import('@/components/partials/ProfileForm'),
   },
   data() {
-    const table = Object.assign(require('@/jsons/statusTable.json'))
+    const table = Object.assign(require('@/jsons/status-table-data.json'))
     return {
-      perfil: require('@/jsons/perfil.json'),
+      perfil: require('@/jsons/profile-data.json'),
       ...table,
     }
   },
@@ -39,7 +39,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.solicitacao-de-acesso-wrapper {
+.login-request-wrapper {
   .fields {
     grid-template-columns: repeat(auto-fill, minmax(px2rem(300), 1fr));
     @media screen and(min-width: px2rem(1500)) {
@@ -50,7 +50,7 @@ export default {
 </style>
 
 <style lang="scss">
-.solicitacao-de-acesso-wrapper {
+.login-request-wrapper {
   label {
     font-size: 0.75rem;
   }

@@ -1,19 +1,18 @@
 <template lang="pug">
 .home-page-wrapper
-  component(is='SolicitacaoDeAcesso')
+  component(is='LoginRequest')
 </template>
 
 <script>
 export default {
   name: 'Analyst',
   components: {
-    SolicitacaoDeAcesso: () =>
-      import('@/components/partials/SolicitacaoDeAcesso'),
-    MeuPerfil: () => import('@/components/partials/MeuPerfil'),
-    PainelGestor: () => import('@/components/partials/PainelGestor'),
-    BloquearUsuario: () => import('@/components/partials/BloquearUsuario'),
-    DelegacaoAprovacao: () =>
-      import('@/components/partials/DelegacaoAprovacao'),
+    LoginRequest: () => import('@/components/partials/LoginRequest'),
+    MyProfile: () => import('@/components/partials/MyProfile'),
+    ManagerPanel: () => import('@/components/partials/ManagerPanel'),
+    BlockUser: () => import('@/components/partials/BlockUser'),
+    ApprovalDelegation: () =>
+      import('@/components/partials/ApprovalDelegation'),
   },
   data() {
     return {}
@@ -22,7 +21,7 @@ export default {
   watch: {},
   mounted() {},
   created() {
-    this.$nuxt.$emit('menuType', 'MenuAnalista')
+    this.$nuxt.$emit('menuType', 'AnalystMenu')
   },
   methods: {},
 }

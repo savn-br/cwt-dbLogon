@@ -1,9 +1,9 @@
 <template lang="pug">
-.bloquear-usuario-wrapper.tw-mt-8.tw-px-5
+.block-user-wrapper.tw-mt-8.tw-px-5
   form
     fieldset
       b-radio(v-model='radio', name='select', native-value='todos') {{ $t("allUsers") }}
-      b-radio(v-model='radio', name='select', native-value='ativos') {{ $t("activeOnly") }}
+      b-radio(v-model='radio', name='select', native-value='actives') {{ $t("activeOnly") }}
   table-default.tw-mt-5(:data='data', :bordered='true')
     b-table-column(field='user', :label='$t("user")', v-slot='props')
       span.tw-text-xs {{ props.row.user }}
@@ -40,14 +40,14 @@
 
 <script>
 export default {
-  name: 'BloquearUsuario',
+  name: 'BlockUser',
   components: {
-    TableDefault: () => import('@/components/TableDefault'),
+    StandardTable: () => import('@/components/StandardTable'),
   },
   props: {},
   data() {
     return {
-      data: require('@/jsons/blockUser.json'),
+      data: require('@/jsons/block-user-data.json'),
       radio: '',
       switchValue: 'Off',
     }
@@ -61,6 +61,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.bloquear-usuario-wrapper {
+.block-user-wrapper {
 }
 </style>

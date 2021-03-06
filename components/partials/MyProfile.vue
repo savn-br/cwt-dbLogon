@@ -1,5 +1,5 @@
 <template lang="pug">
-.meu-perfil-wrapper.tw-mt-5.tw-px-4
+.my-profile-wrapper.tw-mt-5.tw-px-4
   perfil-form-default(:data='perfil')
   .update-buttons.tw-flex.tw-justify-center
     b-button.tw-mx-2.tw-my-4(type='is-success') {{ $t("update") }}
@@ -10,16 +10,16 @@
 
 <script>
 export default {
-  name: 'MeuPerfil',
+  name: 'MyProfile',
   components: {
     Collapse: () => import('@/components/Collapse'),
     DetailTable: () => import('@/components/DetailTable'),
-    PerfilFormDefault: () => import('@/components/partials/PerfilFormDefault'),
+    ProfileForm: () => import('@/components/partials/ProfileForm'),
   },
   props: {},
   data() {
-    const perfil = require('@/jsons/perfil.json')
-    const tree = require('@/jsons/directory.json')
+    const perfil = require('@/jsons/profile-data.json')
+    const tree = require('@/jsons/directory-tree-data.json')
     return { tree, perfil }
   },
   computed: {},
@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.meu-perfil-wrapper {
+.my-profile-wrapper {
   .fields {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     @media screen and(min-width: 1500px) {
@@ -42,7 +42,7 @@ export default {
 </style>
 
 <style lang="scss">
-.meu-perfil-wrapper {
+.my-profile-wrapper {
   label {
     font-size: 0.75rem;
   }

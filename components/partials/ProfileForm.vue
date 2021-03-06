@@ -1,36 +1,36 @@
 <template lang="pug">
-.perfil-form-default-wrapper
+.profile-form-wrapper
   form.fields.tw-grid
     b-field.tw-mx-2(:label='$t("user")')
-      b-input(v-model='data.usuario', size='is-small', disabled)
+      b-input(v-model='data.user', size='is-small', disabled)
     b-field.tw-mx-2(:label='$t("manager")')
-      b-input(v-model='data.gestor', size='is-small', disabled)
+      b-input(v-model='data.manager', size='is-small', disabled)
     b-field.tw-mx-2(label='E-mail')
       b-input(v-model='data.email', size='is-small', disabled)
     b-field.tw-mx-2(:label='$t("company")')
-      b-input(v-model='data.empresa', size='is-small', disabled)
+      b-input(v-model='data.company', size='is-small', disabled)
     b-field.tw-mx-2(:label='$t("name")')
-      b-input(v-model='data.nome', size='is-small', disabled)
+      b-input(v-model='data.name', size='is-small', disabled)
     b-field.tw-mx-2(:label='$t("phone")')
       b-input(
-        v-model='data.telefone',
+        v-model='data.phone',
         size='is-small',
         v-mask='["(##) ####-####", "(##) #####-####"]'
       )
     b-field.tw-mx-2(:label='$t("field")')
-      b-input(v-model='data.area', size='is-small')
+      b-input(v-model='data.field', size='is-small')
     b-field.tw-mx-2(:label='$t("role")')
-      b-input(v-model='data.cargo', size='is-small')
+      b-input(v-model='data.position', size='is-small')
     b-field.tw-mx-2(:label='$t("registration")')
-      b-input(v-model='data.matricula', size='is-small')
-    b-checkbox.tw-m-5(v-model='data.emergencial') {{ $t("emergency") }}
+      b-input(v-model='data.register', size='is-small')
+    b-checkbox.tw-m-5(v-model='data.emergency') {{ $t("emergency") }}
     b-checkbox.tw-m-5(v-model='data.desk') VIP Desk
     slot(name='content')
 </template>
 
 <script>
 export default {
-  name: 'PerfilFormDefault',
+  name: 'ProfileForm',
   components: {},
   props: {
     data: {
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.perfil-form-default-wrapper {
+.profile-form-wrapper {
   .fields {
     grid-template-columns: repeat(auto-fill, minmax(px2rem(300), 1fr));
     @media screen and(min-width: px2rem(1500)) {
@@ -61,7 +61,7 @@ export default {
 </style>
 
 <style lang="scss">
-.perfil-form-default-wrapper {
+.profile-form-wrapper {
   label {
     font-size: 0.75rem;
   }
