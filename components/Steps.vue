@@ -1,5 +1,5 @@
 <template lang="pug">
-.steps-wrapper.tw-mt-6
+.steps-wrapper.tw-mt-10
   b-steps(:has-navigation='false', v-model='steps', size='is-small')
     b-step-item(
       :label='$t("unauthorized")',

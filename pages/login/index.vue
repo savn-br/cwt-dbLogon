@@ -1,104 +1,47 @@
 <template lang="pug">
-.container-fluid
-  #wrapper.login-wrapper.entrance
-    #header-wrapper.header-wrapper
-      #header.login-header(style='background-position: -10px -44px')
-        .logo
-    form#form.login-form(name='loginForm', novalidate='')
-      ValidationObserver(ref='observer')
-        #lift-up
-          .caption
-            | Log in to your account
-          .form-group.username
-            ValidationProvider(
-              rules='required',
-              name='User Name',
-              v-slot='{ errors }'
+.login-wrapper.tw-grid.tw-h-screen.tw-h-screen.tw-place-content-center
+  .l-card.tw-shadow-lg
+    .l-card-header
+      img(src='~/assets/mainBGmobile.jpg', alt='')
+    .l-card-body.tw-p-8.tw-bg-white
+      form
+        fieldset
+          legend Login into account
+          b-field(label='user', type='', message='')
+            b-input(v-model='user', size='is-small', icon='email')
+          b-field(label='password')
+            b-input(
+              v-model='password',
+              size='is-small',
+              icon='key',
+              type='password'
             )
-              b-input#username(
-                name='pf.username',
-                v-model='login.user',
-                icon='account',
-                placeholder='UID (e.g. U101ZZZ)',
-                ma='',
-                autocomplete='off'
-              )
-              span.label-red-small {{ errors[0] }}
-          .form-group.password
-            ValidationProvider(
-              rules='required',
-              name='Password',
-              v-slot='{ errors }'
-            )
-              b-input#password(
-                name='pf.pass',
-                v-model='login.password',
-                icon='key-variant',
-                required='',
-                type='password',
-                placeholder='Password',
-                @keyup.native.enter='userLogin'
-              )
-              span.label-red-small {{ errors[0] }}
-
-          .invalid-login(v-if='errorLogin')
-            | {{ errorMessage }}
-          .form-group.btn-wrapper
-            b-button.btn(v-if='isProcessing', loading) LOG IN
-            b-button.btn(v-else, type='is-primary', @click='userLogin') LOG IN
-              #loader.loader-wrapper
-                .horizontal-dots-loader
+          b-button.tw-w-full.tw-mt-4(type='is-primary') Entrar
 </template>
 
 <script>
 export default {
+  name: 'Teste',
+  components: {},
   layout: 'public',
-
+  props: {},
   data() {
-    return {
-      login: {
-        user: '',
-        password: '',
-        context: 'protected',
-      },
-      errorLogin: false,
-      errorMessage: '',
-      isProcessing: false,
-    }
+    return { user: '', password: '' }
   },
-  methods: {
-    async userLogin() {
-      const isValid = await this.$refs.observer.validate()
-      if (isValid) {
-        this.isProcessing = true
-        this.errorMessage = ''
-        this.$store
-          .dispatch('login/userLogin', this.login)
-          .then((result) => {
-            this.$router.push('/')
-          })
-          .catch((err) => {
-            this.errorLogin = true
-            this.errorMessage = err
-          })
-          .finally(() => {
-            this.isProcessing = false
-          })
-      }
-    },
-  },
+  computed: {},
+  watch: {},
+  mounted() {},
+  created() {},
+  methods: {},
 }
 </script>
-<style scoped>
-@import '../../assets/styles/login.css';
-.label-red-small {
-  color: red;
-  font-size: 10px;
-}
-.invalid-login {
-  color: red;
-  font-size: 12px;
-  margin: 10px;
-  text-align: center;
+
+<style lang="scss" scoped>
+.login-wrapper {
+  margin: 0 10px;
+  .l-card {
+    max-width: 350px;
+    width: 100%;
+  }
 }
 </style>

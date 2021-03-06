@@ -1,5 +1,5 @@
 <template lang="pug">
-.section
+.tw-bg-gray-400
   nuxt
 </template>
 
