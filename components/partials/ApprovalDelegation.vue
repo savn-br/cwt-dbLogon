@@ -2,7 +2,7 @@
 .approval-delegation-wrapper.tw-mt-8.tw-px-5
   .button-primary.tw-flex.tw-justify-end
     b-button(type='is-primary') {{ $t("add") }}
-  table-default.tw-mt-5(
+  standard-table.tw-mt-5(
     :data='data',
     :bordered='true',
     :narrowed='true',

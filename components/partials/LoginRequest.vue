@@ -1,13 +1,13 @@
 <template lang="pug">
 .login-request-wrapper.tw-px-4
   steps
-  perfil-form-default(:data='perfil')
+  profile-form(:data='profile')
   .update-buttons.tw-flex.tw-justify-center(class='sm:tw-justify-end')
     b-button.tw-mx-2(type='is-success') {{ $t("update") }}
     b-button.tw-mx-2(type='is-primary') {{ $t("requestAccess") }}
   .logs.tw-mt-2.tw-mb-4
     h1 Status
-    table-default(:data='data', , :bordered='true')
+    standard-table(:data='data', , :bordered='true')
       b-table-column(field='date', :label='$t("date")', v-slot='props')
         span.tw-text-xs {{ props.row.date }}
       b-table-column(field='action', :label='$t("action")', v-slot='props')
@@ -24,7 +24,7 @@ export default {
   data() {
     const table = Object.assign(require('@/jsons/status-table-data.json'))
     return {
-      perfil: require('@/jsons/profile-data.json'),
+      profile: require('@/jsons/profile-data.json'),
       ...table,
     }
   },

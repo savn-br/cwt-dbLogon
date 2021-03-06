@@ -46,7 +46,7 @@ module.exports = {
   add: 'Add',
   allUsers: 'All Users',
   activeOnly: 'Active Only',
-  perfilCode: 'Perfil Code',
-  perfilDescription: 'Perfil Description',
+  profileCode: 'Perfil Code',
+  profileDescription: 'Perfil Description',
   salesName: 'Sales Name',
 }

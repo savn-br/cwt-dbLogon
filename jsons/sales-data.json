@@ -1,19 +1,19 @@
 [
   {
     "id": 1,
-    "descricao_venda": "ronnas123",
+    "sales_description": "ronnas123",
 
     "operation": "off"
   },
   {
     "id": 2,
-    "descricao_venda": "ronnas123",
+    "sales_description": "ronnas123",
 
     "operation": "off"
   },
   {
     "id": 3,
-    "descricao_venda": "ronnas123",
+    "sales_description": "ronnas123",
 
     "operation": "off"
   }

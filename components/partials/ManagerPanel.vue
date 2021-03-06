@@ -1,6 +1,6 @@
 <template lang="pug">
 .manager-panel-wrapper.tw-mt-10.tw-px-4
-  table-default(
+  standard-table(
     :data='data',
     :bordered='true',
     :narrowed='true',

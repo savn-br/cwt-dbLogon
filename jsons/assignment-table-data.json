@@ -1,24 +1,24 @@
 [
   {
     "id": 1,
-    "codigo_perfil": "ronnas123",
-    "descricao_perfil": "Ronnas Machado",
+    "profile_code": "ronnas123",
+    "profile_description": "Ronnas Machado",
     "initial_date": "2016-10-15 13:43:27",
     "final_date": "2016-10-15 13:43:27",
     "operation": "off"
   },
   {
     "id": 2,
-    "codigo_perfil": "ronnas123",
-    "descricao_perfil": "Ronnas Machado",
+    "profile_code": "ronnas123",
+    "profile_description": "Ronnas Machado",
     "initial_date": "2016-10-15 13:43:27",
     "final_date": "2016-10-15 13:43:27",
     "operation": "off"
   },
   {
     "id": 3,
-    "codigo_perfil": "ronnas123",
-    "descricao_perfil": "Ronnas Machado",
+    "profile_code": "ronnas123",
+    "profile_description": "Ronnas Machado",
     "initial_date": "2016-10-15 13:43:27",
     "final_date": "2016-10-15 13:43:27",
     "operation": "off"

@@ -1,26 +1,26 @@
 <template lang="pug">
 .assignment-of-profile-wrapper.tw-mt-6.tw-px-4
-  perfil-form-default(:data='perfil')
+  profile-form(:data='profile')
     template(v-slot:content)
-      b-checkbox.tw-m-5(v-model='perfil.active') Ativo
+      b-checkbox.tw-m-5(v-model='profile.active') Ativo
   .update-buttons.tw-flex.tw-justify-center
     b-button.tw-mx-2.tw-my-4.tw-w-32(type='is-success') {{ $t("update") }}
-  .view-perfil
+  .view-profile
     .button-wrapper.tw-flex.tw-justify-end
       b-button.tw-w-24(type='is-primary') {{ $t("add") }}
-    table-default(:data='atribuicao')
+    standard-table(:data='allocation')
       b-table-column(
-        field='codigo_perfil',
-        :label='$t("perfilCode")',
+        field='profile_code',
+        :label='$t("profileCode")',
         v-slot='props'
       )
-        span.tw-text-xs {{ props.row.codigo_perfil }}
+        span.tw-text-xs {{ props.row.profile_code }}
       b-table-column(
-        field='descricao_perfil',
-        :label='$t("perfilDescription")',
+        field='profile_description',
+        :label='$t("profileDescription")',
         v-slot='props'
       )
-        span.tw-text-xs {{ props.row.descricao_perfil }}
+        span.tw-text-xs {{ props.row.profile_description }}
       b-table-column(
         field='initial_date',
         :label='$t("initialDate")',
@@ -49,17 +49,17 @@
             ) {{ props.row.operation }}
           a(href='#')
             b-icon.tw-cursor-pointer(icon='eye', size='')
-    .view-vendas.tw-mt-6
+    .view-sales.tw-mt-6
       .button-wrapper.tw-flex.tw-justify-end
         b-button.tw-w-24(type='is-primary') {{ $t("add") }}
-      table-default(:data='vendas')
+      standard-table(:data='sales')
         b-table-column(
-          field='descricao_venda',
+          field='sales_description',
           :label='$t("salesName")',
           v-slot='props',
           width='80%'
         )
-          span.tw-text-xs {{ props.row.descricao_venda }}
+          span.tw-text-xs {{ props.row.sales_description }}
         b-table-column(
           :label='$t("operation")',
           v-slot='props',
@@ -87,9 +87,9 @@ export default {
   props: {},
   data() {
     return {
-      perfil: require('@/jsons/profile-data.json'),
-      atribuicao: require('@/jsons/assignment-table-data.json'),
-      vendas: require('@/jsons/sales-data.json'),
+      profile: require('@/jsons/profile-data.json'),
+      allocation: require('@/jsons/assignment-table-data.json'),
+      sales: require('@/jsons/sales-data.json'),
     }
   },
   computed: {},

@@ -1,6 +1,6 @@
 <template lang="pug">
 .my-profile-wrapper.tw-mt-5.tw-px-4
-  perfil-form-default(:data='perfil')
+  profile-form(:data='profile')
   .update-buttons.tw-flex.tw-justify-center
     b-button.tw-mx-2.tw-my-4(type='is-success') {{ $t("update") }}
   collapse.tw-text-sm(:title='$t("accessProfile")')
@@ -18,9 +18,9 @@ export default {
   },
   props: {},
   data() {
-    const perfil = require('@/jsons/profile-data.json')
+    const profile = require('@/jsons/profile-data.json')
     const tree = require('@/jsons/directory-tree-data.json')
-    return { tree, perfil }
+    return { tree, profile }
   },
   computed: {},
   watch: {},

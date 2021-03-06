@@ -4,13 +4,13 @@
     fieldset
       b-radio(v-model='radio', name='select', native-value='todos') {{ $t("allUsers") }}
       b-radio(v-model='radio', name='select', native-value='actives') {{ $t("activeOnly") }}
-  table-default.tw-mt-5(:data='data', :bordered='true')
+  standard-table.tw-mt-5(:data='data', :bordered='true')
     b-table-column(field='user', :label='$t("user")', v-slot='props')
       span.tw-text-xs {{ props.row.user }}
     b-table-column(field='name', :label='$t("name")', v-slot='props')
       span.tw-text-xs {{ props.row.name }}
-    b-table-column(field='perfil', :label='$t("profile")', v-slot='props')
-      span.tw-text-xs {{ props.row.perfil }}
+    b-table-column(field='profile', :label='$t("profile")', v-slot='props')
+      span.tw-text-xs {{ props.row.profile }}
     b-table-column(
       field='initial_date',
       :label='$t("initialDate")',
