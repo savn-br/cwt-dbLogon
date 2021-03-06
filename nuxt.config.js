@@ -45,7 +45,11 @@ export default {
   ],
 
   styleResources: {
-    scss: ['./assets/styles/_colors.scss'],
+    scss: [
+      './assets/styles/_colors.scss',
+      './assets/styles/_mixins.scss',
+      './assets/styles/_functions.scss',
+    ],
   },
   moment: {
     timezone: true,

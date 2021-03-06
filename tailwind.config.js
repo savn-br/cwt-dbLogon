@@ -1,5 +1,7 @@
-const scss2Json = require('scss-to-json')
-const sassColors = scss2Json('./assets/styles/_colors.scss')
+const { sass2tailwind } = require('./utils')
+const sassColors = sass2tailwind('./assets/styles/_colors.scss')
+const variables = sass2tailwind('./assets/styles/_variables.scss')
+
 module.exports = {
   future: {
     // removeDeprecatedGapUtilities: true,
@@ -25,18 +27,16 @@ module.exports = {
   presets: [],
   theme: {
     screens: {
-      xs: '768px',
-      sm: '769px',
-      md: '1024px',
-      lg: '1216px',
-      xl: '1408px',
+      xs: variables.xs,
+      sm: variables.sm,
+      md: variables.md,
+      lg: variables.lg,
+      xl: variables.xl,
     },
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      primary: sassColors.$primary,
-      secondary: sassColors.$secondary,
-      principal: sassColors.$principal,
+      ...sassColors,
 
       black: '#000',
       white: '#fff',

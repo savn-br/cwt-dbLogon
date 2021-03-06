@@ -59,6 +59,9 @@ export default {
 .meu-perfil-wrapper {
   .fields {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    @media screen and(min-width: 1500px) {
+      grid-template-columns: repeat(4, minmax(300px, 1fr));
+    }
   }
 }
 </style>

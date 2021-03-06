@@ -38,9 +38,9 @@ export default {
 
 <style lang="scss" scoped>
 .login-wrapper {
-  margin: 0 10px;
+  margin: 0 px2rem(10);
   .l-card {
-    max-width: 350px;
+    max-width: px2rem(350);
     width: 100%;
   }
 }

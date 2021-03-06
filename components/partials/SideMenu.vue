@@ -38,7 +38,7 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
-    width: 250px;
+    width: px2rem(250);
     bottom: 0;
     .menu-label {
       color: #fff;

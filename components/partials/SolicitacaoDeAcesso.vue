@@ -67,7 +67,10 @@ export default {
 <style lang="scss" scoped>
 .solicitacao-de-acesso-wrapper {
   .fields {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(px2rem(300), 1fr));
+    @media screen and(min-width: px2rem(1500)) {
+      grid-template-columns: repeat(4, minmax(px2rem(300), 1fr));
+    }
   }
 }
 </style>

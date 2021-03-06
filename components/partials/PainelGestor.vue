@@ -42,9 +42,7 @@ export default {
   mounted() {},
   created() {},
   methods: {
-    verificar(id) {
-      console.log(id)
-    },
+    verificar(id) {},
   },
 }
 </script>

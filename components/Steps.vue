@@ -30,5 +30,8 @@ export default {
 
 <style lang="scss" scoped>
 .steps-wrapper {
+  max-width: px2rem(600);
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

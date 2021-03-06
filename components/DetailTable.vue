@@ -58,7 +58,7 @@ export default {
 </style>
 <style lang="scss">
 .detail-table-wrapper {
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: px2rem(769)) {
     .table.is-bordered tr:last-child td {
       padding-right: 0;
     }

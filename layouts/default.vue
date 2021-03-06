@@ -38,9 +38,10 @@ export default {
 <style lang="scss" scoped>
 .main_content {
   /* min-height: 100vh; */
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: px2rem(250) 1fr;
+
   .wrapper-content {
-    border-left: 1px solid rgb(214, 214, 214);
+    border-left: px2rem(1) solid rgb(214, 214, 214);
   }
 }
 </style>
