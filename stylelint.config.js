@@ -7,5 +7,7 @@ module.exports = {
     'block-no-empty': null,
     'no-descending-specificity': null,
     'at-rule-no-unknown': null,
+    'property-no-unknown': null,
+    'selector-pseudo-class-no-unknown': null,
   },
 }

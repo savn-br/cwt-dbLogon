@@ -8,7 +8,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'CWT Logon',
+    title: 'Passport CWT-BR',
     htmlAttrs: {
       lang: 'pt-BR',
     },
@@ -43,6 +43,10 @@ export default {
     '@nuxtjs/moment',
     '@nuxtjs/tailwindcss',
   ],
+
+  styleResources: {
+    scss: ['./assets/styles/_colors.scss'],
+  },
   moment: {
     timezone: true,
   },
@@ -56,6 +60,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     'nuxt-i18n',
+    '@nuxtjs/style-resources',
   ],
   i18n: {
     locales: [

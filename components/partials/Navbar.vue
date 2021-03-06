@@ -1,9 +1,9 @@
 <template lang="pug">
 .navbar-wrapper
-  b-navbar.tw-shadow(:fixed-top='true')
+  b-navbar.tw-shadow-md(:fixed-top='true')
     template(#brand)
       b-navbar-item(tag='router-link', :to='{ path: "/" }')
-        img(src='~/assets/CWT_logo_-_Color_-_RGB_small_1.jpg', alt='CWT')
+        img(src='~/assets/CWT_LOGO_TRASNPARENTE.png', alt='CWT')
     template(#start)
     template(#end)
       .side-menu-content.tw-block(class='md:tw-hidden')

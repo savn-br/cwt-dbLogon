@@ -2,23 +2,14 @@
 .main_page_layout-wrapper
   navbar(:menuType='menuType')
   .tw-block.main_content(class='md:tw-grid')
-    side-menu.tw-px-4.tw-hidden.tw-h-screen(class='md:tw-block', :menuType='menuType')
+    side-menu.tw-px-4.tw-hidden.tw-h-screen.tw-text-white(
+      class='md:tw-block',
+      :menuType='menuType'
+    )
     nuxt.wrapper-content
-  //- .section
-    .tile.is-ancestor
-      .tile.is-vertical.is-3
-        .tile
-          slot(name='nav_bar')
-            side-bar
-      .tile.is-vertical.is-9
-        .tile
-          slot(name='content')
-            nuxt
 </template>
 
 <script>
-// import { mapState } from 'vuex'
-
 export default {
   name: 'MainPageLayout',
   components: {

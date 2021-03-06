@@ -42,10 +42,12 @@ export default {
 
 <style lang="scss">
 .table-default-wrapper {
-  th {
+  .table th {
     font-size: 0.75rem;
+    background: $principal;
+    color: #fff;
   }
-  td::before {
+  .table td::before {
     font-size: 0.75rem;
   }
 }

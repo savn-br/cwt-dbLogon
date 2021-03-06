@@ -1,6 +1,6 @@
 <template lang="pug">
-.side-menu-wrapper.tw-pt-4
-  b-menu.tw-mt-20.tw-p-2.tw-flex(class='md:tw-block')
+.side-menu-wrapper.tw-pt-4.tw-bg-principal
+  b-menu.tw-mt-20.tw-p-2.tw-flex.tw-bg-principal(class='md:tw-block')
     component(:is='menuType')
 </template>
 
@@ -40,6 +40,20 @@ export default {
     left: 0;
     width: 250px;
     bottom: 0;
+    .menu-label {
+      color: #fff;
+    }
+    .menu-list a.is-active.is-expanded {
+      background: $primary;
+      color: black;
+    }
+    .menu-list a {
+      color: #fff;
+      &:hover {
+        background: $primaryLight;
+        color: black;
+      }
+    }
   }
 }
 </style>

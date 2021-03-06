@@ -1,7 +1,12 @@
 @import './reset';
 @import './bulma@variables.scss';
+@import './colors';
 // Import buefy and bulma styles
 @import '~bulma';
 @import '~buefy/src/scss/buefy';
 // Import your other app styles
 @import './app';
+
+input[disabled] {
+  color: rgb(88, 88, 88) !important;
+}

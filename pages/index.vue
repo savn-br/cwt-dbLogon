@@ -1,6 +1,6 @@
 <template lang="pug">
 .home-page-wrapper
-  component(is='BloquearUsuario')
+  component(is='SolicitacaoDeAcesso')
 </template>
 
 <script>

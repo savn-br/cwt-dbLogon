@@ -1,3 +1,5 @@
+const scss2Json = require('scss-to-json')
+const sassColors = scss2Json('./assets/styles/_colors.scss')
 module.exports = {
   future: {
     // removeDeprecatedGapUtilities: true,
@@ -32,8 +34,9 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      primary: '#7579ff',
-      secondary: '#537ca3',
+      primary: sassColors.$primary,
+      secondary: sassColors.$secondary,
+      principal: sassColors.$principal,
 
       black: '#000',
       white: '#fff',
