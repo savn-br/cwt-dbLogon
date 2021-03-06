@@ -1,6 +1,6 @@
 <template lang="pug">
 .home-page-wrapper
-  component(is='SolicitacaoDeAcesso')
+  component(is='AtribuicaoPerfil')
 </template>
 
 <script>
@@ -14,6 +14,7 @@ export default {
     BloquearUsuario: () => import('@/components/partials/BloquearUsuario'),
     DelegacaoAprovacao: () =>
       import('@/components/partials/DelegacaoAprovacao'),
+    AtribuicaoPerfil: () => import('@/components/partials/AtribuicaoPerfil'),
   },
   data() {
     return {}

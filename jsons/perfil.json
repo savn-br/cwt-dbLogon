@@ -10,5 +10,6 @@
   "cargo": "Engenheiro",
   "matricula": "1234567890",
   "emergencial": "true",
-  "desk": "false"
+  "desk": "false",
+  "ativo": "true"
 }

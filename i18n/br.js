@@ -46,4 +46,7 @@ module.exports = {
   add: 'Adicionar',
   allUsers: 'Todos os Usuários',
   activeOnly: 'Somente Ativos',
+  perfilCode: 'Código de Perfil',
+  perfilDescription: 'Descrição de Perfil',
+  salesName: 'Nome do Ponto de Venda',
 }

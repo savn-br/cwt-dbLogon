@@ -68,8 +68,8 @@ export default {
   ],
   i18n: {
     locales: [
-      { code: 'en', iso: 'en-US', file: 'en.json', dir: 'i18n' },
-      { code: 'br', iso: 'pt-BR', file: 'br.json', dir: 'i18n' },
+      { code: 'en', iso: 'en-US' },
+      { code: 'br', iso: 'pt-BR' },
     ],
     defaultLocale: 'br',
     vueI18n: {
