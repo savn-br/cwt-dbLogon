@@ -1,5 +1,5 @@
 <template lang="pug">
-#profileSearch.profile-search-wrapper.tw-mt-6.tw-px-8
+#assignmentOfProfile2.assignment-of-profile2-wrapper.tw-mt-6.tw-px-8
   standard-table(:data='profileDescription')
     b-table-column(
       v-slot='props',
@@ -23,14 +23,22 @@
     )
       b-checkbox(v-model='props.row.active')
         span.tw-text-xs {{ $t("active") }}
-    b-table-column(:label='$t("operation")', :centered='true')
-      a(href='#')
-        b-icon(icon='account-details')
+    b-table-column(
+      :label='$t("operation")',
+      field='active_operation',
+      :centered='true',
+      v-slot='props'
+    )
+      .operation-wrapper
+        b-checkbox(v-model='props.row.active_operation')
+          span.tw-text-xs {{ $t("active") }}
+        a(href='#')
+          b-icon(icon='account-details')
 </template>
 
 <script>
 export default {
-  name: 'ProfileSearch',
+  name: 'AssignmentOfProfile2',
   components: {
     StandardTable: () => import('@/components/StandardTable'),
   },
@@ -49,12 +57,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.profile-search-wrapper {
+.assignment-of-profile2-wrapper {
 }
 </style>
 
 <style lang="scss">
-.profile-search-wrapper {
+.assignment-of-profile2-wrapper {
   input.input {
     height: px2rem(25);
   }

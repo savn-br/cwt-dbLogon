@@ -1,6 +1,6 @@
 <template lang="pug">
 .home-page-wrapper
-  component(is='ProfileSearch')
+  component(is='MaintainSystem')
 </template>
 
 <script>
@@ -16,6 +16,10 @@ export default {
     AssignmentOfProfile: () =>
       import('@/components/partials/AssignmentOfProfile'),
     ProfileSearch: () => import('@/components/partials/ProfileSearch'),
+    AssignmentOfProfile2: () =>
+      import('@/components/partials/AssignmentOfProfile2'),
+    MaintainProfile: () => import('@/components/partials/MaintainProfile'),
+    MaintainSystem: () => import('@/components/partials/MaintainSystem'),
   },
   data() {
     return {}

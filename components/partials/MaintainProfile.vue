@@ -1,5 +1,7 @@
 <template lang="pug">
-#profileSearch.profile-search-wrapper.tw-mt-6.tw-px-8
+#maintainProfile.maintain-profile-wrapper.tw-mt-6.tw-px-8
+  .buttons-wrapper.tw-flex.tw-justify-end.tw-mb-2
+    b-button(type='is-primary') {{ $t("add") }}
   standard-table(:data='profileDescription')
     b-table-column(
       v-slot='props',
@@ -23,14 +25,22 @@
     )
       b-checkbox(v-model='props.row.active')
         span.tw-text-xs {{ $t("active") }}
-    b-table-column(:label='$t("operation")', :centered='true')
-      a(href='#')
-        b-icon(icon='account-details')
+    b-table-column(
+      :label='$t("operation")',
+      field='active_operation',
+      :centered='true',
+      v-slot='props'
+    )
+      .operation-wrapper
+        span.tw-cursor-pointer(class='hover:tw-text-primary')
+          b-icon.tw-mr-2(icon='pencil')
+        span.tw-cursor-pointer(class='hover:tw-text-primary')
+          b-icon(icon='account-details')
 </template>
 
 <script>
 export default {
-  name: 'ProfileSearch',
+  name: 'MaintainProfile',
   components: {
     StandardTable: () => import('@/components/StandardTable'),
   },
@@ -49,12 +59,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.profile-search-wrapper {
+.maintain-profile-wrapper {
 }
 </style>
 
 <style lang="scss">
-.profile-search-wrapper {
+.maintain-profile-wrapper {
   input.input {
     height: px2rem(25);
   }
