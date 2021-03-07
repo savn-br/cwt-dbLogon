@@ -1,6 +1,6 @@
 <template lang="pug">
 .home-page-wrapper
-  component(is='AssignmentOfProfile')
+  component(is='ProfileSearch')
 </template>
 
 <script>
@@ -15,6 +15,7 @@ export default {
       import('@/components/partials/ApprovalDelegation'),
     AssignmentOfProfile: () =>
       import('@/components/partials/AssignmentOfProfile'),
+    ProfileSearch: () => import('@/components/partials/ProfileSearch'),
   },
   data() {
     return {}

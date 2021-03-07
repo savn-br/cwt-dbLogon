@@ -2,7 +2,7 @@
 .assignment-of-profile-wrapper.tw-mt-6.tw-px-4
   profile-form(:data='profile')
     template(v-slot:content)
-      b-checkbox.tw-m-5(v-model='profile.active') Ativo
+      b-checkbox.tw-m-5(v-model='profile.active', name='active') Ativo
   .update-buttons.tw-flex.tw-justify-center
     b-button.tw-mx-2.tw-my-4.tw-w-32(type='is-success') {{ $t("update") }}
   .view-profile

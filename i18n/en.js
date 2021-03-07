@@ -49,4 +49,5 @@ module.exports = {
   profileCode: 'Perfil Code',
   profileDescription: 'Perfil Description',
   salesName: 'Sales Name',
+  active: 'Active',
 }

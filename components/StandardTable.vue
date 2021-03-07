@@ -5,7 +5,8 @@
     :columns='columns',
     :bordered='true',
     :narrowed='true',
-    :hoverable='true'
+    :hoverable='true',
+    :striped='true'
   )
     slot
 </template>

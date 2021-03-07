@@ -49,4 +49,5 @@ module.exports = {
   profileCode: 'Código de Perfil',
   profileDescription: 'Descrição de Perfil',
   salesName: 'Nome do Ponto de Venda',
+  active: 'Ativo',
 }
