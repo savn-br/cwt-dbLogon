@@ -1,7 +1,10 @@
 <template lang="pug">
 #alternateApproverRegister.alternate-approver-register-wrapper.tw-mt-6.tw-px-8
+  b-modal(v-model='isModalActive')
+    template(#default='props')
+      alternate-approver-modal(@close='props.close')
   .button-primary.tw-flex.tw-justify-end
-    b-button(type='is-primary') {{ $t("add") }}
+    b-button(type='is-primary', @click='isModalActive = true') {{ $t("add") }}
   standard-table.tw-mt-5(
     :data='data',
     :bordered='true',
@@ -50,10 +53,13 @@ export default {
   name: 'AlternateApproverRegister',
   components: {
     StandardTable: () => import('@/components/StandardTable'),
+    AlternateApproverModal: () =>
+      import('@/components/partials/AlternateApproverModal'),
   },
   props: {},
   data() {
     return {
+      isModalActive: false,
       data: require('@/jsons/alternate-approver-data.json'),
     }
   },

@@ -1,7 +1,10 @@
 <template lang="pug">
 #maintainSystem.maintain-system-wrapper.tw-mt-6.tw-px-8
+  b-modal(v-model='isModalActive')
+    template(#default='props')
+      maintain-system-modal(@close='props.close')
   .buttons-wrapper.tw-flex.tw-justify-end.tw-mb-2
-    b-button(type='is-primary') {{ $t("add") }}
+    b-button(type='is-primary', @click='isModalActive = true') {{ $t("add") }}
   standard-table(:data='profileDescription')
     b-table-column(
       v-slot='props',
@@ -49,10 +52,13 @@ export default {
   name: 'MaintainSystem',
   components: {
     StandardTable: () => import('@/components/StandardTable'),
+    MaintainSystemModal: () =>
+      import('@/components/partials/MaintainSystemModal'),
   },
   props: {},
   data() {
     return {
+      isModalActive: false,
       profileDescription: require('@/jsons/profile-description-table-data.json'),
     }
   },
