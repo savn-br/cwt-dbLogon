@@ -1,6 +1,6 @@
 <template lang="pug">
 .home-page-wrapper
-  component(is='AlternateApproverRegister')
+  component(is='MaintainSystem3')
 </template>
 
 <script>
@@ -20,6 +20,8 @@ export default {
       import('@/components/partials/AssignmentOfProfile2'),
     MaintainProfile: () => import('@/components/partials/MaintainProfile'),
     MaintainSystem: () => import('@/components/partials/MaintainSystem'),
+    MaintainSystem2: () => import('@/components/partials/MaintainSystem2'),
+    MaintainSystem3: () => import('@/components/partials/MaintainSystem3'),
     AlternateApproverRegister: () =>
       import('@/components/partials/AlternateApproverRegister'),
   },

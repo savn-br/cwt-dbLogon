@@ -1,10 +1,10 @@
 <template lang="pug">
-#maintainSystemModal.maintain-system-modal-wrapper
+#maintainSystemModal2.maintain-system-modal2-wrapper
   .card
     .card-header
     .card-content
       form.tw-grid(name='perfil')
-        b-field(label='Código do Sistema')
+        b-field(label='Código do Módulo')
           b-input(v-model='perfil.register', size='is-small')
         b-field(label='Sigla')
           b-input(v-model='perfil.register', size='is-small')
@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: 'MaintainSystemModal',
+  name: 'MaintainSystemModal2',
   components: {},
   props: {},
   data() {
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.maintain-system-modal-wrapper {
+.maintain-system-modal2-wrapper {
   max-width: px2rem(875);
   margin: 0 auto;
   form {
@@ -54,7 +54,7 @@ export default {
 </style>
 
 <style lang="scss">
-.maintain-system-modal-wrapper {
+.maintain-system-modal2-wrapper {
   label {
     font-size: 0.75rem;
   }
