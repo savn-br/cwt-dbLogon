@@ -17,7 +17,7 @@
     .card-footer.tw-px-6.tw-pb-4.tw-flex.tw-justify-end
       .wrapper-buttons
         b-button.tw-mr-4(type='is-danger', @click='$emit("close")') Cancelar
-        b-button(type='is-success') Salvar
+        b-button(type='is-primary') Salvar
 </template>
 
 <script>
