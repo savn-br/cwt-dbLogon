@@ -88,4 +88,7 @@ export default {
   build: {
     extractCSS: true,
   },
+  generate: {
+    fallback: true,
+  },
 }
