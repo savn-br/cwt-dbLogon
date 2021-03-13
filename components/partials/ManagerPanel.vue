@@ -18,12 +18,12 @@
       v-slot='props'
     )
       span.tw-text-xs {{ props.row.colaborator }}
-    b-table-column(:label='$t("verify")', v-slot='props', :centered='true')
+    b-table-column(:label='$t("assign")', v-slot='props', :centered='true')
       b-button(
         type='is-primary',
         size='is-small',
         @click='verificar(props.row.id)'
-      ) {{ $t("verifyProfile") }}
+      ) {{ $t("assignProfile") }}
 </template>
 
 <script>

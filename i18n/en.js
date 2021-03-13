@@ -50,4 +50,6 @@ module.exports = {
   profileDescription: 'Profile Description',
   salesName: 'Sales Name',
   active: 'Active',
+  assignProfile: 'Assign Profile',
+  assign: 'Assign',
 }

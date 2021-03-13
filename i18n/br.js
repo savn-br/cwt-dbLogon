@@ -37,6 +37,7 @@ module.exports = {
   collaborator: 'Colaborador',
   verify: 'Verificar',
   verifyProfile: 'Verificar Perfil',
+  assignProfile: 'Atribuir Perfil',
   profile: 'Perfil',
   initialDate: 'Data Inicial',
   finalDate: 'Data Final',
@@ -50,4 +51,5 @@ module.exports = {
   profileDescription: 'Descrição de Perfil',
   salesName: 'Nome do Ponto de Venda',
   active: 'Ativo',
+  assign: 'Atribuir',
 }

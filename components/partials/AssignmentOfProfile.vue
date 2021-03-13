@@ -47,8 +47,8 @@
               false-value='off',
               v-model='props.row.operation'
             ) {{ props.row.operation }}
-          a(href='#')
-            b-icon.tw-cursor-pointer(icon='eye', size='')
+          span.tw-cursor-pointer
+            b-icon(icon='eye', size='')
     .view-sales.tw-mt-6
       .button-wrapper.tw-flex.tw-justify-end
         b-button.tw-w-24(type='is-primary') {{ $t("add") }}
@@ -73,8 +73,8 @@
                 false-value='off',
                 v-model='props.row.operation'
               ) {{ props.row.operation }}
-            a(href='#')
-              b-icon.tw-cursor-pointer(icon='eye', size='')
+            span.tw-cursor-pointer
+              b-icon(icon='eye', size='')
 </template>
 
 <script>
