@@ -8,7 +8,7 @@ import error404 from '~/components/error/404.vue'
 import error500 from '~/components/error/500.vue'
 export default {
   name: 'Error',
-  layout: 'public',
+  layout: 'errorLayout',
   props: {
     error: {
       type: Object,
@@ -20,7 +20,6 @@ export default {
       if (this.error.statusCode === 404) {
         return error404
       }
-      // catch everything else
       return error500
     },
   },
