@@ -1,6 +1,6 @@
 <template lang="pug">
 .home-page-wrapper
-  component(is='MaintainSystem3')
+  component(is='MyProfile')
 </template>
 
 <script>

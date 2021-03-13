@@ -10,7 +10,7 @@
         p.card-header-title {{ title }}
         a.card-header-icon
           b-icon(:icon='props.open ? "menu-down" : "menu-up"')
-    .card-content
+    .l-card-content.tw-px-2
       .content
         slot
 </template>

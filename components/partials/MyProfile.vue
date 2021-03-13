@@ -4,7 +4,7 @@
   .update-buttons.tw-flex.tw-justify-center
     b-button.tw-mx-2.tw-my-4(type='is-success') {{ $t("update") }}
   collapse.tw-text-sm(:title='$t("accessProfile")')
-    detail-table(:data='tree')
+    component(is='RecursiveCollapse', :tree='tree', padding='0')
   collapse.tw-text-sm(:title='$t("customerView")')
 </template>
 
