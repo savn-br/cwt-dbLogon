@@ -3,11 +3,13 @@
   b-menu-list(:label='$t("collaboratorMenu")')
     b-menu-item.tw-text-xs.tw-py-1.tw-w-100(
       icon='account',
-      :label='$t("myProfile")'
+      :label='$t("myProfile")',
+      @click='changePartial("MyProfile")'
     )
     b-menu-item.tw-text-xs.tw-py-1.tw-w-100(
       icon='account-key',
-      :label='$t("accessRequest")'
+      :label='$t("accessRequest")',
+      @click='changePartial("LoginRequest")'
     )
 </template>
 
@@ -23,7 +25,11 @@ export default {
   watch: {},
   mounted() {},
   created() {},
-  methods: {},
+  methods: {
+    changePartial(partialName) {
+      this.$nuxt.$emit('changePartial', partialName)
+    },
+  },
 }
 </script>
 

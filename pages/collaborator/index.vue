@@ -1,26 +1,27 @@
 <template lang="pug">
 .home-page-wrapper
-  component(is='LoginRequest')
+  component(:is='componentPartial')
 </template>
 
 <script>
 export default {
   name: 'Collaborator',
   components: {
-    LoginRequest: () => import('@/components/partials/LoginRequest'),
     MyProfile: () => import('@/components/partials/MyProfile'),
-    ManagerPanel: () => import('@/components/partials/ManagerPanel'),
-    BlockUser: () => import('@/components/partials/BlockUser'),
-    ApprovalDelegation: () =>
-      import('@/components/partials/ApprovalDelegation'),
+    LoginRequest: () => import('@/components/partials/LoginRequest'),
   },
   data() {
-    return {}
+    return {
+      componentPartial: 'MyProfile',
+    }
   },
   computed: {},
   watch: {},
   mounted() {},
   created() {
+    this.$nuxt.$on('changePartial', (partial) => {
+      this.componentPartial = partial
+    })
     this.$nuxt.$emit('menuType', 'CollaboratorMenu')
   },
   methods: {},

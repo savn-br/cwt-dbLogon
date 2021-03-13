@@ -1,26 +1,36 @@
 <template lang="pug">
 .home-page-wrapper
-  component(is='LoginRequest')
+  component(:is='componentPartial')
 </template>
 
 <script>
 export default {
   name: 'Administrator',
   components: {
-    LoginRequest: () => import('@/components/partials/LoginRequest'),
     MyProfile: () => import('@/components/partials/MyProfile'),
     ManagerPanel: () => import('@/components/partials/ManagerPanel'),
+    AssignmentOfProfile: () =>
+      import('@/components/partials/AssignmentOfProfile'),
     BlockUser: () => import('@/components/partials/BlockUser'),
     ApprovalDelegation: () =>
       import('@/components/partials/ApprovalDelegation'),
+    ProfileSearch: () => import('@/components/partials/ProfileSearch'),
+    MaintainProfile: () => import('@/components/partials/MaintainProfile'),
+    AlternateApproverRegister: () =>
+      import('@/components/partials/AlternateApproverRegister'),
   },
   data() {
-    return {}
+    return {
+      componentPartial: 'MyProfile',
+    }
   },
   computed: {},
   watch: {},
   mounted() {},
   created() {
+    this.$nuxt.$on('changePartial', (partial) => {
+      this.componentPartial = partial
+    })
     this.$nuxt.$emit('menuType', 'AdministratorMenu')
   },
   methods: {},
