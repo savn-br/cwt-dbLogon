@@ -23,7 +23,7 @@ export default {
   },
   computed: {},
   watch: {},
-  mounted() {},
+
   created() {
     this.$nuxt.$on('changePartial', (partial) => {
       this.componentPartial = partial

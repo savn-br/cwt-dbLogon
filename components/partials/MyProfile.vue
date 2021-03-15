@@ -24,7 +24,14 @@ export default {
   },
   computed: {},
   watch: {},
-  mounted() {},
+  async mounted() {
+    const { data: profile } = await this.$axios.get(`/users/${1234567890}`)
+    this.profile = profile
+    const {
+      data: [data],
+    } = await this.$axios.get(`/profileAccess/?userID=${profile.id}`)
+    this.tree = data.tree
+  },
   created() {},
   methods: {},
 }
