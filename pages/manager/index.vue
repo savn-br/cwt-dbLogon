@@ -15,6 +15,7 @@ export default {
     ApprovalDelegation: () =>
       import('@/components/partials/ApprovalDelegation'),
     ProfileSearch: () => import('@/components/partials/ProfileSearch'),
+    ProfileSearch2: () => import('@/components/partials/ProfileSearch2'),
   },
   data() {
     return {
