@@ -2,22 +2,27 @@
   {
     "sistema": "sistema/modulo/transação",
     "nota": "notas",
+    "active": false,
     "children": [
       {
         "sistema": "Smart Accounting",
         "nota": "Sistema Account Bla bla bla",
+        "active": false,
         "children": [
           {
             "sistema": "Smart modulo I",
             "nota": "Modulo 1 bla bla bla",
+            "active": false,
             "children": [
               {
                 "sistema": "Transação I",
-                "nota": "Transação I bla bla bla"
+                "nota": "Transação I bla bla bla",
+                "active": false
               },
               {
                 "sistema": "Transação II",
-                "nota": "Transação II bla bla bla"
+                "nota": "Transação II bla bla bla",
+                "active": false
               }
             ]
           }
@@ -26,10 +31,12 @@
       {
         "sistema": "Impressão",
         "nota": "Sistema de impressão",
+        "active": false,
         "children": [
           {
             "sistema": "Balancete 120 colunas",
-            "nota": "Balancete 120 colunas bla bla bla"
+            "nota": "Balancete 120 colunas bla bla bla",
+            "active": false
           }
         ]
       }

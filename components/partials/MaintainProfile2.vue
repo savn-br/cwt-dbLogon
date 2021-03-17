@@ -1,11 +1,19 @@
 <template lang="pug">
 #maintainProfile2.maintain-profile2-wrapper.tw-mt-8.tw-px-4
+  .button-wrappers.tw-mb-8
+    b-button.tw-mr-4(type='is-primary') Salvar
+    b-button(type='is-danger') Cancelar
   form.fields.tw-grid(name='profileForm')
     b-field.tw-mx-2(label='Código do perfil')
       b-input(v-model='code', size='is-small', name='user')
     b-field.tw-mx-2(label='Descrição do perfil')
       b-input(v-model='description', size='is-small', name='user')
-  component.tw-mt-4(is='RecursiveCollapse', :tree='tree', padding='0')
+
+  component.tw-mt-4.tw-px-8(
+    is='CheckableRecursiveCollapse',
+    :tree='tree',
+    padding='0'
+  )
 </template>
 
 <script>

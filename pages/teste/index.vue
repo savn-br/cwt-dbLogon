@@ -18,7 +18,7 @@ export default {
     ApprovalDelegation: () =>
       import('@/components/partials/ApprovalDelegation'), // F-06
     ProfileSearch: () => import('@/components/partials/ProfileSearch'), // F-07
-    ProfileSearch2: () => import('@/components/partials/ProfileSearch2'), // F-07/2
+    ProfileSearch2: () => import('@/components/partials/ProfileSearch2'), // F-07/2 || F-04/3
     MaintainProfile: () => import('@/components/partials/MaintainProfile'), // F-08
     MaintainProfile2: () => import('@/components/partials/MaintainProfile2'), // F-08/2
     MaintainSystem: () => import('@/components/partials/MaintainSystem'), // F-09
