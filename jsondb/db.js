@@ -3,7 +3,16 @@ faker.locale = 'pt_BR'
 faker.seed(123)
 
 module.exports = () => {
-  const data = { users: [], profiles: [] }
+  const systemAcron = ['ACN', 'ASDR', 'RFG', 'WET']
+  const moduleAcron = ['SFD', 'RWE', 'FGHF', 'ERT']
+  const transactionAcron = ['TRE', 'TYRT', 'FGHGF', 'HFGH']
+  const data = {
+    users: [],
+    profiles: [],
+    systems: [],
+    modules: [],
+    transactions: [],
+  }
   for (let index = 0; index < 20; index++) {
     data.users.push({
       id: index + 1,
@@ -36,5 +45,31 @@ module.exports = () => {
       vip: faker.random.boolean(),
     })
   }
+  for (let index = 0; index < 4; index++) {
+    data.systems.push({
+      id: index + 1,
+      acronym: systemAcron[index],
+      description: faker.lorem.sentence(),
+      notes: faker.lorem.paragraph(),
+      active: true,
+    })
+    data.modules.push({
+      id: index + 1,
+      acronym: moduleAcron[index],
+      description: faker.lorem.sentence(),
+      notes: faker.lorem.paragraph(),
+      active: true,
+      system_id: index + 1,
+    })
+    data.transactions.push({
+      id: index + 1,
+      acronym: transactionAcron[index],
+      description: faker.lorem.sentence(),
+      notes: faker.lorem.paragraph(),
+      active: true,
+      module_id: index + 1,
+    })
+  }
+
   return data
 }
