@@ -65,6 +65,9 @@ export default {
 
 <style lang="scss">
 .maintain-profile-wrapper {
+  .control.is-clearfix {
+    width: 100%;
+  }
   input.input {
     height: px2rem(25);
   }

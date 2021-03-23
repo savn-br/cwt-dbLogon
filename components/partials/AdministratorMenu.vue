@@ -1,6 +1,6 @@
 <template lang="pug">
 .administrator-menu-wrapper
-  b-menu-list(:label='$t("AdministratorMenu")')
+  b-menu-list(:label='$t("administratorMenu")')
     b-menu-item.tw-text-xs.tw-py-1.tw-w-100(
       icon='account',
       :label='$t("myProfile")',

@@ -1,5 +1,5 @@
 <template lang="pug">
-#alternateApproverRegister.alternate-approver-register-wrapper.tw-mt-6.tw-px-8
+#alternateApproverRegister.alternate-approver-register-wrapper.tw-mt-8.tw-px-8
   b-modal(v-model='isModalActive')
     template(#default='props')
       alternate-approver-modal(@close='props.close')

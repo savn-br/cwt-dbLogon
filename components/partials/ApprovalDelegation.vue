@@ -1,7 +1,10 @@
 <template lang="pug">
-.approval-delegation-wrapper.tw-mt-8.tw-px-5
+.approval-delegation-wrapper.tw-mt-8.tw-px-8
+  b-modal(v-model='isModalActive')
+    template(#default='props')
+      approval-delegation-modal(@close='props.close')
   .button-primary.tw-flex.tw-justify-end
-    b-button(type='is-primary') {{ $t("add") }}
+    b-button(type='is-primary', @click='isModalActive = true') {{ $t("add") }}
   standard-table.tw-mt-5(
     :data='data',
     :bordered='true',
@@ -48,11 +51,14 @@ export default {
   name: 'ApprovalDelegation',
   components: {
     StandardTable: () => import('@/components/StandardTable'),
+    ApprovalDelegationModal: () =>
+      import('@/components/partials/ApprovalDelegationModal'),
   },
   props: {},
   data() {
     return {
       data: require('@/jsons/approval-table-data.json'),
+      isModalActive: false,
     }
   },
   computed: {},
