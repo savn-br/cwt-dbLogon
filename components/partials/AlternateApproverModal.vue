@@ -4,16 +4,16 @@
     .card-header
     .card-content
       form.tw-grid(name='perfil')
-        b-field.mx-2(label='Register')
+        b-field.mx-2(:label='$t("register")')
           b-input(v-model='perfil.register', size='is-small')
-        b-field.mx-2(label='E-mail')
+        b-field.mx-2(:label='$t("email")')
           b-input(v-model='perfil.email', size='is-small')
-        b-field.mx-2(label='Name')
+        b-field.mx-2(:label='$t("name")')
           b-input(v-model='perfil.name', size='is-small')
     .card-footer.tw-px-6.tw-py-4.tw-flex.tw-justify-end
       .wrapper-buttons
-        b-button.tw-mr-4(type='is-danger', @click='$emit("close")') Cancelar
-        b-button(type='is-primary') Salvar
+        b-button.tw-mr-4(type='is-danger', @click='$emit("close")') {{ $t("cancel") }}
+        b-button(type='is-primary') {{ $t("save") }}
 </template>
 
 <script>

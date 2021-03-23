@@ -1,4 +1,9 @@
 module.exports = {
+  /* PLOP_APPEND_EN */
+  save: 'Save',
+  cancel: 'Cancel',
+  email: 'E-mail',
+  register: 'Register',
   welcome: 'Welcome',
   logout: 'Logout',
   myProfile: 'My Profile',

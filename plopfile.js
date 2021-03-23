@@ -51,4 +51,38 @@ module.exports = function (plop) {
       },
     ],
   })
+  plop.setGenerator('i18n', {
+    description: 'add a new term i18n',
+    prompts: [
+      {
+        type: 'input',
+        name: 'name',
+        message: 'term name please',
+      },
+      {
+        type: 'input',
+        name: 'brName',
+        message: 'Brazilian expression',
+      },
+      {
+        type: 'input',
+        name: 'enName',
+        message: 'English expression',
+      },
+    ],
+    actions: [
+      {
+        type: 'append',
+        path: 'i18n/br.js',
+        pattern: `/* PLOP_APPEND_BR */`,
+        template: `  {{name}}: '{{brName}}',`,
+      },
+      {
+        type: 'append',
+        path: 'i18n/en.js',
+        pattern: `/* PLOP_APPEND_EN */`,
+        template: `  {{name}}: '{{enName}}',`,
+      },
+    ],
+  })
 }
