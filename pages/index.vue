@@ -7,19 +7,25 @@
         src='~/assets/CWT_LOGO_TRASNPARENTE.png'
       )
     .l-card-body.tw-p-8.tw-bg-white
-      form
+      form(@submit.prevent='submitLogin', name='login')
         fieldset
           legend.tw-w-full.tw-flex.tw-justify-end Login into your account
           b-field(label='user', type='', message='')
-            b-input(v-model='user', size='is-small', icon='email')
+            b-input(
+              v-model='username',
+              size='is-small',
+              icon='email',
+              name='username'
+            )
           b-field(label='password')
             b-input(
               v-model='password',
               size='is-small',
               icon='key',
-              type='password'
+              type='password',
+              name='password'
             )
-          b-button.tw-w-full.tw-mt-4(type='is-danger') Entrar
+          b-button.tw-w-full.tw-mt-4(type='is-danger', @click='submitLogin') Entrar
 </template>
 
 <script>
@@ -29,13 +35,28 @@ export default {
   layout: 'public',
   props: {},
   data() {
-    return { user: '', password: '' }
+    return { username: '', password: '' }
   },
   computed: {},
   watch: {},
   mounted() {},
   created() {},
-  methods: {},
+  methods: {
+    async submitLogin() {
+      try {
+        const { data, status } = await this.$axios.post('/auth/', {
+          username: this.username,
+          password: this.password,
+        })
+        if (status === 200) {
+          window.localStorage.setItem('token', data.token)
+          this.$router.push('/manager')
+        }
+      } catch (err) {
+        console.error(err)
+      }
+    },
+  },
 }
 </script>
 

@@ -24,6 +24,14 @@ export default {
   },
   computed: {},
   watch: {},
+  async mounted() {
+    // try {
+    //   const resp = await this.$axios.get('/users/')
+    //   console.log(resp)
+    // } catch (err) {
+    //   console.log(err)
+    // }
+  },
 
   created() {
     this.$nuxt.$on('changePartial', (partial) => {
