@@ -1,7 +1,10 @@
 <template lang="pug">
 #maintainProfile.maintain-profile-wrapper.tw-mt-6.tw-px-8
+  b-modal(v-model='isModalActive')
+    template(#default='props')
+      maintain-profile-modal(@close='props.close')
   .buttons-wrapper.tw-flex.tw-justify-end.tw-mb-2
-    b-button(type='is-primary') {{ $t("add") }}
+    b-button(type='is-primary', @click='isModalActive = true') {{ $t("add") }}
   standard-table(:data='profileDescription')
     b-table-column(
       v-slot='props',
@@ -43,10 +46,13 @@ export default {
   name: 'MaintainProfile',
   components: {
     StandardTable: () => import('@/components/StandardTable'),
+    MaintainProfileModal: () =>
+      import('@/components/partials/MaintainProfileModal'),
   },
   props: {},
   data() {
     return {
+      isModalActive: false,
       profileDescription: require('@/jsons/profile-description-table-data.json'),
     }
   },

@@ -24,7 +24,7 @@
       b-checkbox(v-model='props.row.active')
         span.tw-text-xs {{ $t("active") }}
     b-table-column(:label='$t("operation")', :centered='true')
-      span.tw-cursor-pointer
+      span.tw-cursor-pointer(class='hover:tw-text-primary')
         b-icon(icon='account-details')
 </template>
 

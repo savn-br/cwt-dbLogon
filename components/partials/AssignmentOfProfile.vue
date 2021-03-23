@@ -47,7 +47,7 @@
               false-value='off',
               v-model='props.row.operation'
             ) {{ props.row.operation }}
-          span.tw-cursor-pointer
+          span.tw-cursor-pointer(class='hover:tw-text-primary')
             b-icon(icon='eye', size='')
     .view-sales.tw-mt-6
       .button-wrapper.tw-flex.tw-justify-end
@@ -73,7 +73,7 @@
                 false-value='off',
                 v-model='props.row.operation'
               ) {{ props.row.operation }}
-            span.tw-cursor-pointer
+            span.tw-cursor-pointer(class='hover:tw-text-primary')
               b-icon(icon='eye', size='')
 </template>
 

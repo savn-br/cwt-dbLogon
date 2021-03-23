@@ -18,7 +18,7 @@
           b-button.tw-w-24(
             icon-left='logout',
             tag='router-link',
-            to='/login',
+            to='/',
             type='is-primary is-link'
           ) {{ $t("logout") }}
 </template>
