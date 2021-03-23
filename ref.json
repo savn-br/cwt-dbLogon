@@ -1,0 +1,29 @@
+{
+  "profileName": "XXXX",
+  "details": [
+    {
+      "system": "Smart accounting",
+      "notes": "notas",
+      "active": false,
+      "modules": [
+        {
+          "module": "Faturamento aereo",
+          "notes": "Sistema Account Bla bla bla",
+          "active": false,
+          "transactions": [
+            {
+              "transaction": "Emitir Fatura",
+              "notes": "Modulo 1 bla bla bla",
+              "active": false
+            },
+            {
+              "transaction": "Consultar Fatura",
+              "notes": "Modulo 1 bla bla bla",
+              "active": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
