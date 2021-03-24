@@ -8,7 +8,6 @@ module.exports = () => {
   const transactionAcron = ['TRE', 'TYRT', 'FGHGF', 'HFGH']
   const data = {
     users: [],
-    profiles: [],
     systems: [],
     modules: [],
     transactions: [],
@@ -16,7 +15,7 @@ module.exports = () => {
   for (let index = 0; index < 20; index++) {
     data.users.push({
       id: index + 1,
-      register: index + 1,
+      employeeNumber: index + 1,
       name: faker.name.findName(),
       email: faker.internet.email(),
       username: faker.internet.userName(),
@@ -41,8 +40,8 @@ module.exports = () => {
         'Analista de Ti',
         'PMO',
       ]),
-      emergency: faker.random.boolean(),
-      vip: faker.random.boolean(),
+      emergencyFlag: faker.random.boolean(),
+      vipFlag: faker.random.boolean(),
     })
   }
   for (let index = 0; index < 4; index++) {
@@ -59,7 +58,7 @@ module.exports = () => {
       description: faker.lorem.sentence(),
       notes: faker.lorem.paragraph(),
       active: true,
-      system_id: index + 1,
+      systemId: index + 1,
     })
     data.transactions.push({
       id: index + 1,
@@ -67,7 +66,7 @@ module.exports = () => {
       description: faker.lorem.sentence(),
       notes: faker.lorem.paragraph(),
       active: true,
-      module_id: index + 1,
+      moduleId: index + 1,
     })
   }
 
