@@ -11,6 +11,7 @@ module.exports = () => {
     systems: [],
     modules: [],
     transactions: [],
+    access: [],
   }
   for (let index = 0; index < 20; index++) {
     data.users.push({
@@ -67,6 +68,20 @@ module.exports = () => {
       notes: faker.lorem.paragraph(),
       active: true,
       moduleId: index + 1,
+    })
+    data.access = data.users.map((user) => {
+      const max = Math.floor(Math.random() * 5)
+      const status = new Array(max)
+      for (let index = 0; index < max; index++) {
+        status[index] = {
+          date: faker.date.between('2020-01-01', '2020-12-31'),
+          action: faker.lorem.sentence(),
+        }
+      }
+      return {
+        ...user,
+        status,
+      }
     })
   }
 
