@@ -2,7 +2,7 @@
 .my-profile-wrapper.tw-mt-8.tw-px-4
   profile-form(:data='profile')
   .update-buttons.tw-flex.tw-justify-center
-    b-button.tw-mx-2.tw-my-4(type='is-success') {{ $t("update") }}
+    b-button.tw-mx-2.tw-my-4(type='is-success', @click='update') {{ $t("update") }}
   collapse.tw-text-sm(:title='$t("accessProfile")')
     component(is='RecursiveCollapse', :tree='tree', padding='0')
   collapse.tw-text-sm(:title='$t("customerView")')
@@ -40,7 +40,11 @@ export default {
     this.$store.dispatch('getMyProfile')
   },
   created() {},
-  methods: {},
+  methods: {
+    async update() {
+      await this.$store.dispatch('updateMyProfile')
+    },
+  },
 }
 </script>
 

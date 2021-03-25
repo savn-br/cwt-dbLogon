@@ -72,6 +72,7 @@ export default {
           window.localStorage.setItem('token', data.token)
           const { profileType, userId } = data
           this.$store.commit('changeUserId', userId)
+          this.$store.commit('changeUserProfileType',profileType)
           this.$router.push(`/${this.profileTypes[profileType]}/`)
         }
         if (status === 404) {

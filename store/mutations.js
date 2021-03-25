@@ -2,6 +2,9 @@ export default {
   changeUserId(state, userId) {
     state.userData.userId = userId
   },
+  changeUserProfileType(state, profileType) {
+    state.userData.profileType = profileType
+  },
   changeUserData(state, userData) {
     if (userData.status) {
       delete userData.status

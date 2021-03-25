@@ -28,6 +28,7 @@ export default {
     '@plugins/axios',
     '@/plugins/vee-validate.js',
     '@/plugins/vue-mask.js',
+    { src: '@/plugins/vuex-persist.js', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

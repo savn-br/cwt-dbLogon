@@ -3,11 +3,11 @@
   steps
   profile-form(:data='profile')
   .update-buttons.tw-flex.tw-justify-center(class='sm:tw-justify-end')
-    b-button.tw-mx-2(type='is-success') {{ $t("update") }}
-    b-button.tw-mx-2(type='is-primary') {{ $t("requestAccess") }}
+    b-button.tw-mx-2(type='is-success', @click='update') {{ $t("update") }}
+    b-button.tw-mx-2(type='is-primary', disabled) {{ $t("requestAccess") }}
   .logs.tw-mt-2.tw-mb-4
     h1 Status
-    standard-table(:data='tableData', , :bordered='true')
+    standard-table(:data='tableStatus', , :bordered='true')
       b-table-column(field='date', :label='$t("date")', v-slot='props')
         span.tw-text-xs {{ $moment(props.row.date) }}
       b-table-column(field='action', :label='$t("action")', v-slot='props')
@@ -29,7 +29,7 @@ export default {
   computed: {
     ...mapState({
       profile: (state) => state.userData,
-      tableData: (state) => state.userStatus,
+      tableStatus: (state) => state.userStatus,
     }),
   },
   watch: {},
@@ -37,7 +37,11 @@ export default {
     this.$store.dispatch('getAccess')
   },
   created() {},
-  methods: {},
+  methods: {
+    async update() {
+      await this.$store.dispatch('updateAccess')
+    },
+  },
 }
 </script>
 

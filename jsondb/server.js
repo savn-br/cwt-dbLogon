@@ -23,10 +23,9 @@ server.put('/access/:userId', (req, resp) => {
   const { userId } = req.params
   const data = req.body
   try {
-    const user = database.access.find(
-      (user) => user.userId === parseInt(userId)
-    )
-    resp.status(200).jsonp({ ...user, ...data })
+    const ID = parseInt(userId)
+    database.access[ID - 1] = { ...database.access[ID - 1], ...data }
+    resp.status(200).jsonp(database.access[ID - 1])
   } catch (err) {
     resp.status(404).send()
   }
@@ -35,10 +34,9 @@ server.put('/myProfile/:userId', (req, resp) => {
   const { userId } = req.params
   const data = req.body
   try {
-    const user = database.myProfile.find(
-      (user) => user.userId === parseInt(userId)
-    )
-    resp.status(200).jsonp({ ...user, ...data })
+    const ID = parseInt(userId)
+    database.myProfile[ID - 1] = { ...database.myProfile[ID - 1], ...data }
+    resp.status(200).jsonp(database.myProfile[ID - 1])
   } catch (err) {
     resp.status(404).send()
   }
