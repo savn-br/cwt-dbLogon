@@ -10,14 +10,22 @@
       form(@submit.prevent='submitLogin', name='login')
         fieldset
           legend.tw-w-full.tw-flex.tw-justify-end Login into your account
-          b-field(label='user', type='', message='')
+          b-field(
+            label='user',
+            :type='!!usernameMessage ? "is-danger" : ""',
+            :message='usernameMessage'
+          )
             b-input(
               v-model='username',
               size='is-small',
               icon='email',
               name='username'
             )
-          b-field(label='password')
+          b-field(
+            label='password',
+            :message='passwordMessage',
+            :type='!!passwordMessage ? "is-danger" : ""'
+          )
             b-input(
               v-model='password',
               size='is-small',
@@ -35,7 +43,12 @@ export default {
   layout: 'public',
   props: {},
   data() {
-    return { username: '', password: '' }
+    return {
+      username: '',
+      password: '',
+      usernameMessage: '',
+      passwordMessage: '',
+    }
   },
   computed: {},
   watch: {},
@@ -44,13 +57,18 @@ export default {
   methods: {
     async submitLogin() {
       try {
-        const { data, status } = await this.$axios.post('/auth/', {
+        const { data, status } = await this.$axios.post('/auth/userLogin', {
           username: this.username,
           password: this.password,
         })
         if (status === 200) {
           window.localStorage.setItem('token', data.token)
-          this.$router.push('/manager')
+          const { profileType } = data
+          this.$router.push(`/${profileType}/`)
+        }
+        if (status === 404) {
+          this.usernameMessage = 'usuário ou senha incorretos'
+          this.passwordMessage = 'usuário ou senha incorretos'
         }
       } catch (err) {
         console.error(err)

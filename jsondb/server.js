@@ -14,6 +14,36 @@ const port = 3333
 server.use(middlewares)
 server.use(jsonServer.bodyParser)
 
+server.post('/access/:userId', (req, resp) => {
+  const { userId } = req.params
+  console.log(`user ${userId} request access`)
+  resp.status(200).jsonp({})
+})
+server.put('/access/:userId', (req, resp) => {
+  const { userId } = req.params
+  const data = req.body
+  try {
+    const user = database.access.find(
+      (user) => user.userId === parseInt(userId)
+    )
+    resp.status(200).jsonp({ ...user, ...data })
+  } catch (err) {
+    resp.status(404).send()
+  }
+})
+server.put('/myProfile/:userId', (req, resp) => {
+  const { userId } = req.params
+  const data = req.body
+  try {
+    const user = database.myProfile.find(
+      (user) => user.userId === parseInt(userId)
+    )
+    resp.status(200).jsonp({ ...user, ...data })
+  } catch (err) {
+    resp.status(404).send()
+  }
+})
+
 server.post('/auth/refresh/', (req, resp) => {
   const { refreshToken } = req.body
   if (refreshToken in tokens) {
@@ -41,7 +71,12 @@ server.post('/auth/userLogin/', (req, resp) => {
       expiresIn: '86400s',
     })
     tokens[refreshToken] = token
-    resp.status(200).jsonp({ token, refreshToken })
+    resp.status(200).jsonp({
+      token,
+      refreshToken,
+      userId: user.id,
+      profileType: user.profileType,
+    })
   } else {
     resp.status(404).send()
   }
@@ -49,7 +84,7 @@ server.post('/auth/userLogin/', (req, resp) => {
 
 // verify authentication
 server.use((req, resp, next) => {
-  const closed = ['users', 'profiles', 'systems', 'modules']
+  const closed = ['access', 'myProfile']
   const path = req.path.replace(/\//g, '')
   if (closed.includes(path)) {
     try {

@@ -6,23 +6,26 @@ module.exports = () => {
   const systemAcron = ['ACN', 'ASDR', 'RFG', 'WET']
   const moduleAcron = ['SFD', 'RWE', 'FGHF', 'ERT']
   const transactionAcron = ['TRE', 'TYRT', 'FGHGF', 'HFGH']
+  const profileType = ['new', 'collaborator', 'manager', 'admin', 'analyst']
   const data = {
     users: [],
     systems: [],
     modules: [],
     transactions: [],
     access: [],
+    myProfile: [],
   }
   for (let index = 0; index < 20; index++) {
     data.users.push({
       id: index + 1,
-      employeeNumber: index + 1,
+      userId: index + 1,
+      employeeNumber: faker.finance.creditCardNumber('#########'),
+      profileType: profileType[index % profileType.length],
       name: faker.name.findName(),
       email: faker.internet.email(),
       username: faker.internet.userName(),
       password: faker.internet.password(),
       phone: faker.phone.phoneNumber('119########'),
-      card: faker.finance.creditCardNumber('##############'),
       company: faker.random.arrayElement([
         'Samsung',
         'Apple',
@@ -70,7 +73,7 @@ module.exports = () => {
       moduleId: index + 1,
     })
     data.access = data.users.map((user) => {
-      const max = Math.floor(Math.random() * 5)
+      const max = 3
       const status = new Array(max)
       for (let index = 0; index < max; index++) {
         status[index] = {
@@ -82,6 +85,49 @@ module.exports = () => {
         ...user,
         status,
       }
+    })
+    data.myProfile = data.users.map((user) => {
+      const pointOfSales = new Array(3)
+      const system = new Array(3)
+      const module = new Array(2)
+      const transaction = new Array(2)
+
+      for (let index = 0; index < transaction.length; index++) {
+        transaction[index] = {
+          transaction: faker.lorem.words(5),
+          notes: faker.lorem.words(5),
+          active: faker.random.boolean(),
+        }
+      }
+
+      for (let index = 0; index < module.length; index++) {
+        module[index] = {
+          module: faker.lorem.words(5),
+          notes: faker.lorem.words(5),
+          active: faker.random.boolean(),
+          transaction,
+        }
+      }
+
+      for (let index = 0; index < system.length; index++) {
+        system[index] = {
+          system: faker.lorem.words(5),
+          notes: faker.lorem.words(5),
+          active: faker.random.boolean(),
+          module,
+        }
+      }
+
+      for (let index = 0; index < pointOfSales.length; index++) {
+        pointOfSales[index] = { name: faker.lorem.words(4) }
+      }
+
+      const profileAccess = {
+        details: system,
+        profileName: faker.lorem.words(5),
+      }
+
+      return { ...user, pointOfSales, profileAccess }
     })
   }
 

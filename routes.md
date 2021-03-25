@@ -17,7 +17,7 @@ RESPONSE: {
 
 - token,
 - refreshToken,
-- profileType:< new, collaborator, manager, admin, analyst
+- profileType:< new, collaborator, manager, admin, analyst>
 
 }
 
