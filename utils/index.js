@@ -7,4 +7,5 @@ const scss2Json = require('scss-to-json')
 const sass2tailwind = (sassFile) => {
   return JSON.parse(JSON.stringify(scss2Json(sassFile)).replace(/\$/g, ''))
 }
+
 module.exports = { sass2tailwind }

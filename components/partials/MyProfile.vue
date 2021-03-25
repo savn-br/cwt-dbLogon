@@ -6,9 +6,17 @@
   collapse.tw-text-sm(:title='$t("accessProfile")')
     component(is='RecursiveCollapse', :tree='tree', padding='0')
   collapse.tw-text-sm(:title='$t("customerView")')
+    standard-table.tw-my-4(:data='tableData', , :bordered='true')
+      b-table-column(
+        field='action',
+        label='Nome do ponto de venda',
+        v-slot='props'
+      )
+        span.tw-text-xs {{ props.row.name }}
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'MyProfile',
   components: {
@@ -18,13 +26,19 @@ export default {
   },
   props: {},
   data() {
-    const profile = require('@/jsons/profile-data.json')
     const tree = require('@/jsons/directory-tree-data.json')
-    return { tree, profile }
+    return { tree }
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      profile: (state) => state.userData,
+      tableData: (state) => state.pointOfSales,
+    }),
+  },
   watch: {},
-  mounted() {},
+  mounted() {
+    this.$store.dispatch('getMyProfile')
+  },
   created() {},
   methods: {},
 }

@@ -44,6 +44,13 @@ export default {
   props: {},
   data() {
     return {
+      profileTypes: {
+        collaborator: 'collaborator',
+        manager: 'manager',
+        admin: 'administrator',
+        analyst: 'analyst',
+        new: 'new',
+      },
       username: '',
       password: '',
       usernameMessage: '',
@@ -63,12 +70,13 @@ export default {
         })
         if (status === 200) {
           window.localStorage.setItem('token', data.token)
-          const { profileType } = data
-          this.$router.push(`/${profileType}/`)
+          const { profileType, userId } = data
+          this.$store.commit('changeUserId', userId)
+          this.$router.push(`/${this.profileTypes[profileType]}/`)
         }
         if (status === 404) {
-          this.usernameMessage = 'usuário ou senha incorretos'
-          this.passwordMessage = 'usuário ou senha incorretos'
+          this.usernameMessage = 'Usuário ou senha incorretos'
+          this.passwordMessage = 'Usuário ou senha incorretos'
         }
       } catch (err) {
         console.error(err)

@@ -85,7 +85,7 @@ server.post('/auth/userLogin/', (req, resp) => {
 // verify authentication
 server.use((req, resp, next) => {
   const closed = ['access', 'myProfile']
-  const path = req.path.replace(/\//g, '')
+  const path = req.path.split('/')[1]
   if (closed.includes(path)) {
     try {
       const token = req.headers.authorization.split(' ')[1]

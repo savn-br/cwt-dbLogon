@@ -1,0 +1,21 @@
+export default {
+  userData: {
+    userId: -1,
+    employeeNumber: '',
+    profileType: '',
+    name: '',
+    managerName: '',
+    email: '',
+    username: '',
+    password: '',
+    phone: '',
+    company: '',
+    field: '',
+    role: '',
+    emergencyFlag: false,
+    vipFlag: false,
+  },
+  userStatus: [],
+  pointOfSales: [],
+  profileAccess: {},
+}

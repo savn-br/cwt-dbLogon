@@ -2,10 +2,10 @@
 .profile-form-wrapper
   form.fields.tw-grid(name='profileForm')
     b-field.tw-mx-2(:label='$t("user")')
-      b-input(v-model='data.user', size='is-small', name='user', disabled)
+      b-input(v-model='data.username', size='is-small', name='user', disabled)
     b-field.tw-mx-2(:label='$t("manager")')
       b-input(
-        v-model='data.manager',
+        v-model='data.managerName',
         size='is-small',
         name='manager',
         disabled
@@ -29,19 +29,19 @@
       b-input(v-model='data.name', size='is-small', name='name', disabled)
     b-field.tw-mx-2(:label='$t("phone")')
       b-input(
-        v-model='data.phone',
+        v-model='phone',
         size='is-small',
         name='phone',
         v-mask='["(##) ####-####", "(##) #####-####"]'
       )
     b-field.tw-mx-2(:label='$t("field")')
-      b-input(v-model='data.field', name='field', size='is-small')
+      b-input(v-model='field', name='field', size='is-small')
     b-field.tw-mx-2(:label='$t("role")')
-      b-input(v-model='data.position', name='position', size='is-small')
+      b-input(v-model='role', name='role', size='is-small')
     b-field.tw-mx-2(:label='$t("registration")')
-      b-input(v-model='data.register', name='register', size='is-small')
-    b-checkbox.tw-m-5(v-model='data.emergency', name='emergency') {{ $t("emergency") }}
-    b-checkbox.tw-m-5(v-model='data.desk', name='desk') VIP Desk
+      b-input(v-model='employeeNumber', name='employeeNumber', size='is-small')
+    b-checkbox.tw-m-5(v-model='emergencyFlag', name='emergencyFlag') {{ $t("emergency") }}
+    b-checkbox.tw-m-5(v-model='vipFlag', name='vipFlag') VIP Desk
     slot(name='content')
 </template>
 
@@ -58,7 +58,56 @@ export default {
   data() {
     return {}
   },
-  computed: {},
+  computed: {
+    phone: {
+      get() {
+        return this.$store.state.userData.phone
+      },
+      set(value) {
+        this.$store.commit('changePhone', value)
+      },
+    },
+    field: {
+      get() {
+        return this.$store.state.userData.field
+      },
+      set(value) {
+        this.$store.commit('changeField', value)
+      },
+    },
+    role: {
+      get() {
+        return this.$store.state.userData.role
+      },
+      set(value) {
+        this.$store.commit('changeRole', value)
+      },
+    },
+    employeeNumber: {
+      get() {
+        return this.$store.state.userData.employeeNumber
+      },
+      set(value) {
+        this.$store.commit('changeEmployeeNumber', value)
+      },
+    },
+    emergencyFlag: {
+      get() {
+        return this.$store.state.userData.emergencyFlag
+      },
+      set(value) {
+        this.$store.commit('changeEmergencyFlag', value)
+      },
+    },
+    vipFlag: {
+      get() {
+        return this.$store.state.userData.vipFlag
+      },
+      set(value) {
+        this.$store.commit('changeVipFlag', value)
+      },
+    },
+  },
   watch: {},
   mounted() {},
   created() {},

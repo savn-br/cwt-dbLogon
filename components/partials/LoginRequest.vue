@@ -7,32 +7,35 @@
     b-button.tw-mx-2(type='is-primary') {{ $t("requestAccess") }}
   .logs.tw-mt-2.tw-mb-4
     h1 Status
-    standard-table(:data='data', , :bordered='true')
+    standard-table(:data='tableData', , :bordered='true')
       b-table-column(field='date', :label='$t("date")', v-slot='props')
-        span.tw-text-xs {{ props.row.date }}
+        span.tw-text-xs {{ $moment(props.row.date) }}
       b-table-column(field='action', :label='$t("action")', v-slot='props')
         span.tw-text-xs {{ props.row.action }}
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'LoginRequest',
   components: {
     StandardTable: () => import('@/components/StandardTable'),
     ProfileForm: () => import('@/components/partials/ProfileForm'),
-  },
-  data() {
-    const table = Object.assign(require('@/jsons/status-table-data.json'))
-    return {
-      profile: require('@/jsons/profile-data.json'),
-      ...table,
-    }
-  },
-  computed: {
     Steps: () => import('@/components/Steps'),
   },
+  data() {
+    return {}
+  },
+  computed: {
+    ...mapState({
+      profile: (state) => state.userData,
+      tableData: (state) => state.userStatus,
+    }),
+  },
   watch: {},
-  mounted() {},
+  mounted() {
+    this.$store.dispatch('getAccess')
+  },
   created() {},
   methods: {},
 }

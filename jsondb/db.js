@@ -22,6 +22,7 @@ module.exports = () => {
       employeeNumber: faker.finance.creditCardNumber('#########'),
       profileType: profileType[index % profileType.length],
       name: faker.name.findName(),
+      managerName: faker.name.findName(),
       email: faker.internet.email(),
       username: faker.internet.userName(),
       password: faker.internet.password(),
