@@ -1,5 +1,5 @@
 <template lang="pug">
-.my-profile-wrapper.tw-mt-8.tw-px-4
+.my-profile-wrapper.tw-mt-8.tw-px-8
   profile-form(:data='profile')
   .update-buttons.tw-flex.tw-justify-center
     b-button.tw-mx-2.tw-my-4(type='is-success', @click='update') {{ $t("update") }}

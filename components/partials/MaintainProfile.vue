@@ -1,5 +1,5 @@
 <template lang="pug">
-#maintainProfile.maintain-profile-wrapper.tw-mt-6.tw-px-8
+#maintainProfile.maintain-profile-wrapper.tw-mt-8.tw-px-8
   b-modal(v-model='isModalActive')
     template(#default='props')
       maintain-profile-modal(@close='props.close')

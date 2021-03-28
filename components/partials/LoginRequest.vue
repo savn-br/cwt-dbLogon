@@ -1,5 +1,5 @@
 <template lang="pug">
-.login-request-wrapper.tw-px-4
+.login-request-wrapper.tw-mt-8.tw-px-8
   steps
   profile-form(:data='profile')
   .update-buttons.tw-flex.tw-justify-center(class='sm:tw-justify-end')

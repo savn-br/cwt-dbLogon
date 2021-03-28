@@ -1,5 +1,5 @@
 <template lang="pug">
-.assignment-of-profile-wrapper.tw-mt-6.tw-px-4
+.assignment-of-profile-wrapper.tw-mt-8.tw-px-8
   profile-form(:data='profile')
     template(v-slot:content)
       b-checkbox.tw-m-5(v-model='profile.active', name='active') Ativo

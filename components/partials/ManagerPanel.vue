@@ -1,5 +1,5 @@
 <template lang="pug">
-.manager-panel-wrapper.tw-mt-10.tw-px-4
+.manager-panel-wrapper.tw-mt-8.tw-px-8
   standard-table(
     :data='data',
     :bordered='true',

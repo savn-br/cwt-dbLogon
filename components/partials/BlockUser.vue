@@ -1,5 +1,5 @@
 <template lang="pug">
-.block-user-wrapper.tw-mt-8.tw-px-5
+.block-user-wrapper.tw-mt-8.tw-px-8
   form
     fieldset
       b-radio(v-model='radio', name='select', native-value='todos') {{ $t("allUsers") }}

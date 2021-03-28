@@ -1,5 +1,5 @@
 <template lang="pug">
-#profileSearch.profile-search-wrapper.tw-mt-6.tw-px-8
+#profileSearch.profile-search-wrapper.tw-mt-8.tw-px-8
   standard-table(:data='profileDescription')
     b-table-column(
       v-slot='props',

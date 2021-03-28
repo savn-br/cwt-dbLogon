@@ -1,5 +1,5 @@
 <template lang="pug">
-#assignmentOfProfile2.assignment-of-profile2-wrapper.tw-mt-6.tw-px-8
+#assignmentOfProfile2.assignment-of-profile2-wrapper.tw-mt-8.tw-px-8
   standard-table(:data='profileDescription')
     b-table-column(
       v-slot='props',

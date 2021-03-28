@@ -1,5 +1,5 @@
 <template lang="pug">
-#maintainProfile2.maintain-profile2-wrapper.tw-mt-8.tw-px-4
+#maintainProfile2.maintain-profile2-wrapper.tw-mt-8.tw-px-8
   .button-wrappers.tw-mb-8
     b-button.tw-mr-4(type='is-primary') Salvar
     b-button(type='is-danger') Cancelar

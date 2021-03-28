@@ -1,5 +1,5 @@
 <template lang="pug">
-#maintainSystem3.maintain-system3-wrapper.tw-mt-6.tw-px-8
+#maintainSystem3.maintain-system3-wrapper.tw-mt-8.tw-px-8
   .form.tw-grid.form-auto-fill(name='sistema')
     b-field.tw-mx-2(label='Código do sistema')
       b-input(v-model='systemCode', disabled)

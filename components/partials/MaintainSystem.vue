@@ -1,5 +1,5 @@
 <template lang="pug">
-#maintainSystem.maintain-system-wrapper.tw-mt-6.tw-px-8
+#maintainSystem.maintain-system-wrapper.tw-mt-8.tw-px-8
   b-modal(v-model='isModalActive')
     template(#default='props')
       maintain-system-modal(@close='props.close')

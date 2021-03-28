@@ -1,5 +1,5 @@
 <template lang="pug">
-#profileSearch2.profile-search2-wrapper.tw-mt-8.tw-px-4
+#profileSearch2.profile-search2-wrapper.tw-mt-8.tw-px-8
   form.fields.tw-grid(name='profileForm')
     b-field.tw-mx-2(label='Código do perfil')
       b-input(v-model='code', size='is-small', name='user')
