@@ -17,8 +17,7 @@
             img.tw-w-5.tw-h-5(src='@/assets/flags/br.svg', alt='Brazil flag')
           b-button.tw-w-24(
             icon-left='logout',
-            tag='router-link',
-            to='/',
+            @click='logout',
             type='is-primary is-link'
           ) {{ $t("logout") }}
 </template>
@@ -42,7 +41,12 @@ export default {
   watch: {},
   mounted() {},
   created() {},
-  methods: {},
+  methods: {
+    logout() {
+      window.localStorage.clear()
+      this.$router.push('/')
+    },
+  },
 }
 </script>
 

@@ -25,7 +25,7 @@ module.exports = () => {
       managerName: faker.name.findName(),
       email: faker.internet.email(),
       username: faker.internet.userName(),
-      password: faker.internet.password(),
+      password: '123456',
       phone: faker.phone.phoneNumber('119########'),
       company: faker.random.arrayElement([
         'Samsung',

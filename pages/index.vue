@@ -45,11 +45,11 @@ export default {
   data() {
     return {
       profileTypes: {
-        collaborator: 'collaborator',
-        manager: 'manager',
-        admin: 'administrator',
-        analyst: 'analyst',
-        new: 'new',
+        collaborator: { redirect: 'collaborator', menu: 'CollaboratorMenu' },
+        manager: { redirect: 'manager', menu: 'ManagerMenu' },
+        admin: { redirect: 'administrator', menu: 'AdministratorMenu' },
+        analyst: { redirect: 'analyst', menu: 'AnalystMenu' },
+        new: { redirect: 'new' },
       },
       username: '',
       password: '',
@@ -72,8 +72,14 @@ export default {
           window.localStorage.setItem('token', data.token)
           const { profileType, userId } = data
           this.$store.commit('changeUserId', userId)
-          this.$store.commit('changeUserProfileType',profileType)
-          this.$router.push(`/${this.profileTypes[profileType]}/`)
+          this.$store.commit('changeUserProfileType', profileType)
+          if (this.profileTypes[profileType].menu) {
+            this.$store.commit(
+              'changeCurrentMenu',
+              this.profileTypes[profileType].menu
+            )
+          }
+          this.$router.push(`/${this.profileTypes[profileType].redirect}/`)
         }
         if (status === 404) {
           this.usernameMessage = 'Usuário ou senha incorretos'

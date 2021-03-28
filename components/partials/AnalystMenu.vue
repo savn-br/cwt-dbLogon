@@ -37,7 +37,7 @@ export default {
   created() {},
   methods: {
     changePartial(partialName) {
-      this.$nuxt.$emit('changePartial', partialName)
+      this.$store.commit('changeCurrentPartial', partialName)
     },
   },
 }

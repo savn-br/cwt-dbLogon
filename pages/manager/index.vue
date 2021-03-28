@@ -1,9 +1,10 @@
 <template lang="pug">
 .home-page-wrapper
-  component(:is='componentPartial')
+  component(:is='currentPartial')
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'Manager',
   components: {
@@ -22,23 +23,14 @@ export default {
       componentPartial: 'MyProfile',
     }
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      currentPartial: (state) => state.currentPartial,
+    }),
+  },
   watch: {},
-  async mounted() {
-    // try {
-    //   const resp = await this.$axios.get('/users/')
-    //   console.log(resp)
-    // } catch (err) {
-    //   console.log(err)
-    // }
-  },
-
-  created() {
-    this.$nuxt.$on('changePartial', (partial) => {
-      this.componentPartial = partial
-    })
-    this.$nuxt.$emit('menuType', 'ManagerMenu')
-  },
+  mounted() {},
+  created() {},
   methods: {},
 }
 </script>

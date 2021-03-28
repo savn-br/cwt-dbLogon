@@ -1,4 +1,10 @@
 export default {
+  changeCurrentMenu(state, currentMenu) {
+    state.currentMenu = currentMenu
+  },
+  changeCurrentPartial(state, currentPartial) {
+    state.currentPartial = currentPartial
+  },
   changeUserId(state, userId) {
     state.userData.userId = userId
   },

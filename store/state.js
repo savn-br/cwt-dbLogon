@@ -1,4 +1,6 @@
 export default {
+  currentPartial: 'MyProfile',
+  currentMenu: '',
   userData: {
     userId: -1,
     employeeNumber: '',
