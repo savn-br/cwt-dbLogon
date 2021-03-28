@@ -12,11 +12,13 @@
       @click='changePartial("LoginRequest")'
     )
 </template>
-
 <script>
+import changeMenu from '~/mixins/changeMenu'
 export default {
   name: 'CollaboratorMenu',
   components: {},
+  mixins: [changeMenu],
+
   props: {},
   data() {
     return {}
@@ -25,14 +27,7 @@ export default {
   watch: {},
   mounted() {},
   created() {},
-  methods: {
-    changePartial(partialName) {
-      this.$store.commit('changeCurrentPartial', partialName)
-      const burger = document.querySelector('.navbar-burger.burger')
-      const mEvent = new MouseEvent('click')
-      burger.dispatchEvent(mEvent)
-    },
-  },
+  methods: {},
 }
 </script>
 

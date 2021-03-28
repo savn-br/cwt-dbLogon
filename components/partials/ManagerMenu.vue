@@ -34,9 +34,11 @@
 </template>
 
 <script>
+import { changeMenu } from '~/mixins/changeMenu'
 export default {
   name: 'ManagerMenu',
   components: {},
+  mixins: [changeMenu],
   data() {
     return {}
   },
@@ -44,11 +46,7 @@ export default {
   watch: {},
   mounted() {},
   created() {},
-  methods: {
-    changePartial(partialName) {
-      this.$store.commit('changeCurrentPartial', partialName)
-    },
-  },
+  methods: {},
 }
 </script>
 
