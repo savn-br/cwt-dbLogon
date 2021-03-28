@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { changeMenu } from '~/mixins/changeMenu'
+import changeMenu from '~/mixins/changeMenu'
 export default {
   name: 'ManagerMenu',
   components: {},
