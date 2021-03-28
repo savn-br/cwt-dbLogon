@@ -1,12 +1,7 @@
 export default {
   async updateAccess({ state, commit }) {
     const { data } = await this.$axios.put(`/access/${state.userData.userId}`, {
-      employeeNumber: state.userData.employeeNumber,
-      phone: state.userData.phone,
-      field: state.userData.field,
-      role: state.userData.role,
-      emergencyFlag: state.userData.emergencyFlag,
-      vipFlag: state.userData.vipFlag,
+      ...state.userData,
     })
     commit('changeUserStatus', data.status)
     commit('changeUserData', data)
@@ -22,12 +17,7 @@ export default {
     const { data } = await this.$axios.put(
       `/myProfile/${state.userData.userId}`,
       {
-        employeeNumber: state.userData.employeeNumber,
-        phone: state.userData.phone,
-        field: state.userData.field,
-        role: state.userData.role,
-        emergencyFlag: state.userData.emergencyFlag,
-        vipFlag: state.userData.vipFlag,
+        ...state.userData,
       }
     )
     commit('changePointOfSales', data.pointOfSales)

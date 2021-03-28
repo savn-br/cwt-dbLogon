@@ -1,5 +1,5 @@
 <template lang="pug">
-.collaborator-menu-wrapper
+.collaborator-menu-wrapper(tag='li')
   b-menu-list(:label='$t("collaboratorMenu")')
     b-menu-item.tw-text-xs.tw-py-1.tw-w-100(
       icon='account',
@@ -28,6 +28,9 @@ export default {
   methods: {
     changePartial(partialName) {
       this.$store.commit('changeCurrentPartial', partialName)
+      const burger = document.querySelector('.navbar-burger.burger')
+      const mEvent = new MouseEvent('click')
+      burger.dispatchEvent(mEvent)
     },
   },
 }

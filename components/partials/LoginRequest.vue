@@ -40,6 +40,12 @@ export default {
   methods: {
     async update() {
       await this.$store.dispatch('updateAccess')
+      this.$buefy.toast.open({
+        message: 'Dados atualizados com sucesso',
+        type: 'is-success',
+        duration: 3000,
+        position: 'is-top',
+      })
     },
   },
 }
