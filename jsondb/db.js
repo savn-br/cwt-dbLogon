@@ -125,7 +125,7 @@ module.exports = () => {
 
       const profileAccess = {
         details: system,
-        profileName: faker.lorem.words(5),
+        profileName: 'Profile Access',
       }
 
       return { ...user, pointOfSales, profileAccess }

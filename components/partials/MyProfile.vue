@@ -3,8 +3,14 @@
   profile-form(:data='profile')
   .update-buttons.tw-flex.tw-justify-center
     b-button.tw-mx-2.tw-my-4(type='is-success', @click='update') {{ $t("update") }}
-  collapse.tw-text-sm(:title='$t("accessProfile")')
-    component(is='RecursiveCollapse', :tree='tree', padding='0')
+  collapse.tw-text-sm(:title='profileAccess.profileName')
+    component(
+      v-for='(system,index) in profileAccess.details',
+      is='SystemCollapse',
+      :key='index',
+      :system='system'
+    )
+    //- component(is='RecursiveCollapse', :tree='tree', padding='0')
   collapse.tw-text-sm(:title='$t("customerView")')
     standard-table.tw-my-4(:data='tableData', , :bordered='true')
       b-table-column(
@@ -33,6 +39,7 @@ export default {
     ...mapState({
       profile: (state) => state.userData,
       tableData: (state) => state.pointOfSales,
+      profileAccess: (state) => state.profileAccess,
     }),
   },
   watch: {},
