@@ -1,10 +1,15 @@
 <template lang="pug">
 .login-request-wrapper.tw-mt-8.tw-px-8
-  steps
+  steps(:steps='steps')
   profile-form(:data='profile')
   .update-buttons.tw-flex.tw-justify-center(class='sm:tw-justify-end')
     b-button.tw-mx-2(type='is-success', @click='update') {{ $t("update") }}
-    b-button.tw-mx-2(type='is-primary', disabled) {{ $t("requestAccess") }}
+    b-button.tw-mx-2(
+      type='is-primary',
+      @click='enableAccess',
+      :disabled='profile.profileType === "new"',
+      :class='profile.profileType === "saved" ? "access-hidden" : ""'
+    ) {{ $t("requestAccess") }}
   .logs.tw-mt-2.tw-mb-4
     h1 Status
     standard-table(:data='tableStatus', , :bordered='true')
@@ -23,6 +28,12 @@ export default {
     ProfileForm: () => import('@/components/partials/ProfileForm'),
     Steps: () => import('@/components/Steps'),
   },
+  props: {
+    steps: {
+      type: Number,
+      default: () => 0,
+    },
+  },
   data() {
     return {}
   },
@@ -38,8 +49,17 @@ export default {
   },
   created() {},
   methods: {
+    async enableAccess() {
+      await this.$store.dispatch('enableAccess')
+      if (this.profile.profileType !== this.$route.path.replace(/\//g, '')) {
+        this.$router.push(`/${this.profile.profileType}/`)
+      }
+    },
     async update() {
       await this.$store.dispatch('updateAccess')
+      if (this.profile.profileType !== this.$route.path.replace(/\//g, '')) {
+        this.$router.push(`/${this.profile.profileType}/`)
+      }
       this.$buefy.toast.open({
         message: 'Dados atualizados com sucesso',
         type: 'is-success',
@@ -64,6 +84,9 @@ export default {
 
 <style lang="scss">
 .login-request-wrapper {
+  .access-hidden {
+    display: none;
+  }
   label {
     font-size: 0.75rem;
   }

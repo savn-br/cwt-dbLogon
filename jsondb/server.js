@@ -15,16 +15,26 @@ server.use(middlewares)
 server.use(jsonServer.bodyParser)
 
 server.post('/access/:userId', (req, resp) => {
-  const { userId } = req.params
-  console.log(`user ${userId} request access`)
-  resp.status(200).jsonp({})
+  try {
+    const { userId } = req.params
+    const ID = parseInt(userId)
+    database.users[ID - 1].profileType = 'saved'
+    database.access[ID - 1].data.profileType = 'saved'
+    resp.status(200).jsonp(database.access[ID - 1])
+  } catch (err) {
+    resp.status(404).send()
+  }
 })
 server.put('/access/:userId', (req, resp) => {
   const { userId } = req.params
   const data = req.body
   try {
     const ID = parseInt(userId)
-    database.access[ID - 1] = { ...database.access[ID - 1], ...data }
+    if (data.profileType === 'new') {
+      data.profileType = 'peding'
+    }
+    database.access[ID - 1].data = { ...database.access[ID - 1].data, ...data }
+    database.users[ID - 1] = { ...database.users[ID - 1], ...data }
     resp.status(200).jsonp(database.access[ID - 1])
   } catch (err) {
     resp.status(404).send()
@@ -35,7 +45,11 @@ server.put('/myProfile/:userId', (req, resp) => {
   const data = req.body
   try {
     const ID = parseInt(userId)
-    database.myProfile[ID - 1] = { ...database.myProfile[ID - 1], ...data }
+    database.myProfile[ID - 1].data = {
+      ...database.myProfile[ID - 1].data,
+      ...data,
+    }
+    database.users[ID - 1] = { ...database.users[ID - 1], ...data }
     resp.status(200).jsonp(database.myProfile[ID - 1])
   } catch (err) {
     resp.status(404).send()
@@ -51,7 +65,7 @@ server.post('/auth/refresh/', (req, resp) => {
         expiresIn: '900s',
       })
       tokens[refreshToken] = token
-      resp.jsonp({ token })
+      resp.jsonp({ data: { token } })
     }
   } else {
     resp.status(404).send()
@@ -70,8 +84,10 @@ server.post('/auth/userLogin/', (req, resp) => {
     })
     tokens[refreshToken] = token
     resp.status(200).jsonp({
-      token,
-      refreshToken,
+      data: {
+        token,
+        refreshToken,
+      },
       userId: user.id,
       profileType: user.profileType,
     })

@@ -1,0 +1,28 @@
+<template lang="pug">
+#saved.saved-wrapper
+  compinent(is='LoginRequest', :steps='1')
+</template>
+
+<script>
+export default {
+  name: 'Saved',
+  components: {
+    LoginRequest: () => import('@/components/partials/LoginRequest'),
+  },
+  layout: 'newLayout',
+  props: {},
+  data() {
+    return {}
+  },
+  computed: {},
+  watch: {},
+  mounted() {},
+  created() {},
+  methods: {},
+}
+</script>
+
+<style lang="scss" scoped>
+.saved-wrapper {
+}
+</style>

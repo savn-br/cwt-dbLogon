@@ -7,7 +7,7 @@
     template(#start)
     template(#end)
       .side-menu-content.tw-block(class='md:tw-hidden')
-        b-navbar-item
+        b-navbar-item(v-if='!!menuType')
           component(:is='menuType')
       b-navbar-item(tag='div')
         .buttonns.tw-flex.tw-items-center.tw-justify-end

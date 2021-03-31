@@ -50,6 +50,8 @@ export default {
         admin: { redirect: 'administrator', menu: 'AdministratorMenu' },
         analyst: { redirect: 'analyst', menu: 'AnalystMenu' },
         new: { redirect: 'new' },
+        peding: { redirect: 'peding' },
+        saved: { redirect: 'saved' },
       },
       username: '',
       password: '',
@@ -64,13 +66,16 @@ export default {
   methods: {
     async submitLogin() {
       try {
-        const { data, status } = await this.$axios.post('/auth/userLogin', {
-          username: this.username,
-          password: this.password,
-        })
+        const { data: responseData, status } = await this.$axios.post(
+          '/auth/userLogin',
+          {
+            username: this.username,
+            password: this.password,
+          }
+        )
         if (status === 200) {
-          window.localStorage.setItem('token', data.token)
-          const { profileType, userId } = data
+          window.localStorage.setItem('token', responseData.data.token)
+          const { profileType, userId } = responseData
           this.$store.commit('changeUserId', userId)
           this.$store.commit('changeUserProfileType', profileType)
           if (this.profileTypes[profileType].menu) {

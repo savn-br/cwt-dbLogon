@@ -6,11 +6,6 @@
       :label='$t("myProfile")',
       @click='changePartial("MyProfile")'
     )
-    b-menu-item.tw-text-xs.tw-py-1.tw-w-100(
-      icon='account-key',
-      :label='$t("accessRequest")',
-      @click='changePartial("LoginRequest")'
-    )
 </template>
 <script>
 import changeMenu from '~/mixins/changeMenu'

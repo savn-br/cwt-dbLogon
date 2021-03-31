@@ -16,9 +16,14 @@
 
 <script>
 export default {
-  props: {},
+  props: {
+    steps: {
+      type: Number,
+      default: () => 0,
+    },
+  },
   data() {
-    return { steps: 1 }
+    return {}
   },
   computed: {},
   watch: {},

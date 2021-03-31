@@ -1,0 +1,48 @@
+obs: adicionar coluna systemName
+
+/dashManager/{{userID}} // userID do gestor
+GET:{
+  date
+  action
+  userId
+  userName
+}
+/assignProfile/{{userID}} // userID do usuario/colaborado
+GET:[
+  ...data // mesmos dados do MyProfile
+  active
+  profiles:[
+    {
+      profile,
+      profileDescription
+      systemId
+      systemName
+      startDate
+      endDate
+    }
+  ]
+  pointOfSales:[
+    {
+      name
+      status
+    }
+  ]
+]
+PUT:{
+  ...data
+  active
+}
+
+/assignProfile/{{userID}}/profileUpdate/
+POST:{
+  status(boolean)
+  profile
+  system
+}
+/assignProfile/{{userID}}/salesUpdate/
+POST:{
+  status(boolean)
+  pointOfSale
+  system
+}
+

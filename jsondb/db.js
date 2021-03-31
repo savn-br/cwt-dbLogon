@@ -6,7 +6,15 @@ module.exports = () => {
   const systemAcron = ['ACN', 'ASDR', 'RFG', 'WET']
   const moduleAcron = ['SFD', 'RWE', 'FGHF', 'ERT']
   const transactionAcron = ['TRE', 'TYRT', 'FGHGF', 'HFGH']
-  const profileType = ['new', 'collaborator', 'manager', 'admin', 'analyst']
+  const profileType = [
+    'new',
+    'pending',
+    'saved',
+    'collaborator',
+    'manager',
+    'admin',
+    'analyst',
+  ]
   const data = {
     users: [],
     systems: [],
@@ -15,7 +23,7 @@ module.exports = () => {
     access: [],
     myProfile: [],
   }
-  for (let index = 0; index < 20; index++) {
+  for (let index = 0; index < 14; index++) {
     data.users.push({
       id: index + 1,
       userId: index + 1,
@@ -73,7 +81,7 @@ module.exports = () => {
       active: true,
       moduleId: index + 1,
     })
-    data.access = data.users.map((user) => {
+    data.access = data.users.map((user, index) => {
       const max = 3
       const status = new Array(max)
       for (let index = 0; index < max; index++) {
@@ -83,11 +91,11 @@ module.exports = () => {
         }
       }
       return {
-        ...user,
-        status,
+        id: index + 1,
+        data: { ...user, status },
       }
     })
-    data.myProfile = data.users.map((user) => {
+    data.myProfile = data.users.map((user, index) => {
       const pointOfSales = new Array(3)
       const system = new Array(3)
       const module = new Array(2)
@@ -128,7 +136,7 @@ module.exports = () => {
         profileName: 'Profile Access',
       }
 
-      return { ...user, pointOfSales, profileAccess }
+      return { id: index + 1, data: { ...user, pointOfSales, profileAccess } }
     })
   }
 
