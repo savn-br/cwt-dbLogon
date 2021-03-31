@@ -26,6 +26,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@plugins/axios',
+    // '@plugins/api.js',
     '@/plugins/vee-validate.js',
     '@/plugins/vue-mask.js',
     { src: '@/plugins/vuex-persist.js', ssr: false },
@@ -84,7 +85,8 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseUrl: 'http://localhost:3333',
+    // baseUrl: 'http://localhost:3333',
+    baseUrl: 'http://cwt-dblogon-api.herokuapp.com',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

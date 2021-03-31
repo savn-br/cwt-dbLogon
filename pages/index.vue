@@ -50,7 +50,7 @@ export default {
         admin: { redirect: 'administrator', menu: 'AdministratorMenu' },
         analyst: { redirect: 'analyst', menu: 'AnalystMenu' },
         new: { redirect: 'new' },
-        peding: { redirect: 'peding' },
+        pending: { redirect: 'pending' },
         saved: { redirect: 'saved' },
       },
       username: '',
@@ -75,7 +75,7 @@ export default {
         )
         if (status === 200) {
           window.localStorage.setItem('token', responseData.data.token)
-          const { profileType, userId } = responseData
+          const { profileType, userId } = responseData.data
           this.$store.commit('changeUserId', userId)
           this.$store.commit('changeUserProfileType', profileType)
           if (this.profileTypes[profileType].menu) {

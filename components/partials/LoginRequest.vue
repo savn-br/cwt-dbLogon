@@ -8,7 +8,7 @@
       type='is-primary',
       @click='enableAccess',
       :disabled='profile.profileType === "new"',
-      :class='profile.profileType === "saved" ? "access-hidden" : ""'
+      :class='profile.profileType === "pending" ? "access-hidden" : ""'
     ) {{ $t("requestAccess") }}
   .logs.tw-mt-2.tw-mb-4
     h1 Status

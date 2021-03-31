@@ -18,8 +18,8 @@ server.post('/access/:userId', (req, resp) => {
   try {
     const { userId } = req.params
     const ID = parseInt(userId)
-    database.users[ID - 1].profileType = 'saved'
-    database.access[ID - 1].data.profileType = 'saved'
+    database.users[ID - 1].profileType = 'pending'
+    database.access[ID - 1].data.profileType = 'pending'
     resp.status(200).jsonp(database.access[ID - 1])
   } catch (err) {
     resp.status(404).send()
@@ -31,7 +31,7 @@ server.put('/access/:userId', (req, resp) => {
   try {
     const ID = parseInt(userId)
     if (data.profileType === 'new') {
-      data.profileType = 'peding'
+      data.profileType = 'saved'
     }
     database.access[ID - 1].data = { ...database.access[ID - 1].data, ...data }
     database.users[ID - 1] = { ...database.users[ID - 1], ...data }
@@ -87,9 +87,9 @@ server.post('/auth/userLogin/', (req, resp) => {
       data: {
         token,
         refreshToken,
+        userId: user.id,
+        profileType: user.profileType,
       },
-      userId: user.id,
-      profileType: user.profileType,
     })
   } else {
     resp.status(404).send()
