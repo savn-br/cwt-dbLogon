@@ -2,10 +2,10 @@
 .profile-form-wrapper
   form.fields.tw-grid(name='profileForm')
     b-field.tw-mx-2(:label='$t("user")')
-      b-input(v-model='data.username', size='is-small', name='user', disabled)
+      b-input(v-model='data.userId', size='is-small', name='user', disabled)
     b-field.tw-mx-2(:label='$t("manager")')
       b-input(
-        v-model='data.managerName',
+        v-model='data.manager',
         size='is-small',
         name='manager',
         disabled
@@ -26,7 +26,7 @@
         disabled
       )
     b-field.tw-mx-2(:label='$t("name")')
-      b-input(v-model='data.name', size='is-small', name='name', disabled)
+      b-input(v-model='data.userName', size='is-small', name='name', disabled)
     b-field.tw-mx-2(:label='$t("phone")')
       b-input(
         v-model='phone',

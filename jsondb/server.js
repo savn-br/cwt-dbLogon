@@ -75,7 +75,7 @@ server.post('/auth/refresh/', (req, resp) => {
 server.post('/auth/userLogin/', (req, resp) => {
   const { username, password } = req.body
   const user = database.users.find(
-    (user) => user.username === username && user.password === password
+    (user) => user.userId === username && user.password === password
   )
   if (user) {
     const token = jwt.sign({ id: user.id }, tokenSecret, { expiresIn: '900s' })

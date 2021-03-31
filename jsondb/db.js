@@ -26,13 +26,12 @@ module.exports = () => {
   for (let index = 0; index < 14; index++) {
     data.users.push({
       id: index + 1,
-      userId: index + 1,
+      userId: (index + 1).toString(),
       employeeNumber: faker.finance.creditCardNumber('#########'),
       profileType: profileType[index % profileType.length],
-      name: faker.name.findName(),
-      managerName: faker.name.findName(),
+      manager: faker.name.findName(),
       email: faker.internet.email(),
-      username: faker.internet.userName(),
+      userName: faker.name.findName(),
       password: '123456',
       phone: faker.phone.phoneNumber('119########'),
       company: faker.random.arrayElement([

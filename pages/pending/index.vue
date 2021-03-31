@@ -1,11 +1,11 @@
 <template lang="pug">
-#peding.peding-wrapper
+#pending.pending-wrapper
   compinent(is='LoginRequest', :steps='1')
 </template>
 
 <script>
 export default {
-  name: 'Peding',
+  name: 'Pending',
   components: {
     LoginRequest: () => import('@/components/partials/LoginRequest'),
   },
@@ -23,6 +23,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.peding-wrapper {
+.pending-wrapper {
 }
 </style>
