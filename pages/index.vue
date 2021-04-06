@@ -45,13 +45,14 @@ export default {
   data() {
     return {
       profileTypes: {
-        collaborator: { redirect: 'collaborator', menu: 'CollaboratorMenu' },
-        manager: { redirect: 'manager', menu: 'ManagerMenu' },
-        admin: { redirect: 'administrator', menu: 'AdministratorMenu' },
-        analyst: { redirect: 'analyst', menu: 'AnalystMenu' },
+        // collaborator: { redirect: 'collaborator', menu: 'CollaboratorMenu' },
+        // manager: { redirect: 'manager', menu: 'ManagerMenu' },
+        // admin: { redirect: 'administrator', menu: 'AdministratorMenu' },
+        // analyst: { redirect: 'analyst', menu: 'AnalystMenu' },
         new: { redirect: 'new' },
         pending: { redirect: 'pending' },
         saved: { redirect: 'saved' },
+        authorized: { redirect: 'home' },
       },
       username: '',
       password: '',
@@ -75,15 +76,16 @@ export default {
         )
         if (status === 200) {
           window.localStorage.setItem('token', responseData.data.token)
-          const { profileType, userId } = responseData.data
+          const { profileType, userId, transactions } = responseData.data
           this.$store.commit('changeUserId', userId)
           this.$store.commit('changeUserProfileType', profileType)
-          if (this.profileTypes[profileType].menu) {
-            this.$store.commit(
-              'changeCurrentMenu',
-              this.profileTypes[profileType].menu
-            )
-          }
+          // if (this.profileTypes[profileType].menu) {
+          //   this.$store.commit(
+          //     'changeCurrentMenu',
+          //     this.profileTypes[profileType].menu
+          //   )
+          // }
+          this.$store.commit('changeCurrentMenu', transactions)
           this.$router.push(`/${this.profileTypes[profileType].redirect}/`)
         }
         if (status === 404) {

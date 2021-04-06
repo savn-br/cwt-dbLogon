@@ -1,6 +1,19 @@
 export default {
   currentPartial: 'MyProfile',
-  currentMenu: '',
+  currentMenu: [{ partial: 'MyProfile', label: 'myProfile' }],
+  menuStruct: {
+    1: { partial: 'AssignmentOfProfile', label: 'assignmentOfProfile' },
+    2: { partial: 'ManagerPanel', label: 'managerPanel' },
+    3: { partial: 'BlockUser', label: 'blockUser' },
+    4: { partial: 'ApprovalDelegation', label: 'approvalDelegation' },
+    5: { partial: 'ProfileSearch', label: 'profileSearch' },
+    6: { partial: 'MaintainProfile', label: 'maintainProfile' },
+    7: { partial: 'MaintainSystem', label: 'maintainSytem' },
+    8: {
+      partial: 'AlternateApproverRegister',
+      label: 'alternateApproverRegister',
+    },
+  },
   userData: {
     userId: -1,
     employeeNumber: '',

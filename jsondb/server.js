@@ -87,8 +87,9 @@ server.post('/auth/userLogin/', (req, resp) => {
       data: {
         token,
         refreshToken,
-        userId: user.id,
+        userId: user.userId,
         profileType: user.profileType,
+        transactions: user.transactions,
       },
     })
   } else {

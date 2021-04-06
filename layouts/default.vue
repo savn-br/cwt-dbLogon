@@ -1,16 +1,15 @@
 <template lang="pug">
 .main_page_layout-wrapper
-  navbar(:menuType='currentMenu')
+  navbar(menuType='HomeMenu')
   .tw-block.main_content(class='md:tw-grid')
     side-menu.tw-px-4.tw-hidden.tw-h-screen.tw-text-white(
       class='md:tw-block',
-      :menuType='currentMenu'
+      menuType='HomeMenu'
     )
     nuxt.wrapper-content
 </template>
 
 <script>
-import { mapState } from 'vuex'
 export default {
   name: 'MainPageLayout',
   components: {
@@ -18,13 +17,9 @@ export default {
     SideMenu: () => import('@/components/partials/SideMenu'),
   },
   data() {
-    return { menuType: 'ManagerMenu' }
+    return {}
   },
-  computed: {
-    ...mapState({
-      currentMenu: (state) => state.currentMenu,
-    }),
-  },
+  computed: {},
   created() {},
 
   methods: {},

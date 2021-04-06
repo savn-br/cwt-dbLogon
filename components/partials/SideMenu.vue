@@ -8,10 +8,7 @@
 export default {
   name: 'SideMenu',
   components: {
-    ManagerMenu: () => import('@/components/partials/ManagerMenu'),
-    AdministratorMenu: () => import('@/components/partials/AdministratorMenu'),
-    CollaboratorMenu: () => import('@/components/partials/CollaboratorMenu'),
-    AnalystMenu: () => import('@/components/partials/AnalystMenu'),
+    HomeMenu: () => import('@/components/partials/HomeMenu'),
   },
   props: {
     menuType: { type: String, default: () => '' },
