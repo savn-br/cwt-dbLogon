@@ -1,6 +1,8 @@
 export default {
   changeCurrentMenu(state, transactions) {
-    state.currentMenu = [{ partial: 'MyProfile', label: 'myProfile' }]
+    state.currentMenu = [
+      { partial: 'MyProfile', label: 'myProfile', icon: 'account' },
+    ]
     transactions.forEach((transaction) => {
       state.currentMenu = [...state.currentMenu, state.menuStruct[transaction]]
     })

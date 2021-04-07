@@ -3,8 +3,9 @@
   b-menu-list(label='Menu')
     b-menu-item.tw-text-xs.tw-py-1.tw-w-100(
       v-for='(current, index) in currentMenu',
-      icon='account',
+      :icon='current.icon',
       :label='$t(current.label)',
+      :key='index',
       @click='changePartial(current.partial)'
     )
 </template>

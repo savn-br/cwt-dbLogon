@@ -1,17 +1,42 @@
 export default {
   currentPartial: 'MyProfile',
-  currentMenu: [{ partial: 'MyProfile', label: 'myProfile' }],
+  currentMenu: [{ partial: 'MyProfile', label: 'myProfile', icon: 'account' }],
   menuStruct: {
-    1: { partial: 'AssignmentOfProfile', label: 'assignmentOfProfile' },
-    2: { partial: 'ManagerPanel', label: 'managerPanel' },
-    3: { partial: 'BlockUser', label: 'blockUser' },
-    4: { partial: 'ApprovalDelegation', label: 'approvalDelegation' },
-    5: { partial: 'ProfileSearch', label: 'profileSearch' },
-    6: { partial: 'MaintainProfile', label: 'maintainProfile' },
-    7: { partial: 'MaintainSystem', label: 'maintainSytem' },
+    1: {
+      partial: 'AssignmentOfProfile',
+      label: 'profileAssignment',
+      icon: 'account-arrow-right',
+    },
+    2: {
+      partial: 'ManagerPanel',
+      label: 'managerPanel',
+      icon: 'account-details',
+    },
+    3: { partial: 'BlockUser', label: 'blockUsers', icon: 'account-cancel' },
+    4: {
+      partial: 'ApprovalDelegation',
+      label: 'approvalDelegation',
+      icon: 'account-check',
+    },
+    5: {
+      partial: 'ProfileSearch',
+      label: 'profileSearch',
+      icon: 'account-search',
+    },
+    6: {
+      partial: 'MaintainProfile',
+      label: 'maintainProfiles',
+      icon: 'account-lock',
+    },
+    7: {
+      partial: 'MaintainSystem',
+      label: 'maintainSystems',
+      icon: 'access-point-network',
+    },
     8: {
       partial: 'AlternateApproverRegister',
-      label: 'alternateApproverRegister',
+      label: 'alternativeApprover',
+      icon: 'account-supervisor',
     },
   },
   userData: {
