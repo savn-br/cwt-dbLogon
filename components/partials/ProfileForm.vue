@@ -1,6 +1,6 @@
 <template lang="pug">
 .profile-form-wrapper
-  form.fields.tw-grid(name='profileForm')
+  form.fields.tw-grid(name='profileForm', ref='form')
     b-field.tw-mx-2(:label='$t("user")')
       b-input(v-model='data.userId', size='is-small', name='user', disabled)
     b-field.tw-mx-2(:label='$t("manager")')
@@ -32,6 +32,7 @@
         v-model='phone',
         size='is-small',
         name='phone',
+        ,
         v-mask='["(##) ####-####", "(##) #####-####"]'
       )
     b-field.tw-mx-2(:label='$t("field")')

@@ -1,7 +1,7 @@
 <template lang="pug">
 .login-request-wrapper.tw-mt-8.tw-px-8
   steps(:steps='steps')
-  profile-form(:data='profile')
+  profile-form(ref='profileForm', :data='profile')
   .update-buttons.tw-flex.tw-justify-center(class='sm:tw-justify-end')
     b-button.tw-mx-2(type='is-success', @click='update') {{ $t("update") }}
     b-button.tw-mx-2(
@@ -11,12 +11,13 @@
       :class='profile.profileType === "pending" ? "access-hidden" : ""'
     ) {{ $t("requestAccess") }}
   .logs.tw-mt-2.tw-mb-4
-    h1 Status
-    standard-table(:data='tableStatus', , :bordered='true')
-      b-table-column(field='date', :label='$t("date")', v-slot='props')
-        span.tw-text-xs {{ $moment(props.row.date) }}
-      b-table-column(field='action', :label='$t("action")', v-slot='props')
-        span.tw-text-xs {{ props.row.action }}
+    .status-wrapper(v-if='!!tableStatus && tableStatus.length')
+      h1 Status
+      standard-table(:data='tableStatus', , :bordered='true')
+        b-table-column(field='date', :label='$t("date")', v-slot='props')
+          span.tw-text-xs {{ $moment(props.row.date) }}
+        b-table-column(field='action', :label='$t("action")', v-slot='props')
+          span.tw-text-xs {{ props.row.action }}
 </template>
 
 <script>
@@ -56,16 +57,35 @@ export default {
       }
     },
     async update() {
-      await this.$store.dispatch('updateAccess')
-      if (this.profile.profileType !== this.$route.path.replace(/\//g, '')) {
-        this.$router.push(`/${this.profile.profileType}/`)
+      const form = this.$refs.profileForm.$refs.form
+      const formInputs = [
+        form.phone,
+        form.field,
+        form.role,
+        form.employeeNumber,
+      ]
+      const validationEvery = formInputs.every((input) => !!input.value)
+      if (validationEvery) {
+        const status = await this.$store.dispatch('updateAccess')
+        if (this.profile.profileType !== this.$route.path.replace(/\//g, '')) {
+          this.$router.push(`/${this.profile.profileType}/`)
+        }
+        if (status === 200) {
+          this.$buefy.toast.open({
+            message: 'Dados atualizados com sucesso',
+            type: 'is-success',
+            duration: 3000,
+            position: 'is-top',
+          })
+        }
+      } else {
+        this.$buefy.toast.open({
+          message: 'Por favor preencha todos os dados',
+          type: 'is-danger',
+          duration: 3000,
+          position: 'is-top',
+        })
       }
-      this.$buefy.toast.open({
-        message: 'Dados atualizados com sucesso',
-        type: 'is-success',
-        duration: 3000,
-        position: 'is-top',
-      })
     },
   },
 }

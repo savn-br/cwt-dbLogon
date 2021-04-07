@@ -3,7 +3,10 @@
   profile-form(:data='profile')
   .update-buttons.tw-flex.tw-justify-center
     b-button.tw-mx-2.tw-my-4(type='is-success', @click='update') {{ $t("update") }}
-  collapse.tw-text-sm(:title='profileAccess.profileName')
+  collapse.tw-text-sm(
+    v-if='!!profileAccess && profileAccess.profileName',
+    :title='profileAccess.profileName'
+  )
     component(
       v-for='(system,index) in profileAccess.details',
       is='SystemCollapse',
@@ -11,7 +14,10 @@
       :system='system'
     )
     //- component(is='RecursiveCollapse', :tree='tree', padding='0')
-  collapse.tw-text-sm(:title='$t("customerView")')
+  collapse.tw-text-sm(
+    v-if='!!tableData && tableData.length',
+    :title='$t("customerView")'
+  )
     standard-table.tw-my-4(:data='tableData', , :bordered='true')
       b-table-column(
         field='action',
