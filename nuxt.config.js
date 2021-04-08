@@ -85,7 +85,7 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // baseUrl: 'http://localhost:3333',
-    baseUrl: 'http://cwt-dblogon-api.herokuapp.com',
+    baseUrl: 'https://cwt-dblogon-api.herokuapp.com',
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
