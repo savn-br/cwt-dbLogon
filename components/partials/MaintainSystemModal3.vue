@@ -4,18 +4,18 @@
     .card-header
     .card-content
       form.tw-grid(name='perfil')
-        b-field(label='Código da Transação')
+        b-field(:label='$t("transactionCode")')
           b-input(v-model='transactionId', size='is-small')
-        b-field(label='Descrição')
+        b-field(:label='$t("description")')
           b-input(v-model='transactionName', size='is-small')
-        b-field(label='Notas')
+        b-field(:label='$t("notes")')
           b-input(maxlength='255', type='textarea', v-model='notes')
         b-field
-          b-switch(v-model='active') Ativo
+          b-switch(v-model='active') {{ $t("active") }}
     .card-footer.tw-px-6.tw-pb-4.tw-flex.tw-justify-end
       .wrapper-buttons
-        b-button.tw-mr-4(type='is-danger', @click='$emit("close")') Cancelar
-        b-button(type='is-primary', @click='proccessTransactionRequest') Salvar
+        b-button.tw-mr-4(type='is-danger', @click='$emit("close")') {{ $t("cancel") }}
+        b-button(type='is-primary', @click='proccessTransactionRequest') {{ $t("save") }}
 </template>
 
 <script>

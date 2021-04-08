@@ -17,3 +17,17 @@ input[disabled] {
     grid-template-columns: repeat(4, minmax(300px, 1fr));
   }
 }
+
+.control.is-clearfix {
+  width: 100%;
+}
+
+input.input {
+  height: px2rem(25);
+}
+
+.form {
+  label {
+    font-size: 0.75rem;
+  }
+}

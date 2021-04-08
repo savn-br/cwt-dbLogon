@@ -6,20 +6,20 @@
   .buttons-wrapper.tw-flex.tw-justify-end.tw-mb-2
     b-button(type='is-primary', @click='createSytem') {{ $t("add") }}
   standard-table(:data='systems')
-    b-table-column(v-slot='props', field='systemId', label='Código do sistema')
+    b-table-column(v-slot='props', field='systemId', :label='$t("systemCode")')
       span.tw-text-xs {{ props.row.systemId }}
     b-table-column(
       v-slot='props',
       field='systemAcronym',
       :searchable='true',
-      label='Sigla sistema'
+      :label='$t("systemAcronym")'
     )
       span.tw-text-xs {{ props.row.systemAcronym }}
     b-table-column(
       v-slot='props',
       field='systemName',
       :searchable='true',
-      label='Descrição'
+      :label='$t("description")'
     )
       span.tw-text-xs {{ props.row.systemName }}
     b-table-column(

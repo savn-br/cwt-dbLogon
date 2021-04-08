@@ -75,13 +75,13 @@ module.exports = function (plop) {
         type: 'append',
         path: 'i18n/br.js',
         pattern: `/* PLOP_APPEND_BR */`,
-        template: `  {{name}}: '{{brName}}',`,
+        template: `  {{camelCase name}}: '{{brName}}',`,
       },
       {
         type: 'append',
         path: 'i18n/en.js',
         pattern: `/* PLOP_APPEND_EN */`,
-        template: `  {{name}}: '{{enName}}',`,
+        template: `  {{camelCase name}}: '{{enName}}',`,
       },
     ],
   })

@@ -3,21 +3,21 @@
   .card
     .card-header
     .card-content
-      form.tw-grid(name='perfil')
-        b-field(label='Código do Módulo')
+      form.form.tw-grid(name='perfil')
+        b-field(:label='$t("moduleCode")')
           b-input(v-model='moduleId', size='is-small')
-        b-field(label='Sigla')
+        b-field(:label='$t("moduleAcronym")')
           b-input(v-model='moduleAcronym', size='is-small')
-        b-field(label='Descrição')
+        b-field(:label='$t("description")')
           b-input(v-model='moduleName', size='is-small')
-        b-field(label='Notas')
+        b-field(:label='$t("notes")')
           b-input(maxlength='255', type='textarea', v-model='notes')
         b-field
-          b-switch(v-model='active') Ativo
+          b-switch(v-model='active') {{ $t("active") }}
     .card-footer.tw-px-6.tw-pb-4.tw-flex.tw-justify-end
       .wrapper-buttons
-        b-button.tw-mr-4(type='is-danger', @click='$emit("close")') Cancelar
-        b-button(type='is-primary', @click='proccessModuleRequest') Salvar
+        b-button.tw-mr-4(type='is-danger', @click='$emit("close")') {{ $t("cancel") }}
+        b-button(type='is-primary', @click='proccessModuleRequest') {{ $t("save") }}
 </template>
 
 <script>
@@ -27,13 +27,7 @@ export default {
   components: {},
   props: {},
   data() {
-    return {
-      perfil: {
-        register: '',
-        email: '',
-        name: '',
-      },
-    }
+    return {}
   },
   computed: {
     ...mapState({
@@ -111,14 +105,6 @@ export default {
   form {
     grid-template-columns: repeat(auto-fill, minmax(px2rem(280), 1fr));
     grid-column-gap: px2rem(15);
-  }
-}
-</style>
-
-<style lang="scss">
-.maintain-system-modal2-wrapper {
-  label {
-    font-size: 0.75rem;
   }
 }
 </style>

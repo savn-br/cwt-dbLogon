@@ -13,7 +13,7 @@
         .c-card-header-notes.tw-flex(class='tw-w-2/4') {{ module.notes }}
     component(
       :transaction='transaction',
-      v-for='(transaction, index) in module.transaction',
+      v-for='(transaction, index) in module.transactions',
       :key='index',
       is='TransactionCollapse'
     )

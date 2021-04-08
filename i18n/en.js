@@ -1,7 +1,16 @@
 module.exports = {
   /* PLOP_APPEND_EN */
+  transactionCode: 'Transaction code',
+  moduleAcronym: 'Module acronym',
+  moduleCode: 'Module code',
   save: 'Save',
   cancel: 'Cancel',
+  notes: 'Notes',
+  operation: 'Operation',
+  active: 'Active',
+  description: 'Description',
+  systemAcronym: 'System acronym',
+  systemCode: 'System code',
   email: 'E-mail',
   register: 'Register',
   welcome: 'Welcome',
@@ -45,7 +54,6 @@ module.exports = {
   profile: 'Profile',
   initialDate: 'Initial Date',
   finalDate: 'Final Date',
-  operation: 'Operation',
   delegateApproverName: 'Delegate Approver Name',
   delegateRegistration: 'Delegate Registration',
   add: 'Add',
@@ -54,7 +62,6 @@ module.exports = {
   profileCode: 'Profile Code',
   profileDescription: 'Profile Description',
   salesName: 'Sales Name',
-  active: 'Active',
   assignProfile: 'Assign Profile',
   assign: 'Assign',
 }

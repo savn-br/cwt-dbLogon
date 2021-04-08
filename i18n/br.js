@@ -1,7 +1,16 @@
 module.exports = {
   /* PLOP_APPEND_BR */
+  transactionCode: 'Codigo da transaçao',
+  moduleAcronym: 'Sigla do módulo',
+  moduleCode: 'Código do módulo',
   save: 'Salvar',
   cancel: 'Cancelar',
+  notes: 'Notas',
+  operation: 'Operação',
+  active: 'Ativo',
+  description: 'Descrição',
+  systemAcronym: 'Sigla do sistema',
+  systemCode: 'Código do sistema',
   email: 'E-mail',
   register: 'Matrícula',
   welcome: 'Bem vindo',
@@ -46,7 +55,6 @@ module.exports = {
   profile: 'Perfil',
   initialDate: 'Data Inicial',
   finalDate: 'Data Final',
-  operation: 'Operação',
   delegateApproverName: 'Nome aprovador Delegado',
   delegateRegistration: 'Matrícula Delegado',
   add: 'Adicionar',
@@ -55,6 +63,5 @@ module.exports = {
   profileCode: 'Código de Perfil',
   profileDescription: 'Descrição de Perfil',
   salesName: 'Nome do Ponto de Venda',
-  active: 'Ativo',
   assign: 'Atribuir',
 }

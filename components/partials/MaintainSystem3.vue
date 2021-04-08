@@ -1,26 +1,26 @@
 <template lang="pug">
 #maintainSystem3.maintain-system3-wrapper.tw-mt-8.tw-px-8
   .form.tw-grid.form-auto-fill.tw-mb-4(name='sistema')
-    b-field.tw-mx-2(label='Código do sistema')
+    b-field.tw-mx-2(:label='$t("systemCode")')
       b-input(v-model='selectedSystem.systemId', size='is-small', disabled)
-    b-field.tw-mx-2(label='Sigla do sistema')
+    b-field.tw-mx-2(:label='$t("systemAcronym")')
       b-input(
         v-model='selectedSystem.systemAcronym',
         size='is-small',
         disabled
       )
-    b-field.tw-mx-2(label='Descrição')
+    b-field.tw-mx-2(:label='$t("description")')
       b-input(v-model='selectedSystem.systemName', size='is-small', disabled)
   .form.tw-grid.form-auto-fill(name='modulos')
-    b-field.tw-mx-2(label='Código do Modulo')
+    b-field.tw-mx-2(:label='$t("moduleCode")')
       b-input(v-model='selectedModule.moduleId', size='is-small', disabled)
-    b-field.tw-mx-2(label='Sigla do Modulo')
+    b-field.tw-mx-2(:label='$t("moduleAcronym")')
       b-input(
         v-model='selectedModule.moduleAcronym',
         size='is-small',
         disabled
       )
-    b-field.tw-mx-2(label='Descrição')
+    b-field.tw-mx-2(:label='$t("description")')
       b-input(v-model='selectedModule.moduleName', size='is-small', disabled)
   b-modal(v-model='isModalActive')
     template(#default='props')
@@ -32,14 +32,14 @@
       v-slot='props',
       field='transactionId',
       :searchable='true',
-      label='Código da Transação'
+      :label='$t("transactionCode")'
     )
       span.tw-text-xs {{ props.row.transactionId }}
     b-table-column(
       v-slot='props',
       field='transactionName',
       :searchable='true',
-      label='Descrição da Transação'
+      :label='$t("description")'
     )
       span.tw-text-xs {{ props.row.transactionName }}
     b-table-column(
