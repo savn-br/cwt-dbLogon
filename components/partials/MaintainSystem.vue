@@ -4,22 +4,24 @@
     template(#default='props')
       maintain-system-modal(@close='props.close')
   .buttons-wrapper.tw-flex.tw-justify-end.tw-mb-2
-    b-button(type='is-primary', @click='isModalActive = true') {{ $t("add") }}
-  standard-table(:data='profileDescription')
+    b-button(type='is-primary', @click='createSytem') {{ $t("add") }}
+  standard-table(:data='systems')
+    b-table-column(v-slot='props', field='systemId', label='Código do sistema')
+      span.tw-text-xs {{ props.row.systemId }}
     b-table-column(
       v-slot='props',
-      field='profile_code',
+      field='systemAcronym',
       :searchable='true',
-      :label='$t("profileCode")'
+      label='Sigla sistema'
     )
-      span.tw-text-xs {{ props.row.profile_code }}
+      span.tw-text-xs {{ props.row.systemAcronym }}
     b-table-column(
       v-slot='props',
-      field='profile_description',
+      field='systemName',
       :searchable='true',
-      :label='$t("profileDescription")'
+      label='Descrição'
     )
-      span.tw-text-xs {{ props.row.profile_description }}
+      span.tw-text-xs {{ props.row.systemName }}
     b-table-column(
       v-slot='props',
       field='active',
@@ -37,9 +39,15 @@
       v-slot='props'
     )
       .operation-wrapper
-        span.tw-cursor-pointer(class='hover:tw-text-primary')
+        span.tw-cursor-pointer(
+          class='hover:tw-text-primary',
+          @click='editSystem(props.row)'
+        )
           b-icon.tw-mr-2(icon='pencil')
-        span.tw-cursor-pointer(class='hover:tw-text-primary')
+        span.tw-cursor-pointer(
+          class='hover:tw-text-primary',
+          @click='goToModule(props.row)'
+        )
           b-icon.tw-mr-2(icon='account-details')
         span.tw-cursor-pointer(class='hover:tw-text-primary')
           b-icon.tw-mr-2(icon='clipboard-text')
@@ -48,6 +56,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import changeMenu from '~/mixins/changeMenu'
 export default {
   name: 'MaintainSystem',
   components: {
@@ -55,6 +65,7 @@ export default {
     MaintainSystemModal: () =>
       import('@/components/partials/MaintainSystemModal'),
   },
+  mixins: [changeMenu],
   props: {},
   data() {
     return {
@@ -62,11 +73,32 @@ export default {
       profileDescription: require('@/jsons/profile-description-table-data.json'),
     }
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      systems: (state) => state.systems,
+    }),
+  },
   watch: {},
-  mounted() {},
+  mounted() {
+    this.$store.dispatch('getSystems')
+  },
   created() {},
-  methods: {},
+  methods: {
+    goToModule(system) {
+      this.$store.commit('changeSelectedSystem', system)
+      this.changePartial('MaintainSystem2')
+    },
+    createSytem() {
+      this.$store.commit('changeSystemModalMode', 'save')
+      this.$store.commit('changeSelectedSystem', {})
+      this.isModalActive = true
+    },
+    editSystem(system) {
+      this.$store.commit('changeSystemModalMode', 'edit')
+      this.$store.commit('changeSelectedSystem', system)
+      this.isModalActive = true
+    },
+  },
 }
 </script>
 

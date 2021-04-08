@@ -1,4 +1,11 @@
 export default {
+  transactionModalMode: 'save',
+  selectedTransaction: {},
+  moduleModalMode: 'save',
+  selectedModule: {},
+  systemModalMode: 'save',
+  selectedSystem: {},
+  systems: [],
   currentPartial: 'MyProfile',
   currentMenu: [{ partial: 'MyProfile', label: 'myProfile', icon: 'account' }],
   menuStruct: {

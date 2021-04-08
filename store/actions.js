@@ -1,4 +1,96 @@
 export default {
+  async getTransactions({ state, commit }) {
+    try {
+      const { data: transactions } = await this.$axios.get(
+        `/transaction/SearchAll/${state.selectedSystem.systemId}/${state.selectedModule.moduleId}/`
+      )
+      commit('changeSelectedModuleTransactions', transactions.data)
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async saveTransaction({ state, dispatch }) {
+    try {
+      const response = await this.$axios.post(`/transaction/`, {
+        ...state.selectedTransaction,
+        systemId: state.selectedSystem.systemId,
+        moduleId: state.selectedModule.moduleId,
+      })
+      return response.status
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async editTransaction({ state }) {
+    try {
+      const response = await this.$axios.put(
+        `/transaction/${state.selectedSystem.systemId}/${state.selectedModule.moduleId}/${state.selectedTransaction.transactionId}/`,
+        state.selectedTransaction
+      )
+      return response.status
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async saveModule({ state, dispatch }) {
+    try {
+      const response = await this.$axios.post(`/module/`, {
+        ...state.selectedModule,
+        systemId: state.selectedSystem.systemId,
+      })
+      return response.status
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async editModule({ state }) {
+    try {
+      const response = await this.$axios.put(
+        `/module/${state.selectedSystem.systemId}/${state.selectedModule.moduleId}/`,
+        state.selectedModule
+      )
+      return response.status
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async getModules({ state, commit }) {
+    try {
+      const { data: modules } = await this.$axios.get(
+        `/module/SearchAll/${state.selectedSystem.systemId}/`
+      )
+      commit('changeSelectedSystemModules', modules.data)
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async saveSystem({ state, dispatch }) {
+    try {
+      const response = await this.$axios.post(`/system/`, state.selectedSystem)
+      return response.status
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async editSystem({ state, dispatch }) {
+    try {
+      const response = await this.$axios.put(
+        `/system/${state.selectedSystem.systemId}`,
+        state.selectedSystem
+      )
+      return response.status
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async getSystems({ state, commit }) {
+    try {
+      const { data: systems } = await this.$axios.get(`/system/SearchAll/`)
+      commit('changeSystems', systems.data)
+    } catch (error) {
+      console.error(error)
+    }
+  },
   async enableAccess({ state, commit }) {
     try {
       const { data: responseData } = await this.$axios.post(

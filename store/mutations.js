@@ -1,4 +1,73 @@
 export default {
+  changeSelectedModuleTransactions(state, transactions) {
+    state.selectedModule.transactions = transactions
+  },
+  changeSelectedTransactionActive(state, active) {
+    state.selectedTransaction.active = active
+  },
+  changeSelectedTransactionNotes(state, notes) {
+    state.selectedTransaction.notes = notes
+  },
+  changeSelectedTransactionTransactionName(state, transactionName) {
+    state.selectedTransaction.transactionName = transactionName
+  },
+  changeSelectedTransactionTransactionId(state, transactionId) {
+    state.selectedTransaction.transactionId = transactionId
+  },
+  changeTransactionModalMode(state, mode) {
+    state.transactionModalMode = mode
+  },
+  changeSelectedTransaction(state, selectedTransaction) {
+    state.selectedTransaction = selectedTransaction
+  },
+  changeSelectedModuleActive(state, active) {
+    state.selectedModule.active = active
+  },
+  changeSelectedModuleNotes(state, notes) {
+    state.selectedModule.notes = notes
+  },
+  changeSelectedModuleModuleName(state, moduleName) {
+    state.selectedModule.moduleName = moduleName
+  },
+  changeSelectedModuleModuleAcronym(state, moduleAcronym) {
+    state.selectedModule.moduleAcronym = moduleAcronym
+  },
+  changeSelectedModuleModuleId(state, moduleId) {
+    state.selectedModule.moduleId = moduleId
+  },
+  changeModuleModalMode(state, mode) {
+    state.moduleModalMode = mode
+  },
+  changeSelectedModule(state, selectedModule) {
+    state.selectedModule = selectedModule
+  },
+  changeSelectedSystemModules(state, modules) {
+    state.selectedSystem.modules = modules
+  },
+  changeSelectedSystemActive(state, active) {
+    state.selectedSystem.active = active
+  },
+  changeSelectedSystemNotes(state, notes) {
+    state.selectedSystem.notes = notes
+  },
+  changeSelectedSystemSystemName(state, systemName) {
+    state.selectedSystem.systemName = systemName
+  },
+  changeSelectedSystemSystemAcronym(state, systemAcronym) {
+    state.selectedSystem.systemAcronym = systemAcronym
+  },
+  changeSelectedSystemSystemId(state, systemId) {
+    state.selectedSystem.systemId = systemId
+  },
+  changeSystemModalMode(state, mode) {
+    state.systemModalMode = mode
+  },
+  changeSelectedSystem(state, selectedSystem) {
+    state.selectedSystem = selectedSystem
+  },
+  changeSystems(state, systems) {
+    state.systems = systems
+  },
   changeCurrentMenu(state, transactions) {
     state.currentMenu = [
       { partial: 'MyProfile', label: 'myProfile', icon: 'account' },

@@ -18,6 +18,8 @@ export default {
     ProfileSearch: () => import('@/components/partials/ProfileSearch'),
     MaintainProfile: () => import('@/components/partials/MaintainProfile'),
     MaintainSystem: () => import('@/components/partials/MaintainSystem'),
+    MaintainSystem2: () => import('@/components/partials/MaintainSystem2'),
+    MaintainSystem3: () => import('@/components/partials/MaintainSystem3'),
     AlternateApproverRegister: () =>
       import('@/components/partials/AlternateApproverRegister'),
   },
