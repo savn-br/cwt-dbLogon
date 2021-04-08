@@ -13,7 +13,8 @@
     "lint": "yarn lint:js && yarn lint:style",
     "test": "jest",
     "jserver": "node  ./jsondb/server.js",
-    "deploy": "cd dist && cp index.html 404.html && cd .. && gh-pages -d dist"
+    "deploy": "cd dist && cp index.html 404.html && cd .. && gh-pages -d dist",
+    "deploy2": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.12.5",
@@ -58,6 +59,7 @@
     "prettier": "^2.2.1",
     "pug": "^2.0.4",
     "pug-plain-loader": "^1.0.0",
+    "push-dir": "^0.4.1",
     "sass-loader": "^8.0.2",
     "scss-to-json": "^2.0.0",
     "stylelint": "^13.9.0",
