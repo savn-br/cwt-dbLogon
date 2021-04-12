@@ -1,4 +1,4 @@
-export default {
+export default () => ({
   transactionModalMode: 'save',
   selectedTransaction: {},
   moduleModalMode: 'save',
@@ -65,6 +65,24 @@ export default {
   pointOfSales: [],
   profileAccess: {},
   requests: [],
-  selectedProfileId: null,
-  userProfiles: [{}],
-}
+  searchProfileId: '',
+  selectedProfile: {
+    userId: '',
+    employeeNumber: '',
+    profileType: '',
+    manager: '',
+    email: '',
+    userName: '',
+    password: '',
+    phone: '',
+    company: '',
+    field: '',
+    role: '',
+    emergencyFlag: false,
+    vipFlag: false,
+    active: false,
+    pointOfSales: [],
+    profiles: [],
+  },
+  userProfiles: [],
+})

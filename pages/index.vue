@@ -77,8 +77,14 @@ export default {
         if (status === 200) {
           window.localStorage.setItem('token', responseData.data.token)
           const { profileType, userId, transactions } = responseData.data
-          this.$store.commit('changeUserId', userId)
-          this.$store.commit('changeUserProfileType', profileType)
+          this.$store.commit('changeUserDataTerm', {
+            key: 'userId',
+            value: userId,
+          })
+          this.$store.commit('changeUserDataTerm', {
+            key: 'profileType',
+            value: profileType,
+          })
           // if (this.profileTypes[profileType].menu) {
           //   this.$store.commit(
           //     'changeCurrentMenu',

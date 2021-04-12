@@ -41,7 +41,7 @@ export default {
   methods: {
     logout() {
       window.localStorage.clear()
-      window.location.href = '/'
+      window.location.href = '/cwt-dbLogon/'
     },
   },
 }

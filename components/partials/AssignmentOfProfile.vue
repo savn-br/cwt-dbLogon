@@ -1,14 +1,9 @@
 <template lang="pug">
 .assignment-of-profile-wrapper.tw-mt-8.tw-px-8
-  profile-form(
-    :data='selectedProfile || localProfile',
-    :isDisabled='!!selectedProfileId'
-  )
-    template(v-slot:content)
-      b-checkbox.tw-m-5(
-        v-model='selectedProfile && selectedProfile.active',
-        name='active'
-      ) {{ $t("active") }}
+  .fields.tw-mb-4
+    b-field(label='Find by user')
+      b-autocomplete(v-model='searchProfileId', :data='userProfilesId')
+  profile-form
   .update-buttons.tw-flex.tw-justify-center
     b-button.tw-mx-2.tw-my-4.tw-w-32(type='is-success') {{ $t("update") }}
   .view-profile
@@ -85,7 +80,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 export default {
   name: 'AssignmentOfProfile',
   components: {
@@ -100,17 +95,30 @@ export default {
   },
   computed: {
     ...mapState({
+      selectedProfile: (state) => state.selectedProfile,
       userProfiles: (state) => state.userProfiles,
-      selectedProfileId: (state) => state.selectedProfileId,
     }),
-    selectedProfile() {
-      return this.userProfiles[0]
+    ...mapGetters(['userProfilesId']),
+    searchProfileId: {
+      get() {
+        return this.$store.state.searchProfileId
+      },
+      set(value) {
+        this.$store.commit('changeSearchProfileId', value)
+      },
     },
   },
-  watch: {},
+  watch: {
+    async searchProfileId(newProfileId, oldProfileId) {
+      if (newProfileId.length >= 3) {
+        await this.$store.dispatch('getAssignProfile')
+      }
+    },
+  },
   async mounted() {
-    if (!!this.selectedProfileId && this.selectedProfileId.length >= 3)
+    if (this.searchProfileId.length >= 3) {
       await this.$store.dispatch('getAssignProfile')
+    }
   },
   created() {},
   methods: {},

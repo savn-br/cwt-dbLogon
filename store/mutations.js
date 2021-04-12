@@ -1,9 +1,18 @@
 export default {
+  changeUserDataTerm(state, { key, value }) {
+    state.userData[key] = value
+  },
+  changeSelectedProfileTerm(state, { key, value }) {
+    state.selectedProfile[key] = value
+  },
+  changeSelectedProfile(state, selectedProfile) {
+    state.selectedProfile = selectedProfile
+  },
   changeUserProfiles(state, profiles) {
     state.userProfiles = profiles
   },
-  changeSelectedProfileId(state, userId) {
-    state.selectedProfileId = userId
+  changeSearchProfileId(state, userId) {
+    state.searchProfileId = userId
   },
   changeRequests(state, requests) {
     state.requests = requests
@@ -88,12 +97,7 @@ export default {
   changeCurrentPartial(state, currentPartial) {
     state.currentPartial = currentPartial
   },
-  changeUserId(state, userId) {
-    state.userData.userId = userId
-  },
-  changeUserProfileType(state, profileType) {
-    state.userData.profileType = profileType
-  },
+
   changeUserData(state, userData) {
     if (userData.status) {
       delete userData.status
@@ -109,36 +113,7 @@ export default {
   changeUserStatus(state, userStatus) {
     state.userStatus = userStatus
   },
-  changeManager(state, manager) {
-    state.userData.manager = manager
-  },
-  changeCompany(state, company) {
-    state.userData.company = company
-  },
-  changeUserName(state, userName) {
-    state.userData.userName = userName
-  },
-  changeEmail(state, email) {
-    state.userData.email = email
-  },
-  changePhone(state, phone) {
-    state.userData.phone = phone
-  },
-  changeField(state, field) {
-    state.userData.field = field
-  },
-  changeRole(state, role) {
-    state.userData.role = role
-  },
-  changeEmployeeNumber(state, employeeNumber) {
-    state.userData.employeeNumber = employeeNumber
-  },
-  changeEmergencyFlag(state, emergencyFlag) {
-    state.userData.emergencyFlag = emergencyFlag
-  },
-  changeVipFlag(state, vipFlag) {
-    state.userData.vipFlag = vipFlag
-  },
+
   changePointOfSales(state, pointOfSales) {
     state.pointOfSales = pointOfSales
   },

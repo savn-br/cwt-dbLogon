@@ -3,7 +3,7 @@
   form.fields.tw-grid(name='profileForm', ref='form')
     b-field.tw-mx-2(:label='$t("user")')
       b-input(
-        v-model='data.userId',
+        v-model='userId',
         size='is-small',
         name='user',
         :disabled='isDisabled',
@@ -11,14 +11,14 @@
       )
     b-field.tw-mx-2(:label='$t("manager")')
       b-input(
-        v-model='data.manager',
+        v-model='manager',
         size='is-small',
         name='manager',
         :disabled='isDisabled'
       )
     b-field.tw-mx-2(label='E-mail')
       b-input(
-        v-model='data.email',
+        v-model='email',
         size='is-small',
         name='email',
         type='email',
@@ -26,14 +26,14 @@
       )
     b-field.tw-mx-2(:label='$t("company")')
       b-input(
-        v-model='data.company',
+        v-model='company',
         size='is-small',
         name='company',
         :disabled='isDisabled'
       )
     b-field.tw-mx-2(:label='$t("name")')
       b-input(
-        v-model='data.userName',
+        v-model='userName',
         size='is-small',
         name='name',
         :disabled='isDisabled'
@@ -54,6 +54,7 @@
       b-input(v-model='employeeNumber', name='employeeNumber', size='is-small')
     b-checkbox.tw-m-5(v-model='emergencyFlag', name='emergencyFlag') {{ $t("emergency") }}
     b-checkbox.tw-m-5(v-model='vipFlag', name='vipFlag') VIP Desk
+    b-checkbox.tw-m-5(v-model='active', name='active') {{ $t("active") }}
     slot(name='content')
 </template>
 
@@ -75,52 +76,136 @@ export default {
     return {}
   },
   computed: {
-    phone: {
+    userId: {
       get() {
-        return this.$store.state.userData.phone
+        return this.$store.state.selectedProfile.userId
       },
       set(value) {
-        this.$store.commit('changePhone', value)
+        this.$store.commit('changeSelectedProfileTerm', {
+          key: 'userId',
+          value,
+        })
+      },
+    },
+    manager: {
+      get() {
+        return this.$store.state.selectedProfile.manager
+      },
+      set(value) {
+        this.$store.commit('changeSelectedProfileTerm', {
+          key: 'manager',
+          value,
+        })
+      },
+    },
+    email: {
+      get() {
+        return this.$store.state.selectedProfile.email
+      },
+      set(value) {
+        this.$store.commit('changeSelectedProfileTerm', {
+          key: 'email',
+          value,
+        })
+      },
+    },
+    company: {
+      get() {
+        return this.$store.state.selectedProfile.company
+      },
+      set(value) {
+        this.$store.commit('changeSelectedProfileTerm', {
+          key: 'company',
+          value,
+        })
+      },
+    },
+    userName: {
+      get() {
+        return this.$store.state.selectedProfile.userName
+      },
+      set(value) {
+        this.$store.commit('changeSelectedProfileTerm', {
+          key: 'userName',
+          value,
+        })
+      },
+    },
+    phone: {
+      get() {
+        return this.$store.state.selectedProfile.phone
+      },
+      set(value) {
+        this.$store.commit('changeSelectedProfileTerm', {
+          key: 'phone',
+          value,
+        })
       },
     },
     field: {
       get() {
-        return this.$store.state.userData.field
+        return this.$store.state.selectedProfile.field
       },
       set(value) {
-        this.$store.commit('changeField', value)
+        this.$store.commit('changeSelectedProfileTerm', {
+          key: 'field',
+          value,
+        })
       },
     },
     role: {
       get() {
-        return this.$store.state.userData.role
+        return this.$store.state.selectedProfile.role
       },
       set(value) {
-        this.$store.commit('changeRole', value)
+        this.$store.commit('changeSelectedProfileTerm', {
+          key: 'role',
+          value,
+        })
       },
     },
     employeeNumber: {
       get() {
-        return this.$store.state.userData.employeeNumber
+        return this.$store.state.selectedProfile.employeeNumber
       },
       set(value) {
-        this.$store.commit('changeEmployeeNumber', value)
+        this.$store.commit('changeSelectedProfileTerm', {
+          key: 'employeeNumber',
+          value,
+        })
       },
     },
     emergencyFlag: {
       get() {
-        return this.$store.state.userData.emergencyFlag
+        return this.$store.state.selectedProfile.emergencyFlag
       },
       set(value) {
-        this.$store.commit('changeEmergencyFlag', value)
+        this.$store.commit('changeSelectedProfileTerm', {
+          key: 'emergencyFlag',
+          value,
+        })
       },
     },
     vipFlag: {
       get() {
-        return this.$store.state.userData.vipFlag
+        return this.$store.state.selectedProfile.vipFlag
       },
       set(value) {
-        this.$store.commit('changeVipFlag', value)
+        this.$store.commit('changeSelectedProfileTerm', {
+          key: 'vipFlag',
+          value,
+        })
+      },
+    },
+    active: {
+      get() {
+        return this.$store.state.selectedProfile.active
+      },
+      set(value) {
+        this.$store.commit('changeSelectedProfileTerm', {
+          key: 'active',
+          value,
+        })
       },
     },
   },

@@ -1,13 +1,14 @@
 export default {
   async getAssignProfile({ state, commit }) {
     try {
-      // const response = await this.$axios.get(
-      //   `/assignProfile/${state.selectedProfileId}`
-      // )
       const { data: profiles } = await this.$axios.get(
-        `/assignProfile/${'ULXF214'}`
+        `/assignProfile/${state.searchProfileId}`
       )
+      // const { data: profiles } = await this.$axios.get(
+      //   `/assignProfile/${'ULXF214'}`
+      // )
       commit('changeUserProfiles', profiles.data)
+      commit('changeSelectedProfile', profiles.data[0])
     } catch (error) {
       console.error(error)
     }
