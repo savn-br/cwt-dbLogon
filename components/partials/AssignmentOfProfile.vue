@@ -1,38 +1,47 @@
 <template lang="pug">
 .assignment-of-profile-wrapper.tw-mt-8.tw-px-8
-  profile-form(:data='profile')
+  profile-form(
+    :data='selectedProfile || localProfile',
+    :isDisabled='!!selectedProfileId'
+  )
     template(v-slot:content)
-      b-checkbox.tw-m-5(v-model='profile.active', name='active') Ativo
+      b-checkbox.tw-m-5(
+        v-model='selectedProfile && selectedProfile.active',
+        name='active'
+      ) {{ $t("active") }}
   .update-buttons.tw-flex.tw-justify-center
     b-button.tw-mx-2.tw-my-4.tw-w-32(type='is-success') {{ $t("update") }}
   .view-profile
     .button-wrapper.tw-flex.tw-justify-end
       b-button.tw-w-24(type='is-primary') {{ $t("add") }}
-    standard-table(:data='allocation')
+    standard-table(
+      v-if='!!selectedProfile',
+      :data='selectedProfile && selectedProfile.profiles'
+    )
       b-table-column(
-        field='profile_code',
+        field='profileId',
         :label='$t("profileCode")',
         v-slot='props'
       )
-        span.tw-text-xs {{ props.row.profile_code }}
+        span.tw-text-xs {{ props.row.profileId }}
       b-table-column(
-        field='profile_description',
+        field='profileName',
         :label='$t("profileDescription")',
         v-slot='props'
       )
-        span.tw-text-xs {{ props.row.profile_description }}
+        span.tw-text-xs {{ props.row.profileName }}
       b-table-column(
-        field='initial_date',
+        field='beginTermDate',
         :label='$t("initialDate")',
         v-slot='props'
       )
-        span.tw-text-xs {{ props.row.initial_date }}
+        span.tw-text-xs {{ props.row.beginTermDate }}
       b-table-column(
-        field='final_date',
+        field='endTermDate',
         :label='$t("finalDate")',
         v-slot='props'
       )
-        span.tw-text-xs {{ props.row.final_date }}
+        span.tw-text-xs {{ props.row.endTermDate }}
       b-table-column(
         ,
         :label='$t("operation")',
@@ -41,25 +50,23 @@
       )
         .actions-wrapper.tw-flex.tw-justify-center
           b-field
-            b-switch(
-              size='is-small',
-              true-value='on',
-              false-value='off',
-              v-model='props.row.operation'
-            ) {{ props.row.operation }}
+            b-switch(size='is-small', v-model='props.row.active')
           span.tw-cursor-pointer(class='hover:tw-text-primary')
             b-icon(icon='eye', size='')
     .view-sales.tw-mt-6
       .button-wrapper.tw-flex.tw-justify-end
         b-button.tw-w-24(type='is-primary') {{ $t("add") }}
-      standard-table(:data='sales')
+      standard-table(
+        v-if='!!selectedProfile',
+        :data='selectedProfile && selectedProfile.pointOfSales'
+      )
         b-table-column(
           field='sales_description',
           :label='$t("salesName")',
           v-slot='props',
           width='80%'
         )
-          span.tw-text-xs {{ props.row.sales_description }}
+          span.tw-text-xs {{ props.row.pointOfSale }}
         b-table-column(
           :label='$t("operation")',
           v-slot='props',
@@ -78,6 +85,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'AssignmentOfProfile',
   components: {
@@ -87,14 +95,23 @@ export default {
   props: {},
   data() {
     return {
-      profile: require('@/jsons/profile-data.json'),
-      allocation: require('@/jsons/assignment-table-data.json'),
-      sales: require('@/jsons/sales-data.json'),
+      localProfile: {},
     }
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      userProfiles: (state) => state.userProfiles,
+      selectedProfileId: (state) => state.selectedProfileId,
+    }),
+    selectedProfile() {
+      return this.userProfiles[0]
+    },
+  },
   watch: {},
-  mounted() {},
+  async mounted() {
+    if (!!this.selectedProfileId && this.selectedProfileId.length >= 3)
+      await this.$store.dispatch('getAssignProfile')
+  },
   created() {},
   methods: {},
 }

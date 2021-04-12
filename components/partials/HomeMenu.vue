@@ -6,7 +6,7 @@
       :icon='current.icon',
       :label='$t(current.label)',
       :key='index',
-      @click='changePartial(current.partial)'
+      @click='proccessPartial(current.partial)'
     )
 </template>
 
@@ -29,7 +29,15 @@ export default {
   watch: {},
   mounted() {},
   created() {},
-  methods: {},
+  methods: {
+    proccessPartial(partial) {
+      if (partial === 'AssignmentOfProfile') {
+        this.$store.commit('changeSelectedProfileId', null)
+        this.$store.commit('changeUserProfiles', [{}])
+      }
+      this.changePartial(partial)
+    },
+  },
 }
 </script>
 

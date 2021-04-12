@@ -1,6 +1,6 @@
 <template lang="pug">
 .my-profile-wrapper.tw-mt-8.tw-px-8
-  profile-form(:data='profile')
+  user-form(:isDisabled='true')
   .update-buttons.tw-flex.tw-justify-center
     b-button.tw-mx-2.tw-my-4(type='is-success', @click='update') {{ $t("update") }}
   collapse.tw-text-sm(
@@ -20,11 +20,11 @@
   )
     standard-table.tw-my-4(:data='tableData', , :bordered='true')
       b-table-column(
-        field='action',
-        label='Nome do ponto de venda',
+        field='pointOfSale',
+        :label='$t("salesPoint")',
         v-slot='props'
       )
-        span.tw-text-xs {{ props.row.name }}
+        span.tw-text-xs {{ props.row.pointOfSale }}
 </template>
 
 <script>
@@ -34,7 +34,7 @@ export default {
   components: {
     Collapse: () => import('@/components/Collapse'),
     DetailTable: () => import('@/components/DetailTable'),
-    ProfileForm: () => import('@/components/partials/ProfileForm'),
+    UserForm: () => import('@/components/partials/UserForm'),
   },
   props: {},
   data() {

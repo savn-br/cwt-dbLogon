@@ -64,4 +64,7 @@ export default {
   userStatus: [],
   pointOfSales: [],
   profileAccess: {},
+  requests: [],
+  selectedProfileId: null,
+  userProfiles: [{}],
 }

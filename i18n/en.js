@@ -1,5 +1,6 @@
 module.exports = {
   /* PLOP_APPEND_EN */
+  salesPoint: 'Sales name',
   transactionCode: 'Transaction code',
   moduleAcronym: 'Module acronym',
   moduleCode: 'Module code',

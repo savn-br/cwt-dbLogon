@@ -1,4 +1,13 @@
 export default {
+  changeUserProfiles(state, profiles) {
+    state.userProfiles = profiles
+  },
+  changeSelectedProfileId(state, userId) {
+    state.selectedProfileId = userId
+  },
+  changeRequests(state, requests) {
+    state.requests = requests
+  },
   changeSelectedModuleTransactions(state, transactions) {
     state.selectedModule.transactions = transactions
   },
@@ -99,6 +108,18 @@ export default {
   },
   changeUserStatus(state, userStatus) {
     state.userStatus = userStatus
+  },
+  changeManager(state, manager) {
+    state.userData.manager = manager
+  },
+  changeCompany(state, company) {
+    state.userData.company = company
+  },
+  changeUserName(state, userName) {
+    state.userData.userName = userName
+  },
+  changeEmail(state, email) {
+    state.userData.email = email
   },
   changePhone(state, phone) {
     state.userData.phone = phone

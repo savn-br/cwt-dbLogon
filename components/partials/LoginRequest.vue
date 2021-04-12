@@ -1,7 +1,7 @@
 <template lang="pug">
 .login-request-wrapper.tw-mt-8.tw-px-8
   steps(:steps='steps')
-  profile-form(ref='profileForm', :data='profile')
+  user-form(ref='profileForm', :isDisabled='true')
   .update-buttons.tw-flex.tw-justify-center(class='sm:tw-justify-end')
     b-button.tw-mx-2(type='is-success', @click='update') {{ $t("update") }}
     b-button.tw-mx-2(
@@ -26,7 +26,7 @@ export default {
   name: 'LoginRequest',
   components: {
     StandardTable: () => import('@/components/StandardTable'),
-    ProfileForm: () => import('@/components/partials/ProfileForm'),
+    UserForm: () => import('@/components/partials/UserForm'),
     Steps: () => import('@/components/Steps'),
   },
   props: {

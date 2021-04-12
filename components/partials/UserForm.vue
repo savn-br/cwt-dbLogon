@@ -1,9 +1,9 @@
 <template lang="pug">
-.profile-form-wrapper
+.user-form-wrapper
   form.fields.tw-grid(name='profileForm', ref='form')
     b-field.tw-mx-2(:label='$t("user")')
       b-input(
-        v-model='data.userId',
+        v-model='userId',
         size='is-small',
         name='user',
         :disabled='isDisabled',
@@ -11,14 +11,14 @@
       )
     b-field.tw-mx-2(:label='$t("manager")')
       b-input(
-        v-model='data.manager',
+        v-model='manager',
         size='is-small',
         name='manager',
         :disabled='isDisabled'
       )
     b-field.tw-mx-2(label='E-mail')
       b-input(
-        v-model='data.email',
+        v-model='email',
         size='is-small',
         name='email',
         type='email',
@@ -26,14 +26,14 @@
       )
     b-field.tw-mx-2(:label='$t("company")')
       b-input(
-        v-model='data.company',
+        v-model='company',
         size='is-small',
         name='company',
         :disabled='isDisabled'
       )
     b-field.tw-mx-2(:label='$t("name")')
       b-input(
-        v-model='data.userName',
+        v-model='userName',
         size='is-small',
         name='name',
         :disabled='isDisabled'
@@ -59,13 +59,9 @@
 
 <script>
 export default {
-  name: 'ProfileForm',
+  name: 'UserForm',
   components: {},
   props: {
-    data: {
-      type: Object,
-      default: () => {},
-    },
     isDisabled: {
       type: Boolean,
       default: () => true,
@@ -75,6 +71,46 @@ export default {
     return {}
   },
   computed: {
+    userId: {
+      get() {
+        return this.$store.state.userData.userId
+      },
+      set(value) {
+        this.$store.commit('changeUserId', value)
+      },
+    },
+    email: {
+      get() {
+        return this.$store.state.userData.email
+      },
+      set(value) {
+        this.$store.commit('changeEmail', value)
+      },
+    },
+    userName: {
+      get() {
+        return this.$store.state.userData.userName
+      },
+      set(value) {
+        this.$store.commit('changeUserName', value)
+      },
+    },
+    company: {
+      get() {
+        return this.$store.state.userData.company
+      },
+      set(value) {
+        this.$store.commit('changeCompany', value)
+      },
+    },
+    manager: {
+      get() {
+        return this.$store.state.userData.manager
+      },
+      set(value) {
+        this.$store.commit('changeManager', value)
+      },
+    },
     phone: {
       get() {
         return this.$store.state.userData.phone
@@ -136,7 +172,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.profile-form-wrapper {
+.user-form-wrapper {
   .fields {
     grid-template-columns: repeat(auto-fill, minmax(px2rem(300), 1fr));
     @media screen and(min-width: px2rem(1500)) {
@@ -147,7 +183,7 @@ export default {
 </style>
 
 <style lang="scss">
-.profile-form-wrapper {
+.user-form-wrapper {
   label {
     font-size: 0.75rem;
   }

@@ -1,4 +1,28 @@
 export default {
+  async getAssignProfile({ state, commit }) {
+    try {
+      // const response = await this.$axios.get(
+      //   `/assignProfile/${state.selectedProfileId}`
+      // )
+      const { data: profiles } = await this.$axios.get(
+        `/assignProfile/${'ULXF214'}`
+      )
+      commit('changeUserProfiles', profiles.data)
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async getRequests({ state, commit }) {
+    try {
+      // const { data: requests } = await this.$axios.get(
+      //   `/dashManager/${state.dataUser.userId}`
+      // )
+      const { data: requests } = await this.$axios.get(`/dashManager/${'Us1M'}`)
+      commit('changeRequests', requests.data)
+    } catch (error) {
+      console.error(error)
+    }
+  },
   async getTransactions({ state, commit }) {
     try {
       const { data: transactions } = await this.$axios.get(
