@@ -32,8 +32,7 @@ export default {
   methods: {
     proccessPartial(partial) {
       if (partial === 'AssignmentOfProfile') {
-        this.$store.commit('setSelectedProfileId', null)
-        this.$store.commit('setUserProfiles', [{}])
+        this.$store.commit('setCollaborators', [{}])
       }
       this.setPartial(partial)
     },

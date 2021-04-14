@@ -1,14 +1,36 @@
 export default {
-  async getAssignProfile({ state, commit }) {
+  async getAvailableProfiles({ state, commit }) {
     try {
-      const { data: profiles } = await this.$axios.get(
-        `/assignProfile/${state.searchProfileId}`
+      const response = await this.$axios.get(
+        `/profile/SearchAll/${state.userData.userId}`
       )
-      // const { data: profiles } = await this.$axios.get(
+      console.log(response)
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async setProfileStateus2Collaborator(
+    { state, commit },
+    { active, profileId }
+  ) {
+    try {
+      await this.$axios.put(
+        `/userProfile/${state.userData.userId}/${profileId}/${active}`
+      )
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async getAvailableCollaborators({ state, commit }) {
+    try {
+      const { data: collaborators } = await this.$axios.get(
+        `/assignProfile/${state.searchCollaboratorId}`
+      )
+      // const { data: collaborators } = await this.$axios.get(
       //   `/assignProfile/${'ULXF214'}`
       // )
-      commit('setUserProfiles', profiles.data)
-      commit('setSelectedProfile', profiles.data[0])
+      commit('setCollaborators', collaborators.data)
+      commit('setSelectedCollaborator', collaborators.data[0])
     } catch (error) {
       console.error(error)
     }
@@ -29,7 +51,10 @@ export default {
       const { data: transactions } = await this.$axios.get(
         `/transaction/SearchAll/${state.selectedSystem.systemId}/${state.selectedModule.moduleId}/`
       )
-      commit('setSelectedModuleTransactions', transactions.data)
+      commit('setSelectedModuleTerm', {
+        key: 'transactions',
+        value: transactions.data,
+      })
     } catch (error) {
       console.error(error)
     }
@@ -84,7 +109,7 @@ export default {
       const { data: modules } = await this.$axios.get(
         `/module/SearchAll/${state.selectedSystem.systemId}/`
       )
-      commit('setSelectedSystemModules', modules.data)
+      commit('setSelectedSystemTerm', { key: 'modules', value: modules.data })
     } catch (error) {
       console.error(error)
     }

@@ -2,16 +2,20 @@
 .assignment-of-profile-wrapper.tw-mt-8.tw-px-8
   .fields.tw-mb-4
     b-field(label='Find by user')
-      b-autocomplete(v-model='searchProfileId', :data='userProfilesId')
-  profile-form
+      b-autocomplete(v-model='searchCollaboratorId', :data='collaboratorsId')
+  profile-form(v-if='!!selectedCollaborator')
   .update-buttons.tw-flex.tw-justify-center
     b-button.tw-mx-2.tw-my-4.tw-w-32(type='is-success') {{ $t("update") }}
   .view-profile
     .button-wrapper.tw-flex.tw-justify-end
-      b-button.tw-w-24(type='is-primary') {{ $t("add") }}
+      b-button.tw-w-24(
+        v-if='!!selectedCollaborator',
+        type='is-primary',
+        @click='goToPartTwo'
+      ) {{ $t("add") }}
     standard-table(
-      v-if='!!selectedProfile',
-      :data='selectedProfile && selectedProfile.profiles'
+      v-if='!!selectedCollaborator',
+      :data='selectedCollaborator && selectedCollaborator.profiles'
     )
       b-table-column(
         field='profileId',
@@ -45,15 +49,19 @@
       )
         .actions-wrapper.tw-flex.tw-justify-center
           b-field
-            b-switch(size='is-small', v-model='props.row.active')
+            b-switch(
+              size='is-small',
+              :value='props.row.active',
+              @input='(active) => { setProfile(active, props.row.profileId); }'
+            )
           span.tw-cursor-pointer(class='hover:tw-text-primary')
             b-icon(icon='eye', size='')
     .view-sales.tw-mt-6
       .button-wrapper.tw-flex.tw-justify-end
-        b-button.tw-w-24(type='is-primary') {{ $t("add") }}
+        b-button.tw-w-24(v-if='!!selectedCollaborator', type='is-primary') {{ $t("add") }}
       standard-table(
-        v-if='!!selectedProfile',
-        :data='selectedProfile && selectedProfile.pointOfSales'
+        v-if='!!selectedCollaborator',
+        :data='selectedCollaborator && selectedCollaborator.pointOfSales'
       )
         b-table-column(
           field='sales_description',
@@ -71,57 +79,70 @@
             b-field
               b-switch(
                 size='is-small',
-                true-value='on',
-                false-value='off',
-                v-model='props.row.operation'
+                :value='props.row.operation',
+                @input='(active) => { setSalesPoint(active, props.row); }'
               ) {{ props.row.operation }}
             span.tw-cursor-pointer(class='hover:tw-text-primary')
               b-icon(icon='eye', size='')
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import setMenu from '@/mixins/setMenu'
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
   name: 'AssignmentOfProfile',
   components: {
     ProfileForm: () => import('@/components/partials/ProfileForm'),
     StandardTable: () => import('@/components/StandardTable'),
   },
+  mixins: [setMenu],
   props: {},
   data() {
-    return {
-      localProfile: {},
-    }
+    return {}
   },
   computed: {
-    ...mapState({
-      selectedProfile: (state) => state.selectedProfile,
-      userProfiles: (state) => state.userProfiles,
-    }),
-    ...mapGetters(['userProfilesId']),
-    searchProfileId: {
+    ...mapState(['selectedCollaborator']),
+    ...mapGetters(['collaboratorsId']),
+
+    searchCollaboratorId: {
       get() {
-        return this.$store.state.searchProfileId
+        return this.$store.state.searchCollaboratorId
       },
       set(value) {
-        this.$store.commit('setSearchProfileId', value)
+        this.setSearchCollaboratorId(value)
       },
     },
   },
   watch: {
-    async searchProfileId(newProfileId, oldProfileId) {
-      if (newProfileId.length >= 3) {
-        await this.$store.dispatch('getAssignProfile')
+    async searchCollaboratorId(newCollaboratorId) {
+      if (newCollaboratorId.length >= 3) {
+        await this.getAvailableCollaborators()
       }
     },
   },
   async mounted() {
-    if (this.searchProfileId.length >= 3) {
-      await this.$store.dispatch('getAssignProfile')
+    if (this.searchCollaboratorId.length >= 3) {
+      await this.getAvailableCollaborators()
     }
   },
   created() {},
-  methods: {},
+  methods: {
+    ...mapMutations(['setSearchCollaboratorId']),
+    ...mapActions([
+      'getAvailableCollaborators',
+      'setProfileStateus2Collaborator',
+    ]),
+
+    async setProfile(active, profileId) {
+      await this.setProfileStateus2Collaborator({ active, profileId })
+    },
+    setSalesPoint(active, salesPoint) {
+      console.log(active, salesPoint) // @TODO: Finalizar quando retornar os dados necessarios
+    },
+    goToPartTwo() {
+      this.setPartial('AssignmentOfProfile2')
+    },
+  },
 }
 </script>
 

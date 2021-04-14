@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
   name: 'MaintainSystemModal2',
   components: {},
@@ -30,47 +30,45 @@ export default {
     return {}
   },
   computed: {
-    ...mapState({
-      moduleModalMode: (state) => state.moduleModalMode,
-    }),
+    ...mapState(['moduleModalMode', 'selectedModule']),
     moduleId: {
       get() {
-        return this.$store.state.selectedModule.moduleId
+        return this.selectedModule.moduleId
       },
       set(value) {
-        this.$store.commit('setSelectedModuleModuleId', value)
+        this.setSelectedModuleTerm({ key: 'moduleId', value })
       },
     },
     moduleAcronym: {
       get() {
-        return this.$store.state.selectedModule.moduleAcronym
+        return this.selectedModule.moduleAcronym
       },
       set(value) {
-        this.$store.commit('setSelectedModuleModuleAcronym', value)
+        this.setSelectedModuleTerm({ key: 'moduleAcronym', value })
       },
     },
     moduleName: {
       get() {
-        return this.$store.state.selectedModule.moduleName
+        return this.selectedModule.moduleName
       },
       set(value) {
-        this.$store.commit('setSelectedModuleModuleName', value)
+        this.setSelectedModuleTerm({ key: 'moduleName', value })
       },
     },
     notes: {
       get() {
-        return this.$store.state.selectedModule.notes
+        return this.selectedModule.notes
       },
       set(value) {
-        this.$store.commit('setSelectedModuleNotes', value)
+        this.setSelectedModuleTerm({ key: 'notes', value })
       },
     },
     active: {
       get() {
-        return this.$store.state.selectedModule.active
+        return this.selectedModule.active
       },
       set(value) {
-        this.$store.commit('setSelectedModuleActive', value)
+        this.setSelectedModuleTerm({ key: 'active', value })
       },
     },
   },
@@ -78,18 +76,21 @@ export default {
   mounted() {},
   created() {},
   methods: {
+    ...mapMutations(['setSelectedModuleTerm']),
+    ...mapActions(['saveModule', 'getModules', 'editModule']),
+
     async proccessModuleRequest() {
       if (this.moduleModalMode === 'save') {
-        const status = await this.$store.dispatch('saveModule')
+        const status = await this.saveModule()
         if (status === 200) {
-          this.$store.dispatch('getModules')
+          this.getModules()
           this.$emit('close')
         }
       }
       if (this.moduleModalMode === 'edit') {
-        const status = await this.$store.dispatch('editModule')
+        const status = await this.editModule()
         if (status === 200) {
-          this.$store.dispatch('getModules')
+          this.getModules()
           this.$emit('close')
         }
       }

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
   name: 'MaintainSystemModal3',
   components: {},
@@ -28,39 +28,38 @@ export default {
     return {}
   },
   computed: {
-    ...mapState({
-      transactionModalMode: (state) => state.transactionModalMode,
-    }),
+    ...mapState(['transactionModalMode', 'selectedTransaction']),
+
     transactionId: {
       get() {
-        return this.$store.state.selectedTransaction.transactionId
+        return this.selectedTransaction.transactionId
       },
       set(value) {
-        this.$store.commit('setSelectedTransactionTransactionId', value)
+        this.setSelectedTransactionTerm({ key: 'transactionId', value })
       },
     },
     transactionName: {
       get() {
-        return this.$store.state.selectedTransaction.transactionName
+        return this.selectedTransaction.transactionName
       },
       set(value) {
-        this.$store.commit('setSelectedTransactionTransactionName', value)
+        this.setSelectedTransactionTerm({ key: 'transactionName', value })
       },
     },
     notes: {
       get() {
-        return this.$store.state.selectedTransaction.notes
+        return this.selectedTransaction.notes
       },
       set(value) {
-        this.$store.commit('setSelectedTransactionNotes', value)
+        this.setSelectedTransactionTerm({ key: 'notes', value })
       },
     },
     active: {
       get() {
-        return this.$store.state.selectedTransaction.active
+        return this.selectedTransaction.active
       },
       set(value) {
-        this.$store.commit('setSelectedTransactionActive', value)
+        this.setSelectedTransactionTerm({ key: 'active', value })
       },
     },
   },
@@ -68,18 +67,21 @@ export default {
   mounted() {},
   created() {},
   methods: {
+    ...mapMutations(['setSelectedTransactionTerm']),
+    ...mapActions(['saveTransaction', 'getTransactions', 'editTransaction']),
+
     async proccessTransactionRequest() {
       if (this.transactionModalMode === 'save') {
-        const status = await this.$store.dispatch('saveTransaction')
+        const status = await this.saveTransaction()
         if (status === 200) {
-          this.$store.dispatch('getTransactions')
+          this.getTransactions()
           this.$emit('close')
         }
       }
       if (this.transactionModalMode === 'edit') {
-        const status = await this.$store.dispatch('editTransaction')
+        const status = await this.editTransaction()
         if (status === 200) {
-          this.$store.dispatch('getTransactions')
+          this.getTransactions()
           this.$emit('close')
         }
       }

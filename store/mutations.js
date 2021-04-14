@@ -1,36 +1,28 @@
 export default {
+  setSearchProfileId(state, profileId) {
+    state.searchProfileId = profileId
+  },
   setUserDataTerm(state, { key, value }) {
     state.userData[key] = value
   },
-  setSelectedProfileTerm(state, { key, value }) {
-    state.selectedProfile[key] = value
+  setSelectedCollaboratorTerm(state, { key, value }) {
+    state.selectedCollaborator[key] = value
   },
-  setSelectedProfile(state, selectedProfile) {
-    state.selectedProfile = selectedProfile
+  setSelectedCollaborator(state, selectedCollaborator) {
+    state.selectedCollaborator = selectedCollaborator
   },
-  setUserProfiles(state, profiles) {
-    state.userProfiles = profiles
+  setCollaborators(state, collaborators) {
+    state.collaborators = collaborators
   },
-  setSearchProfileId(state, userId) {
-    state.searchProfileId = userId
+  setSearchCollaboratorId(state, userId) {
+    state.searchCollaboratorId = userId
   },
   setRequests(state, requests) {
     state.requests = requests
   },
-  setSelectedModuleTransactions(state, transactions) {
-    state.selectedModule.transactions = transactions
-  },
-  setSelectedTransactionActive(state, active) {
-    state.selectedTransaction.active = active
-  },
-  setSelectedTransactionNotes(state, notes) {
-    state.selectedTransaction.notes = notes
-  },
-  setSelectedTransactionTransactionName(state, transactionName) {
-    state.selectedTransaction.transactionName = transactionName
-  },
-  setSelectedTransactionTransactionId(state, transactionId) {
-    state.selectedTransaction.transactionId = transactionId
+
+  setSelectedTransactionTerm(state, { key, value }) {
+    state.selectedTransaction[key] = value
   },
   setTransactionModalMode(state, mode) {
     state.transactionModalMode = mode
@@ -38,45 +30,20 @@ export default {
   setSelectedTransaction(state, selectedTransaction) {
     state.selectedTransaction = selectedTransaction
   },
-  setSelectedModuleActive(state, active) {
-    state.selectedModule.active = active
+  setSelectedModuleTerm(state, { key, value }) {
+    state.selectedModule[key] = value
   },
-  setSelectedModuleNotes(state, notes) {
-    state.selectedModule.notes = notes
-  },
-  setSelectedModuleModuleName(state, moduleName) {
-    state.selectedModule.moduleName = moduleName
-  },
-  setSelectedModuleModuleAcronym(state, moduleAcronym) {
-    state.selectedModule.moduleAcronym = moduleAcronym
-  },
-  setSelectedModuleModuleId(state, moduleId) {
-    state.selectedModule.moduleId = moduleId
-  },
+
   setModuleModalMode(state, mode) {
     state.moduleModalMode = mode
   },
   setSelectedModule(state, selectedModule) {
     state.selectedModule = selectedModule
   },
-  setSelectedSystemModules(state, modules) {
-    state.selectedSystem.modules = modules
+  setSelectedSystemTerm(state, { key, value }) {
+    state.selectedSystem[key] = value
   },
-  setSelectedSystemActive(state, active) {
-    state.selectedSystem.active = active
-  },
-  setSelectedSystemNotes(state, notes) {
-    state.selectedSystem.notes = notes
-  },
-  setSelectedSystemSystemName(state, systemName) {
-    state.selectedSystem.systemName = systemName
-  },
-  setSelectedSystemSystemAcronym(state, systemAcronym) {
-    state.selectedSystem.systemAcronym = systemAcronym
-  },
-  setSelectedSystemSystemId(state, systemId) {
-    state.selectedSystem.systemId = systemId
-  },
+
   setSystemModalMode(state, mode) {
     state.systemModalMode = mode
   },

@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
   name: 'MaintainSystemModal',
   components: {},
@@ -32,65 +32,64 @@ export default {
   computed: {
     systemId: {
       get() {
-        return this.$store.state.selectedSystem.systemId
+        return this.selectedSystem.systemId
       },
       set(value) {
-        this.$store.commit('setSelectedSystemSystemId', value)
+        this.setSelectedSystemTerm({ key: 'systemId', value })
       },
     },
     systemAcronym: {
       get() {
-        return this.$store.state.selectedSystem.systemAcronym
+        return this.selectedSystem.systemAcronym
       },
       set(value) {
-        this.$store.commit('setSelectedSystemSystemAcronym', value)
+        this.setSelectedSystemTerm({ key: 'systemAcronym', value })
       },
     },
     systemName: {
       get() {
-        return this.$store.state.selectedSystem.systemName
+        return this.selectedSystem.systemName
       },
       set(value) {
-        this.$store.commit('setSelectedSystemSystemName', value)
+        this.setSelectedSystemTerm({ key: 'systemName', value })
       },
     },
     notes: {
       get() {
-        return this.$store.state.selectedSystem.notes
+        return this.selectedSystem.notes
       },
       set(value) {
-        this.$store.commit('setSelectedSystemNotes', value)
+        this.setSelectedSystemTerm({ key: 'notes', value })
       },
     },
     active: {
       get() {
-        return this.$store.state.selectedSystem.active
+        return this.selectedSystem.active
       },
       set(value) {
-        this.$store.commit('setSelectedSystemActive', value)
+        this.setSelectedSystemTerm({ key: 'active', value })
       },
     },
-    ...mapState({
-      // selectedSystem: (state) => state.selectedSystem,
-      systemModalMode: (state) => state.systemModalMode,
-    }),
+    ...mapState(['systemModalMode', 'selectedSystem']),
   },
   watch: {},
   mounted() {},
   created() {},
   methods: {
+    ...mapMutations(['setSelectedSystemTerm']),
+    ...mapActions(['saveSystem', 'getSystems', 'editSystem']),
     async proccessSystemRequest() {
       if (this.systemModalMode === 'save') {
-        const status = await this.$store.dispatch('saveSystem')
+        const status = await this.saveSystem()
         if (status === 200) {
-          this.$store.dispatch('getSystems')
+          this.getSystems()
           this.$emit('close')
         }
       }
       if (this.systemModalMode === 'edit') {
-        const status = await this.$store.dispatch('editSystem')
+        const status = await this.editSystem()
         if (status === 200) {
-          this.$store.dispatch('getSystems')
+          this.getSystems()
           this.$emit('close')
         }
       }

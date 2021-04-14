@@ -1,5 +1,5 @@
 export default {
-  userProfilesId(state) {
-    return state.userProfiles.map((user) => user.userId)
+  collaboratorsId(state) {
+    return state.collaborators.map((user) => user.userId)
   },
 }

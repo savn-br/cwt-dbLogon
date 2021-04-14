@@ -11,6 +11,8 @@ export default {
     MyProfile: () => import('@/components/partials/MyProfile'),
     AssignmentOfProfile: () =>
       import('@/components/partials/AssignmentOfProfile'),
+    AssignmentOfProfile2: () =>
+      import('@/components/partials/AssignmentOfProfile2'),
     ManagerPanel: () => import('@/components/partials/ManagerPanel'),
     BlockUser: () => import('@/components/partials/BlockUser'),
     ApprovalDelegation: () =>

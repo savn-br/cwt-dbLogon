@@ -6,8 +6,7 @@
         v-model='userId',
         size='is-small',
         name='user',
-        :disabled='isDisabled',
-        @set='verifyUserId'
+        :disabled='isDisabled'
       )
     b-field.tw-mx-2(:label='$t("manager")')
       b-input(
@@ -58,6 +57,7 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex'
 export default {
   name: 'UserForm',
   components: {},
@@ -71,76 +71,77 @@ export default {
     return {}
   },
   computed: {
+    ...mapState(['userData']),
     userId: {
       get() {
-        return this.$store.state.userData.userId
+        return this.userData.userId
       },
       set(value) {
-        this.$store.commit('setUserDataTerm', { key: 'userId', value })
+        this.setUserDataTerm({ key: 'userId', value })
       },
     },
     email: {
       get() {
-        return this.$store.state.userData.email
+        return this.userData.email
       },
       set(value) {
-        this.$store.commit('setUserDataTerm', { key: 'email', value })
+        this.setUserDataTerm({ key: 'email', value })
       },
     },
     userName: {
       get() {
-        return this.$store.state.userData.userName
+        return this.userData.userName
       },
       set(value) {
-        this.$store.commit('setUserDataTerm', { key: 'userName', value })
+        this.setUserDataTerm({ key: 'userName', value })
       },
     },
     company: {
       get() {
-        return this.$store.state.userData.company
+        return this.userData.company
       },
       set(value) {
-        this.$store.commit('setUserDataTerm', { key: 'company', value })
+        this.setUserDataTerm({ key: 'company', value })
       },
     },
     manager: {
       get() {
-        return this.$store.state.userData.manager
+        return this.userData.manager
       },
       set(value) {
-        this.$store.commit('setUserDataTerm', { key: 'manager', value })
+        this.setUserDataTerm({ key: 'manager', value })
       },
     },
     phone: {
       get() {
-        return this.$store.state.userData.phone
+        return this.userData.phone
       },
       set(value) {
-        this.$store.commit('setUserDataTerm', { key: 'phone', value })
+        this.setUserDataTerm({ key: 'phone', value })
       },
     },
     field: {
       get() {
-        return this.$store.state.userData.field
+        return this.userData.field
       },
       set(value) {
-        this.$store.commit('setUserDataTerm', { key: 'field', value })
+        this.setUserDataTerm({ key: 'field', value })
       },
     },
     role: {
       get() {
-        return this.$store.state.userData.role
+        return this.userData.role
       },
       set(value) {
-        this.$store.commit('setUserDataTerm', { key: 'role', value })
+        this.setUserDataTerm({ key: 'role', value })
       },
     },
     employeeNumber: {
       get() {
-        return this.$store.state.userData.employeeNumber
+        return this.userData.employeeNumber
       },
       set(value) {
-        this.$store.commit('setUserDataTerm', {
+        this.setUserDataTerm({
           key: 'employeeNumber',
           value,
         })
@@ -148,10 +149,10 @@ export default {
     },
     emergencyFlag: {
       get() {
-        return this.$store.state.userData.emergencyFlag
+        return this.userData.emergencyFlag
       },
       set(value) {
-        this.$store.commit('setUserDataTerm', {
+        this.setUserDataTerm({
           key: 'emergencyFlag',
           value,
         })
@@ -159,10 +160,10 @@ export default {
     },
     vipFlag: {
       get() {
-        return this.$store.state.userData.vipFlag
+        return this.userData.vipFlag
       },
       set(value) {
-        this.$store.commit('setUserDataTerm', { key: 'vipFlag', value })
+        this.setUserDataTerm({ key: 'vipFlag', value })
       },
     },
   },
@@ -170,9 +171,7 @@ export default {
   mounted() {},
   created() {},
   methods: {
-    verifyUserId() {
-      console.log(this.data.userId)
-    },
+    ...mapMutations(['setUserDataTerm']),
   },
 }
 </script>

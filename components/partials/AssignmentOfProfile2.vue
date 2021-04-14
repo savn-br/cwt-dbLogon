@@ -16,14 +16,6 @@
     )
       span.tw-text-xs {{ props.row.profile_description }}
     b-table-column(
-      v-slot='props',
-      field='active',
-      :label='$t("active")',
-      :centered='true'
-    )
-      b-checkbox(v-model='props.row.active')
-        span.tw-text-xs {{ $t("active") }}
-    b-table-column(
       :label='$t("operation")',
       field='active_operation',
       :centered='true',
@@ -37,6 +29,7 @@
 </template>
 
 <script>
+import { mapMutations, mapActions } from 'vuex'
 export default {
   name: 'AssignmentOfProfile2',
   components: {
@@ -48,11 +41,25 @@ export default {
       profileDescription: require('@/jsons/profile-description-table-data.json'),
     }
   },
-  computed: {},
+  computed: {
+    searchProfileId: {
+      get() {
+        return this.$store.state.searchProfileId
+      },
+      set(value) {
+        this.setSearchProfileId(value)
+      },
+    },
+  },
   watch: {},
-  mounted() {},
+  async mounted() {
+    await this.getAvailableProfiles()
+  },
   created() {},
-  methods: {},
+  methods: {
+    ...mapMutations(['setSearchProfileId']),
+    ...mapActions(['getAvailableProfiles']),
+  },
 }
 </script>
 

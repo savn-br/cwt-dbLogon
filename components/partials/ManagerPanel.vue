@@ -52,7 +52,7 @@ export default {
   created() {},
   methods: {
     async atribuir(userId) {
-      await this.$store.commit('setSearchProfileId', userId)
+      await this.$store.commit('setSearchCollaboratorId', userId)
       this.setPartial('AssignmentOfProfile')
     },
   },

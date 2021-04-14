@@ -78,10 +78,10 @@ export default {
   computed: {
     userId: {
       get() {
-        return this.$store.state.selectedProfile.userId
+        return this.$store.state.selectedCollaborator.userId
       },
       set(value) {
-        this.$store.commit('setSelectedProfileTerm', {
+        this.$store.commit('setSelectedCollaboratorTerm', {
           key: 'userId',
           value,
         })
@@ -89,10 +89,10 @@ export default {
     },
     manager: {
       get() {
-        return this.$store.state.selectedProfile.manager
+        return this.$store.state.selectedCollaborator.manager
       },
       set(value) {
-        this.$store.commit('setSelectedProfileTerm', {
+        this.$store.commit('setSelectedCollaboratorTerm', {
           key: 'manager',
           value,
         })
@@ -100,10 +100,10 @@ export default {
     },
     email: {
       get() {
-        return this.$store.state.selectedProfile.email
+        return this.$store.state.selectedCollaborator.email
       },
       set(value) {
-        this.$store.commit('setSelectedProfileTerm', {
+        this.$store.commit('setSelectedCollaboratorTerm', {
           key: 'email',
           value,
         })
@@ -111,10 +111,10 @@ export default {
     },
     company: {
       get() {
-        return this.$store.state.selectedProfile.company
+        return this.$store.state.selectedCollaborator.company
       },
       set(value) {
-        this.$store.commit('setSelectedProfileTerm', {
+        this.$store.commit('setSelectedCollaboratorTerm', {
           key: 'company',
           value,
         })
@@ -122,10 +122,10 @@ export default {
     },
     userName: {
       get() {
-        return this.$store.state.selectedProfile.userName
+        return this.$store.state.selectedCollaborator.userName
       },
       set(value) {
-        this.$store.commit('setSelectedProfileTerm', {
+        this.$store.commit('setSelectedCollaboratorTerm', {
           key: 'userName',
           value,
         })
@@ -133,10 +133,10 @@ export default {
     },
     phone: {
       get() {
-        return this.$store.state.selectedProfile.phone
+        return this.$store.state.selectedCollaborator.phone
       },
       set(value) {
-        this.$store.commit('setSelectedProfileTerm', {
+        this.$store.commit('setSelectedCollaboratorTerm', {
           key: 'phone',
           value,
         })
@@ -144,10 +144,10 @@ export default {
     },
     field: {
       get() {
-        return this.$store.state.selectedProfile.field
+        return this.$store.state.selectedCollaborator.field
       },
       set(value) {
-        this.$store.commit('setSelectedProfileTerm', {
+        this.$store.commit('setSelectedCollaboratorTerm', {
           key: 'field',
           value,
         })
@@ -155,10 +155,10 @@ export default {
     },
     role: {
       get() {
-        return this.$store.state.selectedProfile.role
+        return this.$store.state.selectedCollaborator.role
       },
       set(value) {
-        this.$store.commit('setSelectedProfileTerm', {
+        this.$store.commit('setSelectedCollaboratorTerm', {
           key: 'role',
           value,
         })
@@ -166,10 +166,10 @@ export default {
     },
     employeeNumber: {
       get() {
-        return this.$store.state.selectedProfile.employeeNumber
+        return this.$store.state.selectedCollaborator.employeeNumber
       },
       set(value) {
-        this.$store.commit('setSelectedProfileTerm', {
+        this.$store.commit('setSelectedCollaboratorTerm', {
           key: 'employeeNumber',
           value,
         })
@@ -177,10 +177,10 @@ export default {
     },
     emergencyFlag: {
       get() {
-        return this.$store.state.selectedProfile.emergencyFlag
+        return this.$store.state.selectedCollaborator.emergencyFlag
       },
       set(value) {
-        this.$store.commit('setSelectedProfileTerm', {
+        this.$store.commit('setSelectedCollaboratorTerm', {
           key: 'emergencyFlag',
           value,
         })
@@ -188,10 +188,10 @@ export default {
     },
     vipFlag: {
       get() {
-        return this.$store.state.selectedProfile.vipFlag
+        return this.$store.state.selectedCollaborator.vipFlag
       },
       set(value) {
-        this.$store.commit('setSelectedProfileTerm', {
+        this.$store.commit('setSelectedCollaboratorTerm', {
           key: 'vipFlag',
           value,
         })
@@ -199,10 +199,10 @@ export default {
     },
     active: {
       get() {
-        return this.$store.state.selectedProfile.active
+        return this.$store.state.selectedCollaborator.active
       },
       set(value) {
-        this.$store.commit('setSelectedProfileTerm', {
+        this.$store.commit('setSelectedCollaboratorTerm', {
           key: 'active',
           value,
         })
