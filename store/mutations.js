@@ -1,4 +1,7 @@
 export default {
+  setSearchCollaboratorLoading(state, value) {
+    state.searchCollaboratorLoading = value
+  },
   setSearchProfileId(state, profileId) {
     state.searchProfileId = profileId
   },

@@ -65,8 +65,9 @@ export default () => ({
   pointOfSales: [],
   profileAccess: {},
   requests: [],
-  searchCollaboratorId: '',
   searchProfileId: '',
+  searchCollaboratorLoading: false,
+  searchCollaboratorId: '',
   selectedCollaborator: {
     userId: '',
     employeeNumber: '',

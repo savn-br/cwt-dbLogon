@@ -23,6 +23,7 @@ export default {
   },
   async getAvailableCollaborators({ state, commit }) {
     try {
+      commit('setSearchCollaboratorLoading', true)
       const { data: collaborators } = await this.$axios.get(
         `/assignProfile/${state.searchCollaboratorId}`
       )
@@ -31,6 +32,7 @@ export default {
       // )
       commit('setCollaborators', collaborators.data)
       commit('setSelectedCollaborator', collaborators.data[0])
+      commit('setSearchCollaboratorLoading', false)
     } catch (error) {
       console.error(error)
     }

@@ -3,6 +3,7 @@
   .fields.tw-mb-4
     b-field(label='Find by user')
       b-autocomplete(v-model='searchCollaboratorId', :data='collaboratorsId')
+      span.tw-ml-2(v-show='searchCollaboratorLoading') loading ...
   profile-form(v-if='!!selectedCollaborator')
   .update-buttons.tw-flex.tw-justify-center
     b-button.tw-mx-2.tw-my-4.tw-w-32(type='is-success') {{ $t("update") }}
@@ -101,7 +102,7 @@ export default {
     return {}
   },
   computed: {
-    ...mapState(['selectedCollaborator']),
+    ...mapState(['selectedCollaborator', 'searchCollaboratorLoading']),
     ...mapGetters(['collaboratorsId']),
 
     searchCollaboratorId: {
