@@ -1,7 +1,7 @@
 <template lang="pug">
 .assignment-of-profile-wrapper.tw-mt-8.tw-px-8
   .fields.tw-mb-4
-    b-field(label='Find by user')
+    b-field.tw-mx-2(label='Find by user')
       b-autocomplete(v-model='searchCollaboratorId', :data='collaboratorsId')
       span.tw-ml-2(v-show='searchCollaboratorLoading') loading ...
   profile-form(v-if='!!selectedCollaborator')
