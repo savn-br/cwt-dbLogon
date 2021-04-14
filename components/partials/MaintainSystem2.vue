@@ -68,7 +68,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import changeMenu from '~/mixins/changeMenu'
+import setMenu from '~/mixins/setMenu'
 export default {
   name: 'MaintainSystem2',
   components: {
@@ -76,7 +76,7 @@ export default {
     MaintainSystemModal2: () =>
       import('@/components/partials/MaintainSystemModal2'),
   },
-  mixins: [changeMenu],
+  mixins: [setMenu],
   props: {},
   data() {
     return {
@@ -99,17 +99,17 @@ export default {
   created() {},
   methods: {
     goToTransaction(module) {
-      this.$store.commit('changeSelectedModule', module)
-      this.changePartial('MaintainSystem3')
+      this.$store.commit('setSelectedModule', module)
+      this.setPartial('MaintainSystem3')
     },
     createModule() {
-      this.$store.commit('changeModuleModalMode', 'save')
-      this.$store.commit('changeSelectedModule', {})
+      this.$store.commit('setModuleModalMode', 'save')
+      this.$store.commit('setSelectedModule', {})
       this.isModalActive = true
     },
     editModule(module) {
-      this.$store.commit('changeModuleModalMode', 'edit')
-      this.$store.commit('changeSelectedModule', module)
+      this.$store.commit('setModuleModalMode', 'edit')
+      this.$store.commit('setSelectedModule', module)
       this.isModalActive = true
     },
   },

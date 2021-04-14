@@ -28,11 +28,11 @@
 
 <script>
 import { mapState } from 'vuex'
-import changeMenu from '@/mixins/changeMenu'
+import setMenu from '@/mixins/setMenu'
 export default {
   name: 'ManagerPanel',
   components: { StandardTable: () => import('@/components/StandardTable') },
-  mixins: [changeMenu],
+  mixins: [setMenu],
   props: {},
   data() {
     const data = Object.assign(require('@/jsons/assignment-profile-data.json'))
@@ -52,8 +52,8 @@ export default {
   created() {},
   methods: {
     async atribuir(userId) {
-      await this.$store.commit('changeSearchProfileId', userId)
-      this.changePartial('AssignmentOfProfile')
+      await this.$store.commit('setSearchProfileId', userId)
+      this.setPartial('AssignmentOfProfile')
     },
   },
 }

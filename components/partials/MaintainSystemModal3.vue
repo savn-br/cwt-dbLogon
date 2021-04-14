@@ -36,7 +36,7 @@ export default {
         return this.$store.state.selectedTransaction.transactionId
       },
       set(value) {
-        this.$store.commit('changeSelectedTransactionTransactionId', value)
+        this.$store.commit('setSelectedTransactionTransactionId', value)
       },
     },
     transactionName: {
@@ -44,7 +44,7 @@ export default {
         return this.$store.state.selectedTransaction.transactionName
       },
       set(value) {
-        this.$store.commit('changeSelectedTransactionTransactionName', value)
+        this.$store.commit('setSelectedTransactionTransactionName', value)
       },
     },
     notes: {
@@ -52,7 +52,7 @@ export default {
         return this.$store.state.selectedTransaction.notes
       },
       set(value) {
-        this.$store.commit('changeSelectedTransactionNotes', value)
+        this.$store.commit('setSelectedTransactionNotes', value)
       },
     },
     active: {
@@ -60,7 +60,7 @@ export default {
         return this.$store.state.selectedTransaction.active
       },
       set(value) {
-        this.$store.commit('changeSelectedTransactionActive', value)
+        this.$store.commit('setSelectedTransactionActive', value)
       },
     },
   },

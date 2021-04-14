@@ -7,7 +7,7 @@
         size='is-small',
         name='user',
         :disabled='isDisabled',
-        @change='verifyUserId'
+        @set='verifyUserId'
       )
     b-field.tw-mx-2(:label='$t("manager")')
       b-input(
@@ -76,7 +76,7 @@ export default {
         return this.$store.state.userData.userId
       },
       set(value) {
-        this.$store.commit('changeUserDataTerm', { key: 'userId', value })
+        this.$store.commit('setUserDataTerm', { key: 'userId', value })
       },
     },
     email: {
@@ -84,7 +84,7 @@ export default {
         return this.$store.state.userData.email
       },
       set(value) {
-        this.$store.commit('changeUserDataTerm', { key: 'email', value })
+        this.$store.commit('setUserDataTerm', { key: 'email', value })
       },
     },
     userName: {
@@ -92,7 +92,7 @@ export default {
         return this.$store.state.userData.userName
       },
       set(value) {
-        this.$store.commit('changeUserDataTerm', { key: 'userName', value })
+        this.$store.commit('setUserDataTerm', { key: 'userName', value })
       },
     },
     company: {
@@ -100,7 +100,7 @@ export default {
         return this.$store.state.userData.company
       },
       set(value) {
-        this.$store.commit('changeUserDataTerm', { key: 'company', value })
+        this.$store.commit('setUserDataTerm', { key: 'company', value })
       },
     },
     manager: {
@@ -108,7 +108,7 @@ export default {
         return this.$store.state.userData.manager
       },
       set(value) {
-        this.$store.commit('changeUserDataTerm', { key: 'manager', value })
+        this.$store.commit('setUserDataTerm', { key: 'manager', value })
       },
     },
     phone: {
@@ -116,7 +116,7 @@ export default {
         return this.$store.state.userData.phone
       },
       set(value) {
-        this.$store.commit('changeUserDataTerm', { key: 'phone', value })
+        this.$store.commit('setUserDataTerm', { key: 'phone', value })
       },
     },
     field: {
@@ -124,7 +124,7 @@ export default {
         return this.$store.state.userData.field
       },
       set(value) {
-        this.$store.commit('changeUserDataTerm', { key: 'field', value })
+        this.$store.commit('setUserDataTerm', { key: 'field', value })
       },
     },
     role: {
@@ -132,7 +132,7 @@ export default {
         return this.$store.state.userData.role
       },
       set(value) {
-        this.$store.commit('changeUserDataTerm', { key: 'role', value })
+        this.$store.commit('setUserDataTerm', { key: 'role', value })
       },
     },
     employeeNumber: {
@@ -140,7 +140,7 @@ export default {
         return this.$store.state.userData.employeeNumber
       },
       set(value) {
-        this.$store.commit('changeUserDataTerm', {
+        this.$store.commit('setUserDataTerm', {
           key: 'employeeNumber',
           value,
         })
@@ -151,7 +151,7 @@ export default {
         return this.$store.state.userData.emergencyFlag
       },
       set(value) {
-        this.$store.commit('changeUserDataTerm', {
+        this.$store.commit('setUserDataTerm', {
           key: 'emergencyFlag',
           value,
         })
@@ -162,7 +162,7 @@ export default {
         return this.$store.state.userData.vipFlag
       },
       set(value) {
-        this.$store.commit('changeUserDataTerm', { key: 'vipFlag', value })
+        this.$store.commit('setUserDataTerm', { key: 'vipFlag', value })
       },
     },
   },

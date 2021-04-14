@@ -7,7 +7,7 @@
         size='is-small',
         name='user',
         :disabled='isDisabled',
-        @change='verifyUserId'
+        @set='verifyUserId'
       )
     b-field.tw-mx-2(:label='$t("manager")')
       b-input(
@@ -81,7 +81,7 @@ export default {
         return this.$store.state.selectedProfile.userId
       },
       set(value) {
-        this.$store.commit('changeSelectedProfileTerm', {
+        this.$store.commit('setSelectedProfileTerm', {
           key: 'userId',
           value,
         })
@@ -92,7 +92,7 @@ export default {
         return this.$store.state.selectedProfile.manager
       },
       set(value) {
-        this.$store.commit('changeSelectedProfileTerm', {
+        this.$store.commit('setSelectedProfileTerm', {
           key: 'manager',
           value,
         })
@@ -103,7 +103,7 @@ export default {
         return this.$store.state.selectedProfile.email
       },
       set(value) {
-        this.$store.commit('changeSelectedProfileTerm', {
+        this.$store.commit('setSelectedProfileTerm', {
           key: 'email',
           value,
         })
@@ -114,7 +114,7 @@ export default {
         return this.$store.state.selectedProfile.company
       },
       set(value) {
-        this.$store.commit('changeSelectedProfileTerm', {
+        this.$store.commit('setSelectedProfileTerm', {
           key: 'company',
           value,
         })
@@ -125,7 +125,7 @@ export default {
         return this.$store.state.selectedProfile.userName
       },
       set(value) {
-        this.$store.commit('changeSelectedProfileTerm', {
+        this.$store.commit('setSelectedProfileTerm', {
           key: 'userName',
           value,
         })
@@ -136,7 +136,7 @@ export default {
         return this.$store.state.selectedProfile.phone
       },
       set(value) {
-        this.$store.commit('changeSelectedProfileTerm', {
+        this.$store.commit('setSelectedProfileTerm', {
           key: 'phone',
           value,
         })
@@ -147,7 +147,7 @@ export default {
         return this.$store.state.selectedProfile.field
       },
       set(value) {
-        this.$store.commit('changeSelectedProfileTerm', {
+        this.$store.commit('setSelectedProfileTerm', {
           key: 'field',
           value,
         })
@@ -158,7 +158,7 @@ export default {
         return this.$store.state.selectedProfile.role
       },
       set(value) {
-        this.$store.commit('changeSelectedProfileTerm', {
+        this.$store.commit('setSelectedProfileTerm', {
           key: 'role',
           value,
         })
@@ -169,7 +169,7 @@ export default {
         return this.$store.state.selectedProfile.employeeNumber
       },
       set(value) {
-        this.$store.commit('changeSelectedProfileTerm', {
+        this.$store.commit('setSelectedProfileTerm', {
           key: 'employeeNumber',
           value,
         })
@@ -180,7 +180,7 @@ export default {
         return this.$store.state.selectedProfile.emergencyFlag
       },
       set(value) {
-        this.$store.commit('changeSelectedProfileTerm', {
+        this.$store.commit('setSelectedProfileTerm', {
           key: 'emergencyFlag',
           value,
         })
@@ -191,7 +191,7 @@ export default {
         return this.$store.state.selectedProfile.vipFlag
       },
       set(value) {
-        this.$store.commit('changeSelectedProfileTerm', {
+        this.$store.commit('setSelectedProfileTerm', {
           key: 'vipFlag',
           value,
         })
@@ -202,7 +202,7 @@ export default {
         return this.$store.state.selectedProfile.active
       },
       set(value) {
-        this.$store.commit('changeSelectedProfileTerm', {
+        this.$store.commit('setSelectedProfileTerm', {
           key: 'active',
           value,
         })

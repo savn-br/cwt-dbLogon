@@ -12,11 +12,11 @@
 
 <script>
 import { mapState } from 'vuex'
-import changeMenu from '~/mixins/changeMenu'
+import setMenu from '~/mixins/setMenu'
 export default {
   name: 'HomeMenu',
   components: {},
-  mixins: [changeMenu],
+  mixins: [setMenu],
   props: {},
   data() {
     return {}
@@ -32,10 +32,10 @@ export default {
   methods: {
     proccessPartial(partial) {
       if (partial === 'AssignmentOfProfile') {
-        this.$store.commit('changeSelectedProfileId', null)
-        this.$store.commit('changeUserProfiles', [{}])
+        this.$store.commit('setSelectedProfileId', null)
+        this.$store.commit('setUserProfiles', [{}])
       }
-      this.changePartial(partial)
+      this.setPartial(partial)
     },
   },
 }

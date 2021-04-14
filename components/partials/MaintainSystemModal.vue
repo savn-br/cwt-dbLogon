@@ -35,7 +35,7 @@ export default {
         return this.$store.state.selectedSystem.systemId
       },
       set(value) {
-        this.$store.commit('changeSelectedSystemSystemId', value)
+        this.$store.commit('setSelectedSystemSystemId', value)
       },
     },
     systemAcronym: {
@@ -43,7 +43,7 @@ export default {
         return this.$store.state.selectedSystem.systemAcronym
       },
       set(value) {
-        this.$store.commit('changeSelectedSystemSystemAcronym', value)
+        this.$store.commit('setSelectedSystemSystemAcronym', value)
       },
     },
     systemName: {
@@ -51,7 +51,7 @@ export default {
         return this.$store.state.selectedSystem.systemName
       },
       set(value) {
-        this.$store.commit('changeSelectedSystemSystemName', value)
+        this.$store.commit('setSelectedSystemSystemName', value)
       },
     },
     notes: {
@@ -59,7 +59,7 @@ export default {
         return this.$store.state.selectedSystem.notes
       },
       set(value) {
-        this.$store.commit('changeSelectedSystemNotes', value)
+        this.$store.commit('setSelectedSystemNotes', value)
       },
     },
     active: {
@@ -67,7 +67,7 @@ export default {
         return this.$store.state.selectedSystem.active
       },
       set(value) {
-        this.$store.commit('changeSelectedSystemActive', value)
+        this.$store.commit('setSelectedSystemActive', value)
       },
     },
     ...mapState({

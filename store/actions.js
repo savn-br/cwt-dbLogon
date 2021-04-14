@@ -7,8 +7,8 @@ export default {
       // const { data: profiles } = await this.$axios.get(
       //   `/assignProfile/${'ULXF214'}`
       // )
-      commit('changeUserProfiles', profiles.data)
-      commit('changeSelectedProfile', profiles.data[0])
+      commit('setUserProfiles', profiles.data)
+      commit('setSelectedProfile', profiles.data[0])
     } catch (error) {
       console.error(error)
     }
@@ -19,7 +19,7 @@ export default {
       //   `/dashManager/${state.dataUser.userId}`
       // )
       const { data: requests } = await this.$axios.get(`/dashManager/${'Us1M'}`)
-      commit('changeRequests', requests.data)
+      commit('setRequests', requests.data)
     } catch (error) {
       console.error(error)
     }
@@ -29,7 +29,7 @@ export default {
       const { data: transactions } = await this.$axios.get(
         `/transaction/SearchAll/${state.selectedSystem.systemId}/${state.selectedModule.moduleId}/`
       )
-      commit('changeSelectedModuleTransactions', transactions.data)
+      commit('setSelectedModuleTransactions', transactions.data)
     } catch (error) {
       console.error(error)
     }
@@ -84,7 +84,7 @@ export default {
       const { data: modules } = await this.$axios.get(
         `/module/SearchAll/${state.selectedSystem.systemId}/`
       )
-      commit('changeSelectedSystemModules', modules.data)
+      commit('setSelectedSystemModules', modules.data)
     } catch (error) {
       console.error(error)
     }
@@ -111,7 +111,7 @@ export default {
   async getSystems({ state, commit }) {
     try {
       const { data: systems } = await this.$axios.get(`/system/SearchAll/`)
-      commit('changeSystems', systems.data)
+      commit('setSystems', systems.data)
     } catch (error) {
       console.error(error)
     }
@@ -121,8 +121,8 @@ export default {
       const { data: responseData } = await this.$axios.post(
         `/access/${state.userData.userId}`
       )
-      commit('changeUserStatus', responseData.data.status)
-      commit('changeUserData', responseData.data)
+      commit('setUserStatus', responseData.data.status)
+      commit('setUserData', responseData.data)
     } catch (error) {
       console.error(error)
     }
@@ -136,8 +136,8 @@ export default {
         }
       )
       const { data: responseData } = response
-      commit('changeUserStatus', responseData.data.status)
-      commit('changeUserData', responseData.data)
+      commit('setUserStatus', responseData.data.status)
+      commit('setUserData', responseData.data)
       return response.status
     } catch (error) {
       console.error(error)
@@ -149,8 +149,8 @@ export default {
       const { data: responseData } = await this.$axios.get(
         `/access/${state.userData.userId}`
       )
-      commit('changeUserStatus', responseData.data.status)
-      commit('changeUserData', responseData.data)
+      commit('setUserStatus', responseData.data.status)
+      commit('setUserData', responseData.data)
     } catch (error) {
       console.error(error)
     }
@@ -164,9 +164,9 @@ export default {
           ...state.userData,
         }
       )
-      commit('changePointOfSales', responseData.data.pointOfSales)
-      commit('changeProfileAccess', responseData.data.profileAccess)
-      commit('changeUserData', responseData.data)
+      commit('setPointOfSales', responseData.data.pointOfSales)
+      commit('setProfileAccess', responseData.data.profileAccess)
+      commit('setUserData', responseData.data)
     } catch (error) {
       console.error(error)
     }
@@ -177,9 +177,9 @@ export default {
       const { data: responseData } = await this.$axios.get(
         `/myProfile/${state.userData.userId}`
       )
-      commit('changePointOfSales', responseData.data.pointOfSales)
-      commit('changeProfileAccess', responseData.data.profileAccess)
-      commit('changeUserData', responseData.data)
+      commit('setPointOfSales', responseData.data.pointOfSales)
+      commit('setProfileAccess', responseData.data.profileAccess)
+      commit('setUserData', responseData.data)
     } catch (error) {
       console.error(error)
     }

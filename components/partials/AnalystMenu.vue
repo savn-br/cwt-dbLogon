@@ -4,31 +4,31 @@
     b-menu-item.tw-text-xs.tw-py-1.tw-w-100(
       icon='account',
       :label='$t("myProfile")',
-      @click='changePartial("MyProfile")'
+      @click='setPartial("MyProfile")'
     )
     b-menu-item.tw-text-xs.tw-py-1(
       icon='account-search',
       :label='$t("profileSearch")',
-      @click='changePartial("ProfileSearch")'
+      @click='setPartial("ProfileSearch")'
     )
     b-menu-item.tw-text-xs.tw-py-1(
       icon='account-lock',
       :label='$t("maintainProfiles")',
-      @click='changePartial("MaintainProfile")'
+      @click='setPartial("MaintainProfile")'
     )
     b-menu-item.tw-text-xs.tw-py-1(
       icon='access-point-network',
       :label='$t("maintainSystems")',
-      @click='changePartial("MaintainSystem")'
+      @click='setPartial("MaintainSystem")'
     )
 </template>
 
 <script>
-import changeMenu from '~/mixins/changeMenu'
+import setMenu from '~/mixins/setMenu'
 export default {
   name: 'AnalystMenu',
   components: {},
-  mixins: [changeMenu],
+  mixins: [setMenu],
   props: {},
   data() {
     return {}

@@ -77,21 +77,21 @@ export default {
         if (status === 200) {
           window.localStorage.setItem('token', responseData.data.token)
           const { profileType, userId, transactions } = responseData.data
-          this.$store.commit('changeUserDataTerm', {
+          this.$store.commit('setUserDataTerm', {
             key: 'userId',
             value: userId,
           })
-          this.$store.commit('changeUserDataTerm', {
+          this.$store.commit('setUserDataTerm', {
             key: 'profileType',
             value: profileType,
           })
           // if (this.profileTypes[profileType].menu) {
           //   this.$store.commit(
-          //     'changeCurrentMenu',
+          //     'setCurrentMenu',
           //     this.profileTypes[profileType].menu
           //   )
           // }
-          this.$store.commit('changeCurrentMenu', transactions)
+          this.$store.commit('setCurrentMenu', transactions)
           this.$router.push(`/${this.profileTypes[profileType].redirect}/`)
         }
         if (status === 404) {

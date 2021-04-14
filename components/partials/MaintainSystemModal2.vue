@@ -38,7 +38,7 @@ export default {
         return this.$store.state.selectedModule.moduleId
       },
       set(value) {
-        this.$store.commit('changeSelectedModuleModuleId', value)
+        this.$store.commit('setSelectedModuleModuleId', value)
       },
     },
     moduleAcronym: {
@@ -46,7 +46,7 @@ export default {
         return this.$store.state.selectedModule.moduleAcronym
       },
       set(value) {
-        this.$store.commit('changeSelectedModuleModuleAcronym', value)
+        this.$store.commit('setSelectedModuleModuleAcronym', value)
       },
     },
     moduleName: {
@@ -54,7 +54,7 @@ export default {
         return this.$store.state.selectedModule.moduleName
       },
       set(value) {
-        this.$store.commit('changeSelectedModuleModuleName', value)
+        this.$store.commit('setSelectedModuleModuleName', value)
       },
     },
     notes: {
@@ -62,7 +62,7 @@ export default {
         return this.$store.state.selectedModule.notes
       },
       set(value) {
-        this.$store.commit('changeSelectedModuleNotes', value)
+        this.$store.commit('setSelectedModuleNotes', value)
       },
     },
     active: {
@@ -70,7 +70,7 @@ export default {
         return this.$store.state.selectedModule.active
       },
       set(value) {
-        this.$store.commit('changeSelectedModuleActive', value)
+        this.$store.commit('setSelectedModuleActive', value)
       },
     },
   },

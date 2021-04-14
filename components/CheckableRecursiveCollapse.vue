@@ -13,7 +13,7 @@
           aria-controls='contentID'
         )
           .c-card-header-note.tw-w-24
-            b-checkbox(v-model='leaf.active', @change='changeChildren') ativo
+            b-checkbox(v-model='leaf.active', @set='setChildren') ativo
           .c-card-header-system.tw-flex.tw-items-center(class='tw-w-2/4')
             a.c-card-header-icon
               b-icon(:icon='props.open ? "menu-down" : "menu-up"')
@@ -54,7 +54,7 @@ export default {
   mounted() {},
   created() {},
   methods: {
-    changeChildren() {
+    setChildren() {
       console.log('AAAAA')
     },
   },

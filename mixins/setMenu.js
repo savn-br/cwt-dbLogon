@@ -1,7 +1,7 @@
 export default {
   methods: {
-    changePartial(partialName) {
-      this.$store.commit('changeCurrentPartial', partialName)
+    setPartial(partialName) {
+      this.$store.commit('setCurrentPartial', partialName)
       this.closeNavbar()
     },
     closeNavbar() {

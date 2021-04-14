@@ -4,15 +4,15 @@
     b-menu-item.tw-text-xs.tw-py-1.tw-w-100(
       icon='account',
       :label='$t("myProfile")',
-      @click='changePartial("MyProfile")'
+      @click='setPartial("MyProfile")'
     )
 </template>
 <script>
-import changeMenu from '~/mixins/changeMenu'
+import setMenu from '~/mixins/setMenu'
 export default {
   name: 'CollaboratorMenu',
   components: {},
-  mixins: [changeMenu],
+  mixins: [setMenu],
 
   props: {},
   data() {

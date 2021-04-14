@@ -1,92 +1,92 @@
 export default {
-  changeUserDataTerm(state, { key, value }) {
+  setUserDataTerm(state, { key, value }) {
     state.userData[key] = value
   },
-  changeSelectedProfileTerm(state, { key, value }) {
+  setSelectedProfileTerm(state, { key, value }) {
     state.selectedProfile[key] = value
   },
-  changeSelectedProfile(state, selectedProfile) {
+  setSelectedProfile(state, selectedProfile) {
     state.selectedProfile = selectedProfile
   },
-  changeUserProfiles(state, profiles) {
+  setUserProfiles(state, profiles) {
     state.userProfiles = profiles
   },
-  changeSearchProfileId(state, userId) {
+  setSearchProfileId(state, userId) {
     state.searchProfileId = userId
   },
-  changeRequests(state, requests) {
+  setRequests(state, requests) {
     state.requests = requests
   },
-  changeSelectedModuleTransactions(state, transactions) {
+  setSelectedModuleTransactions(state, transactions) {
     state.selectedModule.transactions = transactions
   },
-  changeSelectedTransactionActive(state, active) {
+  setSelectedTransactionActive(state, active) {
     state.selectedTransaction.active = active
   },
-  changeSelectedTransactionNotes(state, notes) {
+  setSelectedTransactionNotes(state, notes) {
     state.selectedTransaction.notes = notes
   },
-  changeSelectedTransactionTransactionName(state, transactionName) {
+  setSelectedTransactionTransactionName(state, transactionName) {
     state.selectedTransaction.transactionName = transactionName
   },
-  changeSelectedTransactionTransactionId(state, transactionId) {
+  setSelectedTransactionTransactionId(state, transactionId) {
     state.selectedTransaction.transactionId = transactionId
   },
-  changeTransactionModalMode(state, mode) {
+  setTransactionModalMode(state, mode) {
     state.transactionModalMode = mode
   },
-  changeSelectedTransaction(state, selectedTransaction) {
+  setSelectedTransaction(state, selectedTransaction) {
     state.selectedTransaction = selectedTransaction
   },
-  changeSelectedModuleActive(state, active) {
+  setSelectedModuleActive(state, active) {
     state.selectedModule.active = active
   },
-  changeSelectedModuleNotes(state, notes) {
+  setSelectedModuleNotes(state, notes) {
     state.selectedModule.notes = notes
   },
-  changeSelectedModuleModuleName(state, moduleName) {
+  setSelectedModuleModuleName(state, moduleName) {
     state.selectedModule.moduleName = moduleName
   },
-  changeSelectedModuleModuleAcronym(state, moduleAcronym) {
+  setSelectedModuleModuleAcronym(state, moduleAcronym) {
     state.selectedModule.moduleAcronym = moduleAcronym
   },
-  changeSelectedModuleModuleId(state, moduleId) {
+  setSelectedModuleModuleId(state, moduleId) {
     state.selectedModule.moduleId = moduleId
   },
-  changeModuleModalMode(state, mode) {
+  setModuleModalMode(state, mode) {
     state.moduleModalMode = mode
   },
-  changeSelectedModule(state, selectedModule) {
+  setSelectedModule(state, selectedModule) {
     state.selectedModule = selectedModule
   },
-  changeSelectedSystemModules(state, modules) {
+  setSelectedSystemModules(state, modules) {
     state.selectedSystem.modules = modules
   },
-  changeSelectedSystemActive(state, active) {
+  setSelectedSystemActive(state, active) {
     state.selectedSystem.active = active
   },
-  changeSelectedSystemNotes(state, notes) {
+  setSelectedSystemNotes(state, notes) {
     state.selectedSystem.notes = notes
   },
-  changeSelectedSystemSystemName(state, systemName) {
+  setSelectedSystemSystemName(state, systemName) {
     state.selectedSystem.systemName = systemName
   },
-  changeSelectedSystemSystemAcronym(state, systemAcronym) {
+  setSelectedSystemSystemAcronym(state, systemAcronym) {
     state.selectedSystem.systemAcronym = systemAcronym
   },
-  changeSelectedSystemSystemId(state, systemId) {
+  setSelectedSystemSystemId(state, systemId) {
     state.selectedSystem.systemId = systemId
   },
-  changeSystemModalMode(state, mode) {
+  setSystemModalMode(state, mode) {
     state.systemModalMode = mode
   },
-  changeSelectedSystem(state, selectedSystem) {
+  setSelectedSystem(state, selectedSystem) {
     state.selectedSystem = selectedSystem
   },
-  changeSystems(state, systems) {
+  setSystems(state, systems) {
     state.systems = systems
   },
-  changeCurrentMenu(state, transactions) {
+  setCurrentMenu(state, transactions) {
     state.currentMenu = [
       { partial: 'MyProfile', label: 'myProfile', icon: 'account' },
     ]
@@ -94,11 +94,11 @@ export default {
       state.currentMenu = [...state.currentMenu, state.menuStruct[transaction]]
     })
   },
-  changeCurrentPartial(state, currentPartial) {
+  setCurrentPartial(state, currentPartial) {
     state.currentPartial = currentPartial
   },
 
-  changeUserData(state, userData) {
+  setUserData(state, userData) {
     if (userData.status) {
       delete userData.status
     }
@@ -110,14 +110,14 @@ export default {
     }
     state.userData = userData
   },
-  changeUserStatus(state, userStatus) {
+  setUserStatus(state, userStatus) {
     state.userStatus = userStatus
   },
 
-  changePointOfSales(state, pointOfSales) {
+  setPointOfSales(state, pointOfSales) {
     state.pointOfSales = pointOfSales
   },
-  changeProfileAccess(state, profileAccess) {
+  setProfileAccess(state, profileAccess) {
     state.profileAccess = profileAccess
   },
 }

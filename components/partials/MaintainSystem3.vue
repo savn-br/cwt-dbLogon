@@ -102,13 +102,13 @@ export default {
   created() {},
   methods: {
     createTransaction() {
-      this.$store.commit('changeTransactionModalMode', 'save')
-      this.$store.commit('changeSelectedTransaction', {})
+      this.$store.commit('setTransactionModalMode', 'save')
+      this.$store.commit('setSelectedTransaction', {})
       this.isModalActive = true
     },
     editTransaction(transaction) {
-      this.$store.commit('changeTransactionModalMode', 'edit')
-      this.$store.commit('changeSelectedTransaction', transaction)
+      this.$store.commit('setTransactionModalMode', 'edit')
+      this.$store.commit('setSelectedTransaction', transaction)
       this.isModalActive = true
     },
   },

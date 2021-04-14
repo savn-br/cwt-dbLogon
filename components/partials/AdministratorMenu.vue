@@ -4,51 +4,51 @@
     b-menu-item.tw-text-xs.tw-py-1.tw-w-100(
       icon='account',
       :label='$t("myProfile")',
-      @click='changePartial("MyProfile")'
+      @click='setPartial("MyProfile")'
     )
     b-menu-item.tw-text-xs.tw-py-1(
       icon='account-details',
       :label='$t("managerPanel")',
-      @click='changePartial("ManagerPanel")'
+      @click='setPartial("ManagerPanel")'
     )
     b-menu-item.tw-text-xs.tw-py-1(
       icon='account-arrow-right',
       :label='$t("profileAssignment")',
-      @click='changePartial("AssignmentOfProfile")'
+      @click='setPartial("AssignmentOfProfile")'
     )
     b-menu-item.tw-text-xs.tw-py-1(
       icon='account-cancel',
       :label='$t("blockUsers")',
-      @click='changePartial("BlockUser")'
+      @click='setPartial("BlockUser")'
     )
     b-menu-item.tw-text-xs.tw-py-1(
       icon='account-check',
       :label='$t("approvalDelegation")',
-      @click='changePartial("ApprovalDelegation")'
+      @click='setPartial("ApprovalDelegation")'
     )
     b-menu-item.tw-text-xs.tw-py-1(
       icon='account-search',
       :label='$t("profileSearch")',
-      @click='changePartial("ProfileSearch")'
+      @click='setPartial("ProfileSearch")'
     )
     b-menu-item.tw-text-xs.tw-py-1(
       icon='account-lock',
       :label='$t("maintainProfiles")',
-      @click='changePartial("MaintainProfile")'
+      @click='setPartial("MaintainProfile")'
     )
     b-menu-item.tw-text-xs.tw-py-1(
       icon='account-supervisor',
       :label='$t("alternativeApprover")',
-      @click='changePartial("AlternateApproverRegister")'
+      @click='setPartial("AlternateApproverRegister")'
     )
 </template>
 
 <script>
-import changeMenu from '~/mixins/changeMenu'
+import setMenu from '~/mixins/setMenu'
 export default {
   name: 'AdministratorMenu',
   components: {},
-  mixins: [changeMenu],
+  mixins: [setMenu],
   data() {
     return {}
   },

@@ -104,7 +104,7 @@ export default {
         return this.$store.state.searchProfileId
       },
       set(value) {
-        this.$store.commit('changeSearchProfileId', value)
+        this.$store.commit('setSearchProfileId', value)
       },
     },
   },
