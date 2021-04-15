@@ -1,18 +1,36 @@
 export default {
+  async setProfile2Collaborator({ state, commit }, { profileId }) {
+    const response = await this.$axios.post(`/userProfile/`, {
+      userId: state.selectedCollaborator.userId,
+      profileId,
+    })
+    console.log(response)
+  },
   async getAvailableProfiles({ state, commit }) {
     try {
-      const response = await this.$axios.get(
-        `/profile/SearchAll/${state.userData.userId}`
+      commit('setSearchProfileLoading', true)
+      const { data: profiles } = await this.$axios.get(
+        `/profile/SearchAll/${state.userData.userId}/${state.searchProfileId}`
       )
-      console.log(response)
+      commit('setAvailableProfiles', profiles.data)
+      commit('setSearchProfileLoading', false)
     } catch (error) {
       console.error(error)
     }
   },
-  async setProfileStateus2Collaborator(
+  async setPointOfSales2Collaborator(
     { state, commit },
-    { active, profileId }
+    { active, pointOfSaleId }
   ) {
+    try {
+      await this.$axios.put(
+        `/userPointOfSale/${state.userData.userId}/${pointOfSaleId}/${active}`
+      )
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async setProfileState2Collaborator({ state, commit }, { active, profileId }) {
     try {
       await this.$axios.put(
         `/userProfile/${state.userData.userId}/${profileId}/${active}`

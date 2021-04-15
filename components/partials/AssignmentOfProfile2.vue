@@ -1,35 +1,42 @@
 <template lang="pug">
 #assignmentOfProfile2.assignment-of-profile2-wrapper.tw-mt-8.tw-px-8
-  standard-table(:data='profileDescription')
+  back-button(partialComponent='AssignmentOfProfile')
+  b-field(label='Find by profileName')
+    b-autocomplete(v-model='searchProfileId', :data='availablesProfilesName')
+    span.tw-ml-2(v-if='searchProfileLoading') loading ...
+  standard-table(v-if='availableProfiles.length', :data='availableProfiles')
     b-table-column(
       v-slot='props',
-      field='profile_code',
+      field='profileId',
       :searchable='true',
       :label='$t("profileCode")'
     )
-      span.tw-text-xs {{ props.row.profile_code }}
+      span.tw-text-xs {{ props.row.profileId }}
     b-table-column(
       v-slot='props',
-      field='profile_description',
+      field='profileName',
       :searchable='true',
       :label='$t("profileDescription")'
     )
-      span.tw-text-xs {{ props.row.profile_description }}
+      span.tw-text-xs {{ props.row.profileName }}
     b-table-column(
       :label='$t("operation")',
-      field='active_operation',
+      field='active',
       :centered='true',
       v-slot='props'
     )
       .operation-wrapper
-        b-checkbox(v-model='props.row.active_operation')
+        b-checkbox(
+          :value='props.row.active',
+          @input='(active) => { addProfile2Collaborator(active, props.row.profileId); }'
+        )
           span.tw-text-xs {{ $t("active") }}
         a(href='#')
           b-icon(icon='account-details')
 </template>
 
 <script>
-import { mapMutations, mapActions } from 'vuex'
+import { mapMutations, mapActions, mapState, mapGetters } from 'vuex'
 export default {
   name: 'AssignmentOfProfile2',
   components: {
@@ -42,6 +49,13 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      availablesProfilesName: 'availablesProfilesName',
+    }),
+    ...mapState({
+      availableProfiles: (state) => state.availableProfiles,
+      searchProfileLoading: (state) => state.searchProfileLoading,
+    }),
     searchProfileId: {
       get() {
         return this.$store.state.searchProfileId
@@ -51,14 +65,26 @@ export default {
       },
     },
   },
-  watch: {},
+  watch: {
+    async searchProfileId(newSearchProfileId) {
+      if (newSearchProfileId.length >= 3) {
+        await this.getAvailableProfiles()
+      }
+    },
+  },
   async mounted() {
-    await this.getAvailableProfiles()
+    if (this.searchProfileId.length >= 3) {
+      await this.getAvailableProfiles()
+    }
   },
   created() {},
   methods: {
     ...mapMutations(['setSearchProfileId']),
-    ...mapActions(['getAvailableProfiles']),
+    ...mapActions(['getAvailableProfiles', 'setProfile2Collaborator']),
+
+    async addProfile2Collaborator(active, profileId) {
+      if (active) await this.setProfile2Collaborator({ profileId })
+    },
   },
 }
 </script>

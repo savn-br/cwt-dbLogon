@@ -1,4 +1,10 @@
 export default {
+  setSearchProfileLoading(state, value) {
+    state.searchProfileLoading = value
+  },
+  setAvailableProfiles(state, profiles) {
+    state.availableProfiles = profiles
+  },
   setSearchCollaboratorLoading(state, value) {
     state.searchCollaboratorLoading = value
   },

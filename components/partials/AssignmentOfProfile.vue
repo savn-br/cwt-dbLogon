@@ -80,9 +80,9 @@
             b-field
               b-switch(
                 size='is-small',
-                :value='props.row.operation',
-                @input='(active) => { setSalesPoint(active, props.row); }'
-              ) {{ props.row.operation }}
+                :value='props.row.active',
+                @input='(active) => { setSalesPoint(active, props.row.pointOfSaleId); }'
+              )
             span.tw-cursor-pointer(class='hover:tw-text-primary')
               b-icon(icon='eye', size='')
 </template>
@@ -131,14 +131,16 @@ export default {
     ...mapMutations(['setSearchCollaboratorId']),
     ...mapActions([
       'getAvailableCollaborators',
-      'setProfileStateus2Collaborator',
+      'setProfileState2Collaborator',
+      'setPointOfSales2Collaborator',
     ]),
 
     async setProfile(active, profileId) {
-      await this.setProfileStateus2Collaborator({ active, profileId })
+      await this.setProfileState2Collaborator({ active, profileId })
     },
-    setSalesPoint(active, salesPoint) {
-      console.log(active, salesPoint) // @TODO: Finalizar quando retornar os dados necessarios
+    async setSalesPoint(active, pointOfSaleId) {
+      console.log(active, pointOfSaleId)
+      await this.setPointOfSales2Collaborator({ active, pointOfSaleId })
     },
     goToPartTwo() {
       this.setPartial('AssignmentOfProfile2')
