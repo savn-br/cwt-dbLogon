@@ -1,5 +1,5 @@
 <template lang="pug">
-#assignmentOfProfile2.assignment-of-profile2-wrapper.tw-mt-8.tw-px-8
+#assignmentOfProfile3.assignment-of-profile3-wrapper.tw-mt-8.tw-px-8
   back-button(partialComponent='AssignmentOfProfile')
   b-field(label='Find by profileName')
     b-autocomplete(v-model='searchProfileId', :data='availablesProfilesName')
@@ -27,7 +27,7 @@
     )
       .operation-wrapper
         b-checkbox(
-          :value='props.row.active',
+          :value='isProfileActive2Collaborator(props.row.profileId)',
           @input='(active) => { addProfile2Collaborator(active, props.row.profileId); }'
         )
           span.tw-text-xs {{ $t("active") }}
@@ -38,24 +38,17 @@
 <script>
 import { mapMutations, mapActions, mapState, mapGetters } from 'vuex'
 export default {
-  name: 'AssignmentOfProfile2',
+  name: 'AssignmentOfProfile3',
   components: {
     StandardTable: () => import('@/components/StandardTable'),
   },
   props: {},
   data() {
-    return {
-      profileDescription: require('@/jsons/profile-description-table-data.json'),
-    }
+    return {}
   },
   computed: {
-    ...mapGetters({
-      availablesProfilesName: 'availablesProfilesName',
-    }),
-    ...mapState({
-      availableProfiles: (state) => state.availableProfiles,
-      searchProfileLoading: (state) => state.searchProfileLoading,
-    }),
+    ...mapGetters(['availablesProfilesName', 'isProfileActive2Collaborator']),
+    ...mapState(['availableProfiles', 'searchProfileLoading']),
     searchProfileId: {
       get() {
         return this.$store.state.searchProfileId
@@ -90,12 +83,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.assignment-of-profile2-wrapper {
+.assignment-of-profile3-wrapper {
 }
 </style>
 
 <style lang="scss">
-.assignment-of-profile2-wrapper {
+.assignment-of-profile3-wrapper {
   input.input {
     height: px2rem(25);
   }

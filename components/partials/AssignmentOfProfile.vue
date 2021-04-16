@@ -59,7 +59,11 @@
             b-icon(icon='eye', size='')
     .view-sales.tw-mt-6
       .button-wrapper.tw-flex.tw-justify-end
-        b-button.tw-w-24(v-if='!!selectedCollaborator', type='is-primary') {{ $t("add") }}
+        b-button.tw-w-24(
+          v-if='!!selectedCollaborator',
+          @click='goToPartThree',
+          type='is-primary'
+        ) {{ $t("add") }}
       standard-table(
         v-if='!!selectedCollaborator',
         :data='selectedCollaborator && selectedCollaborator.pointOfSales'
@@ -139,11 +143,14 @@ export default {
       await this.setProfileState2Collaborator({ active, profileId })
     },
     async setSalesPoint(active, pointOfSaleId) {
-      console.log(active, pointOfSaleId)
       await this.setPointOfSales2Collaborator({ active, pointOfSaleId })
     },
+
     goToPartTwo() {
       this.setPartial('AssignmentOfProfile2')
+    },
+    goToPartThree() {
+      this.setPartial('AssignmentOfProfile3')
     },
   },
 }

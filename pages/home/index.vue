@@ -13,6 +13,8 @@ export default {
       import('@/components/partials/AssignmentOfProfile'),
     AssignmentOfProfile2: () =>
       import('@/components/partials/AssignmentOfProfile2'),
+    AssignmentOfProfile3: () =>
+      import('@/components/partials/AssignmentOfProfile3'),
     ManagerPanel: () => import('@/components/partials/ManagerPanel'),
     BlockUser: () => import('@/components/partials/BlockUser'),
     ApprovalDelegation: () =>

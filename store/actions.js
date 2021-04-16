@@ -1,10 +1,33 @@
 export default {
+  async setPointOfSale2Collaborator({ state, commit }, { pointOfSaleId }) {
+    try {
+      await this.$axios.post(`/userPointOfSale/`, {
+        pointOfSaleId,
+        userId: state.selectedCollaborator.userId,
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async getAvailablePointOfSales({ state, commit }) {
+    try {
+      const { data: pointOfSales } = await this.$axios.get(
+        `/userPointOfSale/SearchAll/${state.userData.userId}/`
+      )
+      commit('setAvailablePointOfSales', pointOfSales.data)
+    } catch (error) {
+      console.error(error)
+    }
+  },
   async setProfile2Collaborator({ state, commit }, { profileId }) {
-    const response = await this.$axios.post(`/userProfile/`, {
-      userId: state.selectedCollaborator.userId,
-      profileId,
-    })
-    console.log(response)
+    try {
+      await this.$axios.post(`/userProfile/`, {
+        userId: state.selectedCollaborator.userId,
+        profileId,
+      })
+    } catch (error) {
+      console.error(error)
+    }
   },
   async getAvailableProfiles({ state, commit }) {
     try {

@@ -1,4 +1,7 @@
 export default {
+  setAvailablePointOfSales(state, value) {
+    state.availablePointOfSales = value
+  },
   setSearchProfileLoading(state, value) {
     state.searchProfileLoading = value
   },
