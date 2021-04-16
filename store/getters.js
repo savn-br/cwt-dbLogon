@@ -2,7 +2,7 @@ export default {
   collaboratorsId(state) {
     return state.collaborators.map((user) => user.userId)
   },
-  availablesProfilesName(state) {
+  availableProfilesName(state) {
     return state.availableProfiles.map((profile) => profile.profileName)
   },
   availablePointOfSales(state) {

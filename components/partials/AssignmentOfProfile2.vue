@@ -2,7 +2,7 @@
 #assignmentOfProfile3.assignment-of-profile3-wrapper.tw-mt-8.tw-px-8
   back-button(partialComponent='AssignmentOfProfile')
   b-field(label='Find by profileName')
-    b-autocomplete(v-model='searchProfileId', :data='availablesProfilesName')
+    b-autocomplete(v-model='searchProfileId', :data='availableProfilesName')
     span.tw-ml-2(v-if='searchProfileLoading') loading ...
   standard-table(v-if='availableProfiles.length', :data='availableProfiles')
     b-table-column(
@@ -47,7 +47,7 @@ export default {
     return {}
   },
   computed: {
-    ...mapGetters(['availablesProfilesName', 'isProfileActive2Collaborator']),
+    ...mapGetters(['availableProfilesName', 'isProfileActive2Collaborator']),
     ...mapState(['availableProfiles', 'searchProfileLoading']),
     searchProfileId: {
       get() {
