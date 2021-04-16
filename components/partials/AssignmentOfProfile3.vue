@@ -33,6 +33,7 @@
     )
       .operation-wrapper
         b-checkbox(
+          :value='isPointOfSaleActive2Collaborator(props.row.pointOfSaleId)',
           @input='(active) => { addPointOfSales2Collaborator(active, props.row.pointOfSaleId); }'
         )
           span.tw-text-xs {{ $t("active") }}
@@ -52,7 +53,10 @@ export default {
     return {}
   },
   computed: {
-    ...mapGetters(['availablePointOfSales']),
+    ...mapGetters([
+      'availablePointOfSales',
+      'isPointOfSaleActive2Collaborator',
+    ]),
     ...mapState(['availablePointOfSales']),
   },
   watch: {},

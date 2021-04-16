@@ -13,4 +13,9 @@ export default {
       return profile.profileId === profileId
     })
   },
+  isPointOfSaleActive2Collaborator: (state) => (pointOfSaleId) => {
+    return state.selectedCollaborator.pointOfSales.some((pointOfSale) => {
+      return pointOfSale.pointOfSaleId === pointOfSaleId
+    })
+  },
 }
