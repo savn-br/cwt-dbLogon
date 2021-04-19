@@ -20,6 +20,7 @@ export default {
     ApprovalDelegation: () =>
       import('@/components/partials/ApprovalDelegation'),
     ProfileSearch: () => import('@/components/partials/ProfileSearch'),
+    ProfileSearch2: () => import('@/components/partials/ProfileSearch2'),
     MaintainProfile: () => import('@/components/partials/MaintainProfile'),
     MaintainSystem: () => import('@/components/partials/MaintainSystem'),
     MaintainSystem2: () => import('@/components/partials/MaintainSystem2'),

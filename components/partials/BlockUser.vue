@@ -2,43 +2,37 @@
 .block-user-wrapper.tw-mt-8.tw-px-8
   form
     fieldset
-      b-radio(v-model='radio', name='select', native-value='todos') {{ $t("allUsers") }}
-      b-radio(v-model='radio', name='select', native-value='actives') {{ $t("activeOnly") }}
-  standard-table.tw-mt-5(:data='data', :bordered='true')
-    b-table-column(field='user', :label='$t("user")', v-slot='props')
-      span.tw-text-xs {{ props.row.user }}
-    b-table-column(field='name', :label='$t("name")', v-slot='props')
-      span.tw-text-xs {{ props.row.name }}
-    b-table-column(field='profile', :label='$t("profile")', v-slot='props')
-      span.tw-text-xs {{ props.row.profile }}
+      b-switch(size='is-small', v-model='onlyActives') {{ $t("activeOnly") }}
+  standard-table.tw-mt-5(:data='filteredActivateUsers', :bordered='true')
+    b-table-column(field='userId', :label='$t("user")', v-slot='props')
+      span.tw-text-xs {{ props.row.userId }}
+    b-table-column(field='userName', :label='$t("name")', v-slot='props')
+      span.tw-text-xs {{ props.row.userName }}
+    b-table-column(field='profileName', :label='$t("profile")', v-slot='props')
+      span.tw-text-xs {{ props.row.profileName }}
     b-table-column(
-      field='initial_date',
+      field='startTermDate',
       :label='$t("initialDate")',
       v-slot='props'
     )
-      span.tw-text-xs {{ props.row.initial_date }}
+      span.tw-text-xs {{ props.row.startTermDate }}
     b-table-column(
-      field='end_date',
-      :label='$t("initialDate")',
+      field='endTermDate',
+      :label='$t("finalDate")',
       v-slot='props'
     )
-      span.tw-text-xs {{ props.row.end_date }}
-    b-table-column(
-      ,
-      :label='$t("operation")',
-      v-slot='props',
-      :centered='true'
-    )
+      span.tw-text-xs {{ props.row.endTermDate }}
+    b-table-column(, :label='$t("active")', v-slot='props', :centered='true')
       b-field
         b-switch(
           size='is-small',
-          true-value='on',
-          false-value='off',
-          v-model='props.row.operation'
-        ) {{ props.row.operation }}
+          :value='props.row.active',
+          @input='(active) => updateActiveState(active, props.row.userId)'
+        )
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 export default {
   name: 'BlockUser',
   components: {
@@ -47,16 +41,32 @@ export default {
   props: {},
   data() {
     return {
-      data: require('@/jsons/block-user-data.json'),
-      radio: '',
-      switchValue: 'Off',
+      onlyActives: false,
     }
   },
-  computed: {},
+  computed: {
+    ...mapState(['activateUsers']),
+
+    filteredActivateUsers() {
+      if (this.onlyActives) {
+        return this.activateUsers.filter((user) => user.active)
+      } else {
+        return this.activateUsers
+      }
+    },
+  },
   watch: {},
-  mounted() {},
+  async mounted() {
+    await this.getActivateUsers()
+  },
   created() {},
-  methods: {},
+  methods: {
+    ...mapActions(['getActivateUsers', 'setActivateUser']),
+
+    async updateActiveState(active, userId) {
+      await this.setActivateUser({ active, userId })
+    },
+  },
 }
 </script>
 

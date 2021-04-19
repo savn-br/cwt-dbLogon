@@ -1,45 +1,67 @@
 <template lang="pug">
 #profileSearch2.profile-search2-wrapper.tw-mt-8.tw-px-8
-  form.fields.tw-grid(name='profileForm')
+  back-button.tw-mb-4(partialComponent='AssignmentOfProfile2')
+  form.fields.tw-grid.tw-mb-4(name='profileForm')
     b-field.tw-mx-2(label='Código do perfil')
-      b-input(v-model='code', size='is-small', name='user')
+      b-input(
+        size='is-small',
+        v-model='selectedProfileData.profileId',
+        disabled
+      )
     b-field.tw-mx-2(label='Descrição do perfil')
-      b-input(v-model='description', size='is-small', name='user')
+      b-input(
+        v-model='selectedProfileData.description',
+        size='is-small',
+        disabled
+      )
     b-field.tw-mx-2(label='Perfil pai')
-      b-input(v-model='father', size='is-small', name='user')
+      b-input(
+        v-model='selectedProfileData.profileParentId',
+        size='is-small',
+        disabled
+      )
     b-field.tw-mx-2(label='Visão de dados de clientes')
-      b-input(v-model='clients', size='is-small', name='user')
+      b-input(, size='is-small', disabled)
     b-field.tw-mx-2
-      b-switch(size='is-small', v-model='card') Visualizar cartão
+      b-switch(size='is-small') Visualizar cartão
     b-field.tw-mx-2
-      b-switch(size='is-small', v-model='attr') Permissão de atribuição
+      b-switch(size='is-small') Permissão de atribuição
     b-field.tw-mx-2
-      b-switch(size='is-small', v-model='active') Ativo
-  component.tw-mt-4(is='RecursiveCollapse', :tree='tree', padding='0')
+      b-switch(size='is-small') Ativo
+
+  collapse.tw-text-sm(
+    v-if='!!selectedProfileData.profileAccess && !!selectedProfileData.profileAccess.profileName',
+    :title='selectedProfileData.profileAccess.profileName'
+  )
+    component(
+      v-for='(system,index) in selectedProfileData.profileAccess.details',
+      is='SystemCollapse',
+      :key='index',
+      :system='system'
+    )
+  //- component.tw-mt-4(is='RecursiveCollapse', :tree='tree', padding='0')
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 export default {
   name: 'ProfileSearch2',
   components: {},
   props: {},
   data() {
-    return {
-      code: '',
-      description: '',
-      father: '',
-      clients: '',
-      card: false,
-      attr: false,
-      active: true,
-      tree: require('@/jsons/directory-tree-data.json'),
-    }
+    return {}
   },
-  computed: {},
+  computed: {
+    ...mapState(['selectedProfileData']),
+  },
   watch: {},
-  mounted() {},
+  async mounted() {
+    await this.getSelectedProfileData()
+  },
   created() {},
-  methods: {},
+  methods: {
+    ...mapActions(['getSelectedProfileData']),
+  },
 }
 </script>
 
@@ -62,8 +84,8 @@ export default {
     margin-right: auto;
   }
 
-  label {
-    font-size: 0.75rem;
-  }
+  // label {
+  //   font-size: 0.75rem;
+  // }
 }
 </style>

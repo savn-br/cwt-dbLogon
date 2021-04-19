@@ -31,17 +31,22 @@
           @input='(active) => { addProfile2Collaborator(active, props.row.profileId); }'
         )
           span.tw-text-xs {{ $t("active") }}
-        a(href='#')
+        span.tw-cursor-pointer(
+          class='hover:tw-text-primary',
+          @click='selectProfile(props.row.profileId)'
+        )
           b-icon(icon='account-details')
 </template>
 
 <script>
+import setMenu from '@/mixins/setMenu'
 import { mapMutations, mapActions, mapState, mapGetters } from 'vuex'
 export default {
   name: 'AssignmentOfProfile3',
   components: {
     StandardTable: () => import('@/components/StandardTable'),
   },
+  mixins: [setMenu],
   props: {},
   data() {
     return {}
@@ -72,9 +77,13 @@ export default {
   },
   created() {},
   methods: {
-    ...mapMutations(['setSearchProfileId']),
+    ...mapMutations(['setSearchProfileId', 'setSelectedProfileId']),
     ...mapActions(['getAvailableProfiles', 'setProfile2Collaborator']),
 
+    selectProfile(profileId) {
+      this.setSelectedProfileId(profileId)
+      this.setPartial('ProfileSearch2')
+    },
     async addProfile2Collaborator(active, profileId) {
       if (active) await this.setProfile2Collaborator({ profileId })
     },

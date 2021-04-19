@@ -90,4 +90,7 @@ export default () => ({
   collaborators: [],
   availableProfiles: [],
   availablePointOfSales: [],
+  selectedProfileId: '',
+  selectedProfileData: {},
+  activateUsers: [],
 })

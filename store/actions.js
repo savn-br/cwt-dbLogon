@@ -1,5 +1,38 @@
 export default {
-  async setPointOfSale2Collaborator({ state, commit }, { pointOfSaleId }) {
+  async setActivateUser({ state, commit }, { active, userId }) {
+    try {
+      const { data: newUser } = await this.$axios.put(
+        `/activateUser/${userId}/${active}`
+      )
+      commit('setActivateUsersElement', newUser.data[0])
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async getActivateUsers({ state, commit }) {
+    try {
+      // const response = await this.$axios.get(
+      //   `/activateUser/${state.userData.userId}/false`
+      // )
+      const { data: activateUsers } = await this.$axios.get(
+        `/activateUser/UMXR701/false`
+      )
+      commit('setActivateUsers', activateUsers.data)
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async getSelectedProfileData({ state, commit }) {
+    try {
+      const { data: profileData } = await this.$axios.get(
+        `/profile/${state.selectedProfileId}`
+      )
+      commit('setSelectedProfileData', profileData.data)
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  async setPointOfSale2Collaborator({ state }, { pointOfSaleId }) {
     try {
       await this.$axios.post(`/userPointOfSale/`, {
         pointOfSaleId,
@@ -19,7 +52,7 @@ export default {
       console.error(error)
     }
   },
-  async setProfile2Collaborator({ state, commit }, { profileId }) {
+  async setProfile2Collaborator({ state }, { profileId }) {
     try {
       await this.$axios.post(`/userProfile/`, {
         userId: state.selectedCollaborator.userId,
@@ -53,7 +86,7 @@ export default {
       console.error(error)
     }
   },
-  async setProfileState2Collaborator({ state, commit }, { active, profileId }) {
+  async setProfileState2Collaborator({ state }, { active, profileId }) {
     try {
       await this.$axios.put(
         `/userProfile/${state.userData.userId}/${profileId}/${active}`
@@ -78,7 +111,7 @@ export default {
       console.error(error)
     }
   },
-  async getRequests({ state, commit }) {
+  async getRequests({ commit }) {
     try {
       // const { data: requests } = await this.$axios.get(
       //   `/dashManager/${state.dataUser.userId}`
@@ -102,7 +135,7 @@ export default {
       console.error(error)
     }
   },
-  async saveTransaction({ state, dispatch }) {
+  async saveTransaction({ state }) {
     try {
       const response = await this.$axios.post(`/transaction/`, {
         ...state.selectedTransaction,
@@ -125,7 +158,7 @@ export default {
       console.error(error)
     }
   },
-  async saveModule({ state, dispatch }) {
+  async saveModule({ state }) {
     try {
       const response = await this.$axios.post(`/module/`, {
         ...state.selectedModule,
@@ -157,7 +190,7 @@ export default {
       console.error(error)
     }
   },
-  async saveSystem({ state, dispatch }) {
+  async saveSystem({ state }) {
     try {
       const response = await this.$axios.post(`/system/`, state.selectedSystem)
       return response.status
@@ -165,7 +198,7 @@ export default {
       console.error(error)
     }
   },
-  async editSystem({ state, dispatch }) {
+  async editSystem({ state }) {
     try {
       const response = await this.$axios.put(
         `/system/${state.selectedSystem.systemId}`,
@@ -176,7 +209,7 @@ export default {
       console.error(error)
     }
   },
-  async getSystems({ state, commit }) {
+  async getSystems({ commit }) {
     try {
       const { data: systems } = await this.$axios.get(`/system/SearchAll/`)
       commit('setSystems', systems.data)
@@ -211,7 +244,6 @@ export default {
       console.error(error)
     }
   },
-
   async getAccess({ state, commit }) {
     try {
       const { data: responseData } = await this.$axios.get(
@@ -223,7 +255,6 @@ export default {
       console.error(error)
     }
   },
-
   async updateMyProfile({ state, commit }) {
     try {
       const { data: responseData } = await this.$axios.put(
@@ -239,7 +270,6 @@ export default {
       console.error(error)
     }
   },
-
   async getMyProfile({ state, commit }) {
     try {
       const { data: responseData } = await this.$axios.get(

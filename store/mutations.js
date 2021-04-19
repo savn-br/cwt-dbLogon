@@ -1,4 +1,20 @@
+import Vue from 'vue'
 export default {
+  setActivateUsersElement(state, value) {
+    const index = state.activateUsers
+      .map((user) => user.userId)
+      .indexOf(value.userId)
+    Vue.set(state.activateUsers, index, value)
+  },
+  setActivateUsers(state, value) {
+    state.activateUsers = value
+  },
+  setSelectedProfileData(state, value) {
+    state.selectedProfileData = value
+  },
+  setSelectedProfileId(state, value) {
+    state.selectedProfileId = value
+  },
   setAvailablePointOfSales(state, value) {
     state.availablePointOfSales = value
   },

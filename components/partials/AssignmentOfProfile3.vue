@@ -37,8 +37,6 @@
           @input='(active) => { addPointOfSales2Collaborator(active, props.row.pointOfSaleId); }'
         )
           span.tw-text-xs {{ $t("active") }}
-        a(href='#')
-          b-icon(icon='account-details')
 </template>
 
 <script>
