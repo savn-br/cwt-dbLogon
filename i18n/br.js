@@ -1,7 +1,9 @@
 module.exports = {
   /* PLOP_APPEND_BR */
+  findByUser: 'Procurar por usuário',
+  findByProfile: 'Procurar por Perfil',
   salesPoint: 'Nome do ponto de venda',
-  transactionCode: 'Codigo da transaçao',
+  transactionCode: 'Código da transação',
   moduleAcronym: 'Sigla do módulo',
   moduleCode: 'Código do módulo',
   save: 'Salvar',

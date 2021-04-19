@@ -1,6 +1,6 @@
 <template lang="pug">
 #searchProfile.search-profile-wrapper.tw-mt-8.tw-px-8
-  b-field(label='Find by profileName')
+  b-field(:label='$t("findByProfile")')
     b-autocomplete(v-model='searchProfileId', :data='availableProfilesName')
     span.tw-ml-2(v-if='searchProfileLoading') loading ...
   standard-table(v-if='availableProfiles.length', :data='availableProfiles')
