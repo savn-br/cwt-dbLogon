@@ -77,10 +77,15 @@ export default {
   },
   created() {},
   methods: {
-    ...mapMutations(['setSearchProfileId', 'setSelectedProfileId']),
+    ...mapMutations([
+      'setSearchProfileId',
+      'setSelectedProfileId',
+      'setBackProfileSearchPartial',
+    ]),
     ...mapActions(['getAvailableProfiles', 'setProfile2Collaborator']),
 
     selectProfile(profileId) {
+      this.setBackProfileSearchPartial('AssignmentOfProfile2')
       this.setSelectedProfileId(profileId)
       this.setPartial('ProfileSearch2')
     },

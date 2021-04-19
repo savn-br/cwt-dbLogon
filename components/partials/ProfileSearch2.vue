@@ -1,6 +1,6 @@
 <template lang="pug">
 #profileSearch2.profile-search2-wrapper.tw-mt-8.tw-px-8
-  back-button.tw-mb-4(partialComponent='AssignmentOfProfile2')
+  back-button.tw-mb-4(:partialComponent='backProfileSearchPartial')
   form.fields.tw-grid.tw-mb-4(name='profileForm')
     b-field.tw-mx-2(label='Código do perfil')
       b-input(
@@ -52,7 +52,7 @@ export default {
     return {}
   },
   computed: {
-    ...mapState(['selectedProfileData']),
+    ...mapState(['selectedProfileData', 'backProfileSearchPartial']),
   },
   watch: {},
   async mounted() {

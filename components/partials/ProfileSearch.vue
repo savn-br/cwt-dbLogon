@@ -1,63 +1,99 @@
 <template lang="pug">
-#profileSearch.profile-search-wrapper.tw-mt-8.tw-px-8
-  standard-table(:data='profileDescription')
+#searchProfile.search-profile-wrapper.tw-mt-8.tw-px-8
+  b-field(label='Find by profileName')
+    b-autocomplete(v-model='searchProfileId', :data='availableProfilesName')
+    span.tw-ml-2(v-if='searchProfileLoading') loading ...
+  standard-table(v-if='availableProfiles.length', :data='availableProfiles')
     b-table-column(
       v-slot='props',
-      field='profile_code',
+      field='profileId',
       :searchable='true',
       :label='$t("profileCode")'
     )
-      span.tw-text-xs {{ props.row.profile_code }}
+      span.tw-text-xs {{ props.row.profileId }}
     b-table-column(
       v-slot='props',
-      field='profile_description',
+      field='profileName',
       :searchable='true',
       :label='$t("profileDescription")'
     )
-      span.tw-text-xs {{ props.row.profile_description }}
+      span.tw-text-xs {{ props.row.profileName }}
     b-table-column(
-      v-slot='props',
+      :label='$t("operation")',
       field='active',
-      :label='$t("active")',
-      :centered='true'
+      :centered='true',
+      v-slot='props'
     )
-      b-checkbox(v-model='props.row.active')
-        span.tw-text-xs {{ $t("active") }}
-    b-table-column(:label='$t("operation")', :centered='true')
-      span.tw-cursor-pointer(class='hover:tw-text-primary')
-        b-icon(icon='account-details')
+      .operation-wrapper
+        span.tw-cursor-pointer(
+          class='hover:tw-text-primary',
+          @click='selectProfile(props.row.profileId)'
+        )
+          b-icon(icon='account-details')
 </template>
 
 <script>
+import setMenu from '@/mixins/setMenu'
+import { mapMutations, mapActions, mapState, mapGetters } from 'vuex'
 export default {
-  name: 'ProfileSearch',
+  name: 'SearchProfile',
   components: {
     StandardTable: () => import('@/components/StandardTable'),
   },
+  mixins: [setMenu],
   props: {},
   data() {
-    return {
-      profileDescription: require('@/jsons/profile-description-table-data.json'),
+    return {}
+  },
+  computed: {
+    ...mapGetters(['availableProfilesName']),
+    ...mapState(['availableProfiles', 'searchProfileLoading']),
+    searchProfileId: {
+      get() {
+        return this.$store.state.searchProfileId
+      },
+      set(value) {
+        this.setSearchProfileId(value)
+      },
+    },
+  },
+  watch: {
+    async searchProfileId(newSearchProfileId) {
+      if (newSearchProfileId.length >= 3) {
+        await this.getAvailableProfiles()
+      }
+    },
+  },
+  async mounted() {
+    if (this.searchProfileId.length >= 3) {
+      await this.getAvailableProfiles()
     }
   },
-  computed: {},
-  watch: {},
-  mounted() {},
   created() {},
-  methods: {},
+  methods: {
+    ...mapMutations([
+      'setSearchProfileId',
+      'setSelectedProfileId',
+      'setBackProfileSearchPartial',
+    ]),
+    ...mapActions(['getAvailableProfiles']),
+
+    selectProfile(profileId) {
+      this.setBackProfileSearchPartial('ProfileSearch')
+      this.setSelectedProfileId(profileId)
+      this.setPartial('ProfileSearch2')
+    },
+  },
 }
 </script>
 
 <style lang="scss" scoped>
-.profile-search-wrapper {
+.search-profile-wrapper {
 }
 </style>
 
 <style lang="scss">
-.profile-search-wrapper {
-  .control.is-clearfix {
-    width: 100%;
-  }
+.search-profile-wrapper {
   input.input {
     height: px2rem(25);
   }

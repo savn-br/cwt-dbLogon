@@ -93,4 +93,5 @@ export default () => ({
   selectedProfileId: '',
   selectedProfileData: {},
   activateUsers: [],
+  backProfileSearchPartial: 'ProfileSearch',
 })

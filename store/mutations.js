@@ -1,5 +1,8 @@
 import Vue from 'vue'
 export default {
+  setBackProfileSearchPartial(state, value) {
+    state.backProfileSearchPartial = value
+  },
   setActivateUsersElement(state, value) {
     const index = state.activateUsers
       .map((user) => user.userId)
