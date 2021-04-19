@@ -15,7 +15,7 @@
       h1 Status
       standard-table(:data='tableStatus', , :bordered='true')
         b-table-column(field='date', :label='$t("date")', v-slot='props')
-          span.tw-text-xs {{ $moment(props.row.date) }}
+          span.tw-text-xs {{ props.row.date }}
         b-table-column(field='action', :label='$t("action")', v-slot='props')
           span.tw-text-xs {{ props.row.action }}
 </template>
