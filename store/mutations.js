@@ -1,5 +1,11 @@
 import Vue from 'vue'
 export default {
+  updateSelectedCollaborator(state, selectedCollaborator) {
+    state.selectedCollaborator = {
+      ...state.selectedCollaborator,
+      ...selectedCollaborator,
+    }
+  },
   setAllPointOfSales(state, value) {
     state.allPointOfSales = value
   },

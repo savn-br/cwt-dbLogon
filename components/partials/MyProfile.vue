@@ -65,8 +65,8 @@ export default {
         })
       } else {
         this.$buefy.toast.open({
-          message: 'Dados atualizados com sucesso',
-          type: 'is-success',
+          message: 'Erro ao atualizar',
+          type: 'is-danger',
           duration: 3000,
           position: 'is-top',
         })

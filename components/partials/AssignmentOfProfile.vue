@@ -6,7 +6,7 @@
       span.tw-ml-2(v-show='searchCollaboratorLoading') loading ...
   profile-form(v-if='!!selectedCollaborator')
   .update-buttons.tw-flex.tw-justify-center
-    b-button.tw-mx-2.tw-my-4.tw-w-32(type='is-success') {{ $t("update") }}
+    b-button.tw-mx-2.tw-my-4.tw-w-32(type='is-success', @click='update') {{ $t("update") }}
   .view-profile
     .button-wrapper.tw-flex.tw-justify-end
       b-button.tw-w-24(
@@ -137,6 +137,7 @@ export default {
       'getAvailableCollaborators',
       'setProfileState2Collaborator',
       'setPointOfSales2Collaborator',
+      'updateProfile',
     ]),
 
     async setProfile(active, profileId) {
@@ -151,6 +152,9 @@ export default {
     },
     goToPartThree() {
       this.setPartial('AssignmentOfProfile3')
+    },
+    update() {
+      this.updateProfile()
     },
   },
 }

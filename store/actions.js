@@ -268,7 +268,7 @@ export default {
   },
   async updateMyProfile({ state, commit }) {
     try {
-      const { data: responseData } = await this.$axios.put(
+      const { data: responseData, status } = await this.$axios.put(
         `/myProfile/${state.userData.userId}`,
         {
           ...state.userData,
@@ -278,6 +278,22 @@ export default {
       commit('setPointOfSales', responseData.data.pointOfSales)
       commit('setProfileAccess', responseData.data.profileAccess)
       commit('setUserData', responseData.data)
+      return status
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async updateProfile({ state, commit }) {
+    try {
+      const body = { ...state.selectedCollaborator }
+      delete body.pointOfSales
+      delete body.profiles
+
+      const { data: responseData } = await this.$axios.put(
+        `/myProfile/${state.selectedCollaborator.userId}`,
+        body
+      )
+      commit('updateSelectedCollaborator', responseData.data)
     } catch (error) {
       console.error(error)
     }
