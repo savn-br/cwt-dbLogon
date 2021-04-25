@@ -41,6 +41,7 @@ export default {
   name: 'Teste',
   components: {},
   layout: 'public',
+  middleware: ['auth'],
   props: {},
   data() {
     return {

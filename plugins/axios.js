@@ -14,7 +14,7 @@ export default function ({ $axios, store, redirect }, inject) {
   $axios.onResponse((res) => {
     if (res.status === 401) {
       window.localStorage.clear()
-      redirect('/')
+      window.location.href = '/'
     }
   })
 }

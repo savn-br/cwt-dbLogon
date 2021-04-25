@@ -10,6 +10,7 @@ export default {
     LoginRequest: () => import('@/components/partials/LoginRequest'),
   },
   layout: 'newLayout',
+  middleware: ['auth'],
   props: {},
   data() {
     return {}

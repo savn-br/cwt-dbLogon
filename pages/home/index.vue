@@ -28,6 +28,7 @@ export default {
     AlternateApproverRegister: () =>
       import('@/components/partials/AlternateApproverRegister'),
   },
+  middleware: ['auth'],
   props: {},
   data() {
     return {}
