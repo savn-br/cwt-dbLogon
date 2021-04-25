@@ -51,13 +51,26 @@
       b-input(v-model='role', name='role', size='is-small')
     b-field.tw-mx-2(:label='$t("registration")')
       b-input(v-model='employeeNumber', name='employeeNumber', size='is-small')
-    b-checkbox.tw-m-5(v-model='emergencyFlag', name='emergencyFlag') {{ $t("emergency") }}
-    b-checkbox.tw-m-5(v-model='vipFlag', name='vipFlag') VIP Desk
+    b-field.tw-mx-2(label='Ponto de venda')
+      b-select(
+        placeholder='Selecione o ponto de venda',
+        size='is-small',
+        v-model='pointOfSale'
+      )
+        option(
+          :value='point.pointOfSaleId',
+          v-for='(point, index) in allPointOfSales',
+          :key='index'
+        ) {{ point.pointOfSaleName }}
+    b-field
+      b-checkbox.tw-m-5(v-model='emergencyFlag', name='emergencyFlag') {{ $t("emergency") }}
+    b-field
+      b-checkbox.tw-m-5(v-model='vipFlag', name='vipFlag') VIP Desk
     slot(name='content')
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex'
+import { mapMutations, mapState, mapActions } from 'vuex'
 export default {
   name: 'UserForm',
   components: {},
@@ -71,7 +84,7 @@ export default {
     return {}
   },
   computed: {
-    ...mapState(['userData']),
+    ...mapState(['userData', 'allPointOfSales']),
     userId: {
       get() {
         return this.userData.userId
@@ -166,12 +179,23 @@ export default {
         this.setUserDataTerm({ key: 'vipFlag', value })
       },
     },
+    pointOfSale: {
+      get() {
+        return this.userData.pointOfSale
+      },
+      set(value) {
+        this.setUserDataTerm({ key: 'pointOfSale', value })
+      },
+    },
   },
   watch: {},
-  mounted() {},
+  async mounted() {
+    await this.getAllPointOfSales()
+  },
   created() {},
   methods: {
     ...mapMutations(['setUserDataTerm']),
+    ...mapActions(['getAllPointOfSales']),
   },
 }
 </script>

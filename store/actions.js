@@ -1,4 +1,15 @@
 export default {
+  async getAllPointOfSales({ state, commit }) {
+    try {
+      const { data: allPointOfSales } = await this.$axios.get(
+        `/pointOfSale/SearchAll`
+      )
+
+      commit('setAllPointOfSales', allPointOfSales.data)
+    } catch (error) {
+      console.error(error)
+    }
+  },
   async setActivateUser({ state, commit }, { active, userId }) {
     try {
       const { data: newUser } = await this.$axios.put(
@@ -263,6 +274,7 @@ export default {
           ...state.userData,
         }
       )
+
       commit('setPointOfSales', responseData.data.pointOfSales)
       commit('setProfileAccess', responseData.data.profileAccess)
       commit('setUserData', responseData.data)

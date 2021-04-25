@@ -58,6 +58,7 @@ export default () => ({
     company: '',
     field: '',
     role: '',
+    pointOfSale: '',
     emergencyFlag: false,
     vipFlag: false,
   },
@@ -94,4 +95,5 @@ export default () => ({
   selectedProfileData: {},
   activateUsers: [],
   backProfileSearchPartial: 'ProfileSearch',
+  allPointOfSales: [],
 })

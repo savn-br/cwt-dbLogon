@@ -1,5 +1,8 @@
 import Vue from 'vue'
 export default {
+  setAllPointOfSales(state, value) {
+    state.allPointOfSales = value
+  },
   setBackProfileSearchPartial(state, value) {
     state.backProfileSearchPartial = value
   },
