@@ -55,22 +55,7 @@ export default {
   created() {},
   methods: {
     async update() {
-      const status = await this.$store.dispatch('updateMyProfile')
-      if (status === 200) {
-        this.$buefy.toast.open({
-          message: 'Dados atualizados com sucesso',
-          type: 'is-success',
-          duration: 3000,
-          position: 'is-top',
-        })
-      } else {
-        this.$buefy.toast.open({
-          message: 'Erro ao atualizar',
-          type: 'is-danger',
-          duration: 3000,
-          position: 'is-top',
-        })
-      }
+      await this.$store.dispatch('updateMyProfile')
     },
   },
 }

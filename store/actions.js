@@ -1,3 +1,4 @@
+import showToast from '@/utils/toast'
 export default {
   async getAllPointOfSales({ state, commit }) {
     try {
@@ -274,11 +275,11 @@ export default {
           ...state.userData,
         }
       )
+      showToast(status, responseData.message)
 
       commit('setPointOfSales', responseData.data.pointOfSales)
       commit('setProfileAccess', responseData.data.profileAccess)
       commit('setUserData', responseData.data)
-      return status
     } catch (error) {
       console.error(error)
     }
