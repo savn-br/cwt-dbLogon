@@ -92,7 +92,7 @@ export default {
   ) {
     try {
       await this.$axios.put(
-        `/userPointOfSale/${state.userData.userId}/${pointOfSaleId}/${active}`
+        `/userPointOfSale/${state.selectedCollaborator.userId}/${pointOfSaleId}/${active}`
       )
     } catch (error) {
       console.error(error)
@@ -101,7 +101,7 @@ export default {
   async setProfileState2Collaborator({ state }, { active, profileId }) {
     try {
       await this.$axios.put(
-        `/userProfile/${state.userData.userId}/${profileId}/${active}`
+        `/userProfile/${state.selectedCollaborator.userId}/${profileId}/${active}`
       )
     } catch (error) {
       console.error(error)
