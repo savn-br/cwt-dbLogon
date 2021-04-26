@@ -2,7 +2,7 @@
 .navbar-wrapper
   b-navbar.tw-shadow-md(:fixed-top='true')
     template(#brand)
-      b-navbar-item(tag='router-link', :to='{ path: "/" }')
+      b-navbar-item
         img(src='~/assets/CWT_LOGO_TRASNPARENTE.png', alt='CWT')
     template(#start)
     template(#end)

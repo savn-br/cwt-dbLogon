@@ -52,16 +52,15 @@
     b-field.tw-mx-2(:label='$t("registration")')
       b-input(v-model='employeeNumber', name='employeeNumber', size='is-small')
     b-field.tw-mx-2(label='Ponto de venda')
-      b-select(
-        placeholder='Selecione o ponto de venda',
+      b-autocomplete(
         size='is-small',
-        v-model='pointOfSale'
+        :open-on-focus='true',
+        :data='filteredPointOfSales',
+        field='pointOfSaleName',
+        v-model='selectedPointOfSale',
+        placeholder='Selecione o ponto de venda',
+        @select='(point) => handlePointOfSale(point)'
       )
-        option(
-          :value='point.pointOfSaleId',
-          v-for='(point, index) in allPointOfSales',
-          :key='index'
-        ) {{ point.pointOfSaleName }}
     b-field
       b-checkbox.tw-m-5(v-model='emergencyFlag', name='emergencyFlag') {{ $t("emergency") }}
     b-field
@@ -81,10 +80,15 @@ export default {
     },
   },
   data() {
-    return {}
+    return {
+      searchName: '',
+    }
   },
   computed: {
     ...mapState(['userData', 'allPointOfSales']),
+    ...mapState({
+      pointOfSale: (state) => state.userData.pointOfSale,
+    }),
     userId: {
       get() {
         return this.userData.userId
@@ -179,12 +183,25 @@ export default {
         this.setUserDataTerm({ key: 'vipFlag', value })
       },
     },
-    pointOfSale: {
+    filteredPointOfSales() {
+      return this.allPointOfSales.filter((point) =>
+        point.pointOfSaleName
+          .toString()
+          .toLowerCase()
+          .includes(this.searchName.toLowerCase())
+      )
+    },
+    selectedPointOfSale: {
       get() {
-        return this.userData.pointOfSale
+        const currentPoint = this.allPointOfSales.find(
+          (point) => point.pointOfSaleId === this.pointOfSale
+        )
+        return (
+          (!!currentPoint && currentPoint.pointOfSaleName) || this.searchName
+        )
       },
       set(value) {
-        this.setUserDataTerm({ key: 'pointOfSale', value })
+        this.searchName = value
       },
     },
   },
@@ -196,6 +213,11 @@ export default {
   methods: {
     ...mapMutations(['setUserDataTerm']),
     ...mapActions(['getAllPointOfSales']),
+
+    handlePointOfSale(point) {
+      if (point)
+        this.setUserDataTerm({ key: 'pointOfSale', value: point.pointOfSaleId })
+    },
   },
 }
 </script>
