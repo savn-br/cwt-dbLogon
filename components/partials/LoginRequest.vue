@@ -3,17 +3,17 @@
   steps(:steps='steps')
   user-form(ref='profileForm', :isDisabled='true')
   .update-buttons.tw-flex.tw-justify-center(class='sm:tw-justify-end')
-    b-button.tw-mx-2(type='is-success', @click='update') {{ $t("update") }}
+    b-button.tw-mx-2(type='is-success', @click='handleUpdate') {{ $t("update") }}
     b-button.tw-mx-2(
       type='is-primary',
-      @click='enableAccess',
-      :disabled='profile.profileType === "new"',
-      :class='profile.profileType === "pending" ? "access-hidden" : ""'
+      @click='handleEnable',
+      :disabled='userData.profileType === "new"',
+      :class='userData.profileType === "pending" ? "access-hidden" : ""'
     ) {{ $t("requestAccess") }}
   .logs.tw-mt-2.tw-mb-4
-    .status-wrapper(v-if='!!tableStatus && tableStatus.length')
+    .status-wrapper(v-if='!!userStatus && userStatus.length')
       h1 Status
-      standard-table(:data='tableStatus', , :bordered='true')
+      standard-table(:data='userStatus', , :bordered='true')
         b-table-column(field='date', :label='$t("date")', v-slot='props')
           span.tw-text-xs {{ props.row.date }}
         b-table-column(field='action', :label='$t("action")', v-slot='props')
@@ -21,13 +21,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'LoginRequest',
   components: {
-    StandardTable: () => import('@/components/StandardTable'),
     UserForm: () => import('@/components/partials/UserForm'),
-    Steps: () => import('@/components/Steps'),
   },
   props: {
     steps: {
@@ -39,24 +37,26 @@ export default {
     return {}
   },
   computed: {
-    ...mapState({
-      profile: (state) => state.userData,
-      tableStatus: (state) => state.userStatus,
-    }),
+    ...mapState(['userData', 'userStatus']),
   },
   watch: {},
-  mounted() {
-    this.$store.dispatch('getAccess')
+  async mounted() {
+    await this.handleGetAccess()
   },
   created() {},
   methods: {
-    async enableAccess() {
-      await this.$store.dispatch('enableAccess')
-      if (this.profile.profileType !== this.$route.path.replace(/\//g, '')) {
-        this.$router.push(`/${this.profile.profileType}/`)
+    ...mapActions([
+      'handleGetAccess',
+      'handleEnableAccess',
+      'handleUpdateAccess',
+    ]),
+    async handleEnable() {
+      await this.handleEnableAccess()
+      if (this.userData.profileType !== this.$route.path.replace(/\//g, '')) {
+        this.$router.push(`/${this.userData.profileType}/`)
       }
     },
-    async update() {
+    async handleUpdate() {
       const form = this.$refs.profileForm.$refs.form
       const formInputs = [
         form.phone,
@@ -66,9 +66,9 @@ export default {
       ]
       const validationEvery = formInputs.every((input) => !!input.value)
       if (validationEvery) {
-        const status = await this.$store.dispatch('updateAccess')
-        if (this.profile.profileType !== this.$route.path.replace(/\//g, '')) {
-          this.$router.push(`/${this.profile.profileType}/`)
+        const status = await this.handleUpdateAccess()
+        if (this.userData.profileType !== this.$route.path.replace(/\//g, '')) {
+          this.$router.push(`/${this.userData.profileType}/`)
         }
         if (status === 200) {
           this.$buefy.toast.open({

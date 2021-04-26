@@ -9,5 +9,4 @@ export default function (status, msg) {
       position: 'is-top',
     })
   }
-  console.log(vue.$buefy, status, msg)
 }

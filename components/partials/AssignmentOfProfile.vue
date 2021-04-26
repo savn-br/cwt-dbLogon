@@ -137,7 +137,7 @@ export default {
       'getAvailableCollaborators',
       'setProfileState2Collaborator',
       'setPointOfSales2Collaborator',
-      'updateProfile',
+      'handleUpdateProfile',
     ]),
 
     async setProfile(active, profileId) {
@@ -154,7 +154,7 @@ export default {
       this.setPartial('AssignmentOfProfile3')
     },
     update() {
-      this.updateProfile()
+      this.handleUpdateProfile()
     },
   },
 }

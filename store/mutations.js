@@ -104,6 +104,9 @@ export default {
   setCurrentPartial(state, currentPartial) {
     state.currentPartial = currentPartial
   },
+  updateUserData(state, value) {
+    state.userData = { ...state.userData, ...value }
+  },
 
   setUserData(state, userData) {
     if (userData.status) {

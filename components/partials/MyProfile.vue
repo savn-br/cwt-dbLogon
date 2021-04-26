@@ -2,7 +2,7 @@
 .my-profile-wrapper.tw-mt-8.tw-px-8
   user-form(:isDisabled='true')
   .update-buttons.tw-flex.tw-justify-center
-    b-button.tw-mx-2.tw-my-4(type='is-success', @click='update') {{ $t("update") }}
+    b-button.tw-mx-2.tw-my-4(type='is-success', @click='handleUpdate') {{ $t("update") }}
   collapse.tw-text-sm(
     v-if='!!profileAccess && !!profileAccess.profileName',
     :title='profileAccess.profileName'
@@ -13,12 +13,11 @@
       :key='index',
       :system='system'
     )
-    //- component(is='RecursiveCollapse', :tree='tree', padding='0')
   collapse.tw-text-sm(
-    v-if='!!tableData && tableData.length',
+    v-if='!!pointOfSales && pointOfSales.length',
     :title='$t("customerView")'
   )
-    standard-table.tw-my-4(:data='tableData', , :bordered='true')
+    standard-table.tw-my-4(:data='pointOfSales', , :bordered='true')
       b-table-column(
         field='pointOfSale',
         :label='$t("salesPoint")',
@@ -28,34 +27,32 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   name: 'MyProfile',
   components: {
-    Collapse: () => import('@/components/Collapse'),
-    DetailTable: () => import('@/components/DetailTable'),
     UserForm: () => import('@/components/partials/UserForm'),
   },
   props: {},
   data() {
-    const tree = require('@/jsons/directory-tree-data.json')
-    return { tree }
+    return {}
   },
   computed: {
-    ...mapState({
-      profile: (state) => state.userData,
-      tableData: (state) => state.pointOfSales,
-      profileAccess: (state) => state.profileAccess,
-    }),
+    // -- mapState --
+    ...mapState(['pointOfSales', 'profileAccess']),
+    // -- mapState --
   },
   watch: {},
-  mounted() {
-    this.$store.dispatch('getMyProfile')
+  async mounted() {
+    await this.handleGetMyProfile()
   },
   created() {},
   methods: {
-    async update() {
-      await this.$store.dispatch('updateMyProfile')
+    // -- mapActions --
+    ...mapActions(['handleUpdateMyProfile', 'handleGetMyProfile']),
+    // -- mapActions --
+    async handleUpdate() {
+      await this.handleUpdateMyProfile()
     },
   },
 }

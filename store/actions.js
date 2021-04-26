@@ -229,7 +229,7 @@ export default {
       console.error(error)
     }
   },
-  async enableAccess({ state, commit }) {
+  async handleEnableAccess({ state, commit }) {
     try {
       const { data: responseData } = await this.$axios.post(
         `/access/${state.userData.userId}`
@@ -240,7 +240,7 @@ export default {
       console.error(error)
     }
   },
-  async updateAccess({ state, commit }) {
+  async handleUpdateAccess({ state, commit }) {
     try {
       const response = await this.$axios.put(
         `/access/${state.userData.userId}`,
@@ -250,13 +250,13 @@ export default {
       )
       const { data: responseData } = response
       commit('setUserStatus', responseData.data.status)
-      commit('setUserData', responseData.data)
+      commit('updateUserData', responseData.data)
       return response.status
     } catch (error) {
       console.error(error)
     }
   },
-  async getAccess({ state, commit }) {
+  async handleGetAccess({ state, commit }) {
     try {
       const { data: responseData } = await this.$axios.get(
         `/access/${state.userData.userId}`
@@ -267,7 +267,7 @@ export default {
       console.error(error)
     }
   },
-  async updateMyProfile({ state, commit }) {
+  async handleUpdateMyProfile({ state, commit }) {
     try {
       const { data: responseData, status } = await this.$axios.put(
         `/myProfile/${state.userData.userId}`,
@@ -284,7 +284,7 @@ export default {
       console.error(error)
     }
   },
-  async updateProfile({ state, commit }) {
+  async handleUpdateProfile({ state, commit }) {
     try {
       const body = { ...state.selectedCollaborator }
       delete body.pointOfSales
@@ -299,7 +299,7 @@ export default {
       console.error(error)
     }
   },
-  async getMyProfile({ state, commit }) {
+  async handleGetMyProfile({ state, commit }) {
     try {
       const { data: responseData } = await this.$axios.get(
         `/myProfile/${state.userData.userId}`
