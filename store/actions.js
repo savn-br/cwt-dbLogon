@@ -50,7 +50,7 @@ export default {
         `/userPointOfSale/${state.selectedCollaborator.userId}/${pointOfSaleId}`
       )
       if (status === 200) {
-        commit('deletePointOfSale', pointOfSaleId)
+        commit('deletePointOfSaleOnCollaborator', pointOfSaleId)
       }
     } catch (error) {
       console.error(error)
@@ -99,11 +99,12 @@ export default {
     }
   },
 
-  async setProfileState2Collaborator({ state }, { active, profileId }) {
+  async setProfileState2Collaborator({ state, commit }, { active, profileId }) {
     try {
-      await this.$axios.put(
+      const { data: profile } = await this.$axios.put(
         `/userProfile/${state.selectedCollaborator.userId}/${profileId}/${active}`
       )
+      commit('updateProfileOnCollaborator', { profileId, value: profile.data })
     } catch (error) {
       console.error(error)
     }
@@ -111,25 +112,26 @@ export default {
   async getAvailableCollaborators({ state, commit }) {
     try {
       commit('setSearchCollaboratorLoading', true)
-      const { data: collaborators } = await this.$axios.get(
+      const { data: collaborators, status } = await this.$axios.get(
         `/assignProfile/${state.searchCollaboratorId}`
       )
       // const { data: collaborators } = await this.$axios.get(
       //   `/assignProfile/${'ULXF214'}`
       // )
-      commit('setCollaborators', collaborators.data)
-      commit('setSelectedCollaborator', collaborators.data[0])
+      if (status === 200) {
+        commit('setCollaborators', collaborators.data)
+        commit('setSelectedCollaborator', collaborators.data[0])
+      }
       commit('setSearchCollaboratorLoading', false)
     } catch (error) {
       console.error(error)
     }
   },
-  async getRequests({ commit }) {
+  async getRequests({ state, commit }) {
     try {
-      // const { data: requests } = await this.$axios.get(
-      //   `/dashManager/${state.dataUser.userId}`
-      // )
-      const { data: requests } = await this.$axios.get(`/dashManager/${'Us1M'}`)
+      const { data: requests } = await this.$axios.get(
+        `/dashManager/${state.userData.userId}`
+      )
       commit('setRequests', requests.data)
     } catch (error) {
       console.error(error)

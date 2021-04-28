@@ -27,7 +27,6 @@
     )
       .operation-wrapper
         b-checkbox(
-          :value='isProfileActive2Collaborator(props.row.profileId)',
           @input='(active) => { addProfile2Collaborator(active, props.row.profileId); }'
         )
           span.tw-text-xs {{ $t("active") }}

@@ -1,6 +1,12 @@
 import Vue from 'vue'
 export default {
-  deletePointOfSale(state, value) {
+  updateProfileOnCollaborator(state, { profileId, value }) {
+    const idx = state.selectedCollaborator.profiles
+      .map((profile) => profile.profileId)
+      .indexOf(profileId)
+    Vue.set(state.selectedCollaborator.profiles, idx, value)
+  },
+  deletePointOfSaleOnCollaborator(state, value) {
     const idx = state.selectedCollaborator.pointOfSales
       .map((point) => point.pointOfSaleId)
       .indexOf(value)

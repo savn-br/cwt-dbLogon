@@ -12,6 +12,7 @@
       b-button.tw-w-24(
         v-if='!!selectedCollaborator',
         type='is-primary',
+        :disabled='isEnableToCreate',
         @click='goToPartTwo'
       ) {{ $t("add") }}
     standard-table(
@@ -49,7 +50,7 @@
         :centered='true'
       )
         .actions-wrapper.tw-flex.tw-justify-center
-          b-field
+          b-field(v-if='props.row.active')
             b-switch(
               size='is-small',
               :value='props.row.active',
@@ -108,6 +109,12 @@ export default {
   computed: {
     ...mapState(['selectedCollaborator', 'searchCollaboratorLoading']),
     ...mapGetters(['collaboratorsId']),
+
+    isEnableToCreate() {
+      return this.selectedCollaborator.profiles
+        .map((profile) => profile.active)
+        .some((active) => active)
+    },
 
     searchCollaboratorId: {
       get() {
