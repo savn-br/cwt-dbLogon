@@ -1,6 +1,9 @@
 <template lang="pug">
 #assignmentOfProfile2.assignment-of-profile2-wrapper.tw-mt-8.tw-px-8
   back-button(partialComponent='AssignmentOfProfile')
+  .tw-grid.tw-w-full.tw-place-content-center.tw-text-xl(
+    v-if='!availablePointOfSales.length'
+  ) Sem pontos de vendas para adicionar
   standard-table(
     v-if='availablePointOfSales.length',
     :data='availablePointOfSales'

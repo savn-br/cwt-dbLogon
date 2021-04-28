@@ -10,7 +10,7 @@
       )
     b-field.tw-mx-2(label='Descrição do perfil')
       b-input(
-        v-model='selectedProfileData.description',
+        v-model='selectedProfileData.profileName',
         size='is-small',
         disabled
       )
@@ -23,11 +23,17 @@
     b-field.tw-mx-2(label='Visão de dados de clientes')
       b-input(, size='is-small', disabled)
     b-field.tw-mx-2
-      b-switch(size='is-small') Visualizar cartão
+      b-switch(
+        @input='(active) => handleUpdateProfile({ viewCCard: active })',
+        size='is-small',
+        :value='selectedProfileData.viewCCard'
+      ) Visualizar cartão
     b-field.tw-mx-2
-      b-switch(size='is-small') Permissão de atribuição
-    b-field.tw-mx-2
-      b-switch(size='is-small') Ativo
+      b-switch(
+        @input='(active) => handleUpdateProfile({ active })',
+        size='is-small',
+        :value='selectedProfileData.active'
+      ) Ativo
 
   collapse.tw-text-sm(
     v-if='!!selectedProfileData.profileAccess && !!selectedProfileData.profileAccess.profileName',
@@ -39,7 +45,6 @@
       :key='index',
       :system='system'
     )
-  //- component.tw-mt-4(is='RecursiveCollapse', :tree='tree', padding='0')
 </template>
 
 <script>
@@ -60,7 +65,10 @@ export default {
   },
   created() {},
   methods: {
-    ...mapActions(['getSelectedProfileData']),
+    ...mapActions(['getSelectedProfileData', 'handleUpdateProfileDataTerm']),
+    async handleUpdateProfile(term) {
+      await this.handleUpdateProfileDataTerm(term)
+    },
   },
 }
 </script>

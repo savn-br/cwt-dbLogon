@@ -1,5 +1,23 @@
 import showToast from '@/utils/toast'
 export default {
+  async handleUpdateProfileDataTerm({ state, commit }, term) {
+    try {
+      const profile = state.selectedProfileData
+      const body = { ...profile, ...term }
+      delete body.profileAccess
+      const { status } = await this.$axios.put(
+        `/profile/${profile.profileId}`,
+        body
+      )
+      if (status === 200) {
+        showToast('Operação realizada com sucesso', 'is-success')
+      } else {
+        showToast('Não foi possível realizar a operação', 'is-danger')
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  },
   async getAllPointOfSales({ state, commit }) {
     try {
       const { data: allPointOfSales } = await this.$axios.get(
@@ -13,10 +31,15 @@ export default {
   },
   async setActivateUser({ state, commit }, { active, userId }) {
     try {
-      const { data: newUser } = await this.$axios.put(
+      const { data: newUser, status } = await this.$axios.put(
         `/activateUser/${userId}/${active}`
       )
-      commit('setActivateUsersElement', newUser.data[0])
+      if (status === 200) {
+        showToast('Operação realizada com sucesso', 'is-success')
+        commit('setActivateUsersElement', newUser.data[0])
+      } else {
+        showToast(newUser.message, 'is-danger')
+      }
     } catch (error) {
       console.error(error)
     }
@@ -98,7 +121,6 @@ export default {
       console.error(error)
     }
   },
-
   async setProfileState2Collaborator({ state, commit }, { active, profileId }) {
     try {
       const { data: profile } = await this.$axios.put(
@@ -278,7 +300,11 @@ export default {
           ...state.userData,
         }
       )
-      showToast(status, responseData.message)
+      if (status === 200) {
+        showToast('operação realizada com sucesso', 'is-success')
+      } else {
+        showToast(responseData.message, 'is-danger')
+      }
 
       commit('setPointOfSales', responseData.data.pointOfSales)
       commit('setProfileAccess', responseData.data.profileAccess)
@@ -293,11 +319,16 @@ export default {
       delete body.pointOfSales
       delete body.profiles
 
-      const { data: responseData } = await this.$axios.put(
+      const { data: responseData, status } = await this.$axios.put(
         `/myProfile/${state.selectedCollaborator.userId}`,
         body
       )
-      commit('updateSelectedCollaborator', responseData.data)
+      if (status === 200) {
+        showToast('operação realizada com sucesso', 'is-success')
+        commit('updateSelectedCollaborator', responseData.data)
+      } else {
+        showToast(responseData.message, 'is-danger')
+      }
     } catch (error) {
       console.error(error)
     }
