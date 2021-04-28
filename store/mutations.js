@@ -1,5 +1,11 @@
 import Vue from 'vue'
 export default {
+  deletePointOfSale(state, value) {
+    const idx = state.selectedCollaborator.pointOfSales
+      .map((point) => point.pointOfSaleId)
+      .indexOf(value)
+    Vue.delete(state.selectedCollaborator.pointOfSales, idx)
+  },
   updateSelectedCollaborator(state, selectedCollaborator) {
     state.selectedCollaborator = {
       ...state.selectedCollaborator,

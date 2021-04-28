@@ -1,12 +1,6 @@
 <template lang="pug">
 #assignmentOfProfile2.assignment-of-profile2-wrapper.tw-mt-8.tw-px-8
   back-button(partialComponent='AssignmentOfProfile')
-  //- b-field(label='Find by point of Sales')
-    //- b-autocomplete(
-    //-   v-model='searchPointOfSalesId',
-    //-   :data='availablePointOfSales'
-    //- )
-    //- span.tw-ml-2(v-if='searchPointOfSalesLoading') loading ...
   standard-table(
     v-if='availablePointOfSales.length',
     :data='availablePointOfSales'
@@ -34,7 +28,7 @@
       .operation-wrapper
         b-checkbox(
           :value='isPointOfSaleActive2Collaborator(props.row.pointOfSaleId)',
-          @input='(active) => { addPointOfSales2Collaborator(active, props.row.pointOfSaleId); }'
+          @input='(active) => { handlePointOfSale2Collaborator(active, props.row.pointOfSaleId); }'
         )
           span.tw-text-xs {{ $t("active") }}
 </template>
@@ -51,10 +45,7 @@ export default {
     return {}
   },
   computed: {
-    ...mapGetters([
-      'availablePointOfSales',
-      'isPointOfSaleActive2Collaborator',
-    ]),
+    ...mapGetters(['isPointOfSaleActive2Collaborator']),
     ...mapState(['availablePointOfSales']),
   },
   watch: {},
@@ -64,10 +55,18 @@ export default {
   created() {},
   methods: {
     ...mapMutations([]),
-    ...mapActions(['getAvailablePointOfSales', 'setPointOfSale2Collaborator']),
+    ...mapActions([
+      'getAvailablePointOfSales',
+      'setPointOfSale2Collaborator',
+      'removePointOfSale2Collaborator',
+    ]),
 
-    async addPointOfSales2Collaborator(active, pointOfSaleId) {
-      if (active) await this.setPointOfSale2Collaborator({ pointOfSaleId })
+    async handlePointOfSale2Collaborator(active, pointOfSaleId) {
+      if (active) {
+        await this.setPointOfSale2Collaborator({ pointOfSaleId })
+      } else {
+        await this.removePointOfSale2Collaborator({ pointOfSaleId })
+      }
     },
   },
 }

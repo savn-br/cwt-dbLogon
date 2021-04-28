@@ -80,14 +80,14 @@
           v-slot='props',
           :centered='true'
         )
-          .actions-wrapper.tw-flex.tw-justify-center
-            b-field
-              b-switch(
-                size='is-small',
-                :value='props.row.active',
-                @input='(active) => { setSalesPoint(active, props.row.pointOfSaleId); }'
-              )
-            span.tw-cursor-pointer(class='hover:tw-text-primary')
+          .actions-wrapper.tw-flex.tw-justify-center.items-center
+            b-button.p-2.tw-text-white.tw-rounded.tw-mx-2(
+              type='is-danger',
+              @click='handleRemovePointOfSale(props.row.pointOfSaleId)'
+            ) remover
+            span.tw-cursor-pointer.tw-flex.tw-items-center(
+              class='hover:tw-text-primary'
+            )
               b-icon(icon='eye', size='')
 </template>
 
@@ -136,15 +136,15 @@ export default {
     ...mapActions([
       'getAvailableCollaborators',
       'setProfileState2Collaborator',
-      'setPointOfSales2Collaborator',
       'handleUpdateProfile',
+      'removePointOfSale2Collaborator',
     ]),
 
     async setProfile(active, profileId) {
       await this.setProfileState2Collaborator({ active, profileId })
     },
-    async setSalesPoint(active, pointOfSaleId) {
-      await this.setPointOfSales2Collaborator({ active, pointOfSaleId })
+    async handleRemovePointOfSale(pointOfSaleId) {
+      await this.removePointOfSale2Collaborator({ pointOfSaleId })
     },
 
     goToPartTwo() {

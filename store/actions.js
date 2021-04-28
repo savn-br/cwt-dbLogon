@@ -44,6 +44,18 @@ export default {
       console.log(error)
     }
   },
+  async removePointOfSale2Collaborator({ state, commit }, { pointOfSaleId }) {
+    try {
+      const { status } = await this.$axios.delete(
+        `/userPointOfSale/${state.selectedCollaborator.userId}/${pointOfSaleId}`
+      )
+      if (status === 200) {
+        commit('deletePointOfSale', pointOfSaleId)
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  },
   async setPointOfSale2Collaborator({ state }, { pointOfSaleId }) {
     try {
       await this.$axios.post(`/userPointOfSale/`, {
@@ -86,18 +98,7 @@ export default {
       console.error(error)
     }
   },
-  async setPointOfSales2Collaborator(
-    { state, commit },
-    { active, pointOfSaleId }
-  ) {
-    try {
-      await this.$axios.put(
-        `/userPointOfSale/${state.selectedCollaborator.userId}/${pointOfSaleId}/${active}`
-      )
-    } catch (error) {
-      console.error(error)
-    }
-  },
+
   async setProfileState2Collaborator({ state }, { active, profileId }) {
     try {
       await this.$axios.put(
