@@ -1,14 +1,11 @@
 import showToast from '@/utils/toast'
 export default {
-  async handleUpdateProfileDataTerm({ state, commit }, term) {
+  async handleUpdateProfileDataTerm({ state: { selectedProfileData } }, term) {
     try {
-      const profile = state.selectedProfileData
-      const body = { ...profile, ...term }
+      const body = { ...selectedProfileData, ...term }
+      const { profileId } = selectedProfileData
       delete body.profileAccess
-      const { status } = await this.$axios.put(
-        `/profile/${profile.profileId}`,
-        body
-      )
+      const { status } = await this.$axios.put(`/profile/${profileId}`, body)
       if (status === 200) {
         showToast('Operação realizada com sucesso', 'is-success')
       } else {
@@ -20,57 +17,68 @@ export default {
   },
   async getAllPointOfSales({ state, commit }) {
     try {
-      const { data: allPointOfSales } = await this.$axios.get(
-        `/pointOfSale/SearchAll`
-      )
+      const {
+        data: { data },
+      } = await this.$axios.get(`/pointOfSale/SearchAll`)
 
-      commit('setAllPointOfSales', allPointOfSales.data)
+      commit('setAllPointOfSales', data)
     } catch (error) {
       console.error(error)
     }
   },
   async setActivateUser({ state, commit }, { active, userId }) {
     try {
-      const { data: newUser, status } = await this.$axios.put(
-        `/activateUser/${userId}/${active}`
-      )
+      const {
+        data: { data },
+        status,
+      } = await this.$axios.put(`/activateUser/${userId}/${active}`)
       if (status === 200) {
         showToast('Operação realizada com sucesso', 'is-success')
-        commit('setActivateUsersElement', newUser.data[0])
+        commit('setActivateUsersElement', data[0])
       } else {
-        showToast(newUser.message, 'is-danger')
+        showToast(data.message, 'is-danger')
       }
     } catch (error) {
       console.error(error)
     }
   },
-  async getActivateUsers({ state, commit }) {
+  async getActivateUsers({
+    state: {
+      userData: { userId },
+    },
+    commit,
+  }) {
     try {
-      // const response = await this.$axios.get(
-      //   `/activateUser/${state.userData.userId}/false`
-      // )
-      const { data: activateUsers } = await this.$axios.get(
-        `/activateUser/UMXR701/false`
-      )
-      commit('setActivateUsers', activateUsers.data)
+      const {
+        data: { data },
+      } = await this.$axios.get(`/activateUser/${userId}/false`)
+      commit('setActivateUsers', data)
     } catch (error) {
       console.error(error)
     }
   },
-  async getSelectedProfileData({ state, commit }) {
+  async getSelectedProfileData({ state: { selectedProfileId }, commit }) {
     try {
-      const { data: profileData } = await this.$axios.get(
-        `/profile/${state.selectedProfileId}`
-      )
-      commit('setSelectedProfileData', profileData.data)
+      const {
+        data: { data },
+      } = await this.$axios.get(`/profile/${selectedProfileId}`)
+      commit('setSelectedProfileData', data)
     } catch (error) {
       console.log(error)
     }
   },
-  async removePointOfSale2Collaborator({ state, commit }, { pointOfSaleId }) {
+  async removePointOfSale2Collaborator(
+    {
+      state: {
+        selectedCollaborator: { userId },
+      },
+      commit,
+    },
+    { pointOfSaleId }
+  ) {
     try {
       const { status } = await this.$axios.delete(
-        `/userPointOfSale/${state.selectedCollaborator.userId}/${pointOfSaleId}`
+        `/userPointOfSale/${userId}/${pointOfSaleId}`
       )
       if (status === 200) {
         commit('deletePointOfSaleOnCollaborator', pointOfSaleId)
@@ -79,268 +87,368 @@ export default {
       console.error(error)
     }
   },
-  async setPointOfSale2Collaborator({ state }, { pointOfSaleId }) {
+  async setPointOfSale2Collaborator(
+    {
+      state: {
+        selectedCollaborator: { userId },
+      },
+    },
+    { pointOfSaleId }
+  ) {
     try {
       await this.$axios.post(`/userPointOfSale/`, {
         pointOfSaleId,
-        userId: state.selectedCollaborator.userId,
+        userId,
       })
     } catch (error) {
       console.error(error)
     }
   },
-  async getAvailablePointOfSales({ state, commit }) {
+  async getAvailablePointOfSales({
+    state: {
+      userData: { userId },
+    },
+    commit,
+  }) {
     try {
-      const { data: pointOfSales } = await this.$axios.get(
-        `/userPointOfSale/SearchAll/${state.userData.userId}/`
-      )
-      commit('setAvailablePointOfSales', pointOfSales.data)
+      const {
+        data: { data },
+      } = await this.$axios.get(`/userPointOfSale/SearchAll/${userId}/`)
+      commit('setAvailablePointOfSales', data)
     } catch (error) {
       console.error(error)
     }
   },
-  async setProfile2Collaborator({ state }, { profileId }) {
+  async setProfile2Collaborator(
+    {
+      state: {
+        selectedCollaborator: { userId },
+      },
+    },
+    { profileId }
+  ) {
     try {
       await this.$axios.post(`/userProfile/`, {
-        userId: state.selectedCollaborator.userId,
+        userId,
         profileId,
       })
     } catch (error) {
       console.error(error)
     }
   },
-  async getAvailableProfiles({ state, commit }) {
+  async getAvailableProfiles({
+    state: {
+      userData: { userId },
+      searchProfileId,
+    },
+    commit,
+  }) {
     try {
       commit('setSearchProfileLoading', true)
-      const { data: profiles } = await this.$axios.get(
-        `/profile/SearchAll/${state.userData.userId}/${state.searchProfileId}`
+
+      const {
+        data: { data },
+      } = await this.$axios.get(
+        `/profile/SearchAll/${userId}/${searchProfileId}`
       )
-      commit('setAvailableProfiles', profiles.data)
+      commit('setAvailableProfiles', data)
       commit('setSearchProfileLoading', false)
     } catch (error) {
       console.error(error)
     }
   },
-  async setProfileState2Collaborator({ state, commit }, { active, profileId }) {
+  async setProfileState2Collaborator(
+    {
+      state: {
+        selectedCollaborator: { userId },
+      },
+      commit,
+    },
+    { active, profileId }
+  ) {
     try {
-      const { data: profile } = await this.$axios.put(
-        `/userProfile/${state.selectedCollaborator.userId}/${profileId}/${active}`
-      )
-      commit('updateProfileOnCollaborator', { profileId, value: profile.data })
+      const {
+        data: { data },
+      } = await this.$axios.put(`/userProfile/${userId}/${profileId}/${active}`)
+      commit('updateProfileOnCollaborator', { profileId, value: data })
     } catch (error) {
       console.error(error)
     }
   },
-  async getAvailableCollaborators({ state, commit }) {
+  async getAvailableCollaborators({ state: { searchCollaboratorId }, commit }) {
     try {
       commit('setSearchCollaboratorLoading', true)
-      const { data: collaborators, status } = await this.$axios.get(
-        `/assignProfile/${state.searchCollaboratorId}`
-      )
-      // const { data: collaborators } = await this.$axios.get(
-      //   `/assignProfile/${'ULXF214'}`
-      // )
+      const {
+        data: { data },
+        status,
+      } = await this.$axios.get(`/assignProfile/${searchCollaboratorId}`)
       if (status === 200) {
-        commit('setCollaborators', collaborators.data)
-        commit('setSelectedCollaborator', collaborators.data[0])
+        commit('setCollaborators', data)
+        commit('setSelectedCollaborator', data[0])
       }
       commit('setSearchCollaboratorLoading', false)
     } catch (error) {
       console.error(error)
     }
   },
-  async getRequests({ state, commit }) {
+  async getRequests({
+    state: {
+      userData: { userId },
+    },
+    commit,
+  }) {
     try {
-      const { data: requests } = await this.$axios.get(
-        `/dashManager/${state.userData.userId}`
-      )
-      commit('setRequests', requests.data)
+      const {
+        data: { data },
+      } = await this.$axios.get(`/dashManager/${userId}`)
+      commit('setRequests', data)
     } catch (error) {
       console.error(error)
     }
   },
-  async getTransactions({ state, commit }) {
+  async getTransactions({
+    state: {
+      selectedSystem: { systemId },
+      selectedModule: { moduleId },
+    },
+    commit,
+  }) {
     try {
-      const { data: transactions } = await this.$axios.get(
-        `/transaction/SearchAll/${state.selectedSystem.systemId}/${state.selectedModule.moduleId}/`
+      const {
+        data: { data },
+      } = await this.$axios.get(
+        `/transaction/SearchAll/${systemId}/${moduleId}/`
       )
       commit('setSelectedModuleTerm', {
         key: 'transactions',
-        value: transactions.data,
+        value: data,
       })
     } catch (error) {
       console.error(error)
     }
   },
-  async saveTransaction({ state }) {
+  async saveTransaction({
+    state: {
+      selectedTransaction,
+      selectedSystem: { systemId },
+      selectedModule: { moduleId },
+    },
+  }) {
     try {
-      const response = await this.$axios.post(`/transaction/`, {
-        ...state.selectedTransaction,
-        systemId: state.selectedSystem.systemId,
-        moduleId: state.selectedModule.moduleId,
+      const { status } = await this.$axios.post(`/transaction/`, {
+        ...selectedTransaction,
+        systemId,
+        moduleId,
       })
-      return response.status
+      return status
     } catch (error) {
       console.error(error)
     }
   },
-  async editTransaction({ state }) {
+  async editTransaction({
+    state: {
+      selectedSystem: { systemId },
+      selectedModule: { moduleId },
+      selectedTransaction,
+    },
+  }) {
     try {
-      const response = await this.$axios.put(
-        `/transaction/${state.selectedSystem.systemId}/${state.selectedModule.moduleId}/${state.selectedTransaction.transactionId}/`,
-        state.selectedTransaction
+      const { transactionId } = selectedTransaction
+      const { status } = await this.$axios.put(
+        `/transaction/${systemId}/${moduleId}/${transactionId}/`,
+        selectedTransaction
       )
-      return response.status
+      return status
     } catch (error) {
       console.error(error)
     }
   },
-  async saveModule({ state }) {
+  async saveModule({
+    state: {
+      selectedModule,
+      selectedSystem: { systemId },
+    },
+  }) {
     try {
-      const response = await this.$axios.post(`/module/`, {
-        ...state.selectedModule,
-        systemId: state.selectedSystem.systemId,
+      const { status } = await this.$axios.post(`/module/`, {
+        ...selectedModule,
+        systemId,
       })
-      return response.status
+      return status
     } catch (error) {
       console.error(error)
     }
   },
-  async editModule({ state }) {
+  async editModule({
+    state: {
+      selectedModule,
+      selectedSystem: { systemId },
+    },
+  }) {
     try {
-      const response = await this.$axios.put(
-        `/module/${state.selectedSystem.systemId}/${state.selectedModule.moduleId}/`,
-        state.selectedModule
+      const { moduleId } = selectedModule
+      const { status } = await this.$axios.put(
+        `/module/${systemId}/${moduleId}/`,
+        selectedModule
       )
-      return response.status
+      return status
     } catch (error) {
       console.error(error)
     }
   },
-  async getModules({ state, commit }) {
+  async getModules({
+    state: {
+      selectedSystem: { systemId },
+    },
+    commit,
+  }) {
     try {
-      const { data: modules } = await this.$axios.get(
-        `/module/SearchAll/${state.selectedSystem.systemId}/`
+      const {
+        data: { data },
+      } = await this.$axios.get(`/module/SearchAll/${systemId}/`)
+      commit('setSelectedSystemTerm', { key: 'modules', value: data })
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async saveSystem({ state: { selectedSystem } }) {
+    try {
+      const { status } = await this.$axios.post(`/system/`, selectedSystem)
+      return status
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async editSystem({ state: { selectedSystem } }) {
+    try {
+      const { systemId } = selectedSystem
+      const { status } = await this.$axios.put(
+        `/system/${systemId}`,
+        selectedSystem
       )
-      commit('setSelectedSystemTerm', { key: 'modules', value: modules.data })
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  async saveSystem({ state }) {
-    try {
-      const response = await this.$axios.post(`/system/`, state.selectedSystem)
-      return response.status
-    } catch (error) {
-      console.error(error)
-    }
-  },
-  async editSystem({ state }) {
-    try {
-      const response = await this.$axios.put(
-        `/system/${state.selectedSystem.systemId}`,
-        state.selectedSystem
-      )
-      return response.status
+      return status
     } catch (error) {
       console.error(error)
     }
   },
   async getSystems({ commit }) {
     try {
-      const { data: systems } = await this.$axios.get(`/system/SearchAll/`)
-      commit('setSystems', systems.data)
+      const {
+        data: { data },
+      } = await this.$axios.get(`/system/SearchAll/`)
+      commit('setSystems', data)
     } catch (error) {
       console.error(error)
     }
   },
-  async handleEnableAccess({ state, commit }) {
+  async handleEnableAccess({
+    state: {
+      userData: { userId },
+    },
+    commit,
+  }) {
     try {
-      const { data: responseData } = await this.$axios.post(
-        `/access/${state.userData.userId}`
-      )
-      commit('setUserStatus', responseData.data.status)
-      commit('setUserData', responseData.data)
+      const {
+        data: { data },
+      } = await this.$axios.post(`/access/${userId}`)
+      commit('setUserStatus', data.status)
+      commit('setUserData', data)
     } catch (error) {
       console.error(error)
     }
   },
-  async handleUpdateAccess({ state, commit }) {
+  async handleUpdateAccess({ state: { userData }, commit }) {
     try {
-      const response = await this.$axios.put(
-        `/access/${state.userData.userId}`,
-        {
-          ...state.userData,
-        }
-      )
-      const { data: responseData } = response
-      commit('setUserStatus', responseData.data.status)
-      commit('updateUserData', responseData.data)
-      return response.status
+      const { userId } = userData
+      const {
+        data: { data },
+        status,
+      } = await this.$axios.put(`/access/${userId}`, {
+        ...userData,
+      })
+      commit('setUserStatus', data.status)
+      commit('updateUserData', data)
+      return status
     } catch (error) {
       console.error(error)
     }
   },
-  async handleGetAccess({ state, commit }) {
+  async handleGetAccess({
+    state: {
+      userData: { userId },
+    },
+    commit,
+  }) {
     try {
-      const { data: responseData } = await this.$axios.get(
-        `/access/${state.userData.userId}`
-      )
-      commit('setUserStatus', responseData.data.status)
-      commit('setUserData', responseData.data)
+      const {
+        data: { data },
+      } = await this.$axios.get(`/access/${userId}`)
+      commit('setUserStatus', data.status)
+      commit('setUserData', data)
     } catch (error) {
       console.error(error)
     }
   },
-  async handleUpdateMyProfile({ state, commit }) {
+  async handleUpdateMyProfile({ state: { userData }, commit }) {
     try {
-      const { data: responseData, status } = await this.$axios.put(
-        `/myProfile/${state.userData.userId}`,
-        {
-          ...state.userData,
-        }
-      )
+      const { userId } = userData
+      const {
+        data: { data, message },
+        status,
+      } = await this.$axios.put(`/myProfile/${userId}`, {
+        ...userData,
+      })
       if (status === 200) {
         showToast('operação realizada com sucesso', 'is-success')
       } else {
-        showToast(responseData.message, 'is-danger')
+        showToast(message, 'is-danger')
       }
 
-      commit('setPointOfSales', responseData.data.pointOfSales)
-      commit('setProfileAccess', responseData.data.profileAccess)
-      commit('setUserData', responseData.data)
+      commit('setPointOfSales', data.pointOfSales)
+      commit('setProfileAccess', data.profileAccess)
+      commit('setUserData', data)
     } catch (error) {
       console.error(error)
     }
   },
-  async handleUpdateProfile({ state, commit }) {
+  async handleUpdateProfile({ state: { selectedCollaborator }, commit }) {
     try {
-      const body = { ...state.selectedCollaborator }
+      const { userId } = selectedCollaborator
+      const body = { ...selectedCollaborator }
       delete body.pointOfSales
       delete body.profiles
 
-      const { data: responseData, status } = await this.$axios.put(
-        `/myProfile/${state.selectedCollaborator.userId}`,
-        body
-      )
+      const {
+        data: { data, message },
+        status,
+      } = await this.$axios.put(`/myProfile/${userId}`, body)
       if (status === 200) {
         showToast('operação realizada com sucesso', 'is-success')
-        commit('updateSelectedCollaborator', responseData.data)
+        commit('updateSelectedCollaborator', data)
       } else {
-        showToast(responseData.message, 'is-danger')
+        showToast(message, 'is-danger')
       }
     } catch (error) {
       console.error(error)
     }
   },
-  async handleGetMyProfile({ state, commit }) {
+  async handleGetMyProfile({
+    state: {
+      userData: { userId },
+    },
+    commit,
+  }) {
     try {
-      const { data: responseData } = await this.$axios.get(
-        `/myProfile/${state.userData.userId}`
-      )
-      commit('setPointOfSales', responseData.data.pointOfSales)
-      commit('setProfileAccess', responseData.data.profileAccess)
-      commit('setUserData', responseData.data)
+      const {
+        data: { data },
+      } = await this.$axios.get(`/myProfile/${userId}`)
+      const phone = data.phone.replace(/[^\d]/g, '')
+      commit('setPointOfSales', data.pointOfSales)
+      commit('setProfileAccess', data.profileAccess)
+      commit('setUserData', {
+        ...data,
+        phone,
+      })
     } catch (error) {
       console.error(error)
     }
