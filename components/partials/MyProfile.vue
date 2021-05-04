@@ -1,8 +1,14 @@
 <template lang="pug">
 .my-profile-wrapper.tw-mt-8.tw-px-8
+  b-modal(v-model='isModalActive')
+    template(#default='props')
+      confirmation-modal(
+        @close='props.close',
+        :onConfirm='handleUpdateMyProfile'
+      )
   user-form(:isDisabled='true')
   .update-buttons.tw-flex.tw-justify-center
-    b-button.tw-mx-2.tw-my-4(type='is-success', @click='handleUpdate') {{ $t("update") }}
+    b-button.tw-mx-2.tw-my-4(type='is-success', @click='isModalActive = true') {{ $t("update") }}
   collapse.tw-text-sm(
     v-if='!!profileAccess && !!profileAccess.profileName',
     :title='profileAccess.profileName'
@@ -32,10 +38,13 @@ export default {
   name: 'MyProfile',
   components: {
     UserForm: () => import('@/components/partials/UserForm'),
+    ConfirmationModal: () => import('@/components/partials/ConfirmationModal'),
   },
   props: {},
   data() {
-    return {}
+    return {
+      isModalActive: false,
+    }
   },
   computed: {
     // -- mapState --

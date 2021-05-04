@@ -1,5 +1,12 @@
 <template lang="pug">
 .block-user-wrapper.tw-mt-8.tw-px-8
+  b-modal(v-model='isModalActive', :on-cancel='handleCancelOperation')
+    template(#default='props')
+      confirmation-modal(
+        @close='props.close',
+        :onConfirm='handleUpdateActiveState',
+        :onCancel='handleCancelOperation'
+      )
   form
     fieldset
       b-switch(size='is-small', v-model='onlyActives') {{ $t("activeOnly") }}
@@ -27,21 +34,28 @@
         b-switch(
           size='is-small',
           :value='props.row.active',
-          @input='(active) => updateActiveState(active, props.row.userId)'
+          :ref='props.row.userId',
+          @input='(active) => handleChangeCollaboratorState(active, props.row.userId)'
         )
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapMutations } from 'vuex'
 export default {
   name: 'BlockUser',
   components: {
     StandardTable: () => import('@/components/StandardTable'),
+    ConfirmationModal: () => import('@/components/partials/ConfirmationModal'),
   },
   props: {},
   data() {
     return {
       onlyActives: false,
+      isModalActive: false,
+      currentCollaborator: {
+        active: false,
+        userId: '',
+      },
     }
   },
   computed: {
@@ -62,9 +76,25 @@ export default {
   created() {},
   methods: {
     ...mapActions(['getActivateUsers', 'setActivateUser']),
+    ...mapMutations(['setActivateUsersElement']),
 
-    async updateActiveState(active, userId) {
-      await this.setActivateUser({ active, userId })
+    handleChangeCollaboratorState(active, userId) {
+      this.isModalActive = true
+      this.currentCollaborator.active = active
+      this.currentCollaborator.userId = userId
+    },
+    handleCancelOperation() {
+      this.$refs[this.currentCollaborator.userId].value = !this
+        .currentCollaborator.active
+      this.$refs[this.currentCollaborator.userId].computedValue = !this
+        .currentCollaborator.active
+    },
+
+    async handleUpdateActiveState() {
+      await this.setActivateUser({
+        active: this.currentCollaborator.active,
+        userId: this.currentCollaborator.userId,
+      })
     },
   },
 }
