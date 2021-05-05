@@ -128,10 +128,18 @@ export default {
     { profileId }
   ) {
     try {
-      await this.$axios.post(`/userProfile/`, {
+      const {
+        status,
+        data: { message },
+      } = await this.$axios.post(`/userProfile/`, {
         userId,
         profileId,
       })
+      if (status === 200) {
+        showToast('operação realizada com sucesso', 'is-success')
+      } else {
+        showToast(message, 'is-danger')
+      }
     } catch (error) {
       console.error(error)
     }
@@ -168,9 +176,15 @@ export default {
   ) {
     try {
       const {
-        data: { data },
+        data: { data, message },
+        status,
       } = await this.$axios.put(`/userProfile/${userId}/${profileId}/${active}`)
       commit('updateProfileOnCollaborator', { profileId, value: data })
+      if (status === 200) {
+        showToast('operação realizada com sucesso', 'is-success')
+      } else {
+        showToast(message, 'is-danger')
+      }
     } catch (error) {
       console.error(error)
     }
@@ -184,7 +198,8 @@ export default {
       } = await this.$axios.get(`/assignProfile/${searchCollaboratorId}`)
       if (status === 200) {
         commit('setCollaborators', data)
-        commit('setSelectedCollaborator', data[0])
+        const phone = data[0].phone.replace(/[^\d]/g, '')
+        commit('setSelectedCollaborator', { ...data[0], phone })
       }
       commit('setSearchCollaboratorLoading', false)
     } catch (error) {
@@ -424,7 +439,8 @@ export default {
       } = await this.$axios.put(`/myProfile/${userId}`, body)
       if (status === 200) {
         showToast('operação realizada com sucesso', 'is-success')
-        commit('updateSelectedCollaborator', data)
+        const phone = data.phone.replace(/[^\d]/g, '')
+        commit('updateSelectedCollaborator', { ...data, phone })
       } else {
         showToast(message, 'is-danger')
       }

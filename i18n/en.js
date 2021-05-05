@@ -1,5 +1,8 @@
 module.exports = {
   /* PLOP_APPEND_EN */
+  confirm: 'Confirm',
+  confirmationMessage: 'Are you sure you want to confirm this operation',
+  confirmAction: 'Confirm Action',
   findByUser: 'Find by user',
   findByProfile: 'Find by Profile',
   salesPoint: 'Sales name',

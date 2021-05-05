@@ -89,7 +89,10 @@ export default {
       this.setPartial('ProfileSearch2')
     },
     async addProfile2Collaborator(active, profileId) {
-      if (active) await this.setProfile2Collaborator({ profileId })
+      if (active) {
+        await this.setProfile2Collaborator({ profileId })
+        this.setPartial('AssignmentOfProfile')
+      }
     },
   },
 }

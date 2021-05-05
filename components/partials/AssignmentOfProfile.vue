@@ -1,12 +1,25 @@
 <template lang="pug">
 .assignment-of-profile-wrapper.tw-mt-8.tw-px-8
+  b-modal(v-model='isModalActiveUpdate')
+    template(#default='props')
+      confirmation-modal(@close='props.close', :onConfirm='update')
+  b-modal(v-model='isModalActiveProfile', :on-cancel='handleCancelOperation')
+    template(#default='props')
+      confirmation-modal(
+        @close='props.close',
+        :onConfirm='handleSetProfile',
+        :onCancel='handleCancelOperation'
+      )
   .fields.tw-mb-4
     b-field.tw-mx-2(:label='$t("findByUser")')
       b-autocomplete(v-model='searchCollaboratorId', :data='collaboratorsId')
       span.tw-ml-2(v-show='searchCollaboratorLoading') loading ...
   profile-form(v-if='!!selectedCollaborator')
   .update-buttons.tw-flex.tw-justify-center
-    b-button.tw-mx-2.tw-my-4.tw-w-32(type='is-success', @click='update') {{ $t("update") }}
+    b-button.tw-mx-2.tw-my-4.tw-w-32(
+      type='is-success',
+      @click='isModalActiveUpdate = true'
+    ) {{ $t("update") }}
   .view-profile
     .button-wrapper.tw-flex.tw-justify-end
       b-button.tw-w-24(
@@ -54,7 +67,8 @@
             b-switch(
               size='is-small',
               :value='props.row.active',
-              @input='(active) => { setProfile(active, props.row.profileId); }'
+              :ref='props.row.profileId',
+              @input='(active) => { handleChangeProfile(active, props.row.profileId); }'
             )
           span.tw-cursor-pointer(class='hover:tw-text-primary')
             b-icon(icon='eye', size='')
@@ -99,12 +113,20 @@ export default {
   name: 'AssignmentOfProfile',
   components: {
     ProfileForm: () => import('@/components/partials/ProfileForm'),
+    ConfirmationModal: () => import('@/components/partials/ConfirmationModal'),
     StandardTable: () => import('@/components/StandardTable'),
   },
   mixins: [setMenu],
   props: {},
   data() {
-    return {}
+    return {
+      isModalActiveUpdate: false,
+      isModalActiveProfile: false,
+      currentProfile: {
+        profileId: '',
+        active: false,
+      },
+    }
   },
   computed: {
     ...mapState(['selectedCollaborator', 'searchCollaboratorLoading']),
@@ -147,8 +169,13 @@ export default {
       'removePointOfSale2Collaborator',
     ]),
 
-    async setProfile(active, profileId) {
-      await this.setProfileState2Collaborator({ active, profileId })
+    handleChangeProfile(active, profileId) {
+      this.isModalActiveProfile = true
+      this.currentProfile = { active, profileId }
+    },
+
+    async handleSetProfile() {
+      await this.setProfileState2Collaborator({ ...this.currentProfile })
     },
     async handleRemovePointOfSale(pointOfSaleId) {
       await this.removePointOfSale2Collaborator({ pointOfSaleId })
@@ -162,6 +189,12 @@ export default {
     },
     update() {
       this.handleUpdateProfile()
+    },
+    handleCancelOperation() {
+      this.$refs[this.currentProfile.profileId].value = !this.currentProfile
+        .active
+      this.$refs[this.currentProfile.profileId].computedValue = !this
+        .currentProfile.active
     },
   },
 }
