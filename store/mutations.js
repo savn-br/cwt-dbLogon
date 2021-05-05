@@ -1,5 +1,118 @@
 import Vue from 'vue'
 export default {
+  updateMaintainTransactionSystem(state, { systemId, status }) {
+    const maintain = [...state.maintainTransactions]
+    const systemIdx = maintain
+      .map((system) => system.systemId.toString())
+      .indexOf(systemId)
+    const selectedSystem = maintain[systemIdx]
+
+    Vue.set(state.maintainTransactions, systemIdx, {
+      ...selectedSystem,
+      selected: status,
+    })
+
+    selectedSystem.modules.forEach((module, moduleIdx) => {
+      Vue.set(state.maintainTransactions[systemIdx].modules, moduleIdx, {
+        ...module,
+        selected: status,
+      })
+
+      module.transactions.forEach((transaction, transactionIdx) => {
+        Vue.set(
+          state.maintainTransactions[systemIdx].modules[moduleIdx].transactions,
+          transactionIdx,
+          { ...transaction, selected: status }
+        )
+      })
+    })
+  },
+  updateMaintainTransactionModule(state, { moduleId, status }) {
+    const [systemId] = moduleId.split('_')
+    const maintain = [...state.maintainTransactions]
+
+    const systemIdx = maintain
+      .map((system) => system.systemId.toString())
+      .indexOf(systemId)
+
+    const selectedSystem = maintain[systemIdx]
+
+    const moduleIdx = selectedSystem.modules
+      .map((module) => module.moduleId)
+      .indexOf(moduleId)
+
+    const selectedModule = selectedSystem.modules[moduleIdx]
+
+    // Atualizar estado do modulo
+    Vue.set(state.maintainTransactions[systemIdx].modules, moduleIdx, {
+      ...selectedModule,
+      selected: status,
+    })
+
+    //  Atualizar estado de cada transaction pertencente ao modulo
+    selectedModule.transactions.forEach((transaction, index) => {
+      Vue.set(
+        state.maintainTransactions[systemIdx].modules[moduleIdx].transactions,
+        index,
+        { ...transaction, selected: status }
+      )
+    })
+
+    const moduleStatus = selectedSystem.modules.some(
+      (module) => module.selected
+    )
+
+    // Atualizar estado do sistema ao qual o modulo pertence
+    Vue.set(state.maintainTransactions, systemIdx, {
+      ...selectedSystem,
+      selected: moduleStatus,
+    })
+  },
+  updateMaintainTransactionsTransaction(state, { transactionId, status }) {
+    const [systemId, moduleAuxId] = transactionId.split('_')
+    const moduleId = `${systemId}_${moduleAuxId}`
+
+    const maintain = [...state.maintainTransactions]
+
+    const systemIdx = maintain
+      .map((system) => system.systemId.toString())
+      .indexOf(systemId)
+
+    const selectedSystem = maintain[systemIdx]
+
+    const moduleIdx = selectedSystem.modules
+      .map((module) => module.moduleId)
+      .indexOf(moduleId)
+
+    const selectedModule = selectedSystem.modules[moduleIdx]
+
+    const transactionIdx = selectedModule.transactions
+      .map((transaction) => transaction.transactionId)
+      .indexOf(transactionId)
+
+    const selectedTransaction = selectedModule.transactions[transactionIdx]
+
+    Vue.set(
+      state.maintainTransactions[systemIdx].modules[moduleIdx].transactions,
+      transactionIdx,
+      { ...selectedTransaction, selected: status }
+    )
+
+    const transactionStatus = selectedModule.transactions.some(
+      (transaction) => transaction.selected
+    )
+    Vue.set(state.maintainTransactions[systemIdx].modules, moduleIdx, {
+      ...selectedModule,
+      selected: transactionStatus,
+    })
+    Vue.set(state.maintainTransactions, systemIdx, {
+      ...selectedSystem,
+      selected: transactionStatus,
+    })
+  },
+  setMaintainTransactions(state, value) {
+    state.maintainTransactions = value
+  },
   setSelectedMaintainProfile(state, value) {
     state.selectedMaintainProfile = value
   },

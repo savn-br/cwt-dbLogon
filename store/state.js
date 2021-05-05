@@ -98,4 +98,5 @@ export default () => ({
   allPointOfSales: [],
   maintainAllProfiles: [],
   selectedMaintainProfile: {},
+  maintainTransactions: [],
 })

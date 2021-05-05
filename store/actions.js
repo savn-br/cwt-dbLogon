@@ -1,5 +1,13 @@
 import showToast from '@/utils/toast'
 export default {
+  getMaintaintransactions({ state, commit }) {
+    try {
+      const data = require('@/jsons/data.json')
+      commit('setMaintainTransactions', data)
+    } catch (error) {
+      console.error(error)
+    }
+  },
   async getAllProfiles({ state, commit }) {
     try {
       const {
