@@ -1,5 +1,15 @@
 import showToast from '@/utils/toast'
 export default {
+  async getAllProfiles({ state, commit }) {
+    try {
+      const {
+        data: { data },
+      } = await this.$axios.get(`/profile/SearchAll/`)
+      commit('setMaintainAllProfiles', data)
+    } catch (error) {
+      console.error(error)
+    }
+  },
   async handleUpdateProfileDataTerm({ state: { selectedProfileData } }, term) {
     try {
       const body = { ...selectedProfileData, ...term }

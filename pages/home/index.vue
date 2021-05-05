@@ -22,6 +22,7 @@ export default {
     ProfileSearch: () => import('@/components/partials/ProfileSearch'),
     ProfileSearch2: () => import('@/components/partials/ProfileSearch2'),
     MaintainProfile: () => import('@/components/partials/MaintainProfile'),
+    MaintainProfile2: () => import('@/components/partials/MaintainProfile2'),
     MaintainSystem: () => import('@/components/partials/MaintainSystem'),
     MaintainSystem2: () => import('@/components/partials/MaintainSystem2'),
     MaintainSystem3: () => import('@/components/partials/MaintainSystem3'),

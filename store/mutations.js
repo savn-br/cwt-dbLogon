@@ -1,5 +1,11 @@
 import Vue from 'vue'
 export default {
+  setSelectedMaintainProfile(state, value) {
+    state.selectedMaintainProfile = value
+  },
+  setMaintainAllProfiles(state, value) {
+    state.maintainAllProfiles = value
+  },
   updateProfileOnCollaborator(state, { profileId, value }) {
     const idx = state.selectedCollaborator.profiles
       .map((profile) => profile.profileId)

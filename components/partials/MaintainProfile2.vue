@@ -1,19 +1,15 @@
 <template lang="pug">
 #maintainProfile2.maintain-profile2-wrapper.tw-mt-8.tw-px-8
-  .button-wrappers.tw-mb-8
+  back-button.tw-mb-6(partialComponent='MaintainProfile')
+  form.fields.tw-flex.tw-flex-wrap.tw-justify-center(name='profileForm')
+    b-field.tw-mx-2(label='Código do perfil')
+      b-input(v-model='code', size='is-small', name='user', disabled)
+    b-field.tw-mx-2(label='Descrição do perfil')
+      b-input(v-model='description', size='is-small', name='user', disabled)
+  .button-wrappers.tw-my-4.tw-flex.tw-justify-center
     b-button.tw-mr-4(type='is-primary') Salvar
     b-button(type='is-danger') Cancelar
-  form.fields.tw-grid(name='profileForm')
-    b-field.tw-mx-2(label='Código do perfil')
-      b-input(v-model='code', size='is-small', name='user')
-    b-field.tw-mx-2(label='Descrição do perfil')
-      b-input(v-model='description', size='is-small', name='user')
-
-  component.tw-mt-4.tw-px-8(
-    is='CheckableRecursiveCollapse',
-    :tree='tree',
-    padding='0'
-  )
+  component.tw-mt-4(is='MaintainTransaction')
 </template>
 
 <script>
@@ -38,12 +34,6 @@ export default {
 
 <style lang="scss" scoped>
 .maintain-profile2-wrapper {
-  .fields {
-    grid-template-columns: repeat(auto-fill, minmax(px2rem(300), 1fr));
-    @media screen and(min-width: px2rem(1500)) {
-      grid-template-columns: repeat(4, minmax(px2rem(300), 1fr));
-    }
-  }
 }
 </style>
 
@@ -51,6 +41,9 @@ export default {
 .maintain-profile2-wrapper {
   label {
     font-size: 0.75rem;
+  }
+  .input.is-small {
+    min-width: 250px;
   }
 }
 </style>

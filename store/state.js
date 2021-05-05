@@ -96,4 +96,6 @@ export default () => ({
   activateUsers: [],
   backProfileSearchPartial: 'ProfileSearch',
   allPointOfSales: [],
+  maintainAllProfiles: [],
+  selectedMaintainProfile: {},
 })

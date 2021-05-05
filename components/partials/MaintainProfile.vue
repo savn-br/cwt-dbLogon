@@ -5,21 +5,21 @@
       maintain-profile-modal(@close='props.close')
   .buttons-wrapper.tw-flex.tw-justify-end.tw-mb-2
     b-button(type='is-primary', @click='isModalActive = true') {{ $t("add") }}
-  standard-table(:data='profileDescription')
+  standard-table(:data='maintainAllProfiles')
     b-table-column(
       v-slot='props',
-      field='profile_code',
+      field='profileId',
       :searchable='true',
       :label='$t("profileCode")'
     )
-      span.tw-text-xs {{ props.row.profile_code }}
+      span.tw-text-xs {{ props.row.profileId }}
     b-table-column(
       v-slot='props',
-      field='profile_description',
+      field='profileName',
       :searchable='true',
       :label='$t("profileDescription")'
     )
-      span.tw-text-xs {{ props.row.profile_description }}
+      span.tw-text-xs {{ props.row.profileName }}
     b-table-column(
       v-slot='props',
       field='active',
@@ -35,32 +35,55 @@
       v-slot='props'
     )
       .operation-wrapper
-        span.tw-cursor-pointer(class='hover:tw-text-primary')
+        span.tw-cursor-pointer(
+          class='hover:tw-text-primary',
+          @click='handleEditProfile(props.row.profileId)'
+        )
           b-icon.tw-mr-2(icon='pencil')
-        span.tw-cursor-pointer(class='hover:tw-text-primary')
+        span.tw-cursor-pointer(
+          class='hover:tw-text-primary',
+          @click='handleEditTransactions(props.row.profileId)'
+        )
           b-icon(icon='account-details')
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
+import setMenu from '@/mixins/setMenu'
 export default {
   name: 'MaintainProfile',
   components: {
-    StandardTable: () => import('@/components/StandardTable'),
     MaintainProfileModal: () =>
       import('@/components/partials/MaintainProfileModal'),
   },
+  mixins: [setMenu],
   props: {},
   data() {
     return {
       isModalActive: false,
-      profileDescription: require('@/jsons/profile-description-table-data.json'),
     }
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      maintainAllProfiles: (state) => state.maintainAllProfiles,
+    }),
+  },
   watch: {},
-  mounted() {},
+  async mounted() {
+    await this.getAllProfiles()
+  },
   created() {},
-  methods: {},
+  methods: {
+    ...mapActions(['getAllProfiles']),
+
+    handleEditProfile(profileId) {
+      console.log(profileId)
+    },
+    handleEditTransactions(profileId) {
+      console.log(profileId)
+      this.setPartial('MaintainProfile2')
+    },
+  },
 }
 </script>
 
