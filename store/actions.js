@@ -250,11 +250,19 @@ export default {
     },
   }) {
     try {
-      const { status } = await this.$axios.post(`/transaction/`, {
+      const {
+        data: { message },
+        status,
+      } = await this.$axios.post(`/transaction/`, {
         ...selectedTransaction,
         systemId,
         moduleId,
       })
+      if (status === 200) {
+        showToast(this.$i18n.t('successMessage'), 'is-success')
+      } else {
+        showToast(message, 'is-danger')
+      }
       return status
     } catch (error) {
       console.error(error)
@@ -269,10 +277,18 @@ export default {
   }) {
     try {
       const { transactionId } = selectedTransaction
-      const { status } = await this.$axios.put(
+      const {
+        data: { message },
+        status,
+      } = await this.$axios.put(
         `/transaction/${systemId}/${moduleId}/${transactionId}/`,
         selectedTransaction
       )
+      if (status === 200) {
+        showToast(this.$i18n.t('successMessage'), 'is-success')
+      } else {
+        showToast(message, 'is-danger')
+      }
       return status
     } catch (error) {
       console.error(error)
@@ -285,10 +301,18 @@ export default {
     },
   }) {
     try {
-      const { status } = await this.$axios.post(`/module/`, {
+      const {
+        data: { message },
+        status,
+      } = await this.$axios.post(`/module/`, {
         ...selectedModule,
         systemId,
       })
+      if (status === 200) {
+        showToast(this.$i18n.t('successMessage'), 'is-success')
+      } else {
+        showToast(message, 'is-danger')
+      }
       return status
     } catch (error) {
       console.error(error)
@@ -302,10 +326,18 @@ export default {
   }) {
     try {
       const { moduleId } = selectedModule
-      const { status } = await this.$axios.put(
+      const {
+        data: { message },
+        status,
+      } = await this.$axios.put(
         `/module/${systemId}/${moduleId}/`,
         selectedModule
       )
+      if (status === 200) {
+        showToast(this.$i18n.t('successMessage'), 'is-success')
+      } else {
+        showToast(message, 'is-danger')
+      }
       return status
     } catch (error) {
       console.error(error)
@@ -328,7 +360,15 @@ export default {
   },
   async saveSystem({ state: { selectedSystem } }) {
     try {
-      const { status } = await this.$axios.post(`/system/`, selectedSystem)
+      const {
+        data: { message },
+        status,
+      } = await this.$axios.post(`/system/`, selectedSystem)
+      if (status === 200) {
+        showToast(this.$i18n.t('successMessage'), 'is-success')
+      } else {
+        showToast(message, 'is-danger')
+      }
       return status
     } catch (error) {
       console.error(error)
@@ -337,10 +377,15 @@ export default {
   async editSystem({ state: { selectedSystem } }) {
     try {
       const { systemId } = selectedSystem
-      const { status } = await this.$axios.put(
-        `/system/${systemId}`,
-        selectedSystem
-      )
+      const {
+        data: { message },
+        status,
+      } = await this.$axios.put(`/system/${systemId}`, selectedSystem)
+      if (status === 200) {
+        showToast(this.$i18n.t('successMessage'), 'is-success')
+      } else {
+        showToast(message, 'is-danger')
+      }
       return status
     } catch (error) {
       console.error(error)
