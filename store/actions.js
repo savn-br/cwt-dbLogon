@@ -7,7 +7,7 @@ export default {
       delete body.profileAccess
       const { status } = await this.$axios.put(`/profile/${profileId}`, body)
       if (status === 200) {
-        showToast('Operação realizada com sucesso', 'is-success')
+        showToast(this.$i18n.t('successMessage'), 'is-success')
       } else {
         showToast('Não foi possível realizar a operação', 'is-danger')
       }
@@ -33,7 +33,7 @@ export default {
         status,
       } = await this.$axios.put(`/activateUser/${userId}/${active}`)
       if (status === 200) {
-        showToast('Operação realizada com sucesso', 'is-success')
+        showToast(this.$i18n.t('successMessage'), 'is-success')
         commit('setActivateUsersElement', data[0])
       } else {
         showToast(data.message, 'is-danger')
@@ -136,7 +136,7 @@ export default {
         profileId,
       })
       if (status === 200) {
-        showToast('operação realizada com sucesso', 'is-success')
+        showToast(this.$i18n.t('successMessage'), 'is-success')
       } else {
         showToast(message, 'is-danger')
       }
@@ -181,7 +181,7 @@ export default {
       } = await this.$axios.put(`/userProfile/${userId}/${profileId}/${active}`)
       commit('updateProfileOnCollaborator', { profileId, value: data })
       if (status === 200) {
-        showToast('operação realizada com sucesso', 'is-success')
+        showToast(this.$i18n.t('successMessage'), 'is-success')
       } else {
         showToast(message, 'is-danger')
       }
@@ -414,7 +414,7 @@ export default {
         ...userData,
       })
       if (status === 200) {
-        showToast('operação realizada com sucesso', 'is-success')
+        showToast(this.$i18n.t('successMessage'), 'is-success')
       } else {
         showToast(message, 'is-danger')
       }
@@ -438,7 +438,7 @@ export default {
         status,
       } = await this.$axios.put(`/myProfile/${userId}`, body)
       if (status === 200) {
-        showToast('operação realizada com sucesso', 'is-success')
+        showToast(this.$i18n.t('successMessage'), 'is-success')
         const phone = data.phone.replace(/[^\d]/g, '')
         commit('updateSelectedCollaborator', { ...data, phone })
       } else {

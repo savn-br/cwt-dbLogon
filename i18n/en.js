@@ -1,5 +1,6 @@
 module.exports = {
   /* PLOP_APPEND_EN */
+  successMessage: 'Operation performed successfully',
   confirm: 'Confirm',
   confirmationMessage: 'Are you sure you want to confirm this operation',
   confirmAction: 'Confirm Action',
