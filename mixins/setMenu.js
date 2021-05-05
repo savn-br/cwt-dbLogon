@@ -1,6 +1,7 @@
 export default {
   methods: {
     setPartial(partialName) {
+      window.scrollTo(0, 0)
       this.$store.commit('setCurrentPartial', partialName)
       this.closeNavbar()
     },
