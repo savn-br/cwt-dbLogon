@@ -1,5 +1,6 @@
 <template lang="pug">
 #maintainSystem3.maintain-system3-wrapper.tw-mt-8.tw-px-8
+  back-button(partialComponent='MaintainSystem2')
   .form.tw-grid.form-auto-fill.tw-mb-4(name='sistema')
     b-field.tw-mx-2(:label='$t("systemCode")')
       b-input(v-model='selectedSystem.systemId', size='is-small', disabled)
