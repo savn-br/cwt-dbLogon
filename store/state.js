@@ -1,4 +1,5 @@
 export default () => ({
+  isLoading: false,
   transactionModalMode: 'save',
   selectedTransaction: {},
   moduleModalMode: 'save',
@@ -67,9 +68,7 @@ export default () => ({
   pointOfSales: [],
   profileAccess: {},
   requests: [],
-  searchProfileLoading: false,
   searchProfileId: '',
-  searchCollaboratorLoading: false,
   searchCollaboratorId: '',
   selectedCollaborator: {
     userId: '',

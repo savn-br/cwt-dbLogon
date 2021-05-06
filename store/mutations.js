@@ -1,5 +1,8 @@
 import Vue from 'vue'
 export default {
+  setIsLoading(state, value) {
+    state.isLoading = value
+  },
   setLastMenuLabel(state, value) {
     state.lastMenuLabel = value
   },
@@ -164,14 +167,8 @@ export default {
   setAvailablePointOfSales(state, value) {
     state.availablePointOfSales = value
   },
-  setSearchProfileLoading(state, value) {
-    state.searchProfileLoading = value
-  },
   setAvailableProfiles(state, profiles) {
     state.availableProfiles = profiles
-  },
-  setSearchCollaboratorLoading(state, value) {
-    state.searchCollaboratorLoading = value
   },
   setSearchProfileId(state, profileId) {
     state.searchProfileId = profileId

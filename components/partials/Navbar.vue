@@ -5,6 +5,7 @@
       b-navbar-item
         img.tw-mr-1(src='~/assets/CWT_LOGO_TRASNPARENTE.png', alt='CWT')
         | {{ $t(currentLabel) }}
+      IsLoading
     template(#start)
     template(#end)
       .side-menu-content.tw-block(class='md:tw-hidden')

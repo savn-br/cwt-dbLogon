@@ -46,10 +46,12 @@ export default {
   },
   async setActivateUser({ state, commit }, { active, userId }) {
     try {
+      commit('setIsLoading', true)
       const {
         data: { data },
         status,
       } = await this.$axios.put(`/activateUser/${userId}/${active}`)
+      commit('setIsLoading', false)
       if (status === 200) {
         showToast(this.$i18n.t('successMessage'), 'is-success')
         commit('setActivateUsersElement', data[0])
@@ -170,15 +172,15 @@ export default {
     commit,
   }) {
     try {
-      commit('setSearchProfileLoading', true)
+      commit('setIsLoading', true)
 
       const {
         data: { data },
       } = await this.$axios.get(
         `/profile/SearchAll/${userId}/${searchProfileId}`
       )
+      commit('setIsLoading', false)
       commit('setAvailableProfiles', data)
-      commit('setSearchProfileLoading', false)
     } catch (error) {
       console.error(error)
     }
@@ -209,7 +211,7 @@ export default {
   },
   async getAvailableCollaborators({ state: { searchCollaboratorId }, commit }) {
     try {
-      commit('setSearchCollaboratorLoading', true)
+      commit('setIsLoading', true)
       const {
         data: { data },
         status,
@@ -219,7 +221,7 @@ export default {
         const phone = data[0].phone.replace(/[^\d]/g, '')
         commit('setSelectedCollaborator', { ...data[0], phone })
       }
-      commit('setSearchCollaboratorLoading', false)
+      commit('setIsLoading', false)
     } catch (error) {
       console.error(error)
     }
@@ -470,12 +472,14 @@ export default {
   async handleUpdateMyProfile({ state: { userData }, commit }) {
     try {
       const { userId } = userData
+      commit('setIsLoading', true)
       const {
         data: { data, message },
         status,
       } = await this.$axios.put(`/myProfile/${userId}`, {
         ...userData,
       })
+      commit('setIsLoading', false)
       if (status === 200) {
         showToast(this.$i18n.t('successMessage'), 'is-success')
       } else {

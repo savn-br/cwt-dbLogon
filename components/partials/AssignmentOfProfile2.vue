@@ -3,7 +3,6 @@
   back-button(partialComponent='AssignmentOfProfile')
   b-field(label='Find by profileName')
     b-autocomplete(v-model='searchProfileId', :data='availableProfilesName')
-    span.tw-ml-2(v-if='searchProfileLoading') loading ...
   standard-table(v-if='availableProfiles.length', :data='availableProfiles')
     b-table-column(
       v-slot='props',
@@ -52,7 +51,7 @@ export default {
   },
   computed: {
     ...mapGetters(['availableProfilesName', 'isProfileActive2Collaborator']),
-    ...mapState(['availableProfiles', 'searchProfileLoading']),
+    ...mapState(['availableProfiles']),
     searchProfileId: {
       get() {
         return this.$store.state.searchProfileId
