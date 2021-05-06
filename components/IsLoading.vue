@@ -1,5 +1,5 @@
 <template lang="pug">
-#isLoading.is-loading-wrapper(v-show='isLoading')
+#isLoading.is-loading-wrapper.tw-max-w-md(v-show='isLoading')
   lottie(
     :options='defaultOptions',
     :width='100',
