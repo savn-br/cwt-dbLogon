@@ -80,18 +80,17 @@ export default {
     ...mapActions(['saveModule', 'getModules', 'editModule']),
 
     async proccessModuleRequest() {
+      this.$emit('close')
       if (this.moduleModalMode === 'save') {
         const status = await this.saveModule()
         if (status === 200) {
           this.getModules()
-          this.$emit('close')
         }
       }
       if (this.moduleModalMode === 'edit') {
         const status = await this.editModule()
         if (status === 200) {
           this.getModules()
-          this.$emit('close')
         }
       }
     },

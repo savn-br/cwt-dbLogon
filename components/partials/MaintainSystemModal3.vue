@@ -71,18 +71,17 @@ export default {
     ...mapActions(['saveTransaction', 'getTransactions', 'editTransaction']),
 
     async proccessTransactionRequest() {
+      this.$emit('close')
       if (this.transactionModalMode === 'save') {
         const status = await this.saveTransaction()
         if (status === 200) {
           this.getTransactions()
-          this.$emit('close')
         }
       }
       if (this.transactionModalMode === 'edit') {
         const status = await this.editTransaction()
         if (status === 200) {
           this.getTransactions()
-          this.$emit('close')
         }
       }
     },

@@ -79,18 +79,17 @@ export default {
     ...mapMutations(['setSelectedSystemTerm']),
     ...mapActions(['saveSystem', 'getSystems', 'editSystem']),
     async proccessSystemRequest() {
+      this.$emit('close')
       if (this.systemModalMode === 'save') {
         const status = await this.saveSystem()
         if (status === 200) {
           this.getSystems()
-          this.$emit('close')
         }
       }
       if (this.systemModalMode === 'edit') {
         const status = await this.editSystem()
         if (status === 200) {
           this.getSystems()
-          this.$emit('close')
         }
       }
     },
