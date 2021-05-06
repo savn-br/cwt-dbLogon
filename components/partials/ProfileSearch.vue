@@ -29,6 +29,7 @@
           @click='selectProfile(props.row.profileId)'
         )
           b-icon(icon='account-details')
+  .message.tw-text-xl(v-else) {{ $t("profileSearchMessage") }}
 </template>
 
 <script>

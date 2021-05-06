@@ -1,7 +1,9 @@
 module.exports = {
   /* PLOP_APPEND_BR */
+  profileSearchMessage:
+    'Por favor use a barra de pesquisa para procurar pelos perfis que deseja',
   back: 'Voltar',
-  viewCard: 'Visualizar cartao',
+  viewCard: 'Visualizar cartão',
   superProfile: 'Perfil pai',
   successMessage: 'Operação realizada com sucesso',
   confirm: 'Confirmar',

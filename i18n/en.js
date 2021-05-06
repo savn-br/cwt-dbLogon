@@ -1,5 +1,7 @@
 module.exports = {
   /* PLOP_APPEND_EN */
+  profileSearchMessage:
+    'Please use the search bar to search for the profiles you want',
   back: 'Back',
   viewCard: 'View card',
   superProfile: 'Father profile',
