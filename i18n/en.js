@@ -2,7 +2,7 @@ module.exports = {
   /* PLOP_APPEND_EN */
   back: 'Back',
   viewCard: 'View card',
-  fatherProfile: 'Father profile',
+  superProfile: 'Father profile',
   successMessage: 'Operation performed successfully',
   confirm: 'Confirm',
   confirmationMessage: 'Are you sure you want to confirm this operation',

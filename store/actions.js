@@ -34,6 +34,7 @@ export default {
       } else {
         showToast('Não foi possível realizar a operação', 'is-danger')
       }
+      return status
     } catch (error) {
       console.error(error)
     }
@@ -63,6 +64,7 @@ export default {
       } else {
         showToast(data.message, 'is-danger')
       }
+      return status
     } catch (error) {
       console.error(error)
     }
@@ -215,6 +217,7 @@ export default {
       } else {
         showToast(message, 'is-danger')
       }
+      return status
     } catch (error) {
       console.error(error)
     }

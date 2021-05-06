@@ -174,7 +174,12 @@ export default {
     },
 
     async handleSetProfile() {
-      await this.setProfileState2Collaborator({ ...this.currentProfile })
+      const status = await this.setProfileState2Collaborator({
+        ...this.currentProfile,
+      })
+      if (status !== 200) {
+        this.handleCancelOperation()
+      }
     },
     async handleRemovePointOfSale(pointOfSaleId) {
       await this.removePointOfSale2Collaborator({ pointOfSaleId })

@@ -91,10 +91,13 @@ export default {
     },
 
     async handleUpdateActiveState() {
-      await this.setActivateUser({
+      const status = await this.setActivateUser({
         active: this.currentCollaborator.active,
         userId: this.currentCollaborator.userId,
       })
+      if (status !== 200) {
+        this.handleCancelOperation()
+      }
     },
   },
 }

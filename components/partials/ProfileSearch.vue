@@ -96,5 +96,8 @@ export default {
   input.input {
     height: px2rem(25);
   }
+  label {
+    font-size: 0.75rem;
+  }
 }
 </style>

@@ -21,7 +21,7 @@
         size='is-small',
         disabled
       )
-    b-field.tw-mx-2(:label='$t("fatherProfile")')
+    b-field.tw-mx-2(:label='$t("superProfile")')
       b-input(
         v-model='selectedProfileData.profileParentId',
         size='is-small',
@@ -86,7 +86,10 @@ export default {
   methods: {
     ...mapActions(['getSelectedProfileData', 'handleUpdateProfileDataTerm']),
     async handleUpdateProfile() {
-      await this.handleUpdateProfileDataTerm({ ...this.status })
+      const status = await this.handleUpdateProfileDataTerm({ ...this.status })
+      if (status !== 200) {
+        this.handleCancelOperation()
+      }
     },
     handleUpdateActive(active) {
       this.status.active = active
@@ -127,8 +130,8 @@ export default {
     margin-right: auto;
   }
 
-  // label {
-  //   font-size: 0.75rem;
-  // }
+  label {
+    font-size: 0.75rem;
+  }
 }
 </style>
