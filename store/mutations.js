@@ -1,5 +1,8 @@
 import Vue from 'vue'
 export default {
+  setLastMenuLabel(state, value) {
+    state.lastMenuLabel = value
+  },
   updateMaintainTransactionSystem(state, { systemId, status }) {
     const maintain = [...state.maintainTransactions]
     const systemIdx = maintain

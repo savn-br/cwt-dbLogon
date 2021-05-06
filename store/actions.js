@@ -495,7 +495,6 @@ export default {
       const body = { ...selectedCollaborator }
       delete body.pointOfSales
       delete body.profiles
-
       const {
         data: { data, message },
         status,

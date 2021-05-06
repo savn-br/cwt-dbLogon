@@ -6,6 +6,7 @@ export default () => ({
   systemModalMode: 'save',
   selectedSystem: {},
   systems: [],
+  lastMenuLabel: '',
   currentPartial: 'MyProfile',
   currentMenu: [{ partial: 'MyProfile', label: 'myProfile', icon: 'account' }],
   menuStruct: {

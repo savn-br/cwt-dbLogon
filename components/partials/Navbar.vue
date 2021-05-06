@@ -3,12 +3,14 @@
   b-navbar.tw-shadow-md(:fixed-top='true')
     template(#brand)
       b-navbar-item
-        img(src='~/assets/CWT_LOGO_TRASNPARENTE.png', alt='CWT')
+        img.tw-mr-1(src='~/assets/CWT_LOGO_TRASNPARENTE.png', alt='CWT')
+        | {{ $t(currentLabel) }}
     template(#start)
     template(#end)
       .side-menu-content.tw-block(class='md:tw-hidden')
         b-navbar-item(v-if='!!menuType')
           component(:is='menuType')
+
       b-navbar-item(tag='div')
         .buttonns.tw-flex.tw-items-center.tw-justify-end
           nuxt-link.tw-mr-4(:to='switchLocalePath("en")')
@@ -23,6 +25,7 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'Navbar',
   components: {
@@ -34,11 +37,29 @@ export default {
   data() {
     return {}
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      currentMenu: (state) => state.currentMenu,
+      currentPartial: (state) => state.currentPartial,
+      lastMenuLabel: (state) => state.lastMenuLabel,
+      navbarIsLoading: (state) => state.navbarIsLoading,
+    }),
+    currentLabel() {
+      const selectedMenu = this.currentMenu.find(
+        (menu) => menu.partial === this.currentPartial
+      )
+      if (selectedMenu) {
+        this.setLastMenuLabel(selectedMenu.label)
+        return selectedMenu.label
+      }
+      return this.lastMenuLabel
+    },
+  },
   watch: {},
   mounted() {},
   created() {},
   methods: {
+    ...mapMutations(['setLastMenuLabel']),
     logout() {
       window.localStorage.clear()
       window.location.href = '/cwt-dbLogon/'
