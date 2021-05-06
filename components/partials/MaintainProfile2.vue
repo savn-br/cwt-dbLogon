@@ -7,8 +7,8 @@
     b-field.tw-mx-2(label='Descrição do perfil')
       b-input(v-model='description', size='is-small', name='user', disabled)
   .button-wrappers.tw-my-4.tw-flex.tw-justify-center
-    b-button.tw-mr-4(type='is-primary') Salvar
-    b-button(type='is-danger') Cancelar
+    b-button.tw-mr-4(type='is-primary') {{ $t("save") }}
+    b-button(type='is-danger') {{ $t("cancel") }}
   component.tw-mt-4(is='MaintainTransaction')
 </template>
 
@@ -21,7 +21,6 @@ export default {
     return {
       code: '',
       description: '',
-      tree: require('@/jsons/directory-tree-data.json'),
     }
   },
   computed: {},

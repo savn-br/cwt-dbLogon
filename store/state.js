@@ -99,4 +99,14 @@ export default () => ({
   maintainAllProfiles: [],
   selectedMaintainProfile: {},
   maintainTransactions: [],
+  parentProfiles: [],
+  maintainProfileMode: 'save',
+  maintainProfile: {
+    profileName: '',
+    profileParentId: null,
+    profileParentName: '',
+    profileId: '',
+    active: false,
+    viewCCard: false,
+  },
 })

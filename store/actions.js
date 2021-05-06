@@ -1,5 +1,68 @@
 import showToast from '@/utils/toast'
 export default {
+  async updateMaintainProfile({
+    state: { maintainProfile },
+    commit,
+    dispatch,
+  }) {
+    try {
+      commit('setIsLoading', true)
+      const { status } = await this.$axios.put(
+        `/profile/${maintainProfile.profileId}`,
+        {
+          ...maintainProfile,
+        }
+      )
+      commit('setIsLoading', false)
+      if (status === 200) {
+        showToast(this.$i18n.t('successMessage'), 'is-success')
+        await dispatch('getAllProfiles')
+      } else {
+        showToast('Não foi possível realizar a operação', 'is-danger')
+      }
+      return status
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async getMaintainProfile({ state, commit }, { profileId }) {
+    try {
+      commit('setIsLoading', true)
+      const {
+        data: { data },
+      } = await this.$axios.get(`/profile/${profileId}`)
+      delete data.profileAccess
+      commit('setMaintainProfile', data)
+      commit('setIsLoading', false)
+    } catch (error) {
+      console.log(error)
+    }
+  },
+  async createProfile({ state: { maintainProfile }, commit, dispatch }) {
+    try {
+      commit('setIsLoading', true)
+      const { status } = await this.$axios.post(`/profile`, maintainProfile)
+      commit('setIsLoading', false)
+      if (status === 200) {
+        showToast(this.$i18n.t('successMessage'), 'is-success')
+        await dispatch('getAllProfiles')
+      } else {
+        showToast('Não foi possível realizar a operação', 'is-danger')
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  },
+  async getAllParentProfiles({ state, commit }) {
+    try {
+      const {
+        data: { data },
+      } = await this.$axios.get(`/profile/SearchParent/0`)
+      commit('setParentProfiles', data)
+    } catch (error) {
+      console.error(error)
+    }
+  },
   getMaintaintransactions({ state, commit }) {
     try {
       const data = require('@/jsons/data.json')

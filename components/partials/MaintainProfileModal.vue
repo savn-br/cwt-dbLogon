@@ -5,53 +5,87 @@
     .card-content
       form.tw-grid(name='perfil')
         b-field(label='Perfil pai')
-          b-select(placeholder='Selecione o perfil', value='admin')
-            option(value='admin') ADMIN
-            option(value='gestor') GESTOR
-        b-field(label='Visão de dados de clientes')
-          b-select(placeholder='Selecione a visão', value='admin')
-            option(value='admin') administrador
-            option(value='gestor') gestor
+          b-select(
+            placeholder='Selecione o perfil',
+            @input='(value) => handleChangeTerm("profileParentId", value)',
+            :value='maintainProfile.profileParentId'
+          )
+            option(
+              v-for='(parent,index) in parentProfiles',
+              :value='parent.profileId'
+            ) {{ parent.profileName }}
+        //- b-field(label='Visão de dados de clientes')
+        //-   b-select(placeholder='Selecione a visão', value='admin')
+        //-     option(value='admin') administrador
+        //-     option(value='gestor') gestor
         b-field.mx-2(:label='$t("profileCode")')
-          b-input(v-model='perfil.register', size='is-small')
+          b-input(
+            :value='maintainProfile.profileId',
+            size='is-small',
+            @input='(value) => handleChangeTerm("profileId", value)'
+          )
         b-field.mx-2(label='Descrição do perfil')
-          b-input(v-model='perfil.email', size='is-small')
+          b-input(
+            :value='maintainProfile.profileName',
+            size='is-small',
+            @input='(value) => handleChangeTerm("profileName", value)'
+          )
         b-field
           b-field
-            b-switch(v-model='perfil.card') Visualizar cartão
+            b-switch(
+              :value='maintainProfile.viewCCard',
+              @input='(value) => handleChangeTerm("viewCCard", value)'
+            ) Visualizar cartão
+          //- b-field
+          //-   b-switch(v-model='perfil.access') Permissão de atribuição
           b-field
-            b-switch(v-model='perfil.access') Permissão de atribuição
-          b-field
-            b-switch(v-model='perfil.active') Ativo
+            b-switch(
+              :value='maintainProfile.active',
+              @input='(value) => handleChangeTerm("active", value)'
+            ) Ativo
 
     .card-footer.tw-px-6.tw-py-4.tw-flex.tw-justify-end
       .wrapper-buttons
         b-button.tw-mr-4(type='is-danger', @click='$emit("close")') {{ $t("cancel") }}
-        b-button(type='is-primary') {{ $t("save") }}
+        b-button(type='is-primary', @click='handleCreateProfile') {{ $t("save") }}
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
   name: 'MaintainProfileModal',
   components: {},
   props: {},
   data() {
-    return {
-      perfil: {
-        register: '',
-        email: '',
-        name: '',
-        card: '',
-        access: '',
-        active: '',
-      },
-    }
+    return {}
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      maintainProfile: (state) => state.maintainProfile,
+      parentProfiles: (state) => state.parentProfiles,
+      maintainProfileMode: (state) => state.maintainProfileMode,
+    }),
+  },
   watch: {},
   mounted() {},
   created() {},
-  methods: {},
+  methods: {
+    ...mapActions(['createProfile', 'updateMaintainProfile']),
+    ...mapMutations(['setMaintainProfileTerm']),
+    handleChangeTerm(term, value) {
+      if (term === 'profileId') value = parseInt(value)
+      this.setMaintainProfileTerm({ term, value })
+    },
+    async handleCreateProfile() {
+      this.$emit('close')
+      if (this.maintainProfileMode === 'save') {
+        await this.createProfile()
+      }
+      if (this.maintainProfileMode === 'edit') {
+        await this.updateMaintainProfile()
+      }
+    },
+  },
 }
 </script>
 

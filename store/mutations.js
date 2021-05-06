@@ -1,5 +1,27 @@
 import Vue from 'vue'
 export default {
+  setMaintainProfileMode(state, value) {
+    state.maintainProfileMode = value
+  },
+  setMaintainProfileTerm(state, { term, value }) {
+    Vue.set(state.maintainProfile, term, value)
+  },
+  clearMaintainProfile(state) {
+    state.maintainProfile = {
+      profileName: '',
+      profileParentId: null,
+      profileParentName: '',
+      profileId: '',
+      active: false,
+      viewCCard: false,
+    }
+  },
+  setMaintainProfile(state, value) {
+    state.maintainProfile = value
+  },
+  setParentProfiles(state, value) {
+    state.parentProfiles = value
+  },
   setIsLoading(state, value) {
     state.isLoading = value
   },

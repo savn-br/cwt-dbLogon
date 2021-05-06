@@ -23,7 +23,7 @@
       )
     b-field.tw-mx-2(:label='$t("superProfile")')
       b-input(
-        v-model='selectedProfileData.profileParentId',
+        v-model='selectedProfileData.profileParentName',
         size='is-small',
         disabled
       )

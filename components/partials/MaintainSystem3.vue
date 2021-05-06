@@ -85,11 +85,7 @@ export default {
   props: {},
   data() {
     return {
-      systemCode: '2',
-      systemSigla: 'REC',
-      description: 'Receitas',
       isModalActive: false,
-      profileDescription: require('@/jsons/profile-description-table-data.json'),
     }
   },
   computed: {
