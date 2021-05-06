@@ -12,7 +12,7 @@
           b-select(placeholder='Selecione a visão', value='admin')
             option(value='admin') administrador
             option(value='gestor') gestor
-        b-field.mx-2(label='Código do perfil')
+        b-field.mx-2(:label='$t("profileCode")')
           b-input(v-model='perfil.register', size='is-small')
         b-field.mx-2(label='Descrição do perfil')
           b-input(v-model='perfil.email', size='is-small')

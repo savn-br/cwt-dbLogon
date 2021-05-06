@@ -1,6 +1,6 @@
 <template lang="pug">
 #backButton.back-button-wrapper.tw-mb-2
-  b-button(icon-left='arrow-left', @click='goToPartial') Voltar
+  b-button(icon-left='arrow-left', @click='goToPartial') {{ $t("back") }}
 </template>
 
 <script>

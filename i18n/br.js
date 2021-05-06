@@ -1,5 +1,8 @@
 module.exports = {
   /* PLOP_APPEND_BR */
+  back: 'Voltar',
+  viewCard: 'Visualizar cartao',
+  fatherProfile: 'Perfil pai',
   successMessage: 'Operação realizada com sucesso',
   confirm: 'Confirmar',
   confirmationMessage: 'Voce tem certeza que deseja confirmar essa operação',

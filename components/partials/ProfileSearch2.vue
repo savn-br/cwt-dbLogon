@@ -1,39 +1,49 @@
 <template lang="pug">
 #profileSearch2.profile-search2-wrapper.tw-mt-8.tw-px-8
+  b-modal(v-model='isModalActive', :on-cancel='handleCancelOperation')
+    template(#default='props')
+      confirmation-modal(
+        @close='props.close',
+        :onConfirm='handleUpdateProfile',
+        :onCancel='handleCancelOperation'
+      )
   back-button.tw-mb-4(:partialComponent='backProfileSearchPartial')
   form.fields.tw-grid.tw-mb-4(name='profileForm')
-    b-field.tw-mx-2(label='Código do perfil')
+    b-field.tw-mx-2(:label='$t("profileCode")')
       b-input(
         size='is-small',
         v-model='selectedProfileData.profileId',
         disabled
       )
-    b-field.tw-mx-2(label='Descrição do perfil')
+    b-field.tw-mx-2(:label='$t("profileDescription")')
       b-input(
         v-model='selectedProfileData.profileName',
         size='is-small',
         disabled
       )
-    b-field.tw-mx-2(label='Perfil pai')
+    b-field.tw-mx-2(:label='$t("fatherProfile")')
       b-input(
         v-model='selectedProfileData.profileParentId',
         size='is-small',
         disabled
       )
-    b-field.tw-mx-2(label='Visão de dados de clientes')
-      b-input(, size='is-small', disabled)
-    b-field.tw-mx-2
-      b-switch(
-        @input='(active) => handleUpdateProfile({ viewCCard: active })',
-        size='is-small',
-        :value='selectedProfileData.viewCCard'
-      ) Visualizar cartão
-    b-field.tw-mx-2
-      b-switch(
-        @input='(active) => handleUpdateProfile({ active })',
-        size='is-small',
-        :value='selectedProfileData.active'
-      ) Ativo
+    //- b-field.tw-mx-2(label='Visão de dados de clientes')
+    //-   b-input(, size='is-small', disabled)
+    .switch-wrapper
+      b-field.tw-mx-2
+        b-switch(
+          @input='(active) => handleUpdateViewCCard(active)',
+          size='is-small',
+          :value='selectedProfileData.viewCCard',
+          ref='viewCCard'
+        ) {{ $t("viewCard") }}
+      b-field.tw-mx-2
+        b-switch(
+          ref='active',
+          @input='(active) => handleUpdateActive(active)',
+          size='is-small',
+          :value='selectedProfileData.active'
+        ) {{ $t("active") }}
 
   collapse.tw-text-sm(
     v-if='!!selectedProfileData.profileAccess && !!selectedProfileData.profileAccess.profileName',
@@ -51,10 +61,19 @@
 import { mapActions, mapState } from 'vuex'
 export default {
   name: 'ProfileSearch2',
-  components: {},
+  components: {
+    ConfirmationModal: () => import('@/components/partials/ConfirmationModal'),
+  },
   props: {},
   data() {
-    return {}
+    return {
+      isModalActive: false,
+      lastRefChanged: '',
+      status: {
+        active: false,
+        viewCCard: false,
+      },
+    }
   },
   computed: {
     ...mapState(['selectedProfileData', 'backProfileSearchPartial']),
@@ -66,8 +85,24 @@ export default {
   created() {},
   methods: {
     ...mapActions(['getSelectedProfileData', 'handleUpdateProfileDataTerm']),
-    async handleUpdateProfile(term) {
-      await this.handleUpdateProfileDataTerm(term)
+    async handleUpdateProfile() {
+      await this.handleUpdateProfileDataTerm({ ...this.status })
+    },
+    handleUpdateActive(active) {
+      this.status.active = active
+      this.lastRefChanged = 'active'
+      this.isModalActive = true
+    },
+    handleUpdateViewCCard(viewCCard) {
+      this.status.viewCCard = viewCCard
+      this.lastRefChanged = 'viewCCard'
+      this.isModalActive = true
+    },
+    handleCancelOperation() {
+      this.$refs[this.lastRefChanged].value = !this.status[this.lastRefChanged]
+      this.$refs[this.lastRefChanged].computedValue = !this.status[
+        this.lastRefChanged
+      ]
     },
   },
 }

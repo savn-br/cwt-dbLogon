@@ -33,8 +33,8 @@ export default {
   mounted() {},
   created() {},
   methods: {
-    cancel() {
-      this.onCancel()
+    async cancel() {
+      await this.onCancel()
       this.$emit('close')
     },
     confirm() {
