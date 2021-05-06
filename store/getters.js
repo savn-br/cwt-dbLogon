@@ -11,4 +11,23 @@ export default {
       return pointOfSale.pointOfSaleId === pointOfSaleId
     })
   },
+  getActiveMaintainTransactions(state) {
+    const maintain = [...state.maintainTransactions]
+    const transactions = maintain
+      .map((system) =>
+        system.modules
+          .map((module) =>
+            module.transactions.map((transaction) => ({
+              transactionId: transaction.transactionId,
+              selected: transaction.selected,
+            }))
+          )
+          .flat()
+      )
+      .flat()
+      .filter((transaction) => transaction.selected)
+      .map((transaction) => transaction.transactionId)
+
+    return transactions
+  },
 }

@@ -63,11 +63,11 @@ export default {
   },
   watch: {},
   async mounted() {
-    await this.getMaintaintransactions()
+    await this.getMaintainTransactions()
   },
   created() {},
   methods: {
-    ...mapActions(['getMaintaintransactions']),
+    ...mapActions(['getMaintainTransactions']),
     ...mapMutations([
       'updateMaintainTransactionsTransaction',
       'updateMaintainTransactionModule',

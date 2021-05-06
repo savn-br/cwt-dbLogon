@@ -1,5 +1,26 @@
 import showToast from '@/utils/toast'
 export default {
+  async updateMaintainTransactions({
+    state: { maintainProfile },
+    commit,
+    getters,
+  }) {
+    try {
+      commit('setIsLoading', true)
+      const { status } = await this.$axios.put(
+        `/authorization/${maintainProfile.profileId}`,
+        getters.getActiveMaintainTransactions
+      )
+      if (status === 200) {
+        showToast(this.$i18n.t('successMessage'), 'is-success')
+      } else {
+        showToast('Não foi possível realizar a operação', 'is-danger')
+      }
+      commit('setIsLoading', false)
+    } catch (error) {
+      console.error(error)
+    }
+  },
   async updateMaintainProfile({
     state: { maintainProfile },
     commit,
@@ -63,10 +84,14 @@ export default {
       console.error(error)
     }
   },
-  getMaintaintransactions({ state, commit }) {
+  async getMaintainTransactions({ state: { maintainProfile }, commit }) {
     try {
-      const data = require('@/jsons/data.json')
+      commit('setIsLoading', true)
+      const {
+        data: { data },
+      } = await this.$axios.get(`/authorization/${maintainProfile.profileId}`)
       commit('setMaintainTransactions', data)
+      commit('setIsLoading', false)
     } catch (error) {
       console.error(error)
     }
