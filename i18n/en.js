@@ -1,5 +1,9 @@
 module.exports = {
   /* PLOP_APPEND_EN */
+  transaction: 'Transaction',
+  module: 'Module',
+  system: 'System',
+  select: 'Select',
   profileSearchMessage:
     'Please use the search bar to search for the profiles you want',
   back: 'Back',

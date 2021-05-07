@@ -1,13 +1,13 @@
 <template lang="pug">
 #maintainTransaction.maintain-transaction-wrapper.tw-p-4.tw-shadow.tw-mb-4.tw-max-w-2xl.tw-mx-auto
   .description-wrapper.tw-flex.tw-font-bold
-    .d-select.tw-w-20.tw-mr-4 Selecionar
+    .d-select.tw-w-20.tw-mr-4 {{ $t("select") }}
     .name.tw-mb-2
-      | System
+      | {{ $t("system") }}
       b-icon.tw-mx-1.system-color(icon='arrow-right-circle', size='is-small')
-      | / Module
+      | / {{ $t("module") }}
       b-icon.tw-mx-1.module-color(icon='arrow-right-circle', size='is-small')
-      | / Transaction
+      | / {{ $t("transaction") }}
       b-icon.tw-mx-1.transaction-color(
         icon='arrow-right-circle',
         size='is-small'

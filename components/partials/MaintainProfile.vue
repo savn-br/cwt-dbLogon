@@ -1,9 +1,12 @@
 <template lang="pug">
 #maintainProfile.maintain-profile-wrapper.tw-mt-8.tw-px-8
-  b-modal(v-model='isModalActive2', :on-cancel='handleCancelOperation')
-    template(#default='props')
+  b-modal(
+    v-model='isModalActiveConfirmation',
+    :on-cancel='handleCancelOperation'
+  )
+    template(#default='props2')
       confirmation-modal(
-        @close='props.close',
+        @close='props2.close',
         :onConfirm='handleUpdateMaintainProfile',
         :onCancel='handleCancelOperation'
       )
@@ -33,9 +36,10 @@
       :label='$t("active")',
       :centered='true'
     )
-      b-checkbox(
+      b-switch(
         :value='props.row.active',
         :ref='props.row.profileId',
+        size='is-small',
         @input='(active) => { handleChangeState(active, props.row.profileId); }'
       )
         span.tw-text-xs {{ $t("active") }}
@@ -73,7 +77,7 @@ export default {
   data() {
     return {
       isModalActive: false,
-      isModalActive2: false,
+      isModalActiveConfirmation: false,
       currentProfile: {
         profileId: '',
         active: false,
@@ -118,11 +122,9 @@ export default {
       this.clearMaintainProfile()
       this.isModalActive = true
     },
-    async handleChangeState(active, profileId) {
-      this.isModalActive2 = true
+    handleChangeState(active, profileId) {
+      this.isModalActiveConfirmation = true
       this.currentProfile = { profileId, active }
-      await this.getMaintainProfile({ profileId })
-      this.setMaintainProfileTerm({ term: 'active', value: active })
     },
     handleCancelOperation() {
       this.$refs[this.currentProfile.profileId].value = !this.currentProfile
@@ -131,6 +133,13 @@ export default {
         .currentProfile.active
     },
     async handleUpdateMaintainProfile() {
+      await this.getMaintainProfile({
+        profileId: this.currentProfile.profileId,
+      })
+      this.setMaintainProfileTerm({
+        term: 'active',
+        value: this.currentProfile.active,
+      })
       const status = await this.updateMaintainProfile()
       if (status !== 200) {
         this.handleCancelOperation()
