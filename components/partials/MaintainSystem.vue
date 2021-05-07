@@ -1,5 +1,8 @@
 <template lang="pug">
 #maintainSystem.maintain-system-wrapper.tw-mt-8.tw-px-8
+  b-modal(v-model='NotesModalActive')
+    template(#default='props')
+      notes-modal(@close='props.close', :message='message')
   b-modal(v-model='isModalActive')
     template(#default='props')
       maintain-system-modal(@close='props.close')
@@ -49,7 +52,10 @@
           @click='goToModule(props.row)'
         )
           b-icon.tw-mr-2(icon='account-details')
-        span.tw-cursor-pointer(class='hover:tw-text-primary')
+        span.tw-cursor-pointer(
+          class='hover:tw-text-primary',
+          @click='handleShowNotes(props.row)'
+        )
           b-icon.tw-mr-2(icon='clipboard-text')
         span.tw-cursor-pointer(class='hover:tw-text-primary')
           b-icon(icon='eye')
@@ -64,13 +70,15 @@ export default {
     StandardTable: () => import('@/components/StandardTable'),
     MaintainSystemModal: () =>
       import('@/components/partials/MaintainSystemModal'),
+    NotesModal: () => import('@/components/partials/NotesModal'),
   },
   mixins: [setMenu],
   props: {},
   data() {
     return {
       isModalActive: false,
-      profileDescription: require('@/jsons/profile-description-table-data.json'),
+      NotesModalActive: false,
+      message: '',
     }
   },
   computed: {
@@ -97,6 +105,10 @@ export default {
       this.$store.commit('setSystemModalMode', 'edit')
       this.$store.commit('setSelectedSystem', system)
       this.isModalActive = true
+    },
+    handleShowNotes(system) {
+      this.message = system.notes
+      this.NotesModalActive = true
     },
   },
 }

@@ -1,5 +1,7 @@
 module.exports = {
   /* PLOP_APPEND_BR */
+  notes: 'Notas',
+  close: 'Fechar',
   transaction: 'Transação',
   module: 'Modulo',
   system: 'Sistema',
@@ -21,7 +23,6 @@ module.exports = {
   moduleCode: 'Código do módulo',
   save: 'Salvar',
   cancel: 'Cancelar',
-  notes: 'Notas',
   operation: 'Operação',
   active: 'Ativo',
   description: 'Descrição',

@@ -1,5 +1,8 @@
 <template lang="pug">
 #maintainSystem2.maintain-system2-wrapper.tw-mt-8.tw-px-8
+  b-modal(v-model='NotesModalActive')
+    template(#default='props')
+      notes-modal(@close='props.close', :message='message')
   back-button(partialComponent='MaintainSystem')
   .form.tw-grid.form-auto-fill(name='modulos')
     b-field.tw-mx-2(:label='$t("systemCode")')
@@ -61,7 +64,10 @@
           @click='goToTransaction(props.row)'
         )
           b-icon.tw-mr-2(icon='account-details')
-        span.tw-cursor-pointer(class='hover:tw-text-primary')
+        span.tw-cursor-pointer(
+          class='hover:tw-text-primary',
+          @click='handleShowNotes(props.row)'
+        )
           b-icon.tw-mr-2(icon='clipboard-text')
         span.tw-cursor-pointer(class='hover:tw-text-primary')
           b-icon(icon='eye')
@@ -76,16 +82,15 @@ export default {
     StandardTable: () => import('@/components/StandardTable'),
     MaintainSystemModal2: () =>
       import('@/components/partials/MaintainSystemModal2'),
+    NotesModal: () => import('@/components/partials/NotesModal'),
   },
   mixins: [setMenu],
   props: {},
   data() {
     return {
-      systemCode: '2',
-      systemSigla: 'REC',
-      description: 'Receitas',
       isModalActive: false,
-      profileDescription: require('@/jsons/profile-description-table-data.json'),
+      NotesModalActive: false,
+      message: '',
     }
   },
   computed: {
@@ -112,6 +117,10 @@ export default {
       this.$store.commit('setModuleModalMode', 'edit')
       this.$store.commit('setSelectedModule', module)
       this.isModalActive = true
+    },
+    handleShowNotes(system) {
+      this.message = system.notes
+      this.NotesModalActive = true
     },
   },
 }

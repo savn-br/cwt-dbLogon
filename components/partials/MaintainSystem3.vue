@@ -1,5 +1,8 @@
 <template lang="pug">
 #maintainSystem3.maintain-system3-wrapper.tw-mt-8.tw-px-8
+  b-modal(v-model='NotesModalActive')
+    template(#default='props')
+      notes-modal(@close='props.close', :message='message')
   back-button(partialComponent='MaintainSystem2')
   .form.tw-grid.form-auto-fill.tw-mb-4(name='sistema')
     b-field.tw-mx-2(:label='$t("systemCode")')
@@ -67,7 +70,10 @@
           b-icon.tw-mr-2(icon='pencil')
         //- span.tw-cursor-pointer(class='hover:tw-text-primary')
         //-   b-icon.tw-mr-2(icon='account-details')
-        span.tw-cursor-pointer(class='hover:tw-text-primary')
+        span.tw-cursor-pointer(
+          class='hover:tw-text-primary',
+          @click='handleShowNotes(props.row)'
+        )
           b-icon.tw-mr-2(icon='clipboard-text')
         span.tw-cursor-pointer(class='hover:tw-text-primary')
           b-icon(icon='eye')
@@ -81,11 +87,14 @@ export default {
     StandardTable: () => import('@/components/StandardTable'),
     MaintainSystemModal3: () =>
       import('@/components/partials/MaintainSystemModal3'),
+    NotesModal: () => import('@/components/partials/NotesModal'),
   },
   props: {},
   data() {
     return {
       isModalActive: false,
+      NotesModalActive: false,
+      message: '',
     }
   },
   computed: {
@@ -107,6 +116,10 @@ export default {
       this.$store.commit('setTransactionModalMode', 'edit')
       this.$store.commit('setSelectedTransaction', transaction)
       this.isModalActive = true
+    },
+    handleShowNotes(system) {
+      this.message = system.notes
+      this.NotesModalActive = true
     },
   },
 }
