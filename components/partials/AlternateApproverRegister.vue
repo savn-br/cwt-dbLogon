@@ -4,7 +4,7 @@
     template(#default='props')
       alternate-approver-modal(@close='props.close')
   .button-primary.tw-flex.tw-justify-end
-    b-button(type='is-primary', @click='isModalActive = true') {{ $t("add") }}
+    b-button(type='is-primary', @click='handleOpenModal') {{ $t("add") }}
   standard-table.tw-mt-5(
     :data='data',
     :bordered='true',
@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
   name: 'AlternateApproverRegister',
   components: {
@@ -67,7 +68,13 @@ export default {
   watch: {},
   mounted() {},
   created() {},
-  methods: {},
+  methods: {
+    ...mapMutations(['clearSubstituteApprover']),
+    handleOpenModal() {
+      this.clearSubstituteApprover()
+      this.isModalActive = true
+    },
+  },
 }
 </script>
 

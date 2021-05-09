@@ -1,5 +1,28 @@
 import showToast from '@/utils/toast'
 export default {
+  async createSubstituteApprover({
+    state: { substituteApprover, userData },
+    commit,
+  }) {
+    try {
+      const { userId } = userData
+      const body = { ...substituteApprover, userId }
+      commit('setIsLoading', true)
+      const {
+        status,
+        data: { message },
+      } = await this.$axios.post(` /substituteApprover/`, body)
+      if (status === 200) {
+        showToast(this.$i18n.t('successMessage'), 'is-success')
+      } else {
+        showToast(message, 'is-danger')
+      }
+    } catch (error) {
+      showToast(error.message, 'is-danger')
+    } finally {
+      commit('setIsLoading', false)
+    }
+  },
   async updateMaintainTransactions({
     state: { maintainProfile },
     commit,
@@ -16,9 +39,10 @@ export default {
       } else {
         showToast('Não foi possível realizar a operação', 'is-danger')
       }
-      commit('setIsLoading', false)
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async updateMaintainProfile({
@@ -34,7 +58,7 @@ export default {
           ...maintainProfile,
         }
       )
-      commit('setIsLoading', false)
+
       if (status === 200) {
         showToast(this.$i18n.t('successMessage'), 'is-success')
         await dispatch('getAllProfiles')
@@ -44,6 +68,8 @@ export default {
       return status
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async getMaintainProfile({ state, commit }, { profileId }) {
@@ -54,16 +80,17 @@ export default {
       } = await this.$axios.get(`/profile/${profileId}`)
       delete data.profileAccess
       commit('setMaintainProfile', data)
-      commit('setIsLoading', false)
     } catch (error) {
       console.log(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async createProfile({ state: { maintainProfile }, commit, dispatch }) {
     try {
       commit('setIsLoading', true)
       const { status } = await this.$axios.post(`/profile`, maintainProfile)
-      commit('setIsLoading', false)
+
       if (status === 200) {
         showToast(this.$i18n.t('successMessage'), 'is-success')
         await dispatch('getAllProfiles')
@@ -72,6 +99,8 @@ export default {
       }
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async getAllParentProfiles({ state, commit }) {
@@ -91,9 +120,10 @@ export default {
         data: { data },
       } = await this.$axios.get(`/authorization/${maintainProfile.profileId}`)
       commit('setMaintainTransactions', data)
-      commit('setIsLoading', false)
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async getAllProfiles({ state, commit }) {
@@ -116,7 +146,7 @@ export default {
       delete body.profileAccess
       commit('setIsLoading', true)
       const { status } = await this.$axios.put(`/profile/${profileId}`, body)
-      commit('setIsLoading', false)
+
       if (status === 200) {
         showToast(this.$i18n.t('successMessage'), 'is-success')
       } else {
@@ -125,6 +155,8 @@ export default {
       return status
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async getAllPointOfSales({ state, commit }) {
@@ -145,7 +177,7 @@ export default {
         data: { data },
         status,
       } = await this.$axios.put(`/activateUser/${userId}/${active}`)
-      commit('setIsLoading', false)
+
       if (status === 200) {
         showToast(this.$i18n.t('successMessage'), 'is-success')
         commit('setActivateUsersElement', data[0])
@@ -155,6 +187,8 @@ export default {
       return status
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async getActivateUsers({
@@ -277,10 +311,12 @@ export default {
       } = await this.$axios.get(
         `/profile/SearchAll/${userId}/${searchProfileId}`
       )
-      commit('setIsLoading', false)
+
       commit('setAvailableProfiles', data)
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async setProfileState2Collaborator(
@@ -299,7 +335,7 @@ export default {
         status,
       } = await this.$axios.put(`/userProfile/${userId}/${profileId}/${active}`)
       commit('updateProfileOnCollaborator', { profileId, value: data })
-      commit('setIsLoading', false)
+
       if (status === 200) {
         showToast(this.$i18n.t('successMessage'), 'is-success')
       } else {
@@ -308,6 +344,8 @@ export default {
       return status
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async getAvailableCollaborators({ state: { searchCollaboratorId }, commit }) {
@@ -322,9 +360,10 @@ export default {
         const phone = data[0].phone.replace(/[^\d]/g, '')
         commit('setSelectedCollaborator', { ...data[0], phone })
       }
-      commit('setIsLoading', false)
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async getRequests({
@@ -381,7 +420,7 @@ export default {
         systemId,
         moduleId,
       })
-      commit('setIsLoading', false)
+
       if (status === 200) {
         showToast(this.$i18n.t('successMessage'), 'is-success')
       } else {
@@ -390,6 +429,8 @@ export default {
       return status
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async editTransaction({
@@ -410,7 +451,7 @@ export default {
         `/transaction/${systemId}/${moduleId}/${transactionId}/`,
         selectedTransaction
       )
-      commit('setIsLoading', false)
+
       if (status === 200) {
         showToast(this.$i18n.t('successMessage'), 'is-success')
       } else {
@@ -419,6 +460,8 @@ export default {
       return status
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async saveModule({
@@ -437,7 +480,7 @@ export default {
         ...selectedModule,
         systemId,
       })
-      commit('setIsLoading', false)
+
       if (status === 200) {
         showToast(this.$i18n.t('successMessage'), 'is-success')
       } else {
@@ -446,6 +489,8 @@ export default {
       return status
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async editModule({
@@ -465,7 +510,7 @@ export default {
         `/module/${systemId}/${moduleId}/`,
         selectedModule
       )
-      commit('setIsLoading', false)
+
       if (status === 200) {
         showToast(this.$i18n.t('successMessage'), 'is-success')
       } else {
@@ -474,6 +519,8 @@ export default {
       return status
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async getModules({
@@ -498,7 +545,7 @@ export default {
         data: { message },
         status,
       } = await this.$axios.post(`/system/`, selectedSystem)
-      commit('setIsLoading', false)
+
       if (status === 200) {
         showToast(this.$i18n.t('successMessage'), 'is-success')
       } else {
@@ -507,6 +554,8 @@ export default {
       return status
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async editSystem({ state: { selectedSystem }, commit }) {
@@ -517,7 +566,7 @@ export default {
         data: { message },
         status,
       } = await this.$axios.put(`/system/${systemId}`, selectedSystem)
-      commit('setIsLoading', false)
+
       if (status === 200) {
         showToast(this.$i18n.t('successMessage'), 'is-success')
       } else {
@@ -526,6 +575,8 @@ export default {
       return status
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async getSystems({ commit }) {
@@ -596,7 +647,7 @@ export default {
       } = await this.$axios.put(`/myProfile/${userId}`, {
         ...userData,
       })
-      commit('setIsLoading', false)
+
       if (status === 200) {
         showToast(this.$i18n.t('successMessage'), 'is-success')
       } else {
@@ -608,6 +659,8 @@ export default {
       commit('setUserData', data)
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async handleUpdateProfile({ state: { selectedCollaborator }, commit }) {
@@ -621,7 +674,7 @@ export default {
         data: { data, message },
         status,
       } = await this.$axios.put(`/myProfile/${userId}`, body)
-      commit('setIsLoading', false)
+
       if (status === 200) {
         showToast(this.$i18n.t('successMessage'), 'is-success')
         const phone = data.phone.replace(/[^\d]/g, '')
@@ -631,6 +684,8 @@ export default {
       }
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async handleGetMyProfile({

@@ -109,4 +109,16 @@ export default () => ({
     active: false,
     viewCCard: false,
   },
+  substituteApprover: {
+    userSubstituteId: '',
+    beginTermDate: '',
+    endTermDate: '',
+    active: true,
+  },
+  approvalDelegation: {
+    userSubstituteId: '', // Usuário que será o aprovado delegado
+    beginTermDate: '',
+    endTermDate: '',
+    active: true,
+  },
 })

@@ -1,5 +1,19 @@
 import Vue from 'vue'
 export default {
+  setSubstituteApproverTerm(state, { key, value }) {
+    Vue.set(state.substituteApprover, key, value)
+  },
+  clearSubstituteApprover(state, value) {
+    state.substituteApprover = {
+      userSubstituteId: '',
+      beginTermDate: '',
+      endTermDate: '',
+      active: true,
+    }
+  },
+  setSubstituteApprover(state, value) {
+    state.substituteApprover = value
+  },
   setMaintainProfileMode(state, value) {
     state.maintainProfileMode = value
   },
