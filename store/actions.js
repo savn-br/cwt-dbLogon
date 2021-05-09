@@ -1,5 +1,27 @@
 import showToast from '@/utils/toast'
 export default {
+  setSubstituteApprover({ state, commit, dispatch }, { substituteApprover }) {
+    try {
+      commit('setIsLoading', true)
+      console.log(substituteApprover)
+      dispatch('getSubstituteApproverList')
+    } catch (error) {
+      console.error(error)
+    } finally {
+      commit('setIsLoading', false)
+    }
+  },
+  getSubstituteApproverList({ state, commit }) {
+    try {
+      commit('setIsLoading', true)
+      const data = require('@/jsons/alternate-approver-data.json')
+      commit('setSubstituteApproverList', data)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      commit('setIsLoading', false)
+    }
+  },
   async createSubstituteApprover({
     state: { substituteApprover, userData },
     commit,
@@ -18,7 +40,7 @@ export default {
         showToast(message, 'is-danger')
       }
     } catch (error) {
-      showToast(error.message, 'is-danger')
+      console.error(error)
     } finally {
       commit('setIsLoading', false)
     }

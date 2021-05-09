@@ -1,29 +1,20 @@
 [
   {
-    "id": 1,
-    "register": "ronnas123",
-    "name": "Ronnas Machado",
-    "email": "ronnas@email.com",
-    "initial_date": "2016-10-15 13:43:27",
-    "end_date": "2016-10-15 13:43:27",
-    "operation": "off"
+    "userSubstituteId": "nnn",
+    "beginTermDate": "07/05/2021",
+    "endTermDate": "07/05/2021",
+    "active": true
   },
   {
-    "id": 1,
-    "register": "ronnas123",
-    "name": "Ronnas Machado",
-    "email": "ronnas@email.com",
-    "initial_date": "2016-10-15 13:43:27",
-    "end_date": "2016-10-15 13:43:27",
-    "operation": "off"
+    "userSubstituteId": "nnn2",
+    "beginTermDate": "07/05/2021",
+    "endTermDate": "07/05/2021",
+    "active": true
   },
   {
-    "id": 1,
-    "register": "ronnas123",
-    "name": "Ronnas Machado",
-    "email": "ronnas@email.com",
-    "initial_date": "2016-10-15 13:43:27",
-    "end_date": "2016-10-15 13:43:27",
-    "operation": "off"
+    "userSubstituteId": "nnn4",
+    "beginTermDate": "07/05/2021",
+    "endTermDate": "07/05/2021",
+    "active": true
   }
 ]

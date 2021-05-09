@@ -65,8 +65,8 @@ export default {
       this.setSubstituteApproverTerm({ key, value })
     },
     async handleCreateSubstituteApprover() {
-      await this.createSubstituteApprover()
       this.$emit('close')
+      await this.createSubstituteApprover()
     },
   },
 }

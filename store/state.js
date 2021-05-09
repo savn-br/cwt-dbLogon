@@ -121,4 +121,5 @@ export default () => ({
     endTermDate: '',
     active: true,
   },
+  substituteApproverList: [],
 })

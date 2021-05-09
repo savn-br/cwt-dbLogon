@@ -1,5 +1,8 @@
 import Vue from 'vue'
 export default {
+  setSubstituteApproverList(state, value) {
+    state.substituteApproverList = value
+  },
   setSubstituteApproverTerm(state, { key, value }) {
     Vue.set(state.substituteApprover, key, value)
   },
