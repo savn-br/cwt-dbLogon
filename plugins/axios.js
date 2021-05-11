@@ -18,7 +18,7 @@ export default function ({ $axios, store, redirect }, inject) {
       showToast(message || 'Não autorizado', 'is-danger')
       setTimeout(() => {
         window.localStorage.clear()
-        window.location.href = '/'
+        window.location.href = '/cwt-dbLogon/'
       }, 3000)
     }
   })
