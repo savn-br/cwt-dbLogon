@@ -116,10 +116,11 @@ export default () => ({
     active: true,
   },
   approvalDelegation: {
-    userSubstituteId: '', // Usuário que será o aprovado delegado
+    userSubstituteId: '',
     beginTermDate: '',
     endTermDate: '',
     active: true,
   },
   substituteApproverList: [],
+  approvalDelegationList: [],
 })

@@ -1,9 +1,72 @@
 import showToast from '@/utils/toast'
 export default {
-  setSubstituteApprover({ state, commit, dispatch }, { substituteApprover }) {
+  async setApprovalDelegation({ state, commit, dispatch }, { userId }) {
     try {
       commit('setIsLoading', true)
-      console.log(substituteApprover)
+      const response = await this.$axios.put(`/approvalDelegation/${userId}`)
+      console.log(response)
+      dispatch('getApprovalDelegationList')
+    } catch (error) {
+      console.error(error)
+    } finally {
+      commit('setIsLoading', false)
+    }
+  },
+  async createApprovalDelegation({
+    state: { approvalDelegation, userData },
+    commit,
+    dispatch,
+  }) {
+    try {
+      const { beginTermDate, endTermDate } = approvalDelegation
+      const { userId } = userData
+      const body = {
+        ...approvalDelegation,
+        userId,
+        beginTermDate: beginTermDate
+          ? this.$moment(beginTermDate).format('DD/MM/YYYY')
+          : this.$moment().format('DD/MM/YYYY'),
+        endTermDate: endTermDate
+          ? this.$moment(endTermDate).format('DD/MM/YYYY')
+          : '',
+      }
+      commit('setIsLoading', true)
+      const {
+        status,
+        data: { message },
+      } = await this.$axios.post(`/approvalDelegation/`, body)
+      if (status === 200) {
+        showToast(this.$i18n.t('successMessage'), 'is-success')
+      } else {
+        showToast(message, 'is-danger')
+      }
+    } catch (error) {
+      console.error(error)
+    } finally {
+      dispatch('getApprovalDelegationList')
+      commit('setIsLoading', false)
+    }
+  },
+  async getApprovalDelegationList({ state: { userData }, commit }) {
+    try {
+      const { userId } = userData
+      commit('setIsLoading', true)
+      const {
+        data: { data },
+      } = await this.$axios.get(`/approvalDelegation/SearchAll/${userId}`)
+      commit('setApprovalDelegationList', data)
+    } catch (error) {
+      console.log(error)
+    } finally {
+      commit('setIsLoading', false)
+    }
+  },
+
+  async setSubstituteApprover({ state, commit, dispatch }, { userId }) {
+    try {
+      commit('setIsLoading', true)
+      const response = await this.$axios.put(`/substituteApprover/${userId}`)
+      console.log(response)
       dispatch('getSubstituteApproverList')
     } catch (error) {
       console.error(error)
@@ -11,10 +74,13 @@ export default {
       commit('setIsLoading', false)
     }
   },
-  getSubstituteApproverList({ state, commit }) {
+  async getSubstituteApproverList({ state: { userData }, commit }) {
     try {
+      const { userId } = userData
       commit('setIsLoading', true)
-      const data = require('@/jsons/alternate-approver-data.json')
+      const {
+        data: { data },
+      } = await this.$axios.get(`/substituteApprover/SearchAll/${userId}`)
       commit('setSubstituteApproverList', data)
     } catch (error) {
       console.log(error)
@@ -25,15 +91,26 @@ export default {
   async createSubstituteApprover({
     state: { substituteApprover, userData },
     commit,
+    dispatch,
   }) {
     try {
+      const { beginTermDate, endTermDate } = substituteApprover
       const { userId } = userData
-      const body = { ...substituteApprover, userId }
+      const body = {
+        ...substituteApprover,
+        userId,
+        beginTermDate: beginTermDate
+          ? this.$moment(beginTermDate).format('DD/MM/YYYY')
+          : this.$moment().format('DD/MM/YYYY'),
+        endTermDate: endTermDate
+          ? this.$moment(endTermDate).format('DD/MM/YYYY')
+          : '',
+      }
       commit('setIsLoading', true)
       const {
         status,
         data: { message },
-      } = await this.$axios.post(` /substituteApprover/`, body)
+      } = await this.$axios.post(`/substituteApprover/`, body)
       if (status === 200) {
         showToast(this.$i18n.t('successMessage'), 'is-success')
       } else {
@@ -42,6 +119,7 @@ export default {
     } catch (error) {
       console.error(error)
     } finally {
+      dispatch('getSubstituteApproverList')
       commit('setIsLoading', false)
     }
   },

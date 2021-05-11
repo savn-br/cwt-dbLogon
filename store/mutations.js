@@ -1,5 +1,22 @@
 import Vue from 'vue'
 export default {
+  setApprovalDelegationList(state, value) {
+    state.approvalDelegationList = value
+  },
+  setApprovalDelegationTerm(state, { key, value }) {
+    Vue.set(state.approvalDelegation, key, value)
+  },
+  clearApprovalDelegation(state, value) {
+    state.approvalDelegation = {
+      userSubstituteId: '',
+      beginTermDate: '',
+      endTermDate: '',
+      active: true,
+    }
+  },
+  setApprovalDelegation(state, value) {
+    state.approvalDelegation = value
+  },
   setSubstituteApproverList(state, value) {
     state.substituteApproverList = value
   },

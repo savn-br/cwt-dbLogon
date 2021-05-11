@@ -1,75 +1,132 @@
 <template lang="pug">
 .approval-delegation-wrapper.tw-mt-8.tw-px-8
+  b-modal(
+    v-model='isModalConfirmationActive',
+    :on-cancel='handleCancelOperation'
+  )
+    template(#default='props')
+      confirmation-modal(
+        @close='props.close',
+        :onConfirm='handleApprovalDelegation',
+        :onCancel='handleCancelOperation'
+      )
   b-modal(v-model='isModalActive')
     template(#default='props')
       approval-delegation-modal(@close='props.close')
   .button-primary.tw-flex.tw-justify-end
-    b-button(type='is-primary', @click='isModalActive = true') {{ $t("add") }}
+    b-button(type='is-primary', @click='handleOpenModal') {{ $t("add") }}
   standard-table.tw-mt-5(
-    :data='data',
+    :data='approvalList',
     :bordered='true',
     :narrowed='true',
     :hoverable='true'
   )
     b-table-column(
-      field='register',
-      :label='$t("delegateRegistration")',
+      field='userSubstituteId',
+      :label='$t("registration")',
       v-slot='props'
     )
-      span.tw-text-xs {{ props.row.register }}
+      span.tw-text-xs {{ props.row.userSubstituteId }}
     b-table-column(
-      field='name',
-      :label='$t("delegateApproverName")',
+      field='userSubstituteName',
+      :label='$t("name")',
       v-slot='props'
     )
-      span.tw-text-xs {{ props.row.name }}
+      span.tw-text-xs {{ props.row.userSubstituteName }}
     b-table-column(
-      field='initial_date',
+      field='beginTermDate',
       :label='$t("initialDate")',
       v-slot='props'
     )
-      span.tw-text-xs {{ props.row.initial_date }}
-    b-table-column(field='end_date', :label='$t("finalDate")', v-slot='props')
-      span.tw-text-xs {{ props.row.end_date }}
+      span.tw-text-xs {{ props.row.beginTermDate }}
+    b-table-column(
+      field='endTermDate',
+      :label='$t("finalDate")',
+      v-slot='props'
+    )
+      span.tw-text-xs {{ props.row.endTermDate }}
     b-table-column(
       ,
       :label='$t("operation")',
       v-slot='props',
       :centered='true'
     )
-      b-field
+      b-field(:class='!props.row.active ? "hidden" : ""')
         b-switch(
           size='is-small',
-          true-value='on',
-          false-value='off',
-          v-model='props.row.operation'
-        ) {{ props.row.operation }}
+          :value='props.row.active',
+          :ref='props.row.userSubstituteId',
+          @input='(status) => handleChangeStatus(status, props.row)'
+        )
 </template>
 
 <script>
+import { mapMutations, mapActions, mapState } from 'vuex'
 export default {
   name: 'ApprovalDelegation',
   components: {
     StandardTable: () => import('@/components/StandardTable'),
     ApprovalDelegationModal: () =>
       import('@/components/partials/ApprovalDelegationModal'),
+    ConfirmationModal: () => import('@/components/partials/ConfirmationModal'),
   },
   props: {},
   data() {
     return {
-      data: require('@/jsons/approval-table-data.json'),
       isModalActive: false,
+      isModalConfirmationActive: false,
+      internalApprovalDelegation: {
+        userSubstituteId: '',
+        active: false,
+      },
     }
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      approvalList: (state) => state.approvalDelegationList,
+    }),
+  },
   watch: {},
-  mounted() {},
+  mounted() {
+    this.getApprovalDelegationList()
+  },
   created() {},
-  methods: {},
+  methods: {
+    ...mapMutations(['clearApprovalDelegation']),
+    ...mapActions(['getApprovalDelegationList', 'setApprovalDelegation']),
+
+    handleOpenModal() {
+      this.clearApprovalDelegation()
+      this.isModalActive = true
+    },
+    handleChangeStatus(status, approvalDelegation) {
+      const { userSubstituteId } = approvalDelegation
+      this.internalApprovalDelegation = {
+        userSubstituteId,
+        active: status,
+      }
+      this.isModalConfirmationActive = true
+    },
+    handleCancelOperation() {
+      this.$refs[this.internalApprovalDelegation.userSubstituteId].value = !this
+        .internalApprovalDelegation.active
+      this.$refs[
+        this.internalApprovalDelegation.userSubstituteId
+      ].computedValue = !this.internalApprovalDelegation.active
+    },
+    handleApprovalDelegation() {
+      this.setApprovalDelegation({
+        userId: this.internalApprovalDelegation.userSubstituteId,
+      })
+    },
+  },
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .approval-delegation-wrapper {
+  .hidden {
+    display: none;
+  }
 }
 </style>

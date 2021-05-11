@@ -1,5 +1,5 @@
 <template lang="pug">
-#alternateApproverRegister.alternate-approver-register-wrapper.tw-mt-8.tw-px-8
+.alternate-approver-register-wrapper.tw-mt-8.tw-px-8
   b-modal(
     v-model='isModalConfirmationActive',
     :on-cancel='handleCancelOperation'
@@ -27,6 +27,12 @@
       v-slot='props'
     )
       span.tw-text-xs {{ props.row.userSubstituteId }}
+    b-table-column(
+      field='userSubstituteName',
+      :label='$t("name")',
+      v-slot='props'
+    )
+      span.tw-text-xs {{ props.row.userSubstituteName }}
     //- b-table-column(
     //-   field='name',
     //-   :label='$t("delegateApproverName")',
@@ -53,7 +59,7 @@
       v-slot='props',
       :centered='true'
     )
-      b-field
+      b-field(:class='!props.row.active ? "hidden" : ""')
         b-switch(
           size='is-small',
           :value='props.row.active',
@@ -80,7 +86,6 @@ export default {
       internalSubstituteApprover: {
         userSubstituteId: '',
         active: false,
-        data: {},
       },
     }
   },
@@ -107,7 +112,6 @@ export default {
       this.internalSubstituteApprover = {
         userSubstituteId,
         active: status,
-        data: { ...substituteApprover, active: status },
       }
       this.isModalConfirmationActive = true
     },
@@ -120,14 +124,17 @@ export default {
     },
     handleSetSubstituteApprover() {
       this.setSubstituteApprover({
-        substituteApprover: this.internalSubstituteApprover.data,
+        userId: this.internalSubstituteApprover.userSubstituteId,
       })
     },
   },
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .alternate-approver-register-wrapper {
+  .hidden {
+    display: none;
+  }
 }
 </style>
