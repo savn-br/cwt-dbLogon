@@ -77,6 +77,10 @@ export default {
         )
         if (status === 200) {
           window.localStorage.setItem('token', responseData.data.token)
+          window.localStorage.setItem(
+            'refreshToken',
+            responseData.data.refreshToken
+          )
           const { profileType, userId, transactions } = responseData.data
           this.$store.commit('setUserDataTerm', {
             key: 'userId',
