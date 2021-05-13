@@ -4,10 +4,12 @@ export default {
     try {
       const { userId } = userData
       commit('setIsLoading', true)
-      const response = await this.$axios.get(
+      const {
+        data: { data },
+      } = await this.$axios.get(
         `/approvalDelegation/SearchUsersByManagerId/${userId}`
       )
-      console.log(response)
+      commit('setSearchUsersByManager', data)
     } catch (error) {
       console.error(error)
     } finally {

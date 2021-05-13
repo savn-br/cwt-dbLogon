@@ -5,15 +5,13 @@
     .card-content
       form.tw-grid(name='perfil')
         b-field.mx-2(:label='$t("register")')
-          b-input(
-            :value='approvalDelegation.userSubstituteId',
-            @input='(value) => handleChangeTerm("userSubstituteId", value)',
-            size='is-small'
+          b-autocomplete(
+            :open-on-focus='true',
+            :data='listOfUsers',
+            v-model='userSubstituteId',
+            size='is-small',
+            @select='(user) => handleChangeTerm("userSubstituteId", user)'
           )
-        //- b-field.mx-2(:label='$t("email")')
-        //-   b-input(v-model='perfil.email', size='is-small')
-        //- b-field.mx-2(:label='$t("name")')
-        //-   b-input(v-model='perfil.name', size='is-small')
         b-field.mx-2(label='Data inicial')
           b-input(
             :value='approvalDelegation.beginTermDate',
@@ -42,17 +40,29 @@ export default {
   props: {},
   data() {
     return {
-      perfil: {
-        register: '',
-        email: '',
-        name: '',
-      },
+      searchUser: '',
     }
   },
   computed: {
     ...mapState({
       approvalDelegation: (state) => state.approvalDelegation,
+      searchUsersByManager: (state) => state.searchUsersByManager,
     }),
+    listOfUsers() {
+      return this.searchUsersByManager
+        .map((user) => user.userId.toLowerCase())
+        .filter((user) => {
+          return user.toString().toLowerCase().includes(this.searchUser)
+        })
+    },
+    userSubstituteId: {
+      get() {
+        return this.approvalDelegation.userSubstituteId
+      },
+      set(value) {
+        this.searchUser = value
+      },
+    },
   },
   watch: {},
   mounted() {},
