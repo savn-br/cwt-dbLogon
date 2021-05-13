@@ -123,4 +123,6 @@ export default () => ({
   },
   substituteApproverList: [],
   approvalDelegationList: [],
+
+  searchUsersByManager: [],
 })

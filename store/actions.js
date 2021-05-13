@@ -1,5 +1,19 @@
 import showToast from '@/utils/toast'
 export default {
+  async getUsersByManagerId({ state: { userData }, commit }) {
+    try {
+      const { userId } = userData
+      commit('setIsLoading', true)
+      const response = await this.$axios.get(
+        `/approvalDelegation/SearchUsersByManagerId/${userId}`
+      )
+      console.log(response)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      commit('setIsLoading', false)
+    }
+  },
   async setApprovalDelegation({ state, commit, dispatch }, { userId }) {
     try {
       commit('setIsLoading', true)

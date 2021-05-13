@@ -1,5 +1,8 @@
 import Vue from 'vue'
 export default {
+  setSearchUsersByManager(state, value) {
+    state.searchUsersByManager = value
+  },
   setApprovalDelegationList(state, value) {
     state.approvalDelegationList = value
   },

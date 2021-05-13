@@ -89,11 +89,16 @@ export default {
   watch: {},
   mounted() {
     this.getApprovalDelegationList()
+    this.getUsersByManagerId()
   },
   created() {},
   methods: {
     ...mapMutations(['clearApprovalDelegation']),
-    ...mapActions(['getApprovalDelegationList', 'setApprovalDelegation']),
+    ...mapActions([
+      'getApprovalDelegationList',
+      'setApprovalDelegation',
+      'getUsersByManagerId',
+    ]),
 
     handleOpenModal() {
       this.clearApprovalDelegation()
