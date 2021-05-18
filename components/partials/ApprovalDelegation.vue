@@ -55,8 +55,8 @@
         b-switch(
           size='is-small',
           :value='props.row.active',
-          :ref='props.row.userSubstituteId',
-          @input='(status) => handleChangeStatus(status, props.row)'
+          :ref='`${props.row.userSubstituteId}_${props.index}`',
+          @input='(status) => handleChangeStatus(status, props.row, props.index)'
         )
 </template>
 
@@ -78,6 +78,7 @@ export default {
       internalApprovalDelegation: {
         userSubstituteId: '',
         active: false,
+        index: -1,
       },
     }
   },
@@ -104,20 +105,20 @@ export default {
       this.clearApprovalDelegation()
       this.isModalActive = true
     },
-    handleChangeStatus(status, approvalDelegation) {
+    handleChangeStatus(status, approvalDelegation, index) {
       const { userSubstituteId } = approvalDelegation
       this.internalApprovalDelegation = {
         userSubstituteId,
         active: status,
+        index,
       }
       this.isModalConfirmationActive = true
     },
     handleCancelOperation() {
-      this.$refs[this.internalApprovalDelegation.userSubstituteId].value = !this
-        .internalApprovalDelegation.active
-      this.$refs[
-        this.internalApprovalDelegation.userSubstituteId
-      ].computedValue = !this.internalApprovalDelegation.active
+      const reference = `${this.internalApprovalDelegation.userSubstituteId}_${this.internalApprovalDelegation.index}`
+      this.$refs[reference].value = !this.internalApprovalDelegation.active
+      this.$refs[reference].computedValue = !this.internalApprovalDelegation
+        .active
     },
     handleApprovalDelegation() {
       this.setApprovalDelegation({

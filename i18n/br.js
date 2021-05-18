@@ -1,5 +1,7 @@
 module.exports = {
   /* PLOP_APPEND_BR */
+  rangeDate: 'A data final deve ser maior ou igual a inicial',
+  selectDate: 'Selecione uma data',
   notes: 'Notas',
   close: 'Fechar',
   transaction: 'Transação',

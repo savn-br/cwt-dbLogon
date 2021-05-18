@@ -30,7 +30,7 @@ export default function ({ $axios, store, redirect }, inject) {
   $axios.onResponse((res) => {
     const originalRequest = res.config
 
-    if (res.status === 401 && originalRequest.url === refreshRoute) {
+    if (res.status === 500 && originalRequest.url === refreshRoute) {
       showToast('Não autorizado', 'is-danger')
       setTimeout(() => {
         window.localStorage.clear()

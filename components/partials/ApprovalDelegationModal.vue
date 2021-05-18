@@ -10,30 +10,41 @@
             :data='listOfUsers',
             v-model='userSubstituteId',
             size='is-small',
-            @select='(user) => handleChangeTerm("userSubstituteId", user)'
+            @select='(user) => handleSelectUser(user)'
           )
         b-field.mx-2(label='Data inicial')
-          b-input(
-            :value='approvalDelegation.beginTermDate',
-            type='date',
-            @input='(value) => handleChangeTerm("beginTermDate", value)',
-            size='is-small'
+          b-datepicker(
+            icon='calendar-today',
+            size='is-small',
+            :min-date='minDate',
+            :editable='true',
+            locale='pt-BR',
+            :placeholder='$t("selectDate")',
+            @input='(value) => handleChangeTerm("beginTermDate", value)'
           )
         b-field.mx-2(label='Data final')
-          b-input(
-            :value='approvalDelegation.endTermDate',
-            type='date',
-            @input='(value) => handleChangeTerm("endTermDate", value)',
-            size='is-small'
+          b-datepicker(
+            icon='calendar-today',
+            size='is-small',
+            :min-date='minDate',
+            :editable='true',
+            locale='pt-BR',
+            :placeholder='$t("selectDate")',
+            @input='(value) => handleChangeTerm("endTermDate", value)'
           )
     .card-footer.tw-px-6.tw-py-4.tw-flex.tw-justify-end
       .wrapper-buttons
         b-button.tw-mr-4(type='is-danger', @click='$emit("close")') {{ $t("cancel") }}
-        b-button(type='is-primary', @click='handleCreateApprovalDelegation') {{ $t("save") }}
+        b-button(
+          :disabled='!isEnableToConfirm',
+          type='is-primary',
+          @click='handleCreateApprovalDelegation'
+        ) {{ $t("save") }}
 </template>
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
+import showToast from '../../utils/toast'
 export default {
   name: 'ApprovalDelegationModal',
   components: {},
@@ -41,6 +52,7 @@ export default {
   data() {
     return {
       searchUser: '',
+      minDate: null,
     }
   },
   computed: {
@@ -63,9 +75,18 @@ export default {
         this.searchUser = value
       },
     },
+    isEnableToConfirm() {
+      return (
+        !!this.approvalDelegation.userSubstituteId &&
+        !!this.approvalDelegation.beginTermDate &&
+        !!this.approvalDelegation.endTermDate
+      )
+    },
   },
   watch: {},
-  mounted() {},
+  mounted() {
+    this.minDate = this.$moment().subtract(1, 'd').toDate()
+  },
   created() {},
   methods: {
     ...mapMutations(['setApprovalDelegationTerm']),
@@ -75,8 +96,19 @@ export default {
       this.setApprovalDelegationTerm({ key, value })
     },
     async handleCreateApprovalDelegation() {
-      this.$emit('close')
-      await this.createApprovalDelegation()
+      const begin = this.$moment(this.approvalDelegation.beginTermDate)
+      const end = this.$moment(this.approvalDelegation.endTermDate)
+      if (end.isSameOrAfter(begin)) {
+        this.$emit('close')
+        await this.createApprovalDelegation()
+      } else {
+        showToast(this.$i18n.t('rangeDate'), 'is-danger')
+      }
+    },
+    handleSelectUser(user) {
+      if (user) {
+        this.handleChangeTerm('userSubstituteId', user)
+      }
     },
   },
 }
