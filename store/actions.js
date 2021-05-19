@@ -19,9 +19,13 @@ export default {
   async setApprovalDelegation({ state, commit, dispatch }, { userId }) {
     try {
       commit('setIsLoading', true)
-      const response = await this.$axios.put(`/approvalDelegation/${userId}`)
-      console.log(response)
+      const { status } = await this.$axios.put(`/approvalDelegation/${userId}`)
       dispatch('getApprovalDelegationList')
+      if (status === 200) {
+        showToast(this.$i18n.t('successMessage'), 'is-success')
+      } else {
+        showToast('Não foi possível realizar a operação', 'is-danger')
+      }
     } catch (error) {
       console.error(error)
     } finally {
@@ -81,9 +85,13 @@ export default {
   async setSubstituteApprover({ state, commit, dispatch }, { userId }) {
     try {
       commit('setIsLoading', true)
-      const response = await this.$axios.put(`/substituteApprover/${userId}`)
-      console.log(response)
+      const { status } = await this.$axios.put(`/substituteApprover/${userId}`)
       dispatch('getSubstituteApproverList')
+      if (status === 200) {
+        showToast(this.$i18n.t('successMessage'), 'is-success')
+      } else {
+        showToast('Não foi possível realizar a operação', 'is-danger')
+      }
     } catch (error) {
       console.error(error)
     } finally {

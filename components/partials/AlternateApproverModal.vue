@@ -10,52 +10,66 @@
             @input='(value) => handleChangeTerm("userSubstituteId", value)',
             size='is-small'
           )
-        //- b-field.mx-2(:label='$t("email")')
-        //-   b-input(v-model='perfil.email', size='is-small')
-        //- b-field.mx-2(:label='$t("name")')
-        //-   b-input(v-model='perfil.name', size='is-small')
-        b-field.mx-2(label='Data inicial')
-          b-input(
-            :value='substituteApprover.beginTermDate',
-            type='date',
-            @input='(value) => handleChangeTerm("beginTermDate", value)',
-            size='is-small'
+        b-field.mx-2(:label='$t("initialDate")')
+          b-datepicker(
+            icon='calendar-today',
+            size='is-small',
+            :append-to-body='true',
+            :min-date='minDate',
+            :editable='true',
+            locale='pt-BR',
+            :placeholder='$t("selectDate")',
+            @input='(value) => handleChangeTerm("beginTermDate", value)'
           )
-        b-field.mx-2(label='Data final')
-          b-input(
-            :value='substituteApprover.endTermDate',
-            type='date',
-            @input='(value) => handleChangeTerm("endTermDate", value)',
-            size='is-small'
+        b-field.mx-2(:label='$t("finalDate")')
+          b-datepicker(
+            icon='calendar-today',
+            size='is-small',
+            :append-to-body='true',
+            :min-date='minDate',
+            :editable='true',
+            locale='pt-BR',
+            :placeholder='$t("selectDate")',
+            @input='(value) => handleChangeTerm("endTermDate", value)'
           )
     .card-footer.tw-px-6.tw-py-4.tw-flex.tw-justify-end
       .wrapper-buttons
         b-button.tw-mr-4(type='is-danger', @click='$emit("close")') {{ $t("cancel") }}
-        b-button(type='is-primary', @click='handleCreateSubstituteApprover') {{ $t("save") }}
+        b-button(
+          :disabled='!isEnableToConfirm',
+          type='is-primary',
+          @click='handleCreateSubstituteApprover'
+        ) {{ $t("save") }}
 </template>
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
+import showToast from '../../utils/toast'
 export default {
   name: 'AlternateApproverModal',
   components: {},
   props: {},
   data() {
     return {
-      perfil: {
-        register: '',
-        email: '',
-        name: '',
-      },
+      minDate: null,
     }
   },
   computed: {
     ...mapState({
       substituteApprover: (state) => state.substituteApprover,
     }),
+    isEnableToConfirm() {
+      return (
+        !!this.substituteApprover.userSubstituteId &&
+        !!this.substituteApprover.beginTermDate &&
+        !!this.substituteApprover.endTermDate
+      )
+    },
   },
   watch: {},
-  mounted() {},
+  mounted() {
+    this.minDate = this.$moment().subtract(1, 'd').toDate()
+  },
   created() {},
   methods: {
     ...mapMutations(['setSubstituteApproverTerm']),
@@ -65,8 +79,14 @@ export default {
       this.setSubstituteApproverTerm({ key, value })
     },
     async handleCreateSubstituteApprover() {
-      this.$emit('close')
-      await this.createSubstituteApprover()
+      const begin = this.$moment(this.substituteApprover.beginTermDate)
+      const end = this.$moment(this.substituteApprover.endTermDate)
+      if (end.isSameOrAfter(begin)) {
+        this.$emit('close')
+        await this.createSubstituteApprover()
+      } else {
+        showToast(this.$i18n.t('rangeDate'), 'is-danger')
+      }
     },
   },
 }
@@ -86,6 +106,9 @@ export default {
 .alternate-approver-modal-wrapper {
   label {
     font-size: 0.75rem;
+  }
+  .card-content {
+    min-height: 250px;
   }
 }
 </style>

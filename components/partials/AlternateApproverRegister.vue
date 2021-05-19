@@ -1,14 +1,10 @@
 <template lang="pug">
 .alternate-approver-register-wrapper.tw-mt-8.tw-px-8
-  b-modal(
-    v-model='isModalConfirmationActive',
-    :on-cancel='handleCancelOperation'
-  )
+  b-modal(v-model='isModalConfirmationActive')
     template(#default='props')
       confirmation-modal(
         @close='props.close',
-        :onConfirm='handleSetSubstituteApprover',
-        :onCancel='handleCancelOperation'
+        :onConfirm='handleSetSubstituteApprover'
       )
   b-modal(v-model='isModalActive')
     template(#default='props')
@@ -33,14 +29,6 @@
       v-slot='props'
     )
       span.tw-text-xs {{ props.row.userSubstituteName }}
-    //- b-table-column(
-    //-   field='name',
-    //-   :label='$t("delegateApproverName")',
-    //-   v-slot='props'
-    //- )
-    //-   span.tw-text-xs {{ props.row.name }}
-    //- b-table-column(field='email', label='E-mail', v-slot='props')
-    //-   span.tw-text-xs {{ props.row.email }}
     b-table-column(
       field='beginTermDate',
       :label='$t("initialDate")',
@@ -60,12 +48,17 @@
       :centered='true'
     )
       b-field(:class='!props.row.active ? "hidden" : ""')
-        b-switch(
+        b-button(
+          type='is-danger',
           size='is-small',
-          :value='props.row.active',
-          :ref='props.row.userSubstituteId',
-          @input='(status) => handleChangeStatus(status, props.row)'
-        )
+          @click='(status) => handleChangeStatus(!props.row.active, props.row.userSubstituteId)'
+        ) {{ $t("remove") }}
+        //- b-switch(
+        //-   size='is-small',
+        //-   :value='props.row.active',
+        //-   :ref='`${props.row.userSubstituteId}_${props.index}`',
+        //-   @input='(status) => handleChangeStatus(status, props.row.userSubstituteId, props.index)'
+        //- )
 </template>
 
 <script>
@@ -107,21 +100,14 @@ export default {
       this.clearSubstituteApprover()
       this.isModalActive = true
     },
-    handleChangeStatus(status, substituteApprover) {
-      const { userSubstituteId } = substituteApprover
+    handleChangeStatus(status, userSubstituteId) {
       this.internalSubstituteApprover = {
         userSubstituteId,
         active: status,
       }
       this.isModalConfirmationActive = true
     },
-    handleCancelOperation() {
-      this.$refs[this.internalSubstituteApprover.userSubstituteId].value = !this
-        .internalSubstituteApprover.active
-      this.$refs[
-        this.internalSubstituteApprover.userSubstituteId
-      ].computedValue = !this.internalSubstituteApprover.active
-    },
+
     handleSetSubstituteApprover() {
       this.setSubstituteApprover({
         userId: this.internalSubstituteApprover.userSubstituteId,

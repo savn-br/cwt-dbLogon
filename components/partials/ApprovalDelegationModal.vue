@@ -12,26 +12,27 @@
             size='is-small',
             @select='(user) => handleSelectUser(user)'
           )
-        b-field.mx-2(label='Data inicial')
+        b-field.mx-2(:label='$t("initialDate")')
           b-datepicker(
+            :append-to-body='true',
             icon='calendar-today',
             size='is-small',
             :min-date='minDate',
-            :editable='true',
             locale='pt-BR',
             :placeholder='$t("selectDate")',
             @input='(value) => handleChangeTerm("beginTermDate", value)'
           )
-        b-field.mx-2(label='Data final')
+        b-field.mx-2(:label='$t("finalDate")')
           b-datepicker(
             icon='calendar-today',
+            :append-to-body='true',
             size='is-small',
             :min-date='minDate',
-            :editable='true',
             locale='pt-BR',
             :placeholder='$t("selectDate")',
             @input='(value) => handleChangeTerm("endTermDate", value)'
           )
+
     .card-footer.tw-px-6.tw-py-4.tw-flex.tw-justify-end
       .wrapper-buttons
         b-button.tw-mr-4(type='is-danger', @click='$emit("close")') {{ $t("cancel") }}
@@ -128,6 +129,9 @@ export default {
 .approval-delegation-modal-wrapper {
   label {
     font-size: 0.75rem;
+  }
+  .card-content {
+    min-height: 250px;
   }
 }
 </style>

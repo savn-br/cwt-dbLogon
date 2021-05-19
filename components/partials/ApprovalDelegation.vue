@@ -1,14 +1,10 @@
 <template lang="pug">
 .approval-delegation-wrapper.tw-mt-8.tw-px-8
-  b-modal(
-    v-model='isModalConfirmationActive',
-    :on-cancel='handleCancelOperation'
-  )
+  b-modal(v-model='isModalConfirmationActive')
     template(#default='props')
       confirmation-modal(
         @close='props.close',
-        :onConfirm='handleApprovalDelegation',
-        :onCancel='handleCancelOperation'
+        :onConfirm='handleApprovalDelegation'
       )
   b-modal(v-model='isModalActive')
     template(#default='props')
@@ -52,12 +48,17 @@
       :centered='true'
     )
       b-field(:class='!props.row.active ? "hidden" : ""')
-        b-switch(
+        b-button(
+          type='is-danger',
           size='is-small',
-          :value='props.row.active',
-          :ref='`${props.row.userSubstituteId}_${props.index}`',
-          @input='(status) => handleChangeStatus(status, props.row, props.index)'
-        )
+          @click='(status) => handleChangeStatus(!props.row.active, props.row.userSubstituteId)'
+        ) {{ $t("remove") }}
+        //- b-switch(
+        //-   size='is-small',
+        //-   :value='props.row.active',
+        //-   :ref='`${props.row.userSubstituteId}_${props.index}`',
+        //-   @input='(status) => handleChangeStatus(status, props.row, props.index)'
+        //- )
 </template>
 
 <script>
@@ -78,7 +79,6 @@ export default {
       internalApprovalDelegation: {
         userSubstituteId: '',
         active: false,
-        index: -1,
       },
     }
   },
@@ -105,20 +105,12 @@ export default {
       this.clearApprovalDelegation()
       this.isModalActive = true
     },
-    handleChangeStatus(status, approvalDelegation, index) {
-      const { userSubstituteId } = approvalDelegation
+    handleChangeStatus(status, userSubstituteId) {
       this.internalApprovalDelegation = {
         userSubstituteId,
         active: status,
-        index,
       }
       this.isModalConfirmationActive = true
-    },
-    handleCancelOperation() {
-      const reference = `${this.internalApprovalDelegation.userSubstituteId}_${this.internalApprovalDelegation.index}`
-      this.$refs[reference].value = !this.internalApprovalDelegation.active
-      this.$refs[reference].computedValue = !this.internalApprovalDelegation
-        .active
     },
     handleApprovalDelegation() {
       this.setApprovalDelegation({

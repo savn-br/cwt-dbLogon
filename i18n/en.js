@@ -1,5 +1,6 @@
 module.exports = {
   /* PLOP_APPEND_EN */
+  remove: 'Remove',
   rangeDate: 'The end date must be greater than or equal to the start date',
   selectDate: 'Select a date',
   notes: 'Notes',
