@@ -1,10 +1,10 @@
-import Vue from 'vue'
+import { ToastProgrammatic as Toast } from 'buefy'
+
 export default function (msg, type) {
-  const vue = new Vue()
-  vue.$buefy.toast.open({
+  Toast.open({
+    duration: type === 'is-success' ? 5000 : 10000,
     message: msg,
     type,
-    duration: 3000,
     position: 'is-top',
   })
 }

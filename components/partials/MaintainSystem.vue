@@ -14,14 +14,12 @@
     b-table-column(
       v-slot='props',
       field='systemAcronym',
-      :searchable='true',
       :label='$t("systemAcronym")'
     )
       span.tw-text-xs {{ props.row.systemAcronym }}
     b-table-column(
       v-slot='props',
       field='systemName',
-      :searchable='true',
       :label='$t("description")'
     )
       span.tw-text-xs {{ props.row.systemName }}

@@ -24,6 +24,12 @@ input[disabled] {
 
 input.input {
   height: px2rem(25);
+  &::placeholder {
+    color: rgb(119, 119, 119);
+  }
+}
+.select.is-empty select {
+  color: rgba(39, 39, 39, 0.7);
 }
 
 .form {

@@ -7,14 +7,12 @@
     b-table-column(
       v-slot='props',
       field='profileId',
-      :searchable='true',
       :label='$t("profileCode")'
     )
       span.tw-text-xs {{ props.row.profileId }}
     b-table-column(
       v-slot='props',
       field='profileName',
-      :searchable='true',
       :label='$t("profileDescription")'
     )
       span.tw-text-xs {{ props.row.profileName }}

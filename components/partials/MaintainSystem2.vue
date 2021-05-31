@@ -26,14 +26,12 @@
     b-table-column(
       v-slot='props',
       field='moduleAcronym',
-      :searchable='true',
       :label='$t("moduleAcronym")'
     )
       span.tw-text-xs {{ props.row.moduleAcronym }}
     b-table-column(
       v-slot='props',
       field='moduleName',
-      :searchable='true',
       :label='$t("description")'
     )
       span.tw-text-xs {{ props.row.moduleName }}

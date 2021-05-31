@@ -1,5 +1,7 @@
 module.exports = {
   /* PLOP_APPEND_EN */
+  selectPointOfSale: 'Select point of sale',
+  pointOfSale: 'Point of Sale',
   remove: 'Remove',
   rangeDate: 'The end date must be greater than or equal to the start date',
   selectDate: 'Select a date',
