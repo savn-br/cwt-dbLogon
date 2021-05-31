@@ -1,7 +1,7 @@
 <template lang="pug">
 .user-form-wrapper
   form.fields.tw-grid(name='profileForm', ref='form')
-    b-field.tw-mx-2(:label='$t("user")')
+    b-field.tw-mx-2.tw-w-20(:label='$t("user")')
       b-input(
         v-model='userId',
         size='is-small',
