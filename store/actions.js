@@ -420,21 +420,13 @@ export default {
       console.error(error)
     }
   },
-  async getAvailableProfiles({
-    state: {
-      userData: { userId },
-      searchProfileId,
-    },
-    commit,
-  }) {
+  async getAvailableProfiles({ state, commit }) {
     try {
       commit('setIsLoading', true)
 
       const {
         data: { data },
-      } = await this.$axios.get(
-        `/profile/SearchAll/${userId}/${searchProfileId}`
-      )
+      } = await this.$axios.get(`/profile/SearchAll/`)
 
       commit('setAvailableProfiles', data)
     } catch (error) {

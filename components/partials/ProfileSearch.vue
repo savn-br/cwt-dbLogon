@@ -1,9 +1,10 @@
 <template lang="pug">
 #searchProfile.search-profile-wrapper.tw-mt-8.tw-px-8
-  b-field(:label='$t("findByProfile")')
-    b-autocomplete(v-model='searchProfileId', :data='availableProfilesName')
-  standard-table(v-if='availableProfiles.length', :data='availableProfiles')
+  //- b-field(:label='$t("findByProfile")')
+  //-   b-autocomplete(v-model='searchProfileId', :data='availableProfilesName')
+  standard-table(:data='availableProfiles')
     b-table-column(
+      width='120px',
       v-slot='props',
       field='profileId',
       :label='$t("profileCode")'
@@ -17,6 +18,7 @@
       span.tw-text-xs {{ props.row.profileName }}
     b-table-column(
       :label='$t("operation")',
+      width='120px',
       field='active',
       :centered='true',
       v-slot='props'
@@ -27,7 +29,6 @@
           @click='selectProfile(props.row.profileId)'
         )
           b-icon(icon='account-details')
-  .message.tw-text-xl(v-else) {{ $t("profileSearchMessage") }}
 </template>
 
 <script>
@@ -46,31 +47,22 @@ export default {
   computed: {
     ...mapGetters(['availableProfilesName']),
     ...mapState(['availableProfiles']),
-    searchProfileId: {
-      get() {
-        return this.$store.state.searchProfileId
-      },
-      set(value) {
-        this.setSearchProfileId(value)
-      },
-    },
-  },
-  watch: {
-    async searchProfileId(newSearchProfileId) {
-      if (newSearchProfileId.length >= 3) {
-        await this.getAvailableProfiles()
-      }
-    },
+    // searchProfileId: {
+    //   get() {
+    //     return this.$store.state.searchProfileId
+    //   },
+    //   set(value) {
+    //     this.setSearchProfileId(value)
+    //   },
+    // },
   },
   async mounted() {
-    if (this.searchProfileId.length >= 3) {
-      await this.getAvailableProfiles()
-    }
+    await this.getAvailableProfiles()
   },
   created() {},
   methods: {
     ...mapMutations([
-      'setSearchProfileId',
+      // 'setSearchProfileId',
       'setSelectedProfileId',
       'setBackProfileSearchPartial',
     ]),

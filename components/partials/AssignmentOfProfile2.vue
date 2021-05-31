@@ -1,10 +1,11 @@
 <template lang="pug">
 #assignmentOfProfile3.assignment-of-profile3-wrapper.tw-mt-8.tw-px-8
-  back-button(partialComponent='AssignmentOfProfile')
-  b-field(label='Find by profileName')
-    b-autocomplete(v-model='searchProfileId', :data='availableProfilesName')
+  back-button.tw-w-24(partialComponent='AssignmentOfProfile')
+  //- b-field(label='Find by profileName')
+  //-   b-autocomplete(v-model='searchProfileId', :data='availableProfilesName')
   standard-table(v-if='availableProfiles.length', :data='availableProfiles')
     b-table-column(
+      width='120px',
       v-slot='props',
       field='profileId',
       :label='$t("profileCode")'
@@ -26,7 +27,7 @@
         b-checkbox(
           @input='(active) => { addProfile2Collaborator(active, props.row.profileId); }'
         )
-          span.tw-text-xs {{ $t("active") }}
+          span.tw-text-xs {{ $t("select") }}
         span.tw-cursor-pointer(
           class='hover:tw-text-primary',
           @click='selectProfile(props.row.profileId)'
@@ -50,31 +51,23 @@ export default {
   computed: {
     ...mapGetters(['availableProfilesName', 'isProfileActive2Collaborator']),
     ...mapState(['availableProfiles']),
-    searchProfileId: {
-      get() {
-        return this.$store.state.searchProfileId
-      },
-      set(value) {
-        this.setSearchProfileId(value)
-      },
-    },
+    // searchProfileId: {
+    //   get() {
+    //     return this.$store.state.searchProfileId
+    //   },
+    //   set(value) {
+    //     this.setSearchProfileId(value)
+    //   },
+    // },
   },
-  watch: {
-    async searchProfileId(newSearchProfileId) {
-      if (newSearchProfileId.length >= 3) {
-        await this.getAvailableProfiles()
-      }
-    },
-  },
+
   async mounted() {
-    if (this.searchProfileId.length >= 3) {
-      await this.getAvailableProfiles()
-    }
+    await this.getAvailableProfiles()
   },
   created() {},
   methods: {
     ...mapMutations([
-      'setSearchProfileId',
+      // 'setSearchProfileId',
       'setSelectedProfileId',
       'setBackProfileSearchPartial',
     ]),

@@ -19,7 +19,7 @@
     )
       span.tw-text-xs {{ props.row.userName }}
     b-table-column(:label='$t("assign")', v-slot='props', :centered='true')
-      b-button(
+      b-button.tw-w-24(
         type='is-primary',
         size='is-small',
         @click='atribuir(props.row.userId)'

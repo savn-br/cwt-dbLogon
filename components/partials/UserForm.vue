@@ -41,19 +41,21 @@
         placeholder='(XX) XXXXX-XXXX',
         v-mask='["(##) ####-####", "(##) #####-####"]'
       )
-    b-field.tw-mx-2(:label='$t("company")')
+    b-field.tw-mx-2.tw-w-56(:label='$t("company")')
       b-input(
         v-model='company',
         size='is-small',
         name='company',
-        autocomplete='off'
+        autocomplete='off',
+        maxlength='30'
       )
-    b-field.tw-mx-2(:label='$t("field")')
+    b-field.tw-mx-2.tw-w-32(:label='$t("field")')
       b-input(
         v-model='field',
         name='field',
         size='is-small',
-        autocomplete='off'
+        autocomplete='off',
+        maxlength='15'
       )
     b-field.tw-mx-2.tw-w-56(:label='$t("role")')
       b-input(
@@ -61,8 +63,7 @@
         name='role',
         size='is-small',
         autocomplete='off',
-        maxlength='30',
-        placeholder='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+        maxlength='30'
       )
     b-field.tw-mx-2.tw-w-20(:label='$t("registration")')
       b-input(
@@ -70,7 +71,6 @@
         name='employeeNumber',
         size='is-small',
         autocomplete='off',
-        placeholder='XXXXXXXX',
         maxlength='8'
       )
     b-field.tw-mx-2(:label='$t("pointOfSale")')

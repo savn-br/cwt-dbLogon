@@ -8,7 +8,10 @@
       )
   user-form(:isDisabled='true')
   .update-buttons.tw-flex.tw-justify-center
-    b-button.tw-mx-2.tw-my-4(type='is-success', @click='isModalActive = true') {{ $t("update") }}
+    b-button.tw-w-24.tw-mx-2.tw-my-4(
+      type='is-success',
+      @click='isModalActive = true'
+    ) {{ $t("update") }}
   collapse.tw-text-sm(
     v-if='!!profileAccess && !!profileAccess.profileName',
     :title='profileAccess.profileName'

@@ -1,7 +1,7 @@
 <template lang="pug">
 .profile-form-wrapper
   form.fields.tw-grid(name='profileForm', ref='form')
-    b-field.tw-mx-2(:label='$t("user")')
+    b-field.tw-mx-2.tw-w-20(:label='$t("user")')
       b-input(
         v-model='userId',
         size='is-small',
@@ -24,13 +24,7 @@
         type='email',
         :disabled='isDisabled'
       )
-    b-field.tw-mx-2(:label='$t("company")')
-      b-input(
-        v-model='company',
-        size='is-small',
-        name='company',
-        :disabled='isDisabled'
-      )
+
     b-field.tw-mx-2(:label='$t("name")')
       b-input(
         v-model='userName',
@@ -38,20 +32,59 @@
         name='name',
         :disabled='isDisabled'
       )
-    b-field.tw-mx-2(:label='$t("phone")')
+
+    b-field.tw-mx-2.tw-w-32(:label='$t("phone")')
       b-input(
         v-model='phone',
         size='is-small',
         name='phone',
-        ,
+        autocomplete='off',
+        placeholder='(XX) XXXXX-XXXX',
         v-mask='["(##) ####-####", "(##) #####-####"]'
       )
-    b-field.tw-mx-2(:label='$t("field")')
-      b-input(v-model='field', name='field', size='is-small')
-    b-field.tw-mx-2(:label='$t("role")')
-      b-input(v-model='role', name='role', size='is-small')
-    b-field.tw-mx-2(:label='$t("registration")')
-      b-input(v-model='employeeNumber', name='employeeNumber', size='is-small')
+    b-field.tw-mx-2.tw-w-56(:label='$t("company")')
+      b-input(
+        v-model='company',
+        size='is-small',
+        name='company',
+        autocomplete='off',
+        maxlength='30'
+      )
+    b-field.tw-mx-2.tw-w-32(:label='$t("field")')
+      b-input(
+        v-model='field',
+        name='field',
+        size='is-small',
+        autocomplete='off',
+        maxlength='15'
+      )
+    b-field.tw-mx-2.tw-w-56(:label='$t("role")')
+      b-input(
+        v-model='role',
+        name='role',
+        size='is-small',
+        autocomplete='off',
+        maxlength='30'
+      )
+    b-field.tw-mx-2.tw-w-20(:label='$t("registration")')
+      b-input(
+        v-model='employeeNumber',
+        name='employeeNumber',
+        size='is-small',
+        autocomplete='off',
+        maxlength='8'
+      )
+    b-field.tw-mx-2(:label='$t("pointOfSale")')
+      b-select(
+        :placeholder='$t("selectPointOfSale")',
+        size='is-small',
+        @input='(point) => handlePointOfSale(point)'
+      )
+        option(
+          v-for='point in allPointOfSales',
+          :value='point.pointOfSaleId',
+          :key='point.pointOfSaleId'
+        ) {{ point.pointOfSaleName }}
     b-checkbox.tw-m-5(v-model='emergencyFlag', name='emergencyFlag') {{ $t("emergency") }}
     b-checkbox.tw-m-5(v-model='vipFlag', name='vipFlag') VIP Desk
     b-checkbox.tw-m-5(v-model='active', name='active') {{ $t("active") }}
@@ -59,6 +92,7 @@
 </template>
 
 <script>
+import { mapMutations, mapState, mapActions } from 'vuex'
 export default {
   name: 'ProfileForm',
   components: {},
@@ -76,6 +110,7 @@ export default {
     return {}
   },
   computed: {
+    ...mapState(['allPointOfSales']),
     userId: {
       get() {
         return this.$store.state.selectedCollaborator.userId
@@ -210,9 +245,17 @@ export default {
     },
   },
   watch: {},
-  mounted() {},
+  async mounted() {
+    await this.getAllPointOfSales()
+  },
   created() {},
   methods: {
+    ...mapActions(['getAllPointOfSales']),
+    ...mapMutations(['setSelectedCollaboratorTerm']),
+    handlePointOfSale(point) {
+      if (point)
+        this.setSelectedCollaboratorTerm({ key: 'pointOfSale', value: point })
+    },
     verifyUserId() {
       console.log(this.data.userId)
     },

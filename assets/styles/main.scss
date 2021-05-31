@@ -21,7 +21,9 @@ input[disabled] {
 .control.is-clearfix {
   width: 100%;
 }
-
+span.control-label {
+  color: #000;
+}
 input.input {
   height: px2rem(25);
   &::placeholder {

@@ -4,7 +4,7 @@
     .card-header
     .card-content
       form.tw-grid(name='perfil')
-        b-field.mx-2(:label='$t("register")')
+        b-field.mx-2(:label='$t("user")')
           b-autocomplete(
             :open-on-focus='true',
             :data='listOfUsers',

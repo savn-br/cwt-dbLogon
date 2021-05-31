@@ -10,7 +10,7 @@
     template(#default='props')
       approval-delegation-modal(@close='props.close')
   .button-primary.tw-flex.tw-justify-end
-    b-button(type='is-primary', @click='handleOpenModal') {{ $t("add") }}
+    b-button.tw-w-24(type='is-primary', @click='handleOpenModal') {{ $t("add") }}
   standard-table.tw-mt-5(
     :data='approvalList',
     :bordered='true',
@@ -19,7 +19,7 @@
   )
     b-table-column(
       field='userSubstituteId',
-      :label='$t("registration")',
+      :label='$t("user")',
       v-slot='props'
     )
       span.tw-text-xs {{ props.row.userSubstituteId }}

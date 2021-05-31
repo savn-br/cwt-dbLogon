@@ -19,7 +19,7 @@
   )
     b-table-column(
       field='userSubstituteId',
-      :label='$t("registration")',
+      :label='$t("user")',
       v-slot='props'
     )
       span.tw-text-xs {{ props.row.userSubstituteId }}
