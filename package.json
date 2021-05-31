@@ -24,6 +24,7 @@
     "nuxt": "^2.15.2",
     "nuxt-buefy": "^0.4.4",
     "nuxt-i18n": "^6.20.3",
+    "v-idle": "^0.2.1",
     "vee-validate": "^3.3.0",
     "vue-lottie": "^0.2.1",
     "vue-the-mask": "^0.11.1",

@@ -30,6 +30,10 @@ export default {
     { src: '@/plugins/vee-validate.js', ssr: false },
     { src: '@/plugins/vue-mask.js', ssr: false },
     { src: '@/plugins/vuex-persist.js', ssr: false },
+    {
+      src: '@/plugins/vidle.js',
+      ssr: false,
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
