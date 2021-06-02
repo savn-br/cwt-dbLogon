@@ -7,7 +7,6 @@
     :wait='5',
     :duration='60 * 30'
   )
-  the-toast
   navbar(menuType='HomeMenu')
   .tw-block.main_content(class='md:tw-grid')
     side-menu.tw-px-4.tw-hidden.tw-h-screen.tw-text-white(

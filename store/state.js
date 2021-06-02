@@ -52,7 +52,6 @@ export default () => ({
     userId: -1,
     employeeNumber: '',
     profileType: '',
-    manager: '',
     email: '',
     userName: '',
     password: '',

@@ -10,7 +10,7 @@
       )
     b-field.tw-mx-2(:label='$t("manager")')
       b-input(
-        v-model='manager',
+        v-model='managerName',
         size='is-small',
         name='manager',
         :disabled='isDisabled'
@@ -77,6 +77,7 @@
       b-select(
         :placeholder='$t("selectPointOfSale")',
         size='is-small',
+        :value='pointOfSale',
         @input='(point) => handlePointOfSale(point)'
       )
         option(
@@ -154,12 +155,12 @@ export default {
         this.setUserDataTerm({ key: 'company', value })
       },
     },
-    manager: {
+    managerName: {
       get() {
-        return this.userData.manager
+        return this.userData.managerName
       },
       set(value) {
-        this.setUserDataTerm({ key: 'manager', value })
+        this.setUserDataTerm({ key: 'managerName', value })
       },
     },
     phone: {

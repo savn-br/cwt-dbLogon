@@ -308,7 +308,9 @@ export default {
     if (userData.profileAccess) {
       delete userData.profileAccess
     }
-    state.userData = userData
+    delete userData.managerId
+    delete userData.managerName
+    state.userData = { ...state.userData, ...userData }
   },
   setUserStatus(state, userStatus) {
     state.userStatus = userStatus
