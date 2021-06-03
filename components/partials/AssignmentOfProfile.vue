@@ -12,7 +12,10 @@
       )
   .fields.tw-mb-4
     b-field.tw-mx-2(:label='$t("findByUser")')
-      b-autocomplete(v-model='searchCollaboratorId', :data='collaboratorsId')
+      b-autocomplete(
+        v-model='searchCollaboratorName',
+        :data='collaboratorsName'
+      )
   profile-form(v-if='!!selectedCollaborator')
   .update-buttons.tw-flex.tw-justify-center
     b-button.tw-mx-2.tw-my-4.tw-w-32(
@@ -129,7 +132,7 @@ export default {
   },
   computed: {
     ...mapState(['selectedCollaborator']),
-    ...mapGetters(['collaboratorsId']),
+    ...mapGetters(['collaboratorsName']),
 
     isEnableToCreate() {
       return this.selectedCollaborator.profiles
@@ -137,30 +140,30 @@ export default {
         .some((active) => active)
     },
 
-    searchCollaboratorId: {
+    searchCollaboratorName: {
       get() {
-        return this.$store.state.searchCollaboratorId
+        return this.$store.state.searchCollaboratorName
       },
       set(value) {
-        this.setSearchCollaboratorId(value)
+        this.setSearchCollaboratorName(value)
       },
     },
   },
   watch: {
-    async searchCollaboratorId(newCollaboratorId) {
+    async searchCollaboratorName(newCollaboratorId) {
       if (newCollaboratorId.length >= 3) {
         await this.getAvailableCollaborators()
       }
     },
   },
   async mounted() {
-    if (this.searchCollaboratorId.length >= 3) {
+    if (this.searchCollaboratorName.length >= 3) {
       await this.getAvailableCollaborators()
     }
   },
   created() {},
   methods: {
-    ...mapMutations(['setSearchCollaboratorId']),
+    ...mapMutations(['setSearchCollaboratorName']),
     ...mapActions([
       'getAvailableCollaborators',
       'setProfileState2Collaborator',

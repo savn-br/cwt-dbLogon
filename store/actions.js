@@ -229,12 +229,15 @@ export default {
   },
   async getAllParentProfiles({ state, commit }) {
     try {
+      commit('setIsLoading', true)
       const {
         data: { data },
       } = await this.$axios.get(`/profile/SearchParent/0`)
       commit('setParentProfiles', data)
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async getMaintainTransactions({ state: { maintainProfile }, commit }) {
@@ -252,12 +255,15 @@ export default {
   },
   async getAllProfiles({ state, commit }) {
     try {
+      commit('setIsLoading', true)
       const {
         data: { data },
       } = await this.$axios.get(`/profile/SearchAll/`)
       commit('setMaintainAllProfiles', data)
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async handleUpdateProfileDataTerm(
@@ -285,6 +291,7 @@ export default {
   },
   async getAllPointOfSales({ state, commit }) {
     try {
+      commit('setIsLoading', true)
       const {
         data: { data },
       } = await this.$axios.get(`/pointOfSale/SearchAll`)
@@ -292,6 +299,8 @@ export default {
       commit('setAllPointOfSales', data)
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async setActivateUser({ state, commit }, { active, userId }) {
@@ -322,22 +331,28 @@ export default {
     commit,
   }) {
     try {
+      commit('setIsLoading', true)
       const {
         data: { data },
       } = await this.$axios.get(`/activateUser/${userId}/false`)
       commit('setActivateUsers', data)
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async getSelectedProfileData({ state: { selectedProfileId }, commit }) {
     try {
+      commit('setIsLoading', true)
       const {
         data: { data },
       } = await this.$axios.get(`/profile/${selectedProfileId}`)
       commit('setSelectedProfileData', data)
     } catch (error) {
       console.log(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async removePointOfSale2Collaborator(
@@ -350,14 +365,23 @@ export default {
     { pointOfSaleId }
   ) {
     try {
-      const { status } = await this.$axios.delete(
+      commit('setIsLoading', true)
+      const {
+        status,
+        data: { message },
+      } = await this.$axios.delete(
         `/userPointOfSale/${userId}/${pointOfSaleId}`
       )
       if (status === 200) {
         commit('deletePointOfSaleOnCollaborator', pointOfSaleId)
+        showToast(this.$i18n.t('successMessage'), 'is-success')
+      } else {
+        showToast(message, 'is-danger')
       }
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async setPointOfSale2Collaborator(
@@ -365,16 +389,28 @@ export default {
       state: {
         selectedCollaborator: { userId },
       },
+      commit,
     },
     { pointOfSaleId }
   ) {
     try {
-      await this.$axios.post(`/userPointOfSale/`, {
+      commit('setIsLoading', true)
+      const {
+        status,
+        data: { message },
+      } = await this.$axios.post(`/userPointOfSale/`, {
         pointOfSaleId,
         userId,
       })
+      if (status === 200) {
+        showToast(this.$i18n.t('successMessage'), 'is-success')
+      } else {
+        showToast(message, 'is-danger')
+      }
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async getAvailablePointOfSales({
@@ -384,12 +420,15 @@ export default {
     commit,
   }) {
     try {
+      commit('setIsLoading', true)
       const {
         data: { data },
       } = await this.$axios.get(`/userPointOfSale/SearchAll/${userId}/`)
       commit('setAvailablePointOfSales', data)
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async setProfile2Collaborator(
@@ -464,13 +503,16 @@ export default {
       commit('setIsLoading', false)
     }
   },
-  async getAvailableCollaborators({ state: { searchCollaboratorId }, commit }) {
+  async getAvailableCollaborators({
+    state: { searchCollaboratorName },
+    commit,
+  }) {
     try {
       commit('setIsLoading', true)
       const {
         data: { data },
         status,
-      } = await this.$axios.get(`/assignProfile/${searchCollaboratorId}`)
+      } = await this.$axios.get(`/assignProfile/${searchCollaboratorName}`)
       if (status === 200) {
         commit('setCollaborators', data)
         const phone = data[0].phone.replace(/[^\d]/g, '')
@@ -489,12 +531,15 @@ export default {
     commit,
   }) {
     try {
+      commit('setIsLoading', true)
       const {
         data: { data },
       } = await this.$axios.get(`/dashManager/${userId}`)
       commit('setRequests', data)
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async getTransactions({
@@ -505,6 +550,7 @@ export default {
     commit,
   }) {
     try {
+      commit('setIsLoading', true)
       const {
         data: { data },
       } = await this.$axios.get(
@@ -516,6 +562,8 @@ export default {
       })
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async saveTransaction({
@@ -646,12 +694,15 @@ export default {
     commit,
   }) {
     try {
+      commit('setIsLoading', true)
       const {
         data: { data },
       } = await this.$axios.get(`/module/SearchAll/${systemId}/`)
       commit('setSelectedSystemTerm', { key: 'modules', value: data })
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async saveSystem({ state: { selectedSystem }, commit }) {
@@ -697,12 +748,15 @@ export default {
   },
   async getSystems({ commit }) {
     try {
+      commit('setIsLoading', true)
       const {
         data: { data },
       } = await this.$axios.get(`/system/SearchAll/`)
       commit('setSystems', data)
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async handleEnableAccess({
@@ -713,10 +767,17 @@ export default {
   }) {
     try {
       const {
-        data: { data },
+        data: { data, message },
+        status,
       } = await this.$axios.post(`/access/${userId}`)
-      commit('setUserStatus', data.status)
+
+      // commit('setUserStatus', data.status)
       commit('setUserData', data)
+      if (status === 200) {
+        showToast(this.$i18n.t('successMessage'), 'is-success')
+      } else {
+        showToast(message, 'is-danger')
+      }
     } catch (error) {
       console.error(error)
     }
@@ -725,14 +786,18 @@ export default {
     try {
       const { userId } = userData
       const {
-        data: { data },
+        data: { data, message },
         status,
       } = await this.$axios.put(`/access/${userId}`, {
         ...userData,
       })
-      commit('setUserStatus', data.status)
+      // commit('setUserStatus', data.status)
       commit('updateUserData', data)
-      return status
+      if (status === 200) {
+        showToast(this.$i18n.t('successMessage'), 'is-success')
+      } else {
+        showToast(message, 'is-danger')
+      }
     } catch (error) {
       console.error(error)
     }
@@ -744,13 +809,16 @@ export default {
     commit,
   }) {
     try {
+      commit('setIsLoading', true)
       const {
         data: { data },
       } = await this.$axios.get(`/access/${userId}`)
-      commit('setUserStatus', data.status)
+      // commit('setUserStatus', data.status)
       commit('setUserData', data)
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
   async handleUpdateMyProfile({ state: { userData }, commit }) {
@@ -811,6 +879,7 @@ export default {
     commit,
   }) {
     try {
+      commit('setIsLoading', true)
       const {
         data: { data },
       } = await this.$axios.get(`/myProfile/${userId}`)
@@ -823,6 +892,8 @@ export default {
       })
     } catch (error) {
       console.error(error)
+    } finally {
+      commit('setIsLoading', false)
     }
   },
 }

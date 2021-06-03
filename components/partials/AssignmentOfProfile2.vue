@@ -25,6 +25,7 @@
     )
       .operation-wrapper
         b-checkbox(
+          v-if='props.row.profileId !== profileIdSelected',
           @input='(active) => { addProfile2Collaborator(active, props.row.profileId); }'
         )
           span.tw-text-xs {{ $t("select") }}
@@ -46,7 +47,9 @@ export default {
   mixins: [setMenu],
   props: {},
   data() {
-    return {}
+    return {
+      profileIdSelected: -1,
+    }
   },
   computed: {
     ...mapGetters(['availableProfilesName', 'isProfileActive2Collaborator']),
@@ -80,6 +83,7 @@ export default {
     },
     async addProfile2Collaborator(active, profileId) {
       if (active) {
+        this.profileIdSelected = profileId
         await this.setProfile2Collaborator({ profileId })
         this.setPartial('AssignmentOfProfile')
       }

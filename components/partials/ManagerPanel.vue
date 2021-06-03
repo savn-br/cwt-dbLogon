@@ -22,7 +22,7 @@
       b-button.tw-w-24(
         type='is-primary',
         size='is-small',
-        @click='atribuir(props.row.userId)'
+        @click='attribute(props.row.userName)'
       ) {{ $t("assignProfile") }}
 </template>
 
@@ -35,10 +35,7 @@ export default {
   mixins: [setMenu],
   props: {},
   data() {
-    const data = Object.assign(require('@/jsons/assignment-profile-data.json'))
-    return {
-      data,
-    }
+    return {}
   },
   computed: {
     ...mapState({
@@ -51,8 +48,8 @@ export default {
   },
   created() {},
   methods: {
-    async atribuir(userId) {
-      await this.$store.commit('setSearchCollaboratorId', userId)
+    async attribute(userName) {
+      await this.$store.commit('setSearchCollaboratorName', userName)
       this.setPartial('AssignmentOfProfile')
     },
   },

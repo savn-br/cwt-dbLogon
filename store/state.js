@@ -68,7 +68,7 @@ export default () => ({
   profileAccess: {},
   requests: [],
   searchProfileId: '',
-  searchCollaboratorId: '',
+  searchCollaboratorName: '',
   selectedCollaborator: {
     userId: '',
     employeeNumber: '',

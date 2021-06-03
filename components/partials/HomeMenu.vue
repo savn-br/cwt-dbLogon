@@ -6,6 +6,7 @@
       :icon='current.icon',
       :label='$t(current.label)',
       :key='index',
+      :active='isActive(current)',
       @click='proccessPartial(current.partial)'
     )
 </template>
@@ -24,12 +25,16 @@ export default {
   computed: {
     ...mapState({
       currentMenu: (state) => state.currentMenu,
+      lastMenuLabel: (state) => state.lastMenuLabel,
     }),
   },
   watch: {},
   mounted() {},
   created() {},
   methods: {
+    isActive(current) {
+      return current.label === this.lastMenuLabel
+    },
     proccessPartial(partial) {
       if (partial === 'AssignmentOfProfile') {
         this.$store.commit('setCollaborators', [{}])

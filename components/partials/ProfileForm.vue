@@ -78,6 +78,7 @@
       b-select(
         :placeholder='$t("selectPointOfSale")',
         size='is-small',
+        :value='pointOfSale',
         @input='(point) => handlePointOfSale(point)'
       )
         option(
@@ -239,6 +240,17 @@ export default {
       set(value) {
         this.$store.commit('setSelectedCollaboratorTerm', {
           key: 'active',
+          value,
+        })
+      },
+    },
+    pointOfSale: {
+      get() {
+        return this.$store.state.selectedCollaborator.pointOfSale
+      },
+      set(value) {
+        this.$store.commit('setSelectedCollaboratorTerm', {
+          key: 'pointOfSale',
           value,
         })
       },

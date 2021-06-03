@@ -244,8 +244,8 @@ export default {
   setCollaborators(state, collaborators) {
     state.collaborators = collaborators
   },
-  setSearchCollaboratorId(state, userId) {
-    state.searchCollaboratorId = userId
+  setSearchCollaboratorName(state, userId) {
+    state.searchCollaboratorName = userId
   },
   setRequests(state, requests) {
     state.requests = requests
