@@ -7,9 +7,9 @@
         b-field(:label='$t("transactionCode")', v-if='!!transactionId')
           b-input(v-model='transactionId', size='is-small', disabled)
         b-field(:label='$t("description")')
-          b-input(v-model='transactionName', size='is-small')
+          b-input(v-model='transactionName', size='is-small', maxlength='40')
         b-field(:label='$t("notes")')
-          b-input(maxlength='255', type='textarea', v-model='notes')
+          b-input(maxlength='512', type='textarea', v-model='notes')
         b-field
           b-switch(v-model='active') {{ $t("active") }}
     .card-footer.tw-px-6.tw-pb-4.tw-flex.tw-justify-end
