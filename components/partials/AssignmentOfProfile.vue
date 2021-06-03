@@ -11,11 +11,8 @@
         :onCancel='handleCancelOperation'
       )
   .fields.tw-mb-4
-    b-field.tw-mx-2(:label='$t("findByUser")')
-      b-autocomplete(
-        v-model='searchCollaboratorName',
-        :data='collaboratorsName'
-      )
+    auto-complete(:selectFn='handleSetSelectedCollaborator')
+
   profile-form(v-if='!!selectedCollaborator')
   .update-buttons.tw-flex.tw-justify-center
     b-button.tw-mx-2.tw-my-4.tw-w-32(
@@ -110,7 +107,7 @@
 
 <script>
 import setMenu from '@/mixins/setMenu'
-import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
   name: 'AssignmentOfProfile',
   components: {
@@ -131,8 +128,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['selectedCollaborator']),
-    ...mapGetters(['collaboratorsName']),
+    ...mapState(['selectedCollaborator', 'collaborators', 'isLoading']),
 
     isEnableToCreate() {
       return this.selectedCollaborator.profiles
@@ -149,13 +145,7 @@ export default {
       },
     },
   },
-  watch: {
-    async searchCollaboratorName(newCollaboratorId) {
-      if (newCollaboratorId.length >= 3) {
-        await this.getAvailableCollaborators()
-      }
-    },
-  },
+  watch: {},
   async mounted() {
     if (this.searchCollaboratorName.length >= 3) {
       await this.getAvailableCollaborators()
@@ -163,7 +153,7 @@ export default {
   },
   created() {},
   methods: {
-    ...mapMutations(['setSearchCollaboratorName']),
+    ...mapMutations(['setSearchCollaboratorName', 'setSelectedCollaborator']),
     ...mapActions([
       'getAvailableCollaborators',
       'setProfileState2Collaborator',
@@ -202,6 +192,10 @@ export default {
         .active
       this.$refs[this.currentProfile.profileId].computedValue = !this
         .currentProfile.active
+    },
+    handleSetSelectedCollaborator(collaborator) {
+      this.setSelectedCollaborator(collaborator)
+      this.searchCollaboratorName = ''
     },
   },
 }

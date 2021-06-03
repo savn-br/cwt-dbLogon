@@ -1,7 +1,4 @@
 export default {
-  collaboratorsName(state) {
-    return state.collaborators.map((user) => user.userName) || []
-  },
   availableProfilesName(state) {
     return state.availableProfiles.map((profile) => profile.profileName)
   },

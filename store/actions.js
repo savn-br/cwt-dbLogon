@@ -515,8 +515,8 @@ export default {
       } = await this.$axios.get(`/assignProfile/${searchCollaboratorName}`)
       if (status === 200) {
         commit('setCollaborators', data)
-        const phone = data[0].phone.replace(/[^\d]/g, '')
-        commit('setSelectedCollaborator', { ...data[0], phone })
+        // const phone = data[0].phone.replace(/[^\d]/g, '')
+        // commit('setSelectedCollaborator', { ...data[0], phone })
       }
     } catch (error) {
       console.error(error)
