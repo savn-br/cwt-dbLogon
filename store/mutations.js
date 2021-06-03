@@ -258,7 +258,7 @@ export default {
     state.transactionModalMode = mode
   },
   setSelectedTransaction(state, selectedTransaction) {
-    state.selectedTransaction = selectedTransaction
+    state.selectedTransaction = { ...selectedTransaction }
   },
   setSelectedModuleTerm(state, { key, value }) {
     state.selectedModule[key] = value
@@ -268,7 +268,7 @@ export default {
     state.moduleModalMode = mode
   },
   setSelectedModule(state, selectedModule) {
-    state.selectedModule = selectedModule
+    state.selectedModule = { ...selectedModule }
   },
   setSelectedSystemTerm(state, { key, value }) {
     state.selectedSystem[key] = value
@@ -278,7 +278,7 @@ export default {
     state.systemModalMode = mode
   },
   setSelectedSystem(state, selectedSystem) {
-    state.selectedSystem = selectedSystem
+    state.selectedSystem = { ...selectedSystem }
   },
   setSystems(state, systems) {
     state.systems = systems

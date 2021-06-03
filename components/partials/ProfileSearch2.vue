@@ -81,6 +81,8 @@ export default {
   watch: {},
   async mounted() {
     await this.getSelectedProfileData()
+    this.status.viewCCard = this.selectedProfileData.viewCCard
+    this.status.active = this.selectedProfileData.active
   },
   created() {},
   methods: {

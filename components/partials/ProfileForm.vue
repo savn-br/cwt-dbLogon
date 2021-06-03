@@ -11,7 +11,7 @@
       )
     b-field.tw-mx-2(:label='$t("manager")')
       b-input(
-        v-model='manager',
+        v-model='managerName',
         size='is-small',
         name='manager',
         :disabled='isDisabled'
@@ -123,13 +123,13 @@ export default {
         })
       },
     },
-    manager: {
+    managerName: {
       get() {
-        return this.$store.state.selectedCollaborator.manager
+        return this.$store.state.selectedCollaborator.managerName
       },
       set(value) {
         this.$store.commit('setSelectedCollaboratorTerm', {
-          key: 'manager',
+          key: 'managerName',
           value,
         })
       },
