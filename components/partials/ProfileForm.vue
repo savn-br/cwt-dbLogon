@@ -1,94 +1,101 @@
 <template lang="pug">
-.profile-form-wrapper
-  form.fields.tw-grid(name='profileForm', ref='form')
-    b-field.tw-mx-2.tw-w-20(:label='$t("user")')
-      b-input(
-        v-model='userId',
-        size='is-small',
-        name='user',
-        :disabled='isDisabled',
-        @set='verifyUserId'
-      )
-    b-field.tw-mx-2(:label='$t("manager")')
-      b-input(
-        v-model='managerName',
-        size='is-small',
-        name='manager',
-        :disabled='isDisabled'
-      )
-    b-field.tw-mx-2(label='E-mail')
-      b-input(
-        v-model='email',
-        size='is-small',
-        name='email',
-        type='email',
-        :disabled='isDisabled'
-      )
+.profile-form-wrapper.tw-max-w-3xl.tw-mx-auto
+  form(name='profileForm', ref='form')
+    fieldset.tw-my-6.tw-flex.tw-flex-wrap
+      b-field.tw-mx-2.tw-w-20(:label='$t("user")')
+        b-input(
+          v-model='userId',
+          size='is-small',
+          name='user',
+          :disabled='isDisabled',
+          @set='verifyUserId'
+        )
+      b-field.tw-mx-2(:label='$t("manager")')
+        b-input(
+          v-model='managerName',
+          size='is-small',
+          name='manager',
+          :disabled='isDisabled'
+        )
+      b-field.tw-mx-2(label='E-mail')
+        b-input(
+          v-model='email',
+          size='is-small',
+          name='email',
+          type='email',
+          :disabled='isDisabled'
+        )
 
-    b-field.tw-mx-2(:label='$t("name")')
-      b-input(
-        v-model='userName',
-        size='is-small',
-        name='name',
-        :disabled='isDisabled'
-      )
-
-    b-field.tw-mx-2.tw-w-32(:label='$t("phone")')
-      b-input(
-        v-model='phone',
-        size='is-small',
-        name='phone',
-        autocomplete='off',
-        placeholder='(XX) XXXXX-XXXX',
-        v-mask='["(##) ####-####", "(##) #####-####"]'
-      )
-    b-field.tw-mx-2.tw-w-56(:label='$t("company")')
-      b-input(
-        v-model='company',
-        size='is-small',
-        name='company',
-        autocomplete='off',
-        maxlength='30'
-      )
-    b-field.tw-mx-2.tw-w-32(:label='$t("field")')
-      b-input(
-        v-model='field',
-        name='field',
-        size='is-small',
-        autocomplete='off',
-        maxlength='15'
-      )
-    b-field.tw-mx-2.tw-w-56(:label='$t("role")')
-      b-input(
-        v-model='role',
-        name='role',
-        size='is-small',
-        autocomplete='off',
-        maxlength='30'
-      )
-    b-field.tw-mx-2.tw-w-20(:label='$t("registration")')
-      b-input(
-        v-model='employeeNumber',
-        name='employeeNumber',
-        size='is-small',
-        autocomplete='off',
-        maxlength='8'
-      )
-    b-field.tw-mx-2(:label='$t("pointOfSale")')
-      b-select(
-        :placeholder='$t("selectPointOfSale")',
-        size='is-small',
-        :value='pointOfSale',
-        @input='(point) => handlePointOfSale(point)'
-      )
-        option(
-          v-for='point in allPointOfSales',
-          :value='point.pointOfSaleId',
-          :key='point.pointOfSaleId'
-        ) {{ point.pointOfSaleName }}
-    b-checkbox.tw-m-5(v-model='emergencyFlag', name='emergencyFlag') {{ $t("emergency") }}
-    b-checkbox.tw-m-5(v-model='vipFlag', name='vipFlag') VIP Desk
-    b-checkbox.tw-m-5(v-model='active', name='active') {{ $t("active") }}
+      b-field.tw-mx-2(:label='$t("name")')
+        b-input(
+          v-model='userName',
+          size='is-small',
+          name='name',
+          :disabled='isDisabled'
+        )
+    fieldset.tw-my-6.tw-flex.tw-flex-wrap
+      b-field.tw-mx-2.tw-w-32(:label='$t("phone")')
+        b-input(
+          v-model='phone',
+          size='is-small',
+          name='phone',
+          autocomplete='off',
+          placeholder='(XX) XXXXX-XXXX',
+          v-mask='["(##) ####-####", "(##) #####-####"]'
+        )
+      b-field.tw-mx-2.tw-w-56(:label='$t("company")')
+        b-input(
+          v-model='company',
+          size='is-small',
+          name='company',
+          autocomplete='off',
+          maxlength='30'
+        )
+      b-field.tw-mx-2.tw-w-32(:label='$t("field")')
+        b-input(
+          v-model='field',
+          name='field',
+          size='is-small',
+          autocomplete='off',
+          maxlength='15'
+        )
+      b-field.tw-mx-2.tw-w-56(:label='$t("role")')
+        b-input(
+          v-model='role',
+          name='role',
+          size='is-small',
+          autocomplete='off',
+          maxlength='30'
+        )
+    fieldset.tw-my-6.tw-flex.tw-flex-wrap
+      b-field.tw-mx-2.tw-w-20(:label='$t("registration")')
+        b-input(
+          v-model='employeeNumber',
+          name='employeeNumber',
+          size='is-small',
+          autocomplete='off',
+          maxlength='8'
+        )
+      b-field.tw-mx-2(:label='$t("pointOfSale")')
+        b-select(
+          :placeholder='$t("selectPointOfSale")',
+          size='is-small',
+          :value='pointOfSale',
+          :expanded='true',
+          @input='(point) => handlePointOfSale(point)'
+        )
+          option(
+            v-for='point in allPointOfSales',
+            :value='point.pointOfSaleId',
+            :key='point.pointOfSaleId'
+          ) {{ point.pointOfSaleName }}
+      .wrapper-checkboxs.tw-flex.tw-flex-wrap
+        b-field.tw-m-5
+          b-checkbox(v-model='emergencyFlag', name='emergencyFlag') {{ $t("emergency") }}
+        b-field.tw-m-5
+          b-checkbox(v-model='vipFlag', name='vipFlag') VIP Desk
+        b-field.tw-m-5
+          b-checkbox(v-model='active', name='active') {{ $t("active") }}
     slot(name='content')
 </template>
 
