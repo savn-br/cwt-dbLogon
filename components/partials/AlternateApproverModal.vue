@@ -4,11 +4,28 @@
     .card-header
     .card-content
       form.tw-grid(name='perfil')
-        b-field.mx-2(:label='$t("user")')
+        b-field.tw-mx-2(:label='$t("findByUser")')
+          b-autocomplete(
+            :value='userName',
+            :data='collaborators',
+            :loading='isFetching',
+            @typing='getAsyncData',
+            @select='(option) => { handleSelectUser(option); }'
+          )
+            template(slot-scope='props')
+              .tw-font-bold {{ props.option.userName }}
+              span.tw-text-sm.tw-font-bold ID:
+              span.tw-ml-1 {{ props.option.userId }}
+        //- b-field.mx-2(:label='$t("user")')
+        //-   b-input(
+        //-     :value='substituteApprover.userSubstituteId',
+        //-     @input='(value) => handleChangeTerm("userSubstituteId", value)',
+        //-     size='is-small'
+        //-   )
+        b-field.mx-2(label='Email')
           b-input(
-            :value='substituteApprover.userSubstituteId',
-            @input='(value) => handleChangeTerm("userSubstituteId", value)',
-            size='is-small'
+            @input='(value) => handleChangeTerm("email", value)',
+            type='email'
           )
         b-field.mx-2(:label='$t("initialDate")')
           b-datepicker(
@@ -43,6 +60,7 @@
 </template>
 
 <script>
+import debounce from 'lodash/debounce'
 import { mapState, mapMutations, mapActions } from 'vuex'
 import showToast from '../../utils/toast'
 export default {
@@ -51,19 +69,18 @@ export default {
   props: {},
   data() {
     return {
+      userName: '',
       minDate: null,
+      isFetching: false,
     }
   },
   computed: {
     ...mapState({
       substituteApprover: (state) => state.substituteApprover,
+      collaborators: (state) => state.collaborators,
     }),
     isEnableToConfirm() {
-      return (
-        !!this.substituteApprover.userSubstituteId &&
-        !!this.substituteApprover.beginTermDate &&
-        !!this.substituteApprover.endTermDate
-      )
+      return Object.values(this.substituteApprover).every((value) => !!value)
     },
   },
   watch: {},
@@ -72,8 +89,8 @@ export default {
   },
   created() {},
   methods: {
-    ...mapMutations(['setSubstituteApproverTerm']),
-    ...mapActions(['createSubstituteApprover']),
+    ...mapMutations(['setSubstituteApproverTerm', 'setSearchCollaboratorName']),
+    ...mapActions(['createSubstituteApprover', 'getAvailableCollaborators']),
 
     handleChangeTerm(key, value) {
       this.setSubstituteApproverTerm({ key, value })
@@ -88,6 +105,18 @@ export default {
         showToast(this.$i18n.t('rangeDate'), 'is-danger')
       }
     },
+    handleSelectUser(user) {
+      if (user.userId) {
+        this.handleChangeTerm('userSubstituteId', user.userId)
+        this.userName = user.userName
+      }
+    },
+    getAsyncData: debounce(async function (name) {
+      this.isFetching = true
+      this.setSearchCollaboratorName(name)
+      await this.getAvailableCollaborators()
+      this.isFetching = false
+    }, 500),
   },
 }
 </script>

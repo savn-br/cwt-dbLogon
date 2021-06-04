@@ -2,7 +2,7 @@
 #autoComplete.auto-complete-wrapper
   b-field.tw-mx-2(:label='$t("findByUser")')
     b-autocomplete(
-      v-model='searchCollaboratorName',
+      :value='searchCollaboratorName',
       :data='collaborators',
       :loading='isFetching',
       @select='selectFn',
@@ -54,6 +54,7 @@ export default {
     ...mapMutations(['setSearchCollaboratorName', 'setIsLoading']),
     ...mapActions(['getAvailableCollaborators']),
     getAsyncData: debounce(async function (name) {
+      this.searchCollaboratorName = name
       this.isFetching = true
       await this.getAvailableCollaborators()
       this.isFetching = false

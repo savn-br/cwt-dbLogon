@@ -116,6 +116,7 @@ export default () => ({
   },
   approvalDelegation: {
     userSubstituteId: '',
+    email: '',
     beginTermDate: '',
     endTermDate: '',
     active: true,

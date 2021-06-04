@@ -4,13 +4,23 @@
     .card-header
     .card-content
       form.tw-grid(name='perfil')
-        b-field.mx-2(:label='$t("user")')
+        b-field.tw-mx-2(:label='$t("findByUser")')
           b-autocomplete(
-            :open-on-focus='true',
-            :data='listOfUsers',
-            v-model='userSubstituteId',
-            size='is-small',
-            @select='(user) => handleSelectUser(user)'
+            :value='userName',
+            :data='collaborators',
+            :loading='isFetching',
+            @typing='getAsyncData',
+            @select='(option) => { handleSelectUser(option); }'
+          )
+            template(slot-scope='props')
+              .tw-font-bold {{ props.option.userName }}
+              span.tw-text-sm.tw-font-bold ID:
+              span.tw-ml-1 {{ props.option.userId }}
+
+        b-field.mx-2(label='Email')
+          b-input(
+            @input='(value) => handleChangeTerm("email", value)',
+            type='email'
           )
         b-field.mx-2(:label='$t("initialDate")')
           b-datepicker(
@@ -44,6 +54,7 @@
 </template>
 
 <script>
+import debounce from 'lodash/debounce'
 import { mapState, mapMutations, mapActions } from 'vuex'
 import showToast from '../../utils/toast'
 export default {
@@ -52,36 +63,20 @@ export default {
   props: {},
   data() {
     return {
+      userName: '',
       searchUser: '',
       minDate: null,
+      isFetching: false,
     }
   },
   computed: {
     ...mapState({
       approvalDelegation: (state) => state.approvalDelegation,
-      searchUsersByManager: (state) => state.searchUsersByManager,
+      collaborators: (state) => state.collaborators,
     }),
-    listOfUsers() {
-      return this.searchUsersByManager
-        .map((user) => user.userId.toLowerCase())
-        .filter((user) => {
-          return user.toString().toLowerCase().includes(this.searchUser)
-        })
-    },
-    userSubstituteId: {
-      get() {
-        return this.approvalDelegation.userSubstituteId
-      },
-      set(value) {
-        this.searchUser = value
-      },
-    },
+
     isEnableToConfirm() {
-      return (
-        !!this.approvalDelegation.userSubstituteId &&
-        !!this.approvalDelegation.beginTermDate &&
-        !!this.approvalDelegation.endTermDate
-      )
+      return Object.values(this.approvalDelegation).every((value) => !!value)
     },
   },
   watch: {},
@@ -90,8 +85,8 @@ export default {
   },
   created() {},
   methods: {
-    ...mapMutations(['setApprovalDelegationTerm']),
-    ...mapActions(['createApprovalDelegation']),
+    ...mapMutations(['setApprovalDelegationTerm', 'setSearchCollaboratorName']),
+    ...mapActions(['createApprovalDelegation', 'getAvailableCollaborators']),
 
     handleChangeTerm(key, value) {
       this.setApprovalDelegationTerm({ key, value })
@@ -107,10 +102,17 @@ export default {
       }
     },
     handleSelectUser(user) {
-      if (user) {
-        this.handleChangeTerm('userSubstituteId', user)
+      if (user.userId) {
+        this.handleChangeTerm('userSubstituteId', user.userId)
+        this.userName = user.userName
       }
     },
+    getAsyncData: debounce(async function (name) {
+      this.isFetching = true
+      this.setSearchCollaboratorName(name)
+      await this.getAvailableCollaborators()
+      this.isFetching = false
+    }, 500),
   },
 }
 </script>

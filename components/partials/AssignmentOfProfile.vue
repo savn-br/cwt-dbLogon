@@ -195,7 +195,7 @@ export default {
     },
     handleSetSelectedCollaborator(collaborator) {
       this.setSelectedCollaborator(collaborator)
-      this.searchCollaboratorName = ''
+      this.searchCollaboratorName = collaborator.userName
     },
   },
 }
