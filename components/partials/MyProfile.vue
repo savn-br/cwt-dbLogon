@@ -1,6 +1,6 @@
 <template lang="pug">
 .my-profile-wrapper.tw-mt-8.tw-px-8
-  b-modal(v-model='isModalActive')
+  b-modal(v-model='isModalActive', :full-screen='false')
     template(#default='props')
       confirmation-modal(
         @close='props.close',

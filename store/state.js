@@ -107,6 +107,7 @@ export default () => ({
     profileId: '',
     active: false,
     viewCCard: false,
+    indVision: '',
   },
   substituteApprover: {
     userSubstituteId: '',

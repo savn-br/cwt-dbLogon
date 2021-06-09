@@ -1,5 +1,6 @@
 module.exports = {
   /* PLOP_APPEND_BR */
+  customerDataView: 'Visao de dados de clientes',
   selectPointOfSale: 'Selecione o ponto de venda',
   pointOfSale: 'Ponto de venda',
   remove: 'Remover',

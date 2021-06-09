@@ -1,6 +1,6 @@
 <template lang="pug">
 #alternateApproverModal.alternate-approver-modal-wrapper
-  .card
+  .card-l
     .card-header
     .card-content
       form.tw-grid(name='perfil')
@@ -23,10 +23,7 @@
         //-     size='is-small'
         //-   )
         b-field.mx-2(label='Email')
-          b-input(
-            @input='(value) => handleChangeTerm("email", value)',
-            type='email'
-          )
+          b-input(disabled, type='email', :value='substituteApprover.email')
         b-field.mx-2(:label='$t("initialDate")')
           b-datepicker(
             icon='calendar-today',
@@ -78,9 +75,16 @@ export default {
     ...mapState({
       substituteApprover: (state) => state.substituteApprover,
       collaborators: (state) => state.collaborators,
+      isLoading: (state) => state.isLoading,
     }),
     isEnableToConfirm() {
-      return Object.values(this.substituteApprover).every((value) => !!value)
+      return (
+        Object.values(this.substituteApprover).every((value) => !!value) &&
+        this.collaborators
+          .map((user) => user.userId)
+          .includes(this.substituteApprover.userSubstituteId) &&
+        !this.isLoading
+      )
     },
   },
   watch: {},
@@ -108,6 +112,7 @@ export default {
     handleSelectUser(user) {
       if (user.userId) {
         this.handleChangeTerm('userSubstituteId', user.userId)
+        this.handleChangeTerm('email', user.email)
         this.userName = user.userName
       }
     },

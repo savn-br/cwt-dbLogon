@@ -22,12 +22,12 @@
       b-button.tw-w-24(
         type='is-primary',
         size='is-small',
-        @click='attribute(props.row.userName)'
+        @click='attribute(props.row.userName, props.row.userId)'
       ) {{ $t("assignProfile") }}
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import setMenu from '@/mixins/setMenu'
 export default {
   name: 'ManagerPanel',
@@ -48,8 +48,10 @@ export default {
   },
   created() {},
   methods: {
-    async attribute(userName) {
-      await this.$store.commit('setSearchCollaboratorName', userName)
+    ...mapActions(['getAvailableCollaborator']),
+    async attribute(userName, userId) {
+      await this.getAvailableCollaborator({ userId })
+      this.$store.commit('setSearchCollaboratorName', userName)
       this.setPartial('AssignmentOfProfile')
     },
   },

@@ -1,6 +1,6 @@
 <template lang="pug">
 #maintainSystemModal2.maintain-system-modal2-wrapper
-  .card
+  .card-l
     .card-header
     .card-content
       form.form.tw-grid(name='perfil')

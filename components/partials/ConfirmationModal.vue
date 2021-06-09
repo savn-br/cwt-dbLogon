@@ -1,6 +1,6 @@
 <template lang="pug">
 #confirmationModal.confirmation-modal-wrapper
-  .card
+  .card-l
     .card-header.tw-p-4
       h3 {{ $t("confirmAction") }}!
     .card-content

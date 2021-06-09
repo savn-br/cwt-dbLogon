@@ -1,6 +1,6 @@
 <template lang="pug">
 .approval-delegation-modal-wrapper
-  .card
+  .card-l
     .card-header
     .card-content
       form.tw-grid(name='perfil')
@@ -18,10 +18,7 @@
               span.tw-ml-1 {{ props.option.userId }}
 
         b-field.mx-2(label='Email')
-          b-input(
-            @input='(value) => handleChangeTerm("email", value)',
-            type='email'
-          )
+          b-input(type='email', :value='approvalDelegation.email', disabled)
         b-field.mx-2(:label='$t("initialDate")')
           b-datepicker(
             :append-to-body='true',
@@ -73,10 +70,17 @@ export default {
     ...mapState({
       approvalDelegation: (state) => state.approvalDelegation,
       collaborators: (state) => state.collaborators,
+      isLoading: (state) => state.isLoading,
     }),
 
     isEnableToConfirm() {
-      return Object.values(this.approvalDelegation).every((value) => !!value)
+      return (
+        Object.values(this.approvalDelegation).every((value) => !!value) &&
+        this.collaborators
+          .map((user) => user.userId)
+          .includes(this.approvalDelegation.userSubstituteId) &&
+        !this.isLoading
+      )
     },
   },
   watch: {},
@@ -103,7 +107,9 @@ export default {
     },
     handleSelectUser(user) {
       if (user.userId) {
+        console.log(user)
         this.handleChangeTerm('userSubstituteId', user.userId)
+        this.handleChangeTerm('email', user.email)
         this.userName = user.userName
       }
     },

@@ -1,6 +1,6 @@
 <template lang="pug">
 #notesModal.notes-modal-wrapper
-  .card
+  .card-l
     .card-header.tw-p-4
       h3 {{ $t("notes") }}
     .card-content

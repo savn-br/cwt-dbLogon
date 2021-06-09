@@ -1,5 +1,21 @@
 import showToast from '@/utils/toast'
 export default {
+  async getAvailableCollaborator({ state, commit }, { userId }) {
+    try {
+      commit('setIsLoading', true)
+      const {
+        data: { data },
+        status,
+      } = await this.$axios.get(`/assignProfile/GetById/${userId}`)
+      if (status === 200) {
+        commit('setSelectedCollaborator', data[0])
+      }
+    } catch (error) {
+      console.error(error)
+    } finally {
+      commit('setIsLoading', false)
+    }
+  },
   async getUsersByManagerId({ state: { userData }, commit }) {
     try {
       const { userId } = userData

@@ -1,6 +1,6 @@
 <template lang="pug">
 #maintainProfileModal.maintain-profile-modal-wrapper
-  .card
+  .card-l
     .card-header
     .card-content
       form.tw-grid(name='perfil')
@@ -30,6 +30,15 @@
             size='is-small',
             @input='(value) => handleChangeTerm("profileName", value)'
           )
+        b-field.mx-2(:label='$t("customerDataView")')
+          b-select(
+            placeholder='',
+            :value='maintainProfile.indVision',
+            @input='(value) => handleChangeTerm("indVision", value)'
+          )
+            option(value='a') Adminsitrador
+            option(value='p') Ponto de venda
+
         b-field
           b-field
             b-switch(
@@ -57,7 +66,9 @@ export default {
   components: {},
   props: {},
   data() {
-    return {}
+    return {
+      indVision: [{ a: 'Administrador' }, { p: 'Ponto de venda' }],
+    }
   },
   computed: {
     ...mapState({
@@ -103,6 +114,10 @@ export default {
 .maintain-profile-modal-wrapper {
   label {
     font-size: 0.75rem;
+  }
+  .card {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 10%),
+      0 4px 6px -2px rgba(0, 0, 0, 5%);
   }
 }
 </style>
