@@ -27,6 +27,12 @@
         size='is-small',
         disabled
       )
+    b-field.tw-mx-2(:label='$t("customerDataView")')
+      b-input(
+        v-model='selectedProfileData.indVision',
+        size='is-small',
+        disabled
+      )
     //- b-field.tw-mx-2(label='Visão de dados de clientes')
     //-   b-input(, size='is-small', disabled)
     .switch-wrapper
@@ -105,9 +111,8 @@ export default {
     },
     handleCancelOperation() {
       this.$refs[this.lastRefChanged].value = !this.status[this.lastRefChanged]
-      this.$refs[this.lastRefChanged].computedValue = !this.status[
-        this.lastRefChanged
-      ]
+      this.$refs[this.lastRefChanged].computedValue =
+        !this.status[this.lastRefChanged]
     },
   },
 }

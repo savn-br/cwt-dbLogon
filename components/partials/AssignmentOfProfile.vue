@@ -106,6 +106,7 @@
 </template>
 
 <script>
+import showToast from '@/utils/toast'
 import setMenu from '@/mixins/setMenu'
 import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
@@ -185,6 +186,10 @@ export default {
       this.setPartial('AssignmentOfProfile3')
     },
     update() {
+      if (!this.selectedCollaborator.pointOfSale) {
+        showToast(this.$i18n.t('selectPointOfSale'), 'is-danger')
+        return
+      }
       this.handleUpdateProfile()
     },
     handleCancelOperation() {

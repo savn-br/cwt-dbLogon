@@ -1,12 +1,14 @@
 import showToast from '@/utils/toast'
 export default {
-  async getAvailableCollaborator({ state, commit }, { userId }) {
+  async getAvailableCollaborator({ state, commit }) {
     try {
       commit('setIsLoading', true)
       const {
         data: { data },
         status,
-      } = await this.$axios.get(`/assignProfile/GetById/${userId}`)
+      } = await this.$axios.get(
+        `/assignProfile/GetById/${state.selectedCollaborator.userId}`
+      )
       if (status === 200) {
         commit('setSelectedCollaborator', data[0])
       }
@@ -229,7 +231,7 @@ export default {
   async createProfile({ state: { maintainProfile }, commit, dispatch }) {
     try {
       commit('setIsLoading', true)
-      const { status } = await this.$axios.post(`/profile`, maintainProfile)
+      const { status } = await this.$axios.post(`/profile/`, maintainProfile)
 
       if (status === 200) {
         showToast(this.$i18n.t('successMessage'), 'is-success')

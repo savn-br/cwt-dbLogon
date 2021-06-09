@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import showToast from '@/utils/toast'
 import { mapState, mapActions } from 'vuex'
 export default {
   name: 'MyProfile',
@@ -51,7 +52,7 @@ export default {
   },
   computed: {
     // -- mapState --
-    ...mapState(['pointOfSales', 'profileAccess']),
+    ...mapState(['pointOfSales', 'profileAccess', 'userData']),
     // -- mapState --
   },
   watch: {},
@@ -64,6 +65,10 @@ export default {
     ...mapActions(['handleUpdateMyProfile', 'handleGetMyProfile']),
     // -- mapActions --
     async handleUpdate() {
+      if (!this.userData.pointOfSale) {
+        showToast(this.$i18n.t('selectPointOfSale'), 'is-danger')
+        return
+      }
       await this.handleUpdateMyProfile()
     },
   },

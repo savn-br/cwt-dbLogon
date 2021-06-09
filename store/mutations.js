@@ -51,6 +51,7 @@ export default {
       profileId: '',
       active: false,
       viewCCard: false,
+      description: '',
     }
   },
   setMaintainProfile(state, value) {

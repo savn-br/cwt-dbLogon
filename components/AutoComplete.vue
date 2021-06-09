@@ -5,6 +5,7 @@
       :value='searchCollaboratorName',
       :data='collaborators',
       :loading='isFetching',
+      :open-on-focus='true',
       @select='selectFn',
       @typing='getAsyncData'
     )

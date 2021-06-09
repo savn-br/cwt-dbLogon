@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import showToast from '@/utils/toast'
 import { mapState, mapActions } from 'vuex'
 export default {
   name: 'LoginRequest',
@@ -57,6 +58,10 @@ export default {
       }
     },
     async handleUpdate() {
+      if (!this.userData.pointOfSale) {
+        showToast(this.$i18n.t('selectPointOfSale'), 'is-danger')
+        return
+      }
       await this.handleUpdateAccess()
       if (this.userData.profileType !== this.$route.path.replace(/\//g, '')) {
         this.$router.push(`/${this.userData.profileType}/`)

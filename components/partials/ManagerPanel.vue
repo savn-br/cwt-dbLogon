@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 import setMenu from '@/mixins/setMenu'
 export default {
   name: 'ManagerPanel',
@@ -48,10 +48,12 @@ export default {
   },
   created() {},
   methods: {
-    ...mapActions(['getAvailableCollaborator']),
-    async attribute(userName, userId) {
-      await this.getAvailableCollaborator({ userId })
+    attribute(userName, userId) {
       this.$store.commit('setSearchCollaboratorName', userName)
+      this.$store.commit('setSelectedCollaboratorTerm', {
+        key: 'userId',
+        value: userId,
+      })
       this.setPartial('AssignmentOfProfile')
     },
   },
