@@ -81,7 +81,21 @@ export default {
             'refreshToken',
             responseData.data.refreshToken
           )
-          const { profileType, userId, transactions } = responseData.data
+          const {
+            profileType,
+            userId,
+            transactions,
+            managerName,
+            managerId,
+          } = responseData.data
+          this.$store.commit('setUserDataTerm', {
+            key: 'managerId',
+            value: managerId,
+          })
+          this.$store.commit('setUserDataTerm', {
+            key: 'managerName',
+            value: managerName,
+          })
           this.$store.commit('setUserDataTerm', {
             key: 'userId',
             value: userId,

@@ -19,10 +19,10 @@
     )
       span.tw-text-xs {{ props.row.userName }}
     b-table-column(:label='$t("assign")', v-slot='props', :centered='true')
-      b-button(
+      b-button.tw-w-24(
         type='is-primary',
         size='is-small',
-        @click='atribuir(props.row.userId)'
+        @click='attribute(props.row.userName, props.row.userId)'
       ) {{ $t("assignProfile") }}
 </template>
 
@@ -35,10 +35,7 @@ export default {
   mixins: [setMenu],
   props: {},
   data() {
-    const data = Object.assign(require('@/jsons/assignment-profile-data.json'))
-    return {
-      data,
-    }
+    return {}
   },
   computed: {
     ...mapState({
@@ -51,8 +48,12 @@ export default {
   },
   created() {},
   methods: {
-    async atribuir(userId) {
-      await this.$store.commit('setSearchCollaboratorId', userId)
+    attribute(userName, userId) {
+      this.$store.commit('setSearchCollaboratorName', userName)
+      this.$store.commit('setSelectedCollaboratorTerm', {
+        key: 'userId',
+        value: userId,
+      })
       this.setPartial('AssignmentOfProfile')
     },
   },

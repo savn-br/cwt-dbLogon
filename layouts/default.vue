@@ -1,5 +1,12 @@
 <template lang="pug">
 .main_page_layout-wrapper
+  v-idle.tw-hidden(
+    @idle='onidle',
+    :events='["mousedown"]',
+    :loop='true',
+    :wait='5',
+    :duration='60 * 30'
+  )
   navbar(menuType='HomeMenu')
   .tw-block.main_content(class='md:tw-grid')
     side-menu.tw-px-4.tw-hidden.tw-h-screen.tw-text-white(
@@ -10,11 +17,13 @@
 </template>
 
 <script>
+import Vidle from 'v-idle'
 export default {
   name: 'MainPageLayout',
   components: {
     Navbar: () => import('@/components/partials/Navbar'),
     SideMenu: () => import('@/components/partials/SideMenu'),
+    Vidle,
   },
   data() {
     return {}
@@ -22,7 +31,12 @@ export default {
   computed: {},
   created() {},
 
-  methods: {},
+  methods: {
+    onidle() {
+      window.localStorage.clear()
+      window.location.href = '/cwt-dbLogon/'
+    },
+  },
 }
 </script>
 

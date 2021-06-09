@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import showToast from '@/utils/toast'
 import { mapState, mapActions } from 'vuex'
 export default {
   name: 'LoginRequest',
@@ -57,34 +58,13 @@ export default {
       }
     },
     async handleUpdate() {
-      const form = this.$refs.profileForm.$refs.form
-      const formInputs = [
-        form.phone,
-        form.field,
-        form.role,
-        form.employeeNumber,
-      ]
-      const validationEvery = formInputs.every((input) => !!input.value)
-      if (validationEvery) {
-        const status = await this.handleUpdateAccess()
-        if (this.userData.profileType !== this.$route.path.replace(/\//g, '')) {
-          this.$router.push(`/${this.userData.profileType}/`)
-        }
-        if (status === 200) {
-          this.$buefy.toast.open({
-            message: 'Dados atualizados com sucesso',
-            type: 'is-success',
-            duration: 3000,
-            position: 'is-top',
-          })
-        }
-      } else {
-        this.$buefy.toast.open({
-          message: 'Por favor preencha todos os dados',
-          type: 'is-danger',
-          duration: 3000,
-          position: 'is-top',
-        })
+      if (!this.userData.pointOfSale) {
+        showToast(this.$i18n.t('selectPointOfSale'), 'is-danger')
+        return
+      }
+      await this.handleUpdateAccess()
+      if (this.userData.profileType !== this.$route.path.replace(/\//g, '')) {
+        this.$router.push(`/${this.userData.profileType}/`)
       }
     },
   },

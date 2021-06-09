@@ -1,5 +1,10 @@
 module.exports = {
   /* PLOP_APPEND_EN */
+  selectCustomerDataView: 'Select customer data view',
+  selectProfile: 'Select profile',
+  customerDataView: 'Customer data view',
+  selectPointOfSale: 'Select point of sale',
+  pointOfSale: 'Point of Sale',
   remove: 'Remove',
   rangeDate: 'The end date must be greater than or equal to the start date',
   selectDate: 'Select a date',
@@ -13,7 +18,7 @@ module.exports = {
     'Please use the search bar to search for the profiles you want',
   back: 'Back',
   viewCard: 'View card',
-  superProfile: 'Father profile',
+  superProfile: 'Super profile',
   successMessage: 'Operation performed successfully',
   confirm: 'Confirm',
   confirmationMessage: 'Are you sure you want to confirm this operation',

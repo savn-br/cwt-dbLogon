@@ -11,14 +11,12 @@
     b-table-column(
       v-slot='props',
       field='pointOfSaleId',
-      :searchable='true',
       label='Código do ponto de venda'
     )
       span.tw-text-xs {{ props.row.pointOfSaleId }}
     b-table-column(
       v-slot='props',
       field='pointOfSale',
-      :searchable='true',
       label='Nome do ponto de venda'
     )
       span.tw-text-xs {{ props.row.pointOfSale }}

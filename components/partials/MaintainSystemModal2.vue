@@ -1,17 +1,17 @@
 <template lang="pug">
 #maintainSystemModal2.maintain-system-modal2-wrapper
-  .card
+  .card-l
     .card-header
     .card-content
       form.form.tw-grid(name='perfil')
-        b-field(:label='$t("moduleCode")')
-          b-input(v-model='moduleId', size='is-small')
+        b-field(:label='$t("moduleCode")', v-if='!!moduleId')
+          b-input(v-model='moduleId', size='is-small', disabled)
         b-field(:label='$t("moduleAcronym")')
-          b-input(v-model='moduleAcronym', size='is-small')
+          b-input(v-model='moduleAcronym', size='is-small', maxlength='7')
         b-field(:label='$t("description")')
-          b-input(v-model='moduleName', size='is-small')
+          b-input(v-model='moduleName', size='is-small', maxlength='40')
         b-field(:label='$t("notes")')
-          b-input(maxlength='255', type='textarea', v-model='notes')
+          b-input(maxlength='512', type='textarea', v-model='notes')
         b-field
           b-switch(v-model='active') {{ $t("active") }}
     .card-footer.tw-px-6.tw-pb-4.tw-flex.tw-justify-end

@@ -4,3 +4,9 @@
 
 /* @tailwind components; */
 @tailwind utilities;
+
+@layer components {
+  .card-l {
+    @apply max-w-lg mx-auto bg-white rounded border border-solid border-gray-500;
+  }
+}

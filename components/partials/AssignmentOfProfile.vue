@@ -11,8 +11,8 @@
         :onCancel='handleCancelOperation'
       )
   .fields.tw-mb-4
-    b-field.tw-mx-2(:label='$t("findByUser")')
-      b-autocomplete(v-model='searchCollaboratorId', :data='collaboratorsId')
+    auto-complete(:selectFn='handleSetSelectedCollaborator')
+
   profile-form(v-if='!!selectedCollaborator')
   .update-buttons.tw-flex.tw-justify-center
     b-button.tw-mx-2.tw-my-4.tw-w-32(
@@ -106,8 +106,9 @@
 </template>
 
 <script>
+import showToast from '@/utils/toast'
 import setMenu from '@/mixins/setMenu'
-import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
   name: 'AssignmentOfProfile',
   components: {
@@ -128,8 +129,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['selectedCollaborator']),
-    ...mapGetters(['collaboratorsId']),
+    ...mapState(['selectedCollaborator', 'collaborators', 'isLoading']),
 
     isEnableToCreate() {
       return this.selectedCollaborator.profiles
@@ -137,30 +137,24 @@ export default {
         .some((active) => active)
     },
 
-    searchCollaboratorId: {
+    searchCollaboratorName: {
       get() {
-        return this.$store.state.searchCollaboratorId
+        return this.$store.state.searchCollaboratorName
       },
       set(value) {
-        this.setSearchCollaboratorId(value)
+        this.setSearchCollaboratorName(value)
       },
     },
   },
-  watch: {
-    async searchCollaboratorId(newCollaboratorId) {
-      if (newCollaboratorId.length >= 3) {
-        await this.getAvailableCollaborators()
-      }
-    },
-  },
+  watch: {},
   async mounted() {
-    if (this.searchCollaboratorId.length >= 3) {
+    if (this.searchCollaboratorName.length >= 3) {
       await this.getAvailableCollaborators()
     }
   },
   created() {},
   methods: {
-    ...mapMutations(['setSearchCollaboratorId']),
+    ...mapMutations(['setSearchCollaboratorName', 'setSelectedCollaborator']),
     ...mapActions([
       'getAvailableCollaborators',
       'setProfileState2Collaborator',
@@ -192,6 +186,10 @@ export default {
       this.setPartial('AssignmentOfProfile3')
     },
     update() {
+      if (!this.selectedCollaborator.pointOfSale) {
+        showToast(this.$i18n.t('selectPointOfSale'), 'is-danger')
+        return
+      }
       this.handleUpdateProfile()
     },
     handleCancelOperation() {
@@ -199,6 +197,10 @@ export default {
         .active
       this.$refs[this.currentProfile.profileId].computedValue = !this
         .currentProfile.active
+    },
+    handleSetSelectedCollaborator(collaborator) {
+      this.setSelectedCollaborator(collaborator)
+      this.searchCollaboratorName = collaborator.userName
     },
   },
 }

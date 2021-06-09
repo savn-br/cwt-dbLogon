@@ -19,7 +19,7 @@
   )
     b-table-column(
       field='userSubstituteId',
-      :label='$t("registration")',
+      :label='$t("user")',
       v-slot='props'
     )
       span.tw-text-xs {{ props.row.userSubstituteId }}
@@ -29,6 +29,8 @@
       v-slot='props'
     )
       span.tw-text-xs {{ props.row.userSubstituteName }}
+    b-table-column(field='Email', label='email', v-slot='props')
+      span.tw-text-xs {{ props.row.email }}
     b-table-column(
       field='beginTermDate',
       :label='$t("initialDate")',

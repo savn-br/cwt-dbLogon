@@ -1,10 +1,13 @@
 import Vue from 'vue'
+
 export default function (msg, type) {
-  const vue = new Vue()
-  vue.$buefy.toast.open({
+  const mapType = {
+    'is-success': 'success',
+    'is-danger': 'error',
+  }
+  Vue.$toast.open({
     message: msg,
-    type,
-    duration: 3000,
-    position: 'is-top',
+    type: mapType[type],
+    duration: type === 'is-success' ? 5000 : 0,
   })
 }

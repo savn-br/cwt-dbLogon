@@ -51,6 +51,7 @@ export default {
       profileId: '',
       active: false,
       viewCCard: false,
+      description: '',
     }
   },
   setMaintainProfile(state, value) {
@@ -244,8 +245,8 @@ export default {
   setCollaborators(state, collaborators) {
     state.collaborators = collaborators
   },
-  setSearchCollaboratorId(state, userId) {
-    state.searchCollaboratorId = userId
+  setSearchCollaboratorName(state, userId) {
+    state.searchCollaboratorName = userId
   },
   setRequests(state, requests) {
     state.requests = requests
@@ -258,7 +259,7 @@ export default {
     state.transactionModalMode = mode
   },
   setSelectedTransaction(state, selectedTransaction) {
-    state.selectedTransaction = selectedTransaction
+    state.selectedTransaction = { ...selectedTransaction }
   },
   setSelectedModuleTerm(state, { key, value }) {
     state.selectedModule[key] = value
@@ -268,7 +269,7 @@ export default {
     state.moduleModalMode = mode
   },
   setSelectedModule(state, selectedModule) {
-    state.selectedModule = selectedModule
+    state.selectedModule = { ...selectedModule }
   },
   setSelectedSystemTerm(state, { key, value }) {
     state.selectedSystem[key] = value
@@ -278,7 +279,7 @@ export default {
     state.systemModalMode = mode
   },
   setSelectedSystem(state, selectedSystem) {
-    state.selectedSystem = selectedSystem
+    state.selectedSystem = { ...selectedSystem }
   },
   setSystems(state, systems) {
     state.systems = systems
@@ -308,7 +309,9 @@ export default {
     if (userData.profileAccess) {
       delete userData.profileAccess
     }
-    state.userData = userData
+    delete userData.managerId
+    delete userData.managerName
+    state.userData = { ...state.userData, ...userData }
   },
   setUserStatus(state, userStatus) {
     state.userStatus = userStatus

@@ -1,6 +1,6 @@
 <template lang="pug">
 .my-profile-wrapper.tw-mt-8.tw-px-8
-  b-modal(v-model='isModalActive')
+  b-modal(v-model='isModalActive', :full-screen='false')
     template(#default='props')
       confirmation-modal(
         @close='props.close',
@@ -8,7 +8,10 @@
       )
   user-form(:isDisabled='true')
   .update-buttons.tw-flex.tw-justify-center
-    b-button.tw-mx-2.tw-my-4(type='is-success', @click='isModalActive = true') {{ $t("update") }}
+    b-button.tw-w-24.tw-mx-2.tw-my-4(
+      type='is-success',
+      @click='isModalActive = true'
+    ) {{ $t("update") }}
   collapse.tw-text-sm(
     v-if='!!profileAccess && !!profileAccess.profileName',
     :title='profileAccess.profileName'
@@ -33,6 +36,7 @@
 </template>
 
 <script>
+import showToast from '@/utils/toast'
 import { mapState, mapActions } from 'vuex'
 export default {
   name: 'MyProfile',
@@ -48,7 +52,7 @@ export default {
   },
   computed: {
     // -- mapState --
-    ...mapState(['pointOfSales', 'profileAccess']),
+    ...mapState(['pointOfSales', 'profileAccess', 'userData']),
     // -- mapState --
   },
   watch: {},
@@ -61,6 +65,10 @@ export default {
     ...mapActions(['handleUpdateMyProfile', 'handleGetMyProfile']),
     // -- mapActions --
     async handleUpdate() {
+      if (!this.userData.pointOfSale) {
+        showToast(this.$i18n.t('selectPointOfSale'), 'is-danger')
+        return
+      }
       await this.handleUpdateMyProfile()
     },
   },

@@ -1,15 +1,29 @@
 <template lang="pug">
 #alternateApproverModal.alternate-approver-modal-wrapper
-  .card
+  .card-l
     .card-header
     .card-content
       form.tw-grid(name='perfil')
-        b-field.mx-2(:label='$t("register")')
-          b-input(
-            :value='substituteApprover.userSubstituteId',
-            @input='(value) => handleChangeTerm("userSubstituteId", value)',
-            size='is-small'
+        b-field.tw-mx-2(:label='$t("findByUser")')
+          b-autocomplete(
+            :value='userName',
+            :data='collaborators',
+            :loading='isFetching',
+            @typing='getAsyncData',
+            @select='(option) => { handleSelectUser(option); }'
           )
+            template(slot-scope='props')
+              .tw-font-bold {{ props.option.userName }}
+              span.tw-text-sm.tw-font-bold ID:
+              span.tw-ml-1 {{ props.option.userId }}
+        //- b-field.mx-2(:label='$t("user")')
+        //-   b-input(
+        //-     :value='substituteApprover.userSubstituteId',
+        //-     @input='(value) => handleChangeTerm("userSubstituteId", value)',
+        //-     size='is-small'
+        //-   )
+        b-field.mx-2(label='Email')
+          b-input(disabled, type='email', :value='substituteApprover.email')
         b-field.mx-2(:label='$t("initialDate")')
           b-datepicker(
             icon='calendar-today',
@@ -43,6 +57,7 @@
 </template>
 
 <script>
+import debounce from 'lodash/debounce'
 import { mapState, mapMutations, mapActions } from 'vuex'
 import showToast from '../../utils/toast'
 export default {
@@ -51,18 +66,24 @@ export default {
   props: {},
   data() {
     return {
+      userName: '',
       minDate: null,
+      isFetching: false,
     }
   },
   computed: {
     ...mapState({
       substituteApprover: (state) => state.substituteApprover,
+      collaborators: (state) => state.collaborators,
+      isLoading: (state) => state.isLoading,
     }),
     isEnableToConfirm() {
       return (
-        !!this.substituteApprover.userSubstituteId &&
-        !!this.substituteApprover.beginTermDate &&
-        !!this.substituteApprover.endTermDate
+        Object.values(this.substituteApprover).every((value) => !!value) &&
+        this.collaborators
+          .map((user) => user.userId)
+          .includes(this.substituteApprover.userSubstituteId) &&
+        !this.isLoading
       )
     },
   },
@@ -72,8 +93,8 @@ export default {
   },
   created() {},
   methods: {
-    ...mapMutations(['setSubstituteApproverTerm']),
-    ...mapActions(['createSubstituteApprover']),
+    ...mapMutations(['setSubstituteApproverTerm', 'setSearchCollaboratorName']),
+    ...mapActions(['createSubstituteApprover', 'getAvailableCollaborators']),
 
     handleChangeTerm(key, value) {
       this.setSubstituteApproverTerm({ key, value })
@@ -88,6 +109,19 @@ export default {
         showToast(this.$i18n.t('rangeDate'), 'is-danger')
       }
     },
+    handleSelectUser(user) {
+      if (user.userId) {
+        this.handleChangeTerm('userSubstituteId', user.userId)
+        this.handleChangeTerm('email', user.email)
+        this.userName = user.userName
+      }
+    },
+    getAsyncData: debounce(async function (name) {
+      this.isFetching = true
+      this.setSearchCollaboratorName(name)
+      await this.getAvailableCollaborators()
+      this.isFetching = false
+    }, 500),
   },
 }
 </script>

@@ -52,7 +52,6 @@ export default () => ({
     userId: -1,
     employeeNumber: '',
     profileType: '',
-    manager: '',
     email: '',
     userName: '',
     password: '',
@@ -69,7 +68,7 @@ export default () => ({
   profileAccess: {},
   requests: [],
   searchProfileId: '',
-  searchCollaboratorId: '',
+  searchCollaboratorName: '',
   selectedCollaborator: {
     userId: '',
     employeeNumber: '',
@@ -108,6 +107,8 @@ export default () => ({
     profileId: '',
     active: false,
     viewCCard: false,
+    indVision: '',
+    description: '',
   },
   substituteApprover: {
     userSubstituteId: '',
@@ -117,6 +118,7 @@ export default () => ({
   },
   approvalDelegation: {
     userSubstituteId: '',
+    email: '',
     beginTermDate: '',
     endTermDate: '',
     active: true,

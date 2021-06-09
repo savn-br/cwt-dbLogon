@@ -1,20 +1,19 @@
 <template lang="pug">
 #assignmentOfProfile3.assignment-of-profile3-wrapper.tw-mt-8.tw-px-8
-  back-button(partialComponent='AssignmentOfProfile')
-  b-field(label='Find by profileName')
-    b-autocomplete(v-model='searchProfileId', :data='availableProfilesName')
+  back-button.tw-w-24(partialComponent='AssignmentOfProfile')
+  //- b-field(label='Find by profileName')
+  //-   b-autocomplete(v-model='searchProfileId', :data='availableProfilesName')
   standard-table(v-if='availableProfiles.length', :data='availableProfiles')
     b-table-column(
+      width='120px',
       v-slot='props',
       field='profileId',
-      :searchable='true',
       :label='$t("profileCode")'
     )
       span.tw-text-xs {{ props.row.profileId }}
     b-table-column(
       v-slot='props',
       field='profileName',
-      :searchable='true',
       :label='$t("profileDescription")'
     )
       span.tw-text-xs {{ props.row.profileName }}
@@ -26,9 +25,10 @@
     )
       .operation-wrapper
         b-checkbox(
+          v-if='props.row.profileId !== profileIdSelected',
           @input='(active) => { addProfile2Collaborator(active, props.row.profileId); }'
         )
-          span.tw-text-xs {{ $t("active") }}
+          span.tw-text-xs {{ $t("select") }}
         span.tw-cursor-pointer(
           class='hover:tw-text-primary',
           @click='selectProfile(props.row.profileId)'
@@ -47,36 +47,30 @@ export default {
   mixins: [setMenu],
   props: {},
   data() {
-    return {}
+    return {
+      profileIdSelected: -1,
+    }
   },
   computed: {
     ...mapGetters(['availableProfilesName', 'isProfileActive2Collaborator']),
     ...mapState(['availableProfiles']),
-    searchProfileId: {
-      get() {
-        return this.$store.state.searchProfileId
-      },
-      set(value) {
-        this.setSearchProfileId(value)
-      },
-    },
+    // searchProfileId: {
+    //   get() {
+    //     return this.$store.state.searchProfileId
+    //   },
+    //   set(value) {
+    //     this.setSearchProfileId(value)
+    //   },
+    // },
   },
-  watch: {
-    async searchProfileId(newSearchProfileId) {
-      if (newSearchProfileId.length >= 3) {
-        await this.getAvailableProfiles()
-      }
-    },
-  },
+
   async mounted() {
-    if (this.searchProfileId.length >= 3) {
-      await this.getAvailableProfiles()
-    }
+    await this.getAvailableProfiles()
   },
   created() {},
   methods: {
     ...mapMutations([
-      'setSearchProfileId',
+      // 'setSearchProfileId',
       'setSelectedProfileId',
       'setBackProfileSearchPartial',
     ]),
@@ -89,6 +83,7 @@ export default {
     },
     async addProfile2Collaborator(active, profileId) {
       if (active) {
+        this.profileIdSelected = profileId
         await this.setProfile2Collaborator({ profileId })
         this.setPartial('AssignmentOfProfile')
       }

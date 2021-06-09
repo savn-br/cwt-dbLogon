@@ -35,14 +35,12 @@
     b-table-column(
       v-slot='props',
       field='transactionId',
-      :searchable='true',
       :label='$t("transactionCode")'
     )
       span.tw-text-xs {{ props.row.transactionId }}
     b-table-column(
       v-slot='props',
       field='transactionName',
-      :searchable='true',
       :label='$t("description")'
     )
       span.tw-text-xs {{ props.row.transactionName }}

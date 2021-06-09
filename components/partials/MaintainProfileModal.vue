@@ -1,12 +1,12 @@
 <template lang="pug">
 #maintainProfileModal.maintain-profile-modal-wrapper
-  .card
+  .card-l
     .card-header
     .card-content
       form.tw-grid(name='perfil')
-        b-field(label='Perfil pai')
+        b-field.tw-mx-2(:label='$t("superProfile")')
           b-select(
-            placeholder='Selecione o perfil',
+            :placeholder='$t("selectProfile")',
             @input='(value) => handleChangeTerm("profileParentId", value)',
             :value='maintainProfile.profileParentId'
           )
@@ -18,27 +18,38 @@
         //-   b-select(placeholder='Selecione a visão', value='admin')
         //-     option(value='admin') administrador
         //-     option(value='gestor') gestor
-        b-field.mx-2(:label='$t("profileCode")')
+        b-field.tw-mx-2.tw-w-24(:label='$t("profileCode")')
           b-input(
             :value='maintainProfile.profileId',
             size='is-small',
+            maxlength='7',
             @input='(value) => handleChangeTerm("profileId", value)'
           )
-        b-field.mx-2(label='Descrição do perfil')
+        b-field.tw-mx-2(:label='$t("profileDescription")')
           b-input(
             :value='maintainProfile.profileName',
             size='is-small',
+            maxlength='40',
             @input='(value) => handleChangeTerm("profileName", value)'
           )
+        b-field.mx-2(:label='$t("customerDataView")')
+          b-select(
+            :placeholder='$t("selectCustomerDataView")',
+            :value='maintainProfile.indVision',
+            @input='(value) => handleChangeTerm("indVision", value)'
+          )
+            option(value='a') Adminsitrador
+            option(value='p') Ponto de venda
+
         b-field
-          b-field
+          b-field.tw-mx-2
             b-switch(
               :value='maintainProfile.viewCCard',
               @input='(value) => handleChangeTerm("viewCCard", value)'
             ) Visualizar cartão
           //- b-field
           //-   b-switch(v-model='perfil.access') Permissão de atribuição
-          b-field
+          b-field.tw-mx-2
             b-switch(
               :value='maintainProfile.active',
               @input='(value) => handleChangeTerm("active", value)'
@@ -57,7 +68,9 @@ export default {
   components: {},
   props: {},
   data() {
-    return {}
+    return {
+      indVision: [{ a: 'Administrador' }, { p: 'Ponto de venda' }],
+    }
   },
   computed: {
     ...mapState({
@@ -103,6 +116,10 @@ export default {
 .maintain-profile-modal-wrapper {
   label {
     font-size: 0.75rem;
+  }
+  .card {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 10%),
+      0 4px 6px -2px rgba(0, 0, 0, 5%);
   }
 }
 </style>
