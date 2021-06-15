@@ -8,7 +8,8 @@
           b-select(
             :placeholder='$t("selectProfile")',
             @input='(value) => handleChangeTerm("profileParentId", value)',
-            :value='maintainProfile.profileParentId'
+            :value='maintainProfile.profileParentId',
+            size='is-small'
           )
             option(
               v-for='(parent,index) in parentProfiles',
@@ -18,11 +19,15 @@
         //-   b-select(placeholder='Selecione a visão', value='admin')
         //-     option(value='admin') administrador
         //-     option(value='gestor') gestor
-        b-field.tw-mx-2.tw-w-24(:label='$t("profileCode")')
+        b-field.tw-mx-2.tw-w-24(
+          :label='$t("profileCode")',
+          v-if='!!maintainProfile.profileId'
+        )
           b-input(
             :value='maintainProfile.profileId',
             size='is-small',
             maxlength='7',
+            disabled,
             @input='(value) => handleChangeTerm("profileId", value)'
           )
         b-field.tw-mx-2(:label='$t("profileDescription")')
@@ -36,7 +41,8 @@
           b-select(
             :placeholder='$t("selectCustomerDataView")',
             :value='maintainProfile.indVision',
-            @input='(value) => handleChangeTerm("indVision", value)'
+            @input='(value) => handleChangeTerm("indVision", value)',
+            size='is-small'
           )
             option(value='A') {{ $t("admin") }}
             option(value='P') {{ $t("pointOfSale") }}
