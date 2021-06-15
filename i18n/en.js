@@ -1,5 +1,6 @@
 module.exports = {
   /* PLOP_APPEND_EN */
+  admin: 'Administer',
   selectCustomerDataView: 'Select customer data view',
   selectProfile: 'Select profile',
   customerDataView: 'Customer data view',

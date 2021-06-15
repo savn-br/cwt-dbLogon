@@ -28,11 +28,13 @@
         disabled
       )
     b-field.tw-mx-2(:label='$t("customerDataView")')
-      b-input(
+      b-select(
         v-model='selectedProfileData.indVision',
         size='is-small',
         disabled
       )
+        option(value='A') Adminsitrador
+        option(value='P') Ponto de venda
     //- b-field.tw-mx-2(label='Visão de dados de clientes')
     //-   b-input(, size='is-small', disabled)
     .switch-wrapper
