@@ -7,7 +7,7 @@
         src='~/assets/CWT_LOGO_TRASNPARENTE.png'
       )
     .l-card-body.tw-p-8.tw-bg-white
-      form(@submit.prevent='submitLogin', name='login')
+      form(@submit.prevent='submitLogin', name="login", autocomplete='off')
         fieldset
           legend.tw-w-full.tw-flex.tw-justify-end Login into your account
           b-field(
@@ -19,7 +19,8 @@
               v-model='username',
               size='is-small',
               icon='email',
-              name='username'
+              name='username',
+              autocomplete='off'
             )
           b-field(
             label='password',
@@ -31,7 +32,8 @@
               size='is-small',
               icon='key',
               type='password',
-              name='password'
+              name='password',
+              autocomplete='off'
             )
           b-button.tw-w-full.tw-mt-4(type='is-danger', @click='submitLogin') Entrar
 </template>
@@ -81,13 +83,8 @@ export default {
             'refreshToken',
             responseData.data.refreshToken
           )
-          const {
-            profileType,
-            userId,
-            transactions,
-            managerName,
-            managerId,
-          } = responseData.data
+          const { profileType, userId, transactions, managerName, managerId } =
+            responseData.data
           this.$store.commit('setUserDataTerm', {
             key: 'managerId',
             value: managerId,

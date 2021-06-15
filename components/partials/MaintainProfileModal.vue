@@ -38,8 +38,8 @@
             :value='maintainProfile.indVision',
             @input='(value) => handleChangeTerm("indVision", value)'
           )
-            option(value='a') Adminsitrador
-            option(value='p') Ponto de venda
+            option(value='A') {{ $t("admin") }}
+            option(value='P') {{ $t("pointOfSale") }}
 
         b-field
           b-field.tw-mx-2
@@ -68,9 +68,7 @@ export default {
   components: {},
   props: {},
   data() {
-    return {
-      indVision: [{ a: 'Administrador' }, { p: 'Ponto de venda' }],
-    }
+    return {}
   },
   computed: {
     ...mapState({
