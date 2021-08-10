@@ -127,4 +127,10 @@ export default () => ({
   approvalDelegationList: [],
 
   searchUsersByManager: [],
+  logState: {
+    insertDate: null,
+    userIdInsert: null,
+    alterDate: null,
+    userIdUpdate: null,
+  },
 })

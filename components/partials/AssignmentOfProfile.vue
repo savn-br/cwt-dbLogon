@@ -1,5 +1,8 @@
 <template lang="pug">
 .assignment-of-profile-wrapper.tw-mt-8.tw-px-8
+  b-modal(v-model='isLogModalActive')
+    template(#default='props')
+      log-modal(@close='props.close')
   b-modal(v-model='isModalActiveUpdate')
     template(#default='props')
       confirmation-modal(@close='props.close', :onConfirm='update')
@@ -69,7 +72,10 @@
               :ref='props.row.profileId',
               @input='(active) => { handleChangeProfile(active, props.row.profileId); }'
             )
-          span.tw-cursor-pointer(class='hover:tw-text-primary')
+          span.tw-cursor-pointer(
+            class='hover:tw-text-primary',
+            @click='(event) => handleShowLogModal(event, props.row)'
+          )
             b-icon(icon='eye', size='')
     .view-sales.tw-mt-6
       .button-wrapper.tw-flex.tw-justify-end
@@ -100,7 +106,8 @@
               @click='handleRemovePointOfSale(props.row.pointOfSaleId)'
             ) remover
             span.tw-cursor-pointer.tw-flex.tw-items-center(
-              class='hover:tw-text-primary'
+              class='hover:tw-text-primary',
+              @click='(event) => handleShowLogModal(event, props.row)'
             )
               b-icon(icon='eye', size='')
 </template>
@@ -115,11 +122,13 @@ export default {
     ProfileForm: () => import('@/components/partials/ProfileForm'),
     ConfirmationModal: () => import('@/components/partials/ConfirmationModal'),
     StandardTable: () => import('@/components/StandardTable'),
+    LogModal: () => import('@/components/partials/LogModal.vue'),
   },
   mixins: [setMenu],
   props: {},
   data() {
     return {
+      isLogModalActive: false,
       isModalActiveUpdate: false,
       isModalActiveProfile: false,
       currentProfile: {
@@ -154,7 +163,11 @@ export default {
   },
   created() {},
   methods: {
-    ...mapMutations(['setSearchCollaboratorName', 'setSelectedCollaborator']),
+    ...mapMutations([
+      'setSearchCollaboratorName',
+      'setSelectedCollaborator',
+      'setLogState',
+    ]),
     ...mapActions([
       'getAvailableCollaborators',
       'setProfileState2Collaborator',
@@ -193,14 +206,20 @@ export default {
       this.handleUpdateProfile()
     },
     handleCancelOperation() {
-      this.$refs[this.currentProfile.profileId].value = !this.currentProfile
-        .active
-      this.$refs[this.currentProfile.profileId].computedValue = !this
-        .currentProfile.active
+      this.$refs[this.currentProfile.profileId].value =
+        !this.currentProfile.active
+      this.$refs[this.currentProfile.profileId].computedValue =
+        !this.currentProfile.active
     },
     handleSetSelectedCollaborator(collaborator) {
       this.setSelectedCollaborator(collaborator)
       this.searchCollaboratorName = collaborator.userName
+    },
+    handleShowLogModal(event, props) {
+      event.stopPropagation()
+      this.isLogModalActive = !this.isLogModalActive
+      const { insertDate, userIdInsert, alterDate, userIdUpdate } = props
+      this.setLogState({ insertDate, userIdInsert, alterDate, userIdUpdate })
     },
   },
 }

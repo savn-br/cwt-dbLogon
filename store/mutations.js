@@ -1,5 +1,8 @@
 import Vue from 'vue'
 export default {
+  setLogState(state, value) {
+    state.logState = value
+  },
   setSearchUsersByManager(state, value) {
     state.searchUsersByManager = value
   },
@@ -57,6 +60,7 @@ export default {
   setMaintainProfile(state, value) {
     state.maintainProfile = value
   },
+
   setParentProfiles(state, value) {
     state.parentProfiles = value
   },

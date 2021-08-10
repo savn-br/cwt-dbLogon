@@ -1,5 +1,8 @@
 <template lang="pug">
 #maintainSystem2.maintain-system2-wrapper.tw-mt-8.tw-px-8
+  b-modal(v-model='isLogModalActive')
+    template(#default='props')
+      log-modal(@close='props.close')
   b-modal(v-model='NotesModalActive')
     template(#default='props')
       notes-modal(@close='props.close', :message='message')
@@ -67,12 +70,15 @@
           @click='handleShowNotes(props.row)'
         )
           b-icon.tw-mr-2(icon='clipboard-text')
-        span.tw-cursor-pointer(class='hover:tw-text-primary')
+        span.tw-cursor-pointer(
+          class='hover:tw-text-primary',
+          @click='(event) => handleShowLogModal(event, props.row)'
+        )
           b-icon(icon='eye')
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import setMenu from '~/mixins/setMenu'
 export default {
   name: 'MaintainSystem2',
@@ -81,11 +87,13 @@ export default {
     MaintainSystemModal2: () =>
       import('@/components/partials/MaintainSystemModal2'),
     NotesModal: () => import('@/components/partials/NotesModal'),
+    LogModal: () => import('@/components/partials/LogModal.vue'),
   },
   mixins: [setMenu],
   props: {},
   data() {
     return {
+      isLogModalActive: false,
       isModalActive: false,
       NotesModalActive: false,
       message: '',
@@ -102,6 +110,7 @@ export default {
   },
   created() {},
   methods: {
+    ...mapMutations(['setLogState']),
     goToTransaction(module) {
       this.$store.commit('setSelectedModule', module)
       this.setPartial('MaintainSystem3')
@@ -119,6 +128,12 @@ export default {
     handleShowNotes(system) {
       this.message = system.notes
       this.NotesModalActive = true
+    },
+    handleShowLogModal(event, props) {
+      event.stopPropagation()
+      this.isLogModalActive = !this.isLogModalActive
+      const { insertDate, userIdInsert, alterDate, userIdUpdate } = props
+      this.setLogState({ insertDate, userIdInsert, alterDate, userIdUpdate })
     },
   },
 }
