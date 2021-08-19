@@ -1,31 +1,40 @@
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
+  mode: 'spa',
   ssr: false,
+  // target: 'static',
+  router: {
+    base: '/cwt-dbLogon/',
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'CWT Logon',
+    title: 'Passport CWT-BR',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'pt-BR',
     },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: '' },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/cwtico.ico' }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/cwtico.ico' }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-  ],
+  css: ['@/assets/styles/main.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@plugins/axios',
-    '@/plugins/vee-validate.js'
+    { src: '@plugins/axios', ssr: false },
+    { src: '@/plugins/vee-validate.js', ssr: false },
+    { src: '@/plugins/vue-mask.js', ssr: false },
+    { src: '@/plugins/vuex-persist.js', ssr: false },
+    { src: '@/plugins/vue-toast-notification.js', ssr: false },
+    {
+      src: '@/plugins/vidle.js',
+      ssr: false,
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -33,11 +42,24 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    // https://go.nuxtjs.dev/eslint
+    // '@nuxtjs/eslint-module',
+    // https://go.nuxtjs.dev/stylelint
+    '@nuxtjs/stylelint-module',
     '@nuxtjs/dotenv',
     '@nuxtjs/moment',
+    '@nuxtjs/tailwindcss',
   ],
+
+  styleResources: {
+    scss: [
+      './assets/styles/_colors.scss',
+      './assets/styles/_mixins.scss',
+      './assets/styles/_functions.scss',
+    ],
+  },
   moment: {
-    timezone: true
+    timezone: true,
   },
   dotenv: {
     /* module options */
@@ -48,12 +70,36 @@ export default {
     'nuxt-buefy',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    'nuxt-i18n',
+    '@nuxtjs/style-resources',
   ],
+  i18n: {
+    locales: [
+      { code: 'en', iso: 'en-US' },
+      { code: 'br', iso: 'pt-BR' },
+    ],
+    defaultLocale: 'br',
+    vueI18n: {
+      fallbackLocale: 'br',
+      messages: {
+        br: require('./i18n/br.js'),
+        en: require('./i18n/en.js'),
+      },
+    },
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    // baseUrl: 'http://localhost:3333',
+    baseUrl: 'https://cwt-dblogon-api.herokuapp.com',
+    // baseUrl: 'https://d583bddf7941.ngrok.io',
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+    extractCSS: true,
+  },
+  generate: {
+    fallback: true,
+  },
 }

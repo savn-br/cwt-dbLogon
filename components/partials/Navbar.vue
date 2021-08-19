@@ -1,0 +1,75 @@
+<template lang="pug">
+.navbar-wrapper
+  b-navbar.tw-shadow-md(:fixed-top='true')
+    template(#brand)
+      b-navbar-item
+        img.tw-mr-1(src='~/assets/CWT_LOGO_TRASNPARENTE.png', alt='CWT')
+        | {{ $t(currentLabel) }}
+      IsLoading
+    template(#start)
+    template(#end)
+      .side-menu-content.tw-block(class='md:tw-hidden')
+        b-navbar-item(v-if='!!menuType')
+          component(:is='menuType')
+
+      b-navbar-item(tag='div')
+        .buttonns.tw-flex.tw-items-center.tw-justify-end
+          nuxt-link.tw-mr-4(:to='switchLocalePath("en")')
+            img.tw-w-5.tw-h-5(src='@/assets/flags/en.svg', alt='EUA flag')
+          nuxt-link.tw-mr-4(:to='switchLocalePath("br")')
+            img.tw-w-5.tw-h-5(src='@/assets/flags/br.svg', alt='Brazil flag')
+          b-button.tw-w-24(
+            icon-left='logout',
+            @click='logout',
+            type='is-primary is-link'
+          ) {{ $t("logout") }}
+</template>
+
+<script>
+import { mapState, mapMutations } from 'vuex'
+export default {
+  name: 'Navbar',
+  components: {
+    HomeMenu: () => import('@/components/partials/HomeMenu'),
+  },
+  props: {
+    menuType: { type: String, default: () => '' },
+  },
+  data() {
+    return {}
+  },
+  computed: {
+    ...mapState({
+      currentMenu: (state) => state.currentMenu,
+      currentPartial: (state) => state.currentPartial,
+      lastMenuLabel: (state) => state.lastMenuLabel,
+      navbarIsLoading: (state) => state.navbarIsLoading,
+    }),
+    currentLabel() {
+      const selectedMenu = this.currentMenu.find(
+        (menu) => menu.partial === this.currentPartial
+      )
+      if (selectedMenu) {
+        this.setLastMenuLabel(selectedMenu.label)
+        return selectedMenu.label
+      }
+      return this.lastMenuLabel
+    },
+  },
+  watch: {},
+  mounted() {},
+  created() {},
+  methods: {
+    ...mapMutations(['setLastMenuLabel']),
+    logout() {
+      window.localStorage.clear()
+      window.location.href = '/cwt-dbLogon/'
+    },
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+.navbar-wrapper {
+}
+</style>

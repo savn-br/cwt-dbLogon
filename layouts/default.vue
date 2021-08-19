@@ -1,63 +1,52 @@
 <template lang="pug">
-    .main_page_layout
-        b-navbar
-            <template lang="pug" slot="brand">
-                b-navbar-item(tag="router-link" :to="{ path: '/' }")
-                    img(src="~/assets/CWT_logo_-_Color_-_RGB_small_1.jpg"
-                        alt="CWT")
-            </template>
-            
-            <template lang="pug" slot="start">
-                
-            </template>
-
-            <template lang="pug" slot="end">
-                b-navbar-item(tag="div")
-                    .buttons
-                        b-button(type="is-primary" size="is-small" @click="logout")
-                            strong Logout
-            </template>
-        .section
-            .tile.is-ancestor
-                .tile.is-vertical.is-3
-                    .tile
-                        slot(name="nav_bar")
-                            side-bar
-                .tile.is-vertical.is-9
-                    .tile
-                        slot(name="content")
-                            nuxt
+.main_page_layout-wrapper
+  v-idle.tw-hidden(
+    @idle='onidle',
+    :events='["mousedown"]',
+    :loop='true',
+    :wait='5',
+    :duration='60 * 30'
+  )
+  navbar(menuType='HomeMenu')
+  .tw-block.main_content(class='md:tw-grid')
+    side-menu.tw-px-4.tw-hidden.tw-h-screen.tw-text-white(
+      class='md:tw-block',
+      menuType='HomeMenu'
+    )
+    nuxt.wrapper-content
 </template>
 
 <script>
-import SideBar from "~/components/partials/SideBar";
-
-import { mapState } from "vuex";
-
+import Vidle from 'v-idle'
 export default {
-    name: "main-page-layout",
-    components: {
-        SideBar
-    },
+  name: 'MainPageLayout',
+  components: {
+    Navbar: () => import('@/components/partials/Navbar'),
+    SideMenu: () => import('@/components/partials/SideMenu'),
+    Vidle,
+  },
+  data() {
+    return {}
+  },
+  computed: {},
+  created() {},
 
-    methods: {
-        logout() {
-            this.$store.dispatch("login/userLogout", this.login).then(() => {
-                this.$router.push("/login");
-            });
-        }
-    }
-};
+  methods: {
+    onidle() {
+      window.localStorage.clear()
+      window.location.href = '/cwt-dbLogon/'
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
-.main_page_layout {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-.section {
-    padding: 1rem 2rem;
+.main_content {
+  /* min-height: 100vh; */
+  grid-template-columns: px2rem(250) 1fr;
+
+  .wrapper-content {
+    border-left: px2rem(1) solid rgb(214, 214, 214);
+  }
 }
 </style>

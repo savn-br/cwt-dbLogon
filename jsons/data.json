@@ -1,0 +1,127 @@
+[
+  {
+    "systemId": 4,
+    "systemName": "Controle de Acesso",
+    "selected": false,
+    "modules": [
+      {
+        "moduleId": "4_1",
+        "moduleName": "Módulo de Administração - Novo",
+        "selected": false,
+        "transactions": [
+          {
+            "transactionId": "4_1_1",
+            "transactionName": "Usuario",
+            "selected": false
+          },
+          {
+            "transactionId": "4_1_2",
+            "transactionName": "Usuario",
+            "selected": false
+          },
+          {
+            "transactionId": "4_1_3",
+            "transactionName": "Módulos",
+            "selected": false
+          },
+          {
+            "transactionId": "4_1_4",
+            "transactionName": "Transação",
+            "selected": false
+          },
+          {
+            "transactionId": "4_1_5",
+            "transactionName": "Perfil",
+            "selected": false
+          },
+          {
+            "transactionId": "4_1_6",
+            "transactionName": "Variável Transação",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "moduleId": "4_2",
+        "moduleName": "Módulo de Administração - Novo",
+        "selected": false,
+        "transactions": [
+          {
+            "transactionId": "4_2_1",
+            "transactionName": "Usuario",
+            "selected": false
+          },
+          {
+            "transactionId": "4_2_2",
+            "transactionName": "Usuario",
+            "selected": false
+          },
+          {
+            "transactionId": "4_2_3",
+            "transactionName": "Módulos",
+            "selected": false
+          },
+          {
+            "transactionId": "4_2_4",
+            "transactionName": "Transação",
+            "selected": false
+          },
+          {
+            "transactionId": "4_2_5",
+            "transactionName": "Perfil",
+            "selected": false
+          },
+          {
+            "transactionId": "4_2_6",
+            "transactionName": "Variável Transação",
+            "selected": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "systemId": 5,
+    "systemName": "Controle de Acesso",
+    "selected": false,
+    "modules": [
+      {
+        "moduleId": "5_1",
+        "moduleName": "Módulo de Administração - Novo",
+        "selected": false,
+        "transactions": [
+          {
+            "transactionId": "5_1_1",
+            "transactionName": "Usuario",
+            "selected": false
+          },
+          {
+            "transactionId": "5_1_2",
+            "transactionName": "Usuario",
+            "selected": false
+          },
+          {
+            "transactionId": "5_1_3",
+            "transactionName": "Módulos",
+            "selected": false
+          },
+          {
+            "transactionId": "5_1_4",
+            "transactionName": "Transação",
+            "selected": false
+          },
+          {
+            "transactionId": "5_1_5",
+            "transactionName": "Perfil",
+            "selected": false
+          },
+          {
+            "transactionId": "5_1_6",
+            "transactionName": "Variável Transação",
+            "selected": false
+          }
+        ]
+      }
+    ]
+  }
+]

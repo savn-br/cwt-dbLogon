@@ -1,6 +1,45 @@
-@import './variables.scss';
+@import './reset';
+@import './bulma@variables.scss';
+@import './colors';
 // Import buefy and bulma styles
-@import "~bulma";
-@import "~buefy/src/scss/buefy";
+@import '~bulma';
+@import '~buefy/src/scss/buefy';
 // Import your other app styles
-@import "./app"
+@import './app';
+
+input[disabled] {
+  color: rgb(88, 88, 88) !important;
+}
+
+.form-auto-fill {
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  @media screen and(min-width: 1500px) {
+    grid-template-columns: repeat(4, minmax(300px, 1fr));
+  }
+}
+
+.control.is-clearfix {
+  width: 100%;
+}
+span.control-label {
+  color: #000;
+}
+input.input {
+  height: px2rem(25);
+  &::placeholder {
+    color: rgb(119, 119, 119);
+  }
+}
+.select.is-empty select {
+  color: rgba(39, 39, 39, 0.7);
+}
+
+.form {
+  label {
+    font-size: 0.75rem;
+  }
+}
+
+.modal-background {
+  display: none;
+}

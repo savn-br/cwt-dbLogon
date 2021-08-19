@@ -1,0 +1,121 @@
+{
+  "profileAccess": [
+    {
+      "id": 1,
+      "userID": 1234567890,
+      "tree": [
+        {
+          "sistema": "sistema/modulo/transação",
+          "nota": "notas",
+          "children": [
+            {
+              "sistema": "Smart Accounting",
+              "nota": "Sistema Account Bla bla bla",
+              "children": [
+                {
+                  "sistema": "Smart modulo I",
+                  "nota": "Modulo 1 bla bla bla",
+                  "children": [
+                    {
+                      "sistema": "Transação I",
+                      "nota": "Transação I bla bla bla"
+                    },
+                    {
+                      "sistema": "Transação II",
+                      "nota": "Transação II bla bla bla"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "sistema": "Impressão",
+              "nota": "Sistema de impressão",
+              "children": [
+                {
+                  "sistema": "Balancete 120 colunas",
+                  "nota": "Balancete 120 colunas bla bla bla"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "logs": [],
+  "profiles": [],
+  "access": [
+    {
+      "id": 1,
+      "userID": 1234567892,
+      "action": "Lorem ipsum, dolor sit amet consectetur adipisicing elit.",
+      "date": "2021-03-15T22:27:09.028Z"
+    }
+  ],
+  "users": [
+    {
+      "id": 1234567890,
+      "user": "manager123",
+      "email": "manager@gmail.com",
+      "company": "CWT",
+      "name": "Manager",
+      "phone": "1199999999",
+      "field": "Engenharia",
+      "position": "Engenheiro",
+      "register": 1234567890,
+      "emergency": true,
+      "desk": false,
+      "active": true,
+      "profileType": "manager"
+    },
+    {
+      "id": 1234567891,
+      "user": "analyst123",
+      "email": "analyst@gmail.com",
+      "company": "CWT",
+      "name": "Analyst",
+      "phone": "1199999999",
+      "field": "Engenharia",
+      "position": "Engenheiro",
+      "register": 1234567891,
+      "emergency": true,
+      "desk": false,
+      "active": true,
+      "profileType": "analyst",
+      "managerID": 1234567890
+    },
+    {
+      "id": 1234567892,
+      "user": "collaborator123",
+      "managerID": 1234567890,
+      "email": "collaborator@gmail.com",
+      "company": "CWT",
+      "name": "Collaborator",
+      "phone": "1199999999",
+      "field": "Engenharia",
+      "position": "Engenheiro",
+      "register": 1234567892,
+      "emergency": true,
+      "desk": false,
+      "active": true,
+      "profileType": "collaborator"
+    },
+    {
+      "id": 1234567892,
+      "user": "administrator123",
+      "email": "administrator@gmail.com",
+      "company": "CWT",
+      "name": "Administrator",
+      "phone": "1199999999",
+      "field": "Engenharia",
+      "position": "Engenheiro",
+      "register": 1234567892,
+      "emergency": true,
+      "desk": false,
+      "active": true,
+      "managerID": 1234567890,
+      "profileType": "administrator"
+    }
+  ]
+}

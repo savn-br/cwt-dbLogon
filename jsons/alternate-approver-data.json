@@ -1,0 +1,20 @@
+[
+  {
+    "userSubstituteId": "nnn",
+    "beginTermDate": "07/05/2021",
+    "endTermDate": "07/05/2021",
+    "active": true
+  },
+  {
+    "userSubstituteId": "nnn2",
+    "beginTermDate": "07/05/2021",
+    "endTermDate": "07/05/2021",
+    "active": true
+  },
+  {
+    "userSubstituteId": "nnn4",
+    "beginTermDate": "07/05/2021",
+    "endTermDate": "07/05/2021",
+    "active": true
+  }
+]
