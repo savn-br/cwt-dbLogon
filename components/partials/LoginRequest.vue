@@ -1,9 +1,15 @@
 <template lang="pug">
 .login-request-wrapper.tw-mt-8.tw-px-8
-  steps(:steps='steps')
+  //steps(:steps='steps')
+  fieldset.tw-my-6.tw-flex.tw-justify-center
+    b-field.tw-mx-2(label='Status:')
+    b-field.tw-mx-2(
+      :label='userData.profileType === "pending" ? "Aguardando autorização" : "Solicitando autorização"',
+      :class='userData.profileType === "pending" ? "field-pending" : "field-not-pending"'
+    ) 
   user-form(ref='profileForm', :isDisabled='true')
   .update-buttons.tw-flex.tw-justify-center(class='sm:tw-justify-end')
-    b-button.tw-mx-2(type='is-success', @click='handleUpdate') {{ $t("update") }}
+    //b-button.tw-mx-2(type='is-success', @click='handleUpdate') {{ $t("update") }}
     b-button.tw-mx-2(
       type='is-primary',
       @click='handleEnable',
@@ -89,6 +95,14 @@ export default {
   }
   label {
     font-size: 0.75rem;
+  }
+  .field-not-pending label {
+    color: red;
+    font-weight: bold;
+  }
+  .field-pending label {
+    color: yellowgreen;
+    font-weight: bold;
   }
 }
 </style>

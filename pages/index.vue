@@ -7,18 +7,14 @@
         src='~/assets/CWT_LOGO_TRASNPARENTE.png'
       )
     .l-card-body.tw-p-8.tw-bg-white
-      form(@submit.prevent='submitLogin', name="login", autocomplete='off')
+      form(@submit.prevent='submitLogin', name='login', autocomplete='off')
         fieldset
           legend.tw-w-full.tw-flex.tw-justify-end Login into your account
-          b-field(
-            label='user',
-            :type='!!usernameMessage ? "is-danger" : ""',
-            :message='usernameMessage'
-          )
+          b-field(label='user', :type='!!usernameMessage ? "is-danger" : ""')
             b-input(
               v-model='username',
               size='is-small',
-              icon='email',
+              icon='account',
               name='username',
               autocomplete='off'
             )
@@ -35,7 +31,7 @@
               name='password',
               autocomplete='off'
             )
-          b-button.tw-w-full.tw-mt-4(type='is-danger', @click='submitLogin') Entrar
+          b-button.tw-w-full.tw-mt-4(type='is-danger', @click='submitLogin') Log in
 </template>
 
 <script>

@@ -90,4 +90,6 @@ module.exports = {
   salesName: 'Sales Name',
   assignProfile: 'Assign Profile',
   assign: 'Assign',
+  statusRequestAuthorization: 'Awaiting authorization',
+  statusNotRequestAuthorization: 'Request authorization',
 }

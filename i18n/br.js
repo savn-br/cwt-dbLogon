@@ -57,7 +57,7 @@ module.exports = {
   surname: 'Sobrenome',
   phone: 'Telefone',
   field: 'Área',
-  role: 'Cargo',
+  role: 'Cargo / Função',
   registration: 'Matrícula',
   emergency: 'Emergencial',
   update: 'Atualizar',
@@ -90,4 +90,6 @@ module.exports = {
   profileDescription: 'Descrição de Perfil',
   salesName: 'Nome do Ponto de Venda',
   assign: 'Atribuir',
+  statusRequestAuthorization: 'Aguardando autorização',
+  statusNotRequestAuthorization: 'Solicitando autorização',
 }

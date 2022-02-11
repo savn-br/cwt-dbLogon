@@ -64,7 +64,7 @@
           name='role',
           size='is-small',
           autocomplete='off',
-          maxlength='30'
+          maxlength='60'
         )
     fieldset.tw-my-6.tw-flex.tw-flex-wrap
       b-field.tw-mx-2.tw-w-20(:label='$t("registration")')
