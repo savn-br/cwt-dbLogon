@@ -109,6 +109,7 @@
 import showToast from '@/utils/toast'
 import setMenu from '@/mixins/setMenu'
 import { mapState, mapMutations, mapActions } from 'vuex'
+import { collaborator } from '~/i18n/br'
 export default {
   name: 'AssignmentOfProfile',
   components: {
@@ -145,11 +146,17 @@ export default {
         this.setSearchCollaboratorName(value)
       },
     },
+
+    selectedCollaborator: {
+      get() {
+        return this.$store.state.selectedCollaborator
+      },
+    },
   },
   watch: {},
   async mounted() {
     if (this.searchCollaboratorName.length >= 3) {
-      await this.getAvailableCollaborators()
+      await this.handleSetSelectedPanelGestor()
     }
   },
   created() {},
@@ -160,6 +167,7 @@ export default {
       'setProfileState2Collaborator',
       'handleUpdateProfile',
       'removePointOfSale2Collaborator',
+      `getAvailableCollaborator`,
     ]),
 
     handleChangeProfile(active, profileId) {
@@ -193,14 +201,21 @@ export default {
       this.handleUpdateProfile()
     },
     handleCancelOperation() {
-      this.$refs[this.currentProfile.profileId].value = !this.currentProfile
-        .active
-      this.$refs[this.currentProfile.profileId].computedValue = !this
-        .currentProfile.active
+      this.$refs[this.currentProfile.profileId].value =
+        !this.currentProfile.active
+      this.$refs[this.currentProfile.profileId].computedValue =
+        !this.currentProfile.active
+    },
+    handleSetSelectedPanelGestor() {
+      this.getAvailableCollaborator()
     },
     handleSetSelectedCollaborator(collaborator) {
-      this.setSelectedCollaborator(collaborator)
-      this.searchCollaboratorName = collaborator.userName
+      if (collaborator.userName) {
+        this.setSelectedCollaborator(collaborator)
+        this.searchCollaboratorName = collaborator.userName
+      } else {
+        console.log('handleSetSelectedCollaborator not datas')
+      }
     },
   },
 }

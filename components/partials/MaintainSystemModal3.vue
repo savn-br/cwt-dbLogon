@@ -4,8 +4,8 @@
     .card-header
     .card-content
       form.tw-grid(name='perfil')
-        b-field(:label='$t("transactionCode")', v-if='!!transactionId')
-          b-input(v-model='transactionId', size='is-small', disabled)
+        b-field(:label='$t("transactionCode")')
+          b-input(v-model='transactionId', size='is-small')
         b-field(:label='$t("description")')
           b-input(v-model='transactionName', size='is-small', maxlength='40')
         b-field(:label='$t("notes")')

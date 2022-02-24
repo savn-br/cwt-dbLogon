@@ -19,15 +19,11 @@
         //-   b-select(placeholder='Selecione a visão', value='admin')
         //-     option(value='admin') administrador
         //-     option(value='gestor') gestor
-        b-field.tw-mx-2.tw-w-24(
-          :label='$t("profileCode")',
-          v-if='!!maintainProfile.profileId'
-        )
+        b-field.tw-mx-2.tw-w-24(:label='$t("profileCode")')
           b-input(
             :value='maintainProfile.profileId',
             size='is-small',
             maxlength='7',
-            disabled,
             @input='(value) => handleChangeTerm("profileId", value)'
           )
         b-field.tw-mx-2(:label='$t("profileDescription")')

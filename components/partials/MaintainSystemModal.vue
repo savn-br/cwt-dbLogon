@@ -4,8 +4,8 @@
     .card-header
     .card-content
       form.tw-grid(name='perfil')
-        b-field(:label='$t("systemCode")', v-if='!!systemId')
-          b-input(v-model='systemId', size='is-small', disabled)
+        b-field(:label='$t("systemCode")')
+          b-input(v-model='systemId', size='is-small')
         b-field(:label='$t("systemAcronym")')
           b-input(v-model='systemAcronym', size='is-small', maxlength='7')
         b-field(:label='$t("description")')

@@ -12,8 +12,7 @@
     //b-button.tw-mx-2(type='is-success', @click='handleUpdate') {{ $t("update") }}
     b-button.tw-mx-2(
       type='is-primary',
-      @click='handleEnable',
-      :disabled='userData.profileType === "new"',
+      @click='handleUpdate',
       :class='userData.profileType === "pending" ? "access-hidden" : ""'
     ) {{ $t("requestAccess") }}
   .logs.tw-mt-2.tw-mb-4
@@ -72,6 +71,7 @@ export default {
       if (this.userData.profileType !== this.$route.path.replace(/\//g, '')) {
         this.$router.push(`/${this.userData.profileType}/`)
       }
+      this.handleEnable()
     },
   },
 }
@@ -101,7 +101,7 @@ export default {
     font-weight: bold;
   }
   .field-pending label {
-    color: yellowgreen;
+    color: blue;
     font-weight: bold;
   }
 }

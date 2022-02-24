@@ -68,11 +68,11 @@
           b-icon.tw-mr-2(icon='pencil')
         //- span.tw-cursor-pointer(class='hover:tw-text-primary')
         //-   b-icon.tw-mr-2(icon='account-details')
-        span.tw-cursor-pointer(
-          class='hover:tw-text-primary',
-          @click='handleShowNotes(props.row)'
-        )
-          b-icon.tw-mr-2(icon='clipboard-text')
+        //-span.tw-cursor-pointer(
+        //-  class='hover:tw-text-primary',
+        //-  @click='handleShowNotes(props.row)'
+        //- )
+        //-  b-icon.tw-mr-2(icon='clipboard-text')
         span.tw-cursor-pointer(class='hover:tw-text-primary')
           b-icon(icon='eye')
 </template>

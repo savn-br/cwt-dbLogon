@@ -9,21 +9,6 @@
           name='user',
           :disabled='isDisabled'
         )
-      b-field.tw-mx-2(:label='$t("manager")')
-        b-input(
-          v-model='managerName',
-          size='is-small',
-          name='manager',
-          :disabled='isDisabled'
-        )
-      b-field.tw-mx-2(label='E-mail')
-        b-input(
-          v-model='email',
-          size='is-small',
-          name='email',
-          type='email',
-          :disabled='isDisabled'
-        )
 
       b-field.tw-mx-2(:label='$t("name")')
         b-input(
@@ -32,7 +17,24 @@
           name='name',
           :disabled='isDisabled'
         )
-    fieldset.tw-my-6.tw-flex.tw-flex-wrap
+
+      b-field.tw-mx-2(:label='$t("manager")')
+        b-input(
+          v-model='managerName',
+          size='is-small',
+          name='manager',
+          :disabled='isDisabled'
+        )
+      b-field.tw-mx-2.tw-w-56(label='E-mail')
+        b-input(
+          v-model='email',
+          size='is-small',
+          name='email',
+          type='email',
+          :disabled='isDisabled'
+        )
+
+    fieldset.tw-my-12.tw-flex.tw-flex-wrap
       b-field.tw-mx-2.tw-w-32(:label='$t("phone")')
         b-input(
           v-model='phone',
@@ -50,6 +52,7 @@
           autocomplete='off',
           maxlength='30'
         )
+
       b-field.tw-mx-2.tw-w-32(:label='$t("field")')
         b-input(
           v-model='field',
@@ -104,7 +107,8 @@
           b-checkbox(v-model='emergencyFlag', name='emergencyFlag') {{ $t("emergency") }}
         b-field.tw-m-5
           b-checkbox(v-model='vipFlag', name='vipFlag') VIP Desk
-    slot(name='content')
+
+    slot(name='content') 
 </template>
 
 <script>

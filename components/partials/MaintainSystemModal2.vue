@@ -4,8 +4,8 @@
     .card-header
     .card-content
       form.form.tw-grid(name='perfil')
-        b-field(:label='$t("moduleCode")', v-if='!!moduleId')
-          b-input(v-model='moduleId', size='is-small', disabled)
+        b-field(:label='$t("moduleCode")')
+          b-input(v-model='moduleId', size='is-small')
         b-field(:label='$t("moduleAcronym")')
           b-input(v-model='moduleAcronym', size='is-small', maxlength='7')
         b-field(:label='$t("description")')
