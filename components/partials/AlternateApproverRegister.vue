@@ -1,5 +1,8 @@
 <template lang="pug">
 .alternate-approver-register-wrapper.tw-mt-8.tw-px-8
+  b-modal(v-model='isLogModalActive')
+    template(#default='props')
+      log-modal(@close='props.close')
   b-modal(v-model='isModalConfirmationActive')
     template(#default='props')
       confirmation-modal(
@@ -49,12 +52,19 @@
       v-slot='props',
       :centered='true'
     )
-      b-field(:class='!props.row.active ? "hidden" : ""')
+      .button-container.tw-flex.tw-justify-center.tw-items-center.tw-gap-2
         b-button(
+          :class='!props.row.active ? "hidden" : ""',
           type='is-danger',
           size='is-small',
           @click='(status) => handleChangeStatus(!props.row.active, props.row.userSubstituteId)'
         ) {{ $t("remove") }}
+        span.tw-cursor-pointer.tw-flex.tw-items-center(
+          class='hover:tw-text-primary',
+          @click='(event) => handleShowLogModal(event, props.row)'
+        )
+          b-icon(icon='eye', size='')
+
         //- b-switch(
         //-   size='is-small',
         //-   :value='props.row.active',
@@ -72,10 +82,12 @@ export default {
     AlternateApproverModal: () =>
       import('@/components/partials/AlternateApproverModal'),
     ConfirmationModal: () => import('@/components/partials/ConfirmationModal'),
+    LogModal: () => import('@/components/partials/LogModal.vue'),
   },
   props: {},
   data() {
     return {
+      isLogModalActive: false,
       isModalActive: false,
       isModalConfirmationActive: false,
       internalSubstituteApprover: {
@@ -95,7 +107,7 @@ export default {
   },
   created() {},
   methods: {
-    ...mapMutations(['clearSubstituteApprover']),
+    ...mapMutations(['clearSubstituteApprover', 'setLogState']),
     ...mapActions(['getSubstituteApproverList', 'setSubstituteApprover']),
 
     handleOpenModal() {
@@ -114,6 +126,12 @@ export default {
       this.setSubstituteApprover({
         userId: this.internalSubstituteApprover.userSubstituteId,
       })
+    },
+    handleShowLogModal(event, props) {
+      event.stopPropagation()
+      this.isLogModalActive = !this.isLogModalActive
+      const { insertDate, userIdInsert, alterDate, userIdUpdate } = props
+      this.setLogState({ insertDate, userIdInsert, alterDate, userIdUpdate })
     },
   },
 }

@@ -1,5 +1,9 @@
 module.exports = {
   /* PLOP_APPEND_EN */
+  changeUser: 'Change user',
+  lastChangeDate: 'Last change Date',
+  creationUser: 'Creation user',
+  createdDate: 'Created Date',
   admin: 'Administer',
   selectCustomerDataView: 'Select customer data view',
   selectProfile: 'Select profile',
