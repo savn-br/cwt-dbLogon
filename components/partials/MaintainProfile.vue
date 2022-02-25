@@ -24,10 +24,10 @@
       span.tw-text-xs {{ props.row.profileId }}
     b-table-column(
       v-slot='props',
-      field='profileName',
+      field='description',
       :label='$t("profileDescription")'
     )
-      span.tw-text-xs {{ props.row.profileName }}
+      span.tw-text-xs {{ props.row.description }}
     b-table-column(
       v-slot='props',
       field='active',
@@ -76,6 +76,7 @@ export default {
     return {
       isModalActive: false,
       isModalActiveConfirmation: false,
+      isModalShowConfirmation: true,
       currentProfile: {
         profileId: '',
         active: false,
@@ -121,14 +122,15 @@ export default {
       this.isModalActive = true
     },
     handleChangeState(active, profileId) {
-      this.isModalActiveConfirmation = true
+      this.isModalActiveConfirmation = this.isModalShowConfirmation
       this.currentProfile = { profileId, active }
+      this.isModalShowConfirmation = true
     },
     handleCancelOperation() {
-      this.$refs[this.currentProfile.profileId].value = !this.currentProfile
-        .active
-      this.$refs[this.currentProfile.profileId].computedValue = !this
-        .currentProfile.active
+      this.$refs[this.currentProfile.profileId].value =
+        !this.currentProfile.active
+      this.$refs[this.currentProfile.profileId].computedValue =
+        !this.currentProfile.active
     },
     async handleUpdateMaintainProfile() {
       await this.getMaintainProfile({
@@ -140,6 +142,7 @@ export default {
       })
       const status = await this.updateMaintainProfile()
       if (status !== 200) {
+        this.isModalShowConfirmation = false
         this.handleCancelOperation()
       }
     },

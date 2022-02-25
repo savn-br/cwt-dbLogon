@@ -73,11 +73,6 @@
         //-   b-icon.tw-mr-2(icon='account-details')
         span.tw-cursor-pointer(
           class='hover:tw-text-primary',
-          @click='handleShowNotes(props.row)'
-        )
-          b-icon.tw-mr-2(icon='account-details')
-        span.tw-cursor-pointer(
-          class='hover:tw-text-primary',
           @click='(event) => handleShowLogModal(event, props.row)'
         )
           b-icon(icon='eye')

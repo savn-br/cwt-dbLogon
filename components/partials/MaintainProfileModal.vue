@@ -26,12 +26,21 @@
             maxlength='7',
             @input='(value) => handleChangeTerm("profileId", value)'
           )
-        b-field.tw-mx-2(:label='$t("profileDescription")')
+
+        b-field.tw-mx-2(:label='$t("profileName")')
           b-input(
             :value='maintainProfile.profileName',
             size='is-small',
             maxlength='40',
             @input='(value) => handleChangeTerm("profileName", value)'
+          )
+
+        b-field.tw-mx-2(:label='$t("profileDescription")')
+          b-input(
+            :value='maintainProfile.description',
+            size='is-small',
+            maxlength='40',
+            @input='(value) => handleChangeTerm("description", value)'
           )
         b-field.mx-2(:label='$t("customerDataView")')
           b-select(
@@ -87,6 +96,8 @@ export default {
     ...mapMutations(['setMaintainProfileTerm']),
     handleChangeTerm(term, value) {
       if (term === 'profileId') value = parseInt(value)
+      console.log(`terrm ${term}`)
+      console.log(`value ${value}`)
       this.setMaintainProfileTerm({ term, value })
     },
     async handleCreateProfile() {

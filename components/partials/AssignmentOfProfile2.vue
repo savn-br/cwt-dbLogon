@@ -13,10 +13,10 @@
       span.tw-text-xs {{ props.row.profileId }}
     b-table-column(
       v-slot='props',
-      field='profileName',
+      field='description',
       :label='$t("profileDescription")'
     )
-      span.tw-text-xs {{ props.row.profileName }}
+      span.tw-text-xs {{ props.row.description }}
     b-table-column(
       :label='$t("operation")',
       field='active',

@@ -218,12 +218,9 @@ export default {
         !this.currentProfile.active
       this.$refs[this.currentProfile.profileId].computedValue =
         !this.currentProfile.active
-<<<<<<< HEAD
     },
     handleSetSelectedPanelGestor() {
       this.getAvailableCollaborator()
-=======
->>>>>>> origin/develop_ronnas
     },
     handleSetSelectedCollaborator(collaborator) {
       if (collaborator.userName) {

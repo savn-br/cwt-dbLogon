@@ -194,18 +194,20 @@ export default {
   }) {
     try {
       commit('setIsLoading', true)
-      const { status } = await this.$axios.put(
-        `/profile/${maintainProfile.profileId}`,
-        {
-          ...maintainProfile,
-        }
-      )
-
+      const {
+        data: { message },
+        status } = await this.$axios.put(
+          `/profile/${maintainProfile.profileId}`,
+          {
+            ...maintainProfile,
+          }
+        )
+      console.log(message)
       if (status === 200) {
         showToast(this.$i18n.t('successMessage'), 'is-success')
         await dispatch('getAllProfiles')
       } else {
-        showToast('Não foi possível realizar a operação', 'is-danger')
+        showToast(message, 'is-danger')
       }
       return status
     } catch (error) {

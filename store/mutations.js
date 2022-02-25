@@ -49,6 +49,7 @@ export default {
   clearMaintainProfile(state) {
     state.maintainProfile = {
       profileName: '',
+      description: '',
       profileParentId: null,
       profileParentName: '',
       profileId: '',

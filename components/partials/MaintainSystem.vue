@@ -52,22 +52,11 @@
           class='hover:tw-text-primary',
           @click='goToModule(props.row)'
         )
-<<<<<<< HEAD
           b-icon.tw-mr-2(icon='file-tree')
-
-        span.tw-cursor-pointer(class='hover:tw-text-primary')
-=======
-          b-icon.tw-mr-2(icon='account-details')
-        span.tw-cursor-pointer(
-          class='hover:tw-text-primary',
-          @click='handleShowNotes(props.row)'
-        )
-          b-icon.tw-mr-2(icon='clipboard-text')
         span.tw-cursor-pointer(
           class='hover:tw-text-primary',
           @click='(event) => handleShowLogModal(event, props.row)'
         )
->>>>>>> origin/develop_ronnas
           b-icon(icon='eye')
 </template>
 

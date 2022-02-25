@@ -1,9 +1,5 @@
 module.exports = {
   /* PLOP_APPEND_BR */
-  changeUser: 'Usuário alteração',
-  lastChangeDate: 'Data ultima alteração',
-  creationUser: 'Usuário de criação',
-  createdDate: 'Data de criação',
   admin: 'Administrador',
   selectCustomerDataView: 'Selecione a visão de dados de clientes',
   selectProfile: 'Selecione o perfil',
@@ -91,7 +87,8 @@ module.exports = {
   allUsers: 'Todos os Usuários',
   activeOnly: 'Somente Ativos',
   profileCode: 'Código de Perfil',
-  profileDescription: 'Descrição de Perfil',
+  profileName: 'Nome do Perfil',
+  profileDescription: 'Descrição do Perfil',
   salesName: 'Nome do Ponto de Venda',
   assign: 'Atribuir',
   statusRequestAuthorization: 'Aguardando autorização',

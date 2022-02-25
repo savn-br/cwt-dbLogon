@@ -90,6 +90,7 @@ module.exports = {
   allUsers: 'All Users',
   activeOnly: 'Active Only',
   profileCode: 'Profile Code',
+  profileName: 'Name Profile',
   profileDescription: 'Profile Description',
   salesName: 'Sales Name',
   assignProfile: 'Assign Profile',

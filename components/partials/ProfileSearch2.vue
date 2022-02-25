@@ -15,6 +15,7 @@
         v-model='selectedProfileData.profileId',
         disabled
       )
+
     b-field.tw-mx-2(:label='$t("profileDescription")')
       b-input(
         v-model='selectedProfileData.profileName',
@@ -43,13 +44,15 @@
           @input='(active) => handleUpdateViewCCard(active)',
           size='is-small',
           :value='selectedProfileData.viewCCard',
-          ref='viewCCard'
+          ref='viewCCard',
+          disabled
         ) {{ $t("viewCard") }}
       b-field.tw-mx-2
         b-switch(
           ref='active',
           @input='(active) => handleUpdateActive(active)',
           size='is-small',
+          disabled,
           :value='selectedProfileData.active'
         ) {{ $t("active") }}
 
