@@ -7,7 +7,9 @@
         b-field(:label='$t("systemCode")')
           b-input(v-model='systemId', size='is-small')
         b-field(:label='$t("systemAcronym")')
-          b-input(v-model='systemAcronym', size='is-small', maxlength='7')
+          b-input(v-model='systemAcronym', size='is-small', maxlength='7') 
+        b-field(:label='$t("systemMenu")')
+          b-input(v-model='systemMenu', size='is-small', maxlength='11')
         b-field(:label='$t("description")')
           b-input(v-model='systemName', size='is-small', maxlength='40')
         b-field(:label='$t("notes")')
@@ -52,6 +54,14 @@ export default {
       },
       set(value) {
         this.setSelectedSystemTerm({ key: 'systemName', value })
+      },
+    },
+    systemMenu: {
+      get() {
+        return this.selectedSystem.systemMenu
+      },
+      set(value) {
+        this.setSelectedSystemTerm({ key: 'systemMenu', value })
       },
     },
     notes: {

@@ -41,6 +41,7 @@ module.exports = {
   description: 'Description',
   systemAcronym: 'System acronym',
   systemCode: 'System code',
+  systemMenu: 'Nome menu',
   email: 'E-mail',
   register: 'Register',
   welcome: 'Welcome',
