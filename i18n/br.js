@@ -14,6 +14,7 @@ module.exports = {
   transaction: 'Transação',
   module: 'Modulo',
   system: 'Sistema',
+  systems: 'Sistemas',
   select: 'Selecionar',
   profileSearchMessage:
     'Por favor use a barra de pesquisa para procurar pelos perfis que deseja',

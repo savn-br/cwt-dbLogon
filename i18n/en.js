@@ -18,6 +18,7 @@ module.exports = {
   transaction: 'Transaction',
   module: 'Module',
   system: 'System',
+  systems: 'Sistemas',
   select: 'Select',
   profileSearchMessage:
     'Please use the search bar to search for the profiles you want',

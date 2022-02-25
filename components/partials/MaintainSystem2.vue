@@ -23,6 +23,10 @@
       maintain-system-modal-2(@close='props.close')
   .buttons-wrapper.tw-flex.tw-justify-end.tw-mb-2
     b-button(type='is-primary', @click='createModule') {{ $t("add") }}
+  .description-wrapper.tw-flex.tw-font-bold
+    .d-select.tw-w-20.tw-mr-2 {{ $t("systems") }} :
+    .name.tw-mb-1
+      | {{ selectedSystem.systemMenu }}
   standard-table(:data='selectedSystem.modules')
     b-table-column(v-slot='props', field='moduleId', :label='$t("moduleCode")')
       span.tw-text-xs {{ props.row.moduleId }}
@@ -38,6 +42,8 @@
       :label='$t("description")'
     )
       span.tw-text-xs {{ props.row.moduleName }}
+    b-table-column(v-slot='props', field='notes', :label='$t("notes")') 
+      span.tw-text-xs {{ props.row.notes }}
     b-table-column(
       v-slot='props',
       field='active',

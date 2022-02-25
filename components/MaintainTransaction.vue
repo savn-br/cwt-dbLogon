@@ -125,13 +125,12 @@ export default {
         this.stateTransactions[systemIdx].modules[moduleIdx].show = value
     },
     handleToggleSystem(systemIdx, value) {
-      this.stateTransactions[systemIdx].show = !this.stateTransactions[
-        systemIdx
-      ].show
+      this.stateTransactions[systemIdx].show =
+        !this.stateTransactions[systemIdx].show
     },
     handleToggleModule(systemIdx, moduleIdx) {
-      this.stateTransactions[systemIdx].modules[moduleIdx].show = !this
-        .stateTransactions[systemIdx].modules[moduleIdx].show
+      this.stateTransactions[systemIdx].modules[moduleIdx].show =
+        !this.stateTransactions[systemIdx].modules[moduleIdx].show
     },
   },
 }

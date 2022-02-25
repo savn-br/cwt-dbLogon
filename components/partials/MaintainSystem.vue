@@ -11,6 +11,8 @@
       maintain-system-modal(@close='props.close')
   .buttons-wrapper.tw-flex.tw-justify-end.tw-mb-2
     b-button(type='is-primary', @click='createSytem') {{ $t("add") }}
+  .description-wrapper.tw-flex.tw-font-bold
+    .d-select.tw-w-20.tw-mr-2 {{ $t("systems") }}:
   standard-table(:data='systems')
     b-table-column(v-slot='props', field='systemId', :label='$t("systemCode")')
       span.tw-text-xs {{ props.row.systemId }}
@@ -26,6 +28,8 @@
       :label='$t("description")'
     )
       span.tw-text-xs {{ props.row.systemName }}
+    b-table-column(v-slot='props', field='notes', :label='$t("notes")') 
+      span.tw-text-xs {{ props.row.notes }}
     b-table-column(
       v-slot='props',
       field='active',

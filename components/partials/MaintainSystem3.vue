@@ -34,6 +34,11 @@
       maintain-system-modal3(@close='props.close')
   .buttons-wrapper.tw-flex.tw-justify-end.tw-mb-2
     b-button(type='is-primary', @click='createTransaction') {{ $t("add") }}
+  .description-wrapper.tw-flex.tw-font-bold
+    .d-select.tw-w-20.tw-mr-2 {{ $t("systems") }} :
+    .name.tw-mb-1
+      | {{ selectedSystem.systemMenu }}
+      | / Modulo: {{ selectedModule.moduleAcronym }}
   standard-table(:data='selectedModule.transactions')
     b-table-column(
       v-slot='props',
@@ -47,6 +52,14 @@
       :label='$t("description")'
     )
       span.tw-text-xs {{ props.row.transactionName }}
+    b-table-column(
+      v-slot='props',
+      field='transactionName',
+      :label='$t("description")'
+    )
+      span.tw-text-xs {{ props.row.transactionName }}
+    b-table-column(v-slot='props', field='notes', :label='$t("notes")') 
+      span.tw-text-xs {{ props.row.notes }}
     b-table-column(
       v-slot='props',
       field='active',
