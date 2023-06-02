@@ -28,7 +28,12 @@
       :label='$t("description")'
     )
       span.tw-text-xs {{ props.row.systemName }}
-    b-table-column(v-slot='props', field='notes', :label='$t("notes")') 
+    b-table-column(
+      v-slot='props',
+      field='notes',
+      :label='$t("notes")',
+      thStyle={ width: "10%" }
+    ) 
       span.tw-text-xs {{ props.row.notes }}
     b-table-column(
       v-slot='props',
@@ -56,7 +61,7 @@
           class='hover:tw-text-primary',
           @click='goToModule(props.row)'
         )
-          b-icon.tw-mr-2(icon='file-tree')
+          b-icon.tw-mr-2(icon='sitemap')
         span.tw-cursor-pointer(
           class='hover:tw-text-primary',
           @click='(event) => handleShowLogModal(event, props.row)'

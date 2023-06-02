@@ -44,6 +44,7 @@ export default {
   },
   watch: {},
   mounted() {
+    console.log('mounted...')
     this.$store.dispatch('getRequests')
   },
   created() {},

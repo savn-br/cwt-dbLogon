@@ -24,6 +24,7 @@
             :value='maintainProfile.profileId',
             size='is-small',
             maxlength='7',
+            type='number',
             @input='(value) => handleChangeTerm("profileId", value)'
           )
 
@@ -31,7 +32,7 @@
           b-input(
             :value='maintainProfile.profileName',
             size='is-small',
-            maxlength='40',
+            maxlength='30',
             @input='(value) => handleChangeTerm("profileName", value)'
           )
 
@@ -39,9 +40,18 @@
           b-input(
             :value='maintainProfile.description',
             size='is-small',
-            maxlength='40',
+            maxlength='80',
             @input='(value) => handleChangeTerm("description", value)'
           )
+        b-field(:label='$t("notes")')
+          b-input(
+            :value='maintainProfile.dsNotas',
+            size='is-small',
+            maxlength='512',
+            type='textarea',
+            @input='(value) => handleChangeTerm("dsNotas", value)'
+          )
+
         b-field.mx-2(:label='$t("customerDataView")')
           b-select(
             :placeholder='$t("selectCustomerDataView")',
@@ -96,8 +106,8 @@ export default {
     ...mapMutations(['setMaintainProfileTerm']),
     handleChangeTerm(term, value) {
       if (term === 'profileId') value = parseInt(value)
-      console.log(`terrm ${term}`)
-      console.log(`value ${value}`)
+      console.log('term::', term)
+      console.log('value::', value)
       this.setMaintainProfileTerm({ term, value })
     },
     async handleCreateProfile() {

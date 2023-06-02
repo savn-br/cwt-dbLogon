@@ -3,7 +3,7 @@
   back-button(partialComponent='AssignmentOfProfile')
   .tw-grid.tw-w-full.tw-place-content-center.tw-text-xl(
     v-if='!availablePointOfSales.length'
-  ) Sem pontos de vendas para adicionar
+  ) Sem pontos de vendas para adiciona
   standard-table(
     v-if='availablePointOfSales.length',
     :data='availablePointOfSales'

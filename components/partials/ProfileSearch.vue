@@ -13,9 +13,15 @@
     b-table-column(
       v-slot='props',
       field='profileName',
-      :label='$t("profileDescription")'
+      :label='$t("profileName")'
     )
       span.tw-text-xs {{ props.row.profileName }}
+    b-table-column(
+      v-slot='props',
+      field='profileName',
+      :label='$t("profileDescription")'
+    )
+      span.tw-text-xs {{ props.row.description }}
     b-table-column(
       :label='$t("operation")',
       width='120px',
@@ -28,7 +34,7 @@
           class='hover:tw-text-primary',
           @click='selectProfile(props.row.profileId)'
         )
-          b-icon(icon='account-details')
+          b-icon(icon='sitemap')
 </template>
 
 <script>
@@ -57,7 +63,7 @@ export default {
     // },
   },
   async mounted() {
-    await this.getAvailableProfiles()
+    await this.getAvailableProfilesConsulta()
   },
   created() {},
   methods: {
@@ -66,7 +72,7 @@ export default {
       'setSelectedProfileId',
       'setBackProfileSearchPartial',
     ]),
-    ...mapActions(['getAvailableProfiles']),
+    ...mapActions(['getAvailableProfilesConsulta']),
 
     selectProfile(profileId) {
       this.setBackProfileSearchPartial('ProfileSearch')

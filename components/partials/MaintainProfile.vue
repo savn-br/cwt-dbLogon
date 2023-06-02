@@ -57,7 +57,7 @@
           class='hover:tw-text-primary',
           @click='handleEditTransactions(props.row.profileId)'
         )
-          b-icon(icon='account-details')
+          b-icon(icon='sitemap')
 </template>
 
 <script>

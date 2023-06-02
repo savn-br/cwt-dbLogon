@@ -70,7 +70,7 @@
           class='hover:tw-text-primary',
           @click='goToTransaction(props.row)'
         )
-          b-icon.tw-mr-2(icon='file-tree')
+          b-icon.tw-mr-2(icon='sitemap')
         span.tw-cursor-pointer(
           class='hover:tw-text-primary',
           @click='(event) => handleShowLogModal(event, props.row)'

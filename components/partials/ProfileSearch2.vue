@@ -16,7 +16,7 @@
         disabled
       )
 
-    b-field.tw-mx-2(:label='$t("profileDescription")')
+    b-field.tw-mx-2(:label='$t("profileName")')
       b-input(
         v-model='selectedProfileData.profileName',
         size='is-small',

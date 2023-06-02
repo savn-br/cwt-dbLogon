@@ -166,14 +166,14 @@ export default {
     }
   },
   async updateMaintainTransactions({
-    state: { maintainProfile },
+    state: { maintainProfile, userData },
     commit,
     getters,
   }) {
     try {
       commit('setIsLoading', true)
       const { status } = await this.$axios.put(
-        `/authorization/${maintainProfile.profileId}`,
+        `/authorization/${maintainProfile.profileId}/${userData.userId}`,
         getters.getActiveMaintainTransactions
       )
       if (status === 200) {
@@ -221,8 +221,9 @@ export default {
       commit('setIsLoading', true)
       const {
         data: { data },
-      } = await this.$axios.get(`/profile/${profileId}`)
+      } = await this.$axios.get(`/profile/${profileId}/M`)
       delete data.profileAccess
+      console.log("data-profile::", data);
       commit('setMaintainProfile', data)
     } catch (error) {
       console.log(error)
@@ -275,10 +276,11 @@ export default {
   },
   async getAllProfiles({ state, commit }) {
     try {
+      console.log("profile-manter");
       commit('setIsLoading', true)
       const {
         data: { data },
-      } = await this.$axios.get(`/profile/SearchAll/`)
+      } = await this.$axios.get(`/profile/SearchAll/M`)
       commit('setMaintainAllProfiles', data)
     } catch (error) {
       console.error(error)
@@ -367,7 +369,7 @@ export default {
       commit('setIsLoading', true)
       const {
         data: { data },
-      } = await this.$axios.get(`/profile/${selectedProfileId}`)
+      } = await this.$axios.get(`/profile/${selectedProfileId}/C`)
       commit('setSelectedProfileData', data)
     } catch (error) {
       console.log(error)
@@ -433,17 +435,19 @@ export default {
       commit('setIsLoading', false)
     }
   },
-  async getAvailablePointOfSales({
-    state: {
-      userData: { userId },
-    },
-    commit,
-  }) {
+  async getAvailablePointOfSales(
+    {
+      state: {
+        selectedCollaborator: { userId },
+      },
+      commit,
+    }
+  ) {
     try {
       commit('setIsLoading', true)
       const {
         data: { data },
-      } = await this.$axios.get(`/userPointOfSale/SearchAll/${userId}/`)
+      } = await this.$axios.get(`/userPointOfSale/SearchAll/${userId}/1/`)
       commit('setAvailablePointOfSales', data)
     } catch (error) {
       console.error(error)
@@ -479,13 +483,34 @@ export default {
       console.error(error)
     }
   },
-  async getAvailableProfiles({ state, commit }) {
+  async getAvailableProfilesConsulta({ commit }) {
     try {
       commit('setIsLoading', true)
-
+      console.log("profile-consulta");
       const {
         data: { data },
-      } = await this.$axios.get(`/profile/SearchAll/`)
+      } = await this.$axios.get(`/profile/SearchAll/C`)
+
+      commit('setAvailableProfiles', data)
+    } catch (error) {
+      console.error(error)
+    } finally {
+      commit('setIsLoading', false)
+    }
+  },
+  async getAvailableProfiles(
+    {
+      state: {
+        userData: { userId },
+      },
+      commit
+    }) {
+    try {
+      commit('setIsLoading', true)
+      console.log("profile-atribuir");
+      const {
+        data: { data },
+      } = await this.$axios.get(`/profile/SearchProfile/${userId}/A`)
 
       commit('setAvailableProfiles', data)
     } catch (error) {
@@ -525,6 +550,9 @@ export default {
   },
   async getAvailableCollaborators({
     state: { searchCollaboratorName },
+    state: {
+      userData: { userId },
+    },
     commit,
   }) {
     try {
@@ -532,7 +560,7 @@ export default {
       const {
         data: { data },
         status,
-      } = await this.$axios.get(`/assignProfile/${searchCollaboratorName}`)
+      } = await this.$axios.get(`/assignProfile/${searchCollaboratorName}/${userId}`)
       if (status === 200) {
         commit('setCollaborators', data)
         // const phone = data[0].phone.replace(/[^\d]/g, '')
@@ -874,6 +902,9 @@ export default {
       delete body.pointOfSales
       delete body.profiles
       commit('setIsLoading', true)
+
+      console.log("body::", body)
+
       const {
         data: { data, message },
         status,

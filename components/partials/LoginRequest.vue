@@ -63,10 +63,20 @@ export default {
       }
     },
     async handleUpdate() {
+      if (!this.userData.field) {
+        showToast(this.$i18n.t('fieldWarning'), 'is-danger')
+        return
+      }
+      if (!this.userData.employeeNumber) {
+        showToast(this.$i18n.t('registerWarning'), 'is-danger')
+        return
+      }
+
       if (!this.userData.pointOfSale) {
         showToast(this.$i18n.t('selectPointOfSale'), 'is-danger')
         return
       }
+
       await this.handleUpdateAccess()
       if (this.userData.profileType !== this.$route.path.replace(/\//g, '')) {
         this.$router.push(`/${this.userData.profileType}/`)

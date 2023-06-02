@@ -27,7 +27,6 @@
       b-button.tw-w-24(
         v-if='!!selectedCollaborator',
         type='is-primary',
-        :disabled='isEnableToCreate',
         @click='goToPartTwo'
       ) {{ $t("add") }}
     standard-table(

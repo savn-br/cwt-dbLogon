@@ -109,6 +109,7 @@ export default () => ({
     viewCCard: false,
     indVision: '',
     description: '',
+    dsNotas: '',
   },
   substituteApprover: {
     userSubstituteId: '',

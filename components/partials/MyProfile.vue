@@ -2,10 +2,7 @@
 .my-profile-wrapper.tw-mt-8.tw-px-8
   b-modal(v-model='isModalActive', :full-screen='false')
     template(#default='props')
-      confirmation-modal(
-        @close='props.close',
-        :onConfirm='handleUpdateMyProfile'
-      )
+      confirmation-modal(@close='props.close', :onConfirm='handleUpdate')
   user-form(:isDisabled='true')
   .update-buttons.tw-flex.tw-justify-center
     b-button.tw-w-24.tw-mx-2.tw-my-4(
@@ -38,6 +35,7 @@
 <script>
 import showToast from '@/utils/toast'
 import { mapState, mapActions } from 'vuex'
+import { user } from '~/i18n/br'
 export default {
   name: 'MyProfile',
   components: {
@@ -65,6 +63,14 @@ export default {
     ...mapActions(['handleUpdateMyProfile', 'handleGetMyProfile']),
     // -- mapActions --
     async handleUpdate() {
+      if (!this.userData.field) {
+        showToast(this.$i18n.t('fieldWarning'), 'is-danger')
+        return
+      }
+      if (!this.userData.employeeNumber) {
+        showToast(this.$i18n.t('registerWarning'), 'is-danger')
+        return
+      }
       if (!this.userData.pointOfSale) {
         showToast(this.$i18n.t('selectPointOfSale'), 'is-danger')
         return

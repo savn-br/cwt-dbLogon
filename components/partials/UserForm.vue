@@ -59,7 +59,7 @@
           name='field',
           size='is-small',
           autocomplete='off',
-          maxlength='15'
+          maxlength='9'
         )
       b-field.tw-mx-2.tw-w-56(:label='$t("role")')
         b-input(
