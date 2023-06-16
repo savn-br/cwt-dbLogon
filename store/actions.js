@@ -332,7 +332,7 @@ export default {
         data: { data },
         status,
       } = await this.$axios.put(`/activateUser/${userId}/${active}`)
-
+      console.log(data[0])
       if (status === 200) {
         showToast(this.$i18n.t('successMessage'), 'is-success')
         commit('setActivateUsersElement', data[0])
@@ -519,7 +519,7 @@ export default {
       commit('setIsLoading', false)
     }
   },
-  async setProfileState2Collaborator(
+  async deleteProfileState2Collaborator(
     {
       state: {
         selectedCollaborator: { userId },
@@ -534,7 +534,7 @@ export default {
         data: { data, message },
         status,
       } = await this.$axios.put(`/userProfile/${userId}/${profileId}/${active}`)
-      commit('updateProfileOnCollaborator', { profileId, value: data })
+      commit('deleteProfileOnCollaborator', { profileId, value: data })
 
       if (status === 200) {
         showToast(this.$i18n.t('successMessage'), 'is-success')

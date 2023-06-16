@@ -176,7 +176,7 @@ export default {
     ]),
     ...mapActions([
       'getAvailableCollaborators',
-      'setProfileState2Collaborator',
+      'deleteProfileState2Collaborator',
       'handleUpdateProfile',
       'removePointOfSale2Collaborator',
       `getAvailableCollaborator`,
@@ -188,7 +188,7 @@ export default {
     },
 
     async handleSetProfile() {
-      const status = await this.setProfileState2Collaborator({
+      const status = await this.deleteProfileState2Collaborator({
         ...this.currentProfile,
       })
       if (status !== 200) {

@@ -34,7 +34,7 @@ export default {
   methods: {
     onidle() {
       window.localStorage.clear()
-      window.location.href = '/cwt-dbLogon/'
+      window.location.href = '/brlogon/'
     },
   },
 }

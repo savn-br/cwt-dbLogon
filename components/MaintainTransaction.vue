@@ -80,14 +80,15 @@ export default {
   },
   watch: {},
   async mounted() {
+    await this.getMaintainTransactions()
     this.systems.forEach((system, systemIdx) => {
       const modules = []
       system.modules.forEach((module, moduleIdx) => {
         modules.push({ show: false })
       })
+      console.log('push-transc')
       this.stateTransactions.push({ show: false, modules })
     })
-    await this.getMaintainTransactions()
   },
   created() {},
   methods: {
